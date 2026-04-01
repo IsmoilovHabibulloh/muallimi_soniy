@@ -106,9 +106,10 @@ export default function LessonPage({ params }: Props) {
   const handleElementClick = useCallback(
     async (el: Element) => {
       setActiveElement(el);
-      if (lesson?.audioUrl) {
+      const audioSrc = el.audioUrl || lesson?.audioUrl;
+      if (audioSrc) {
         try {
-          await audio.playSegment(lesson.audioUrl, el.start, el.end);
+          await audio.playSegment(audioSrc, el.start, el.end);
         } catch {
           // silent
         }
@@ -118,12 +119,11 @@ export default function LessonPage({ params }: Props) {
   );
 
   const handleReplay = useCallback(() => {
-    if (activeElement && lesson?.audioUrl) {
-      audio.playSegment(
-        lesson.audioUrl,
-        activeElement.start,
-        activeElement.end
-      );
+    if (activeElement) {
+      const audioSrc = activeElement.audioUrl || lesson?.audioUrl;
+      if (audioSrc) {
+        audio.playSegment(audioSrc, activeElement.start, activeElement.end);
+      }
     }
   }, [activeElement, lesson, audio]);
 
@@ -209,19 +209,20 @@ export default function LessonPage({ params }: Props) {
       )}
 
       {/* Audio controls */}
-      {lesson?.audioUrl && (
+      {(lesson?.audioUrl || pages[currentPageIndex]?.elements.some(e => e.audioUrl)) && (
         <AudioControls
           isPlaying={audio.isPlaying}
           currentTime={audio.currentTime}
           duration={audio.duration}
           bufferProgress={audio.bufferProgress}
           onPlayPause={() => {
-            if (activeElement && lesson.audioUrl) {
+            const audioSrc = activeElement?.audioUrl || lesson?.audioUrl;
+            if (activeElement && audioSrc) {
               if (audio.isPlaying) {
                 audio.pause();
               } else {
                 audio.playSegment(
-                  lesson.audioUrl,
+                  audioSrc,
                   activeElement.start,
                   activeElement.end
                 );

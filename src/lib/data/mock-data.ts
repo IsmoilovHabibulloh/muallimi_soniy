@@ -1,4 +1,5 @@
 import { Chapter, Lesson, Page } from "./types";
+import { PAGE_ELEMENTS } from "./elements";
 
 export const chapters: Chapter[] = [
   {
@@ -221,7 +222,7 @@ export const lessons: Record<string, Lesson[]> = {
         en: "Alif Hamza & Alif Lam",
       },
       order: 1,
-      audioUrl: null,
+      audioUrl: "/audio/36. tanvinli tashdid.mp3",
       pageCount: 6,
     },
   ],
@@ -302,58 +303,6 @@ const PAGE_MAP: Record<string, number[]> = {
   ls_duolar: [48, 49, 50],
 };
 
-// Sample elements for page 3 (alifbo) — placeholder coordinates
-const SAMPLE_ELEMENTS_PAGE3 = [
-  {
-    id: "el_001",
-    type: "harf" as const,
-    arabic: "أ",
-    uzbek: "Alif",
-    start: 1.0,
-    end: 3.0,
-    x: 65,
-    y: 15,
-    width: 12,
-    height: 8,
-  },
-  {
-    id: "el_002",
-    type: "harf" as const,
-    arabic: "ب",
-    uzbek: "Ba",
-    start: 3.5,
-    end: 5.5,
-    x: 50,
-    y: 15,
-    width: 12,
-    height: 8,
-  },
-  {
-    id: "el_003",
-    type: "harf" as const,
-    arabic: "ت",
-    uzbek: "Ta",
-    start: 6.0,
-    end: 8.0,
-    x: 35,
-    y: 15,
-    width: 12,
-    height: 8,
-  },
-  {
-    id: "el_004",
-    type: "harf" as const,
-    arabic: "ث",
-    uzbek: "Sa",
-    start: 8.5,
-    end: 10.5,
-    x: 20,
-    y: 15,
-    width: 12,
-    height: 8,
-  },
-];
-
 export function getPages(lessonId: string): Page[] {
   const pageNumbers = PAGE_MAP[lessonId] || [];
   return pageNumbers.map((num, idx) => ({
@@ -361,7 +310,6 @@ export function getPages(lessonId: string): Page[] {
     lessonId,
     order: idx + 1,
     imageUrl: `/images/${num}.jpg`,
-    elements:
-      lessonId === "ls_alifbo" && idx === 0 ? SAMPLE_ELEMENTS_PAGE3 : [],
+    elements: PAGE_ELEMENTS[num] || [],
   }));
 }

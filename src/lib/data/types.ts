@@ -45,6 +45,7 @@ export interface Element {
   type: ElementType;
   arabic: string;
   uzbek: string;
+  audioUrl?: string;
   start: number;
   end: number;
   x: number;
