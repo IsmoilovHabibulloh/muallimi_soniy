@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: #22c55e;
+  --color-primary-dark: #16a34a;
+  --color-primary-light: #4ade80;
+  --color-primary-glow: rgba(34, 197, 94, 0.5);
+
+  --color-bg-dark: #050d05;
+  --color-bg-card: rgba(255, 255, 255, 0.06);
+  --color-border-card: rgba(255, 255, 255, 0.12);
+
+  --color-text-main: #eefbee;
+  --color-text-secondary: #86efac;
+  --color-text-muted: #5a9a6a;
+
+  --color-el-harf: #818cf8;
+  --color-el-bogin: #38bdf8;
+  --color-el-soz: #34d399;
+  --color-el-jumla: #fbbf24;
+
+  --font-arabic: "Noto Naskh Arabic", "Scheherazade New", "Traditional Arabic", serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "Noto Naskh Arabic";
+  src: url("/fonts/NotoNaskhArabic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+html {
+  background: var(--color-bg-dark);
+  color: var(--color-text-main);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-dark);
+  color: var(--color-text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100dvh;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ═══ Glassmorphism ═══ */
+.glass {
+  background: rgba(16, 42, 16, 0.65);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(34, 197, 94, 0.12);
+  border-radius: 20px;
+}
+
+.glass-green {
+  background: rgba(34, 197, 94, 0.1);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1.5px solid rgba(34, 197, 94, 0.3);
+  border-radius: 20px;
+}
+
+.glass-bright {
+  background: rgba(34, 197, 94, 0.15);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1.5px solid rgba(34, 197, 94, 0.4);
+  border-radius: 16px;
+}
+
+/* ═══ Element animations ═══ */
+.element-spring {
+  transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.element-active {
+  transform: translateY(-6px) scale(1.08);
+  box-shadow: 0 8px 30px rgba(34, 197, 94, 0.5);
+  border: 2px solid #22c55e;
+  z-index: 10;
+}
+
+.element-inactive {
+  opacity: 0.4;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(0.97); }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ═══ Scrollbar ═══ */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(34, 197, 94, 0.2); border-radius: 2px; }
+
+/* ═══ Arabic text ═══ */
+.arabic-text {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  line-height: 1.8;
 }
