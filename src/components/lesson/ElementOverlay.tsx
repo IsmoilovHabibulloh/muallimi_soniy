@@ -1,6 +1,7 @@
 "use client";
 
 import type { Element } from "@/lib/data/types";
+import { ELEMENT_COLORS } from "@/lib/data/types";
 
 interface Props {
   element: Element;
@@ -15,6 +16,8 @@ export function ElementOverlay({
   hasActiveElement,
   onClick,
 }: Props) {
+  const color = ELEMENT_COLORS[element.type];
+
   return (
     <button
       onClick={(e) => {
@@ -27,16 +30,21 @@ export function ElementOverlay({
         top: `${element.y}%`,
         width: `${element.width}%`,
         height: `${element.height}%`,
-        transform: isActive ? "translateY(-6px) scale(1.08)" : "none",
+        transform: isActive ? "translateY(-4px) scale(1.06)" : "none",
         boxShadow: isActive
-          ? "0 8px 30px rgba(34, 197, 94, 0.5)"
-          : "none",
-        border: isActive ? "2px solid #22c55e" : "2px solid transparent",
+          ? `0 6px 24px ${color}66`
+          : `0 0 0 1.5px ${color}40`,
+        border: isActive
+          ? `2px solid ${color}`
+          : `1.5px solid ${color}50`,
         backgroundColor: isActive
-          ? "rgba(34, 197, 94, 0.15)"
-          : "rgba(255, 255, 255, 0.0)",
-        opacity: hasActiveElement && !isActive ? 0.4 : 1,
+          ? `${color}20`
+          : `${color}08`,
+        borderRadius: "8px",
+        opacity: hasActiveElement && !isActive ? 0.25 : 1,
         zIndex: isActive ? 10 : 1,
+        animation: !hasActiveElement ? "element-hint 2.5s ease-in-out infinite" : "none",
+        animationDelay: `${Math.random() * 2}s`,
       }}
     />
   );

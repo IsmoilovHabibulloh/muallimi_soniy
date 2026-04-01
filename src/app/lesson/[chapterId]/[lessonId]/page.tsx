@@ -35,6 +35,7 @@ export default function LessonPage({ params }: Props) {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [activeElement, setActiveElement] = useState<Element | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showHint, setShowHint] = useState(false);
 
   const audio = useAudio();
 
@@ -51,6 +52,21 @@ export default function LessonPage({ params }: Props) {
       setLoading(false);
     });
   }, [lessonId, chapterId]);
+
+  // Show hint for first-time users
+  useEffect(() => {
+    if (!loading) {
+      const hintSeen = localStorage.getItem("muallimi-hint-seen");
+      if (!hintSeen && pages[0]?.elements.length > 0) {
+        setShowHint(true);
+        const timer = setTimeout(() => {
+          setShowHint(false);
+          localStorage.setItem("muallimi-hint-seen", "1");
+        }, 4000);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [loading, pages]);
 
   // Preload audio
   useEffect(() => {
@@ -106,16 +122,20 @@ export default function LessonPage({ params }: Props) {
   const handleElementClick = useCallback(
     async (el: Element) => {
       setActiveElement(el);
+      if (showHint) {
+        setShowHint(false);
+        localStorage.setItem("muallimi-hint-seen", "1");
+      }
       const audioSrc = el.audioUrl || lesson?.audioUrl;
-      if (audioSrc) {
+      if (audioSrc && el.start !== el.end) {
         try {
           await audio.playSegment(audioSrc, el.start, el.end);
         } catch {
-          // silent
+          console.warn("Audio yuklanmadi:", audioSrc);
         }
       }
     },
-    [lesson, audio]
+    [lesson, audio, showHint]
   );
 
   const handleReplay = useCallback(() => {
@@ -235,6 +255,21 @@ export default function LessonPage({ params }: Props) {
           onNext={handleNextElement}
           onSeek={audio.seek}
         />
+      )}
+
+      {/* Onboarding hint */}
+      {showHint && !activeElement && (
+        <div
+          className="fixed top-20 left-1/2 -translate-x-1/2 z-40 glass-bright px-5 py-3 animate-fade-in"
+          onClick={() => {
+            setShowHint(false);
+            localStorage.setItem("muallimi-hint-seen", "1");
+          }}
+        >
+          <p className="text-sm text-text-main text-center font-medium">
+            Rangli tugmalarni bosib audio eshiting
+          </p>
+        </div>
       )}
 
       {/* Bottom sheet */}

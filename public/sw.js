@@ -1,4 +1,4 @@
-const CACHE_NAME = "muallimi-soniy-v1";
+const CACHE_NAME = "muallimi-soniy-v2";
 const PRECACHE = ["/home", "/darslar", "/sozlamalar", "/logo.png"];
 
 self.addEventListener("install", (event) => {
