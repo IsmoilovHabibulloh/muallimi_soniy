@@ -6,15 +6,18 @@ export default function TabsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col min-h-dvh">
-      <main className="flex-1 pb-20 overflow-y-auto">{children}</main>
-      {/* Fade gradient above tab bar */}
-      <div
-        className="fixed bottom-16 left-0 right-0 h-14 z-40 pointer-events-none"
+    <div className="flex flex-col h-dvh overflow-hidden">
+      <main
+        className="flex-1 min-h-0 overflow-y-auto"
         style={{
-          background: "linear-gradient(to bottom, transparent, var(--color-bg-dark))",
+          maskImage:
+            "linear-gradient(to bottom, black, black calc(100% - 80px), transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black, black calc(100% - 80px), transparent)",
         }}
-      />
+      >
+        {children}
+      </main>
       <BottomTabBar />
     </div>
   );
