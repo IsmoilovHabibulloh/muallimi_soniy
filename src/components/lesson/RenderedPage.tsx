@@ -11,6 +11,82 @@ interface RenderedPageProps {
   onBackgroundClick: () => void;
 }
 
+// ========== MUQADDIMA COMPONENTS ==========
+
+function MuqaddimaWord({
+  el,
+  isActive,
+  hasActive,
+  onClick,
+}: {
+  el: Element;
+  isActive: boolean;
+  hasActive: boolean;
+  onClick: () => void;
+}) {
+  const color = ELEMENT_COLORS[el.type];
+  return (
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+      className="element-spring rounded px-0.5 py-0 inline leading-relaxed transition-all"
+      style={{
+        color: isActive ? color : "var(--color-text-main)",
+        backgroundColor: isActive ? `${color}18` : "transparent",
+        borderBottom: isActive ? `2px solid ${color}` : "2px solid transparent",
+        boxShadow: isActive ? `0 2px 12px ${color}30` : "none",
+        transform: isActive ? "scale(1.05)" : "none",
+        opacity: hasActive && !isActive ? 0.6 : 1,
+      }}
+    >
+      {el.arabic}
+    </button>
+  );
+}
+
+function MuqaddimaParagraph({
+  elements,
+  startIdx,
+  endIdx,
+  pageNum,
+  activeId,
+  hasActive,
+  onClick,
+}: {
+  elements: Element[];
+  startIdx: number;
+  endIdx: number;
+  pageNum: number;
+  activeId: string | null;
+  hasActive: boolean;
+  onClick: (el: Element) => void;
+}) {
+  const prefix = `p${pageNum}_`;
+  const wordEls: Element[] = [];
+  for (let i = startIdx; i <= endIdx; i++) {
+    const id = `${prefix}${String(i).padStart(3, "0")}`;
+    const el = elements.find((e) => e.id === id);
+    if (el) wordEls.push(el);
+  }
+
+  return (
+    <p className="text-sm leading-relaxed text-text-main text-justify indent-6">
+      {wordEls.map((el) => (
+        <span key={el.id} className="inline">
+          <MuqaddimaWord
+            el={el}
+            isActive={activeId === el.id}
+            hasActive={hasActive}
+            onClick={() => onClick(el)}
+          />{" "}
+        </span>
+      ))}
+    </p>
+  );
+}
+
 // ========== SHARED COMPONENTS ==========
 
 function ArabicEl({
@@ -151,6 +227,30 @@ function LetterSection({
 }
 
 // ========== PAGE RENDERERS ==========
+
+function Page1({ elements, activeId, hasActive, onElementClick }: PP) {
+  return (
+    <div className="flex flex-col gap-4">
+      <h2 className="text-lg font-bold text-text-secondary text-center mb-2">MUQADDIMA</h2>
+      <MuqaddimaParagraph elements={elements} startIdx={1} endIdx={104} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
+      <MuqaddimaParagraph elements={elements} startIdx={105} endIdx={175} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
+      <MuqaddimaParagraph elements={elements} startIdx={176} endIdx={276} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
+      <MuqaddimaParagraph elements={elements} startIdx={277} endIdx={372} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
+    </div>
+  );
+}
+
+function Page2({ elements, activeId, hasActive, onElementClick }: PP) {
+  return (
+    <div className="flex flex-col gap-4">
+      <MuqaddimaParagraph elements={elements} startIdx={1} endIdx={26} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
+      <MuqaddimaParagraph elements={elements} startIdx={27} endIdx={154} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
+      <MuqaddimaParagraph elements={elements} startIdx={155} endIdx={237} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
+      <MuqaddimaParagraph elements={elements} startIdx={238} endIdx={258} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
+      <MuqaddimaParagraph elements={elements} startIdx={259} endIdx={287} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
+    </div>
+  );
+}
 
 function Page3({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 3);
@@ -817,6 +917,7 @@ function Page50(props: PP) {
 // ========== REGISTRY ==========
 
 const PAGE_RENDERERS: Record<number, React.ComponentType<PP>> = {
+  1: Page1, 2: Page2,
   3: Page3, 4: Page4, 5: Page5, 6: Page6, 7: Page7,
   8: Page8, 9: Page9, 10: Page10, 11: Page11, 12: Page12,
   13: Page13, 14: Page14, 15: Page15, 16: Page16,
