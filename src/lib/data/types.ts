@@ -89,7 +89,7 @@ export const DEFAULT_PROGRESS: UserProgress = {
 };
 
 export const ELEMENT_COLORS: Record<ElementType, string> = {
-  harf: "#818cf8",
+  harf: "#a78bfa",
   bogin: "#38bdf8",
   soz: "#34d399",
   jumla: "#fbbf24",

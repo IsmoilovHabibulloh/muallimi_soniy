@@ -6,7 +6,7 @@ export function SplashScreen() {
       className="fixed inset-0 z-[300] flex flex-col items-center justify-center"
       style={{
         background:
-          "radial-gradient(ellipse at center, rgba(34,197,94,0.08) 0%, #050d05 60%)",
+          "radial-gradient(ellipse at center, rgba(52,211,153,0.06) 0%, #0c1222 60%)",
       }}
     >
       {/* Glow */}
@@ -16,7 +16,7 @@ export function SplashScreen() {
           width: 280,
           height: 280,
           background:
-            "radial-gradient(circle, rgba(34,197,94,0.2) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(52,211,153,0.15) 0%, transparent 70%)",
           filter: "blur(50px)",
         }}
       />
@@ -36,7 +36,7 @@ export function SplashScreen() {
       <h1 className="mt-8 text-3xl font-bold text-white tracking-wide">
         Muallimi Soniy
       </h1>
-      <p className="mt-2 text-sm text-emerald-400/60 font-medium">
+      <p className="mt-2 text-sm text-emerald-300/60 font-medium">
         Arab tili oʻrganish platformasi
       </p>
     </div>
