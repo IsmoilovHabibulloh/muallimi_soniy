@@ -1,6 +1,6 @@
 "use client";
 
-import { Play, Pause, SkipBack, SkipForward, Repeat, ListOrdered } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Repeat } from "lucide-react";
 import { useSettings } from "@/providers/SettingsProvider";
 import type { PlaybackSpeed } from "@/lib/data/types";
 
@@ -129,17 +129,6 @@ export function AudioControls({
             title={t("loop")}
           >
             <Repeat size={16} />
-          </button>
-          <button
-            onClick={() => setSequentialMode(!settings.sequentialMode)}
-            className={`p-1.5 rounded-lg transition-all ${
-              settings.sequentialMode
-                ? "bg-primary/20 text-primary"
-                : "text-text-muted hover:text-text-secondary"
-            }`}
-            title={t("sequential")}
-          >
-            <ListOrdered size={16} />
           </button>
         </div>
       </div>

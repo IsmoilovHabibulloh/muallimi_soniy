@@ -121,23 +121,7 @@ export default function LessonPage({ params }: Props) {
     }
   }, [audio.currentTime, audio.isPlaying, isFullPlayback, currentPageIndex, pages, activeElement?.id]);
 
-  // Sequential: auto-play next element
-  useEffect(() => {
-    audio.setOnSegmentComplete(() => {
-      if (!settings.sequentialMode || !activeElement) return;
-      const currentPage = pages[currentPageIndex];
-      if (!currentPage) return;
-      const idx = currentPage.elements.findIndex(
-        (e) => e.id === activeElement.id
-      );
-      if (idx >= 0 && idx < currentPage.elements.length - 1) {
-        handleElementClick(currentPage.elements[idx + 1]);
-      } else {
-        setActiveElement(null);
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeElement, currentPageIndex, pages, settings.sequentialMode]);
+
 
   const handleElementClick = useCallback(
     async (el: Element) => {
