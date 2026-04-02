@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useMemo } from "react";
+import React, { createContext, useContext, useEffect, useMemo } from "react";
 import { useLocalStorage } from "@/lib/hooks/useLocalStorage";
 import type {
   UserSettings,
@@ -47,6 +47,28 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
     "muallimi-settings",
     DEFAULT_SETTINGS
   );
+
+  // Apply theme to DOM
+  useEffect(() => {
+    const root = document.documentElement;
+    if (settings.theme === "system") {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      root.setAttribute("data-theme", prefersDark ? "dark" : "light");
+      const listener = (e: MediaQueryListEvent) => {
+        root.setAttribute("data-theme", e.matches ? "dark" : "light");
+      };
+      const mq = window.matchMedia("(prefers-color-scheme: dark)");
+      mq.addEventListener("change", listener);
+      return () => mq.removeEventListener("change", listener);
+    } else {
+      root.setAttribute("data-theme", settings.theme);
+    }
+  }, [settings.theme]);
+
+  // Apply font size to DOM
+  useEffect(() => {
+    document.documentElement.setAttribute("data-font-size", settings.fontSize);
+  }, [settings.fontSize]);
 
   const t = useMemo(() => {
     const msgs = messages[settings.locale] || messages["uz-latn"];
