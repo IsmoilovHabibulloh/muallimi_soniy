@@ -229,9 +229,26 @@ function LetterSection({
 // ========== PAGE RENDERERS ==========
 
 function Page1({ elements, activeId, hasActive, onElementClick }: PP) {
+  const bismillah = elements.find((e) => e.id === "p1_000");
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-lg font-bold text-text-secondary text-center mb-2">MUQADDIMA</h2>
+      {bismillah && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onElementClick(bismillah); }}
+          className="arabic-text text-2xl text-center leading-relaxed element-spring rounded-lg py-2 px-4 mx-auto"
+          style={{
+            fontFamily: "var(--font-arabic)",
+            color: activeId === bismillah.id ? ELEMENT_COLORS.jumla : "var(--color-text-main)",
+            backgroundColor: activeId === bismillah.id ? `${ELEMENT_COLORS.jumla}18` : "transparent",
+            border: activeId === bismillah.id ? `2px solid ${ELEMENT_COLORS.jumla}` : "2px solid transparent",
+            boxShadow: activeId === bismillah.id ? `0 4px 20px ${ELEMENT_COLORS.jumla}40` : "none",
+            opacity: hasActive && activeId !== bismillah.id ? 0.5 : 1,
+          }}
+        >
+          {bismillah.arabic}
+        </button>
+      )}
       <MuqaddimaParagraph elements={elements} startIdx={1} endIdx={104} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
       <MuqaddimaParagraph elements={elements} startIdx={105} endIdx={175} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
       <MuqaddimaParagraph elements={elements} startIdx={176} endIdx={276} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
