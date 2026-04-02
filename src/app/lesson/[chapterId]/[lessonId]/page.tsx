@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { HorizontalPager } from "@/components/lesson/HorizontalPager";
 import { PageIndicator } from "@/components/lesson/PageIndicator";
-import { ElementBottomSheet } from "@/components/lesson/ElementBottomSheet";
 import { AudioControls } from "@/components/lesson/AudioControls";
 import { Spinner } from "@/components/ui/Spinner";
 import { useSettings } from "@/providers/SettingsProvider";
@@ -160,15 +159,6 @@ export default function LessonPage({ params }: Props) {
     [lesson, audio, showHint]
   );
 
-  const handleReplay = useCallback(() => {
-    if (activeElement) {
-      const audioSrc = activeElement.audioUrl || lesson?.audioUrl;
-      if (audioSrc) {
-        audio.playSegment(audioSrc, activeElement.start, activeElement.end);
-      }
-    }
-  }, [activeElement, lesson, audio]);
-
   const handlePrevElement = useCallback(() => {
     const currentPage = pages[currentPageIndex];
     if (!currentPage || !activeElement) return;
@@ -302,19 +292,6 @@ export default function LessonPage({ params }: Props) {
         </div>
       )}
 
-      {/* Bottom sheet — only in segment mode, not full playback, not text-only elements */}
-      {activeElement && !isFullPlayback && activeElement.uzbek !== "" && (
-        <ElementBottomSheet
-          element={activeElement}
-          repeatIndex={audio.repeatIndex}
-          isPlaying={audio.isPlaying}
-          onReplay={handleReplay}
-          onClose={() => {
-            setActiveElement(null);
-            audio.stop();
-          }}
-        />
-      )}
     </div>
   );
 }
