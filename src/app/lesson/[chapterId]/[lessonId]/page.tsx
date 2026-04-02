@@ -190,7 +190,7 @@ export default function LessonPage({ params }: Props) {
   return (
     <div className="flex flex-col min-h-dvh">
       {/* Header */}
-      <header className="flex items-center gap-3 px-4 py-3 glass rounded-none border-t-0 border-x-0 sticky top-0 z-30">
+      <header className="flex items-center gap-3 px-4 py-3 rounded-none border-b border-white/10 sticky top-0 z-30" style={{ background: "var(--color-bg-dark)" }}>
         <button
           onClick={() => router.back()}
           className="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
