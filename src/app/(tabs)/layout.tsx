@@ -6,14 +6,14 @@ export default function TabsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col h-dvh overflow-hidden">
+    <div className="flex flex-col min-h-dvh">
       <main
-        className="flex-1 min-h-0 overflow-y-auto"
+        className="flex-1 pb-28 overflow-y-auto"
         style={{
           maskImage:
-            "linear-gradient(to bottom, black, black calc(100% - 80px), transparent)",
+            "linear-gradient(to bottom, black, black calc(100% - 100px), transparent)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, black, black calc(100% - 80px), transparent)",
+            "linear-gradient(to bottom, black, black calc(100% - 100px), transparent)",
         }}
       >
         {children}
