@@ -232,7 +232,6 @@ function Page1({ elements, activeId, hasActive, onElementClick }: PP) {
   const bismillah = elements.find((e) => e.id === "p1_000");
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-lg font-bold text-text-secondary text-center mb-2">MUQADDIMA</h2>
       {bismillah && (
         <button
           onClick={(e) => { e.stopPropagation(); onElementClick(bismillah); }}
@@ -249,6 +248,7 @@ function Page1({ elements, activeId, hasActive, onElementClick }: PP) {
           {bismillah.arabic}
         </button>
       )}
+      <h2 className="text-lg font-bold text-text-secondary text-center mb-2">MUQADDIMA</h2>
       <MuqaddimaParagraph elements={elements} startIdx={1} endIdx={104} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
       <MuqaddimaParagraph elements={elements} startIdx={105} endIdx={175} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
       <MuqaddimaParagraph elements={elements} startIdx={176} endIdx={276} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
