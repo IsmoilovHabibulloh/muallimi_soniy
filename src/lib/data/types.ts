@@ -72,7 +72,7 @@ export interface UserProgress {
 }
 
 export const DEFAULT_SETTINGS: UserSettings = {
-  repeatCount: 3,
+  repeatCount: 1,
   speed: 1.0,
   locale: "uz-latn",
   theme: "dark",
