@@ -302,8 +302,8 @@ export default function LessonPage({ params }: Props) {
         </div>
       )}
 
-      {/* Bottom sheet — only in segment mode, not full playback */}
-      {activeElement && !isFullPlayback && (
+      {/* Bottom sheet — only in segment mode, not full playback, not text-only elements */}
+      {activeElement && !isFullPlayback && activeElement.uzbek !== "" && (
         <ElementBottomSheet
           element={activeElement}
           repeatIndex={audio.repeatIndex}
