@@ -101,6 +101,20 @@ export default function LessonPage({ params }: Props) {
     return () => clearMediaSession();
   }, [activeElement, lesson, settings.locale]);
 
+  // Auto-highlight: sync active element with audio currentTime
+  useEffect(() => {
+    if (!audio.isPlaying) return;
+    const currentPage = pages[currentPageIndex];
+    if (!currentPage) return;
+    const t = audio.currentTime;
+    const match = currentPage.elements.find(
+      (el) => el.start < el.end && t >= el.start && t < el.end
+    );
+    if (match && match.id !== activeElement?.id) {
+      setActiveElement(match);
+    }
+  }, [audio.currentTime, audio.isPlaying, currentPageIndex, pages, activeElement?.id]);
+
   // Sequential: auto-play next element
   useEffect(() => {
     audio.setOnSegmentComplete(() => {
@@ -244,19 +258,19 @@ export default function LessonPage({ params }: Props) {
           duration={audio.duration}
           bufferProgress={audio.bufferProgress}
           onPlayPause={() => {
+            if (audio.isPlaying) {
+              audio.pause();
+              return;
+            }
             const audioSrc = activeElement?.audioUrl || lesson?.audioUrl;
-            if (activeElement && audioSrc) {
-              if (audio.isPlaying) {
-                audio.pause();
-              } else {
-                audio.playSegment(
-                  audioSrc,
-                  activeElement.start,
-                  activeElement.end
-                );
-              }
-            } else {
-              audio.togglePlayPause();
+            if (activeElement && audioSrc && activeElement.start < activeElement.end) {
+              audio.playSegment(
+                audioSrc,
+                activeElement.start,
+                activeElement.end
+              );
+            } else if (lesson?.audioUrl) {
+              audio.playFull(lesson.audioUrl);
             }
           }}
           onPrev={handlePrevElement}

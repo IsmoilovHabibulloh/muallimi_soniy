@@ -40,6 +40,13 @@ export function useAudio() {
     await engineRef.current.playSegment(start, end);
   }, []);
 
+  const playFull = useCallback(async (url: string) => {
+    if (!engineRef.current) return;
+    await engineRef.current.loadAudio(url);
+    setDuration(engineRef.current.duration);
+    await engineRef.current.playFull();
+  }, []);
+
   const pause = useCallback(() => engineRef.current?.pause(), []);
   const resume = useCallback(() => engineRef.current?.resume(), []);
   const togglePlayPause = useCallback(() => engineRef.current?.togglePlayPause(), []);
@@ -71,6 +78,7 @@ export function useAudio() {
     bufferProgress,
     repeatIndex,
     loadAudio,
+    playFull,
     playSegment,
     pause,
     resume,
