@@ -70,17 +70,17 @@ export function WelcomeScreen() {
       className={`fixed inset-0 z-[200] flex items-center justify-center p-4 transition-opacity duration-300 ${visible ? "opacity-100" : "opacity-0"}`}
       style={{
         background:
-          "radial-gradient(ellipse at center, rgba(52,211,153,0.04) 0%, #0c1222 65%)",
+          "radial-gradient(ellipse at center, rgba(34,197,94,0.06) 0%, #071a0e 65%)",
       }}
     >
       <div
         className={`max-w-[380px] w-full px-7 py-9 rounded-[28px] text-center transition-all duration-500 ${visible ? "scale-100 translate-y-0" : "scale-95 translate-y-4"}`}
         style={{
           background:
-            "linear-gradient(160deg, rgba(15,30,55,0.95), rgba(10,18,38,0.98))",
-          border: "1.5px solid rgba(52, 211, 153, 0.2)",
+            "linear-gradient(160deg, rgba(16,50,28,0.92), rgba(7,26,14,0.96))",
+          border: "1.5px solid rgba(34, 197, 94, 0.2)",
           boxShadow:
-            "0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(52,211,153,0.08)",
+            "0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(34,197,94,0.1)",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -95,15 +95,15 @@ export function WelcomeScreen() {
           {texts.welcome}
         </h1>
 
-        <p className="text-[15px] text-slate-300/70 leading-relaxed mb-7">
+        <p className="text-[15px] text-emerald-100/70 leading-relaxed mb-7">
           {texts.description}
         </p>
 
         <div
           className="rounded-2xl px-5 py-4 mb-5 flex items-start gap-3.5 text-left"
           style={{
-            background: "rgba(52, 211, 153, 0.08)",
-            border: "1px solid rgba(52, 211, 153, 0.18)",
+            background: "rgba(34, 197, 94, 0.1)",
+            border: "1px solid rgba(34, 197, 94, 0.2)",
           }}
         >
           <span className="text-[26px] leading-none mt-0.5 shrink-0">🤲</span>
@@ -120,9 +120,9 @@ export function WelcomeScreen() {
           onClick={handleContinue}
           className="w-full py-4 rounded-2xl font-bold text-[16px] text-white transition-all active:scale-[0.97] hover:brightness-110"
           style={{
-            background: "linear-gradient(135deg, #10b981, #34d399)",
+            background: "linear-gradient(135deg, #16a34a, #22c55e)",
             boxShadow:
-              "0 4px 24px rgba(52, 211, 153, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)",
+              "0 4px 24px rgba(34, 197, 94, 0.35), inset 0 1px 0 rgba(255,255,255,0.15)",
           }}
         >
           {texts.continueBtn}

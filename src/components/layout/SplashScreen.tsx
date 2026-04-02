@@ -6,7 +6,7 @@ export function SplashScreen() {
       className="fixed inset-0 z-[300] flex flex-col items-center justify-center"
       style={{
         background:
-          "radial-gradient(ellipse at center, rgba(52,211,153,0.06) 0%, #0c1222 60%)",
+          "radial-gradient(ellipse at center, rgba(52,211,153,0.06) 0%, #071a0e 60%)",
       }}
     >
       {/* Glow */}

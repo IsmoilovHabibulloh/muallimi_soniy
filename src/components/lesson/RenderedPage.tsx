@@ -849,7 +849,7 @@ export function RenderedPage({
 
   return (
     <div
-      className="w-full bg-white/[0.03] rounded-2xl border border-white/10 p-4"
+      className="w-full bg-white/[0.05] rounded-2xl border border-white/10 p-4"
       onClick={onBackgroundClick}
     >
       <PageRenderer
