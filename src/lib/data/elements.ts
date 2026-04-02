@@ -55,7 +55,7 @@ const A = {
   tash: "/audio/34. tashdid.mp3",
   tanv: "/audio/35. tanvin.mp3",
   tantash: "/audio/36. tanvinli tashdid.mp3",
-  muq: "/audio/02. muqaddima.mp3",
+  muq: "/audio/02. Muqaddima.mp3",
 };
 
 // ============================================================

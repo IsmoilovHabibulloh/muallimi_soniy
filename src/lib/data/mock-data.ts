@@ -136,7 +136,7 @@ export const lessons: Record<string, Lesson[]> = {
         en: "Introduction",
       },
       order: 1,
-      audioUrl: "/audio/02. muqaddima.mp3",
+      audioUrl: "/audio/02. Muqaddima.mp3",
       pageCount: 2,
     },
   ],
