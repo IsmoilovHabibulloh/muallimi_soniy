@@ -188,9 +188,9 @@ export default function LessonPage({ params }: Props) {
   if (loading) return <Spinner />;
 
   return (
-    <div className="flex flex-col min-h-dvh">
+    <div className="flex flex-col h-dvh overflow-hidden">
       {/* Header */}
-      <header className="flex items-center gap-3 px-4 py-3 rounded-none border-b border-white/10 sticky top-0 z-30" style={{ background: "var(--color-bg-dark)" }}>
+      <header className="flex items-center gap-3 px-4 py-3 glass rounded-none border-t-0 border-x-0 shrink-0 z-30">
         <button
           onClick={() => router.back()}
           className="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
@@ -207,8 +207,14 @@ export default function LessonPage({ params }: Props) {
         </div>
       </header>
 
-      {/* Pager */}
-      <div className="flex-1 px-3 pt-2">
+      {/* Pager — scrollable with fade edges */}
+      <div
+        className="flex-1 px-3 pt-2 overflow-y-auto min-h-0"
+        style={{
+          maskImage: "linear-gradient(to bottom, transparent, black 24px, black calc(100% - 24px), transparent)",
+          WebkitMaskImage: "linear-gradient(to bottom, transparent, black 24px, black calc(100% - 24px), transparent)",
+        }}
+      >
         <HorizontalPager
           pages={pages}
           currentIndex={currentPageIndex}
@@ -221,16 +227,18 @@ export default function LessonPage({ params }: Props) {
 
       {/* Page indicator */}
       {pages.length > 1 && (
-        <PageIndicator
-          total={pages.length}
-          current={currentPageIndex}
-          onSelect={handlePageChange}
-        />
+        <div className="shrink-0">
+          <PageIndicator
+            total={pages.length}
+            current={currentPageIndex}
+            onSelect={handlePageChange}
+          />
+        </div>
       )}
 
       {/* Audio controls */}
       {(lesson?.audioUrl || pages[currentPageIndex]?.elements.some(e => e.audioUrl)) && (
-        <AudioControls
+        <div className="shrink-0"><AudioControls
           isPlaying={audio.isPlaying}
           currentTime={audio.currentTime}
           duration={audio.duration}
@@ -254,7 +262,7 @@ export default function LessonPage({ params }: Props) {
           onPrev={handlePrevElement}
           onNext={handleNextElement}
           onSeek={audio.seek}
-        />
+        /></div>
       )}
 
       {/* Onboarding hint */}
