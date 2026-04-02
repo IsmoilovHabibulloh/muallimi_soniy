@@ -37,25 +37,8 @@ export function ElementBottomSheet({
             <X size={16} className="text-text-muted" />
           </button>
 
-          {/* Arabic */}
-          <p
-            className="arabic-text text-center mb-2"
-            style={{
-              fontSize:
-                element.type === "harf"
-                  ? 52
-                  : element.type === "bogin"
-                    ? 42
-                    : element.type === "soz"
-                      ? 34
-                      : 26,
-            }}
-          >
-            {element.arabic}
-          </p>
-
           {/* Uzbek translation */}
-          <p className="text-center text-text-secondary text-sm mb-3">
+          <p className="text-center text-text-secondary text-sm mb-3 mt-1">
             {element.uzbek}
           </p>
 
