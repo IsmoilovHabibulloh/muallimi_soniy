@@ -34,6 +34,7 @@ export default function LessonPage({ params }: Props) {
   const [chapter, setChapter] = useState<Chapter | null>(null);
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [activeElement, setActiveElement] = useState<Element | null>(null);
+  const [isFullPlayback, setIsFullPlayback] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showHint, setShowHint] = useState(false);
 
@@ -101,9 +102,15 @@ export default function LessonPage({ params }: Props) {
     return () => clearMediaSession();
   }, [activeElement, lesson, settings.locale]);
 
-  // Auto-highlight: sync active element with audio currentTime
+  // Auto-highlight: sync active element with audio currentTime (only in full playback)
   useEffect(() => {
-    if (!audio.isPlaying) return;
+    if (!isFullPlayback || !audio.isPlaying) {
+      if (isFullPlayback && !audio.isPlaying) {
+        setIsFullPlayback(false);
+        setActiveElement(null);
+      }
+      return;
+    }
     const currentPage = pages[currentPageIndex];
     if (!currentPage) return;
     const t = audio.currentTime;
@@ -113,7 +120,7 @@ export default function LessonPage({ params }: Props) {
     if (match && match.id !== activeElement?.id) {
       setActiveElement(match);
     }
-  }, [audio.currentTime, audio.isPlaying, currentPageIndex, pages, activeElement?.id]);
+  }, [audio.currentTime, audio.isPlaying, isFullPlayback, currentPageIndex, pages, activeElement?.id]);
 
   // Sequential: auto-play next element
   useEffect(() => {
@@ -135,6 +142,7 @@ export default function LessonPage({ params }: Props) {
 
   const handleElementClick = useCallback(
     async (el: Element) => {
+      setIsFullPlayback(false);
       setActiveElement(el);
       if (showHint) {
         setShowHint(false);
@@ -262,14 +270,14 @@ export default function LessonPage({ params }: Props) {
               audio.pause();
               return;
             }
-            const audioSrc = activeElement?.audioUrl || lesson?.audioUrl;
-            if (activeElement && audioSrc && activeElement.start < activeElement.end) {
-              audio.playSegment(
-                audioSrc,
-                activeElement.start,
-                activeElement.end
-              );
+            if (!isFullPlayback && activeElement && activeElement.start < activeElement.end) {
+              const audioSrc = activeElement.audioUrl || lesson?.audioUrl;
+              if (audioSrc) {
+                audio.playSegment(audioSrc, activeElement.start, activeElement.end);
+              }
             } else if (lesson?.audioUrl) {
+              setIsFullPlayback(true);
+              setActiveElement(null);
               audio.playFull(lesson.audioUrl);
             }
           }}
@@ -294,8 +302,8 @@ export default function LessonPage({ params }: Props) {
         </div>
       )}
 
-      {/* Bottom sheet */}
-      {activeElement && (
+      {/* Bottom sheet — only in segment mode, not full playback */}
+      {activeElement && !isFullPlayback && (
         <ElementBottomSheet
           element={activeElement}
           repeatIndex={audio.repeatIndex}
