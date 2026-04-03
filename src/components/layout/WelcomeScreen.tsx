@@ -67,52 +67,34 @@ export function WelcomeScreen() {
 
   return (
     <div
-      className={`fixed inset-0 z-[200] flex items-center justify-center p-4 transition-opacity duration-300 ${visible ? "opacity-100" : "opacity-0"}`}
-      style={{
-        background:
-          "radial-gradient(ellipse at center, rgba(34,197,94,0.06) 0%, #071a0e 65%)",
-      }}
+      className={`fixed inset-0 z-[200] flex items-center justify-center p-4 bg-bg-dark transition-opacity duration-300 ${visible ? "opacity-100" : "opacity-0"}`}
     >
       <div
-        className={`max-w-[380px] w-full px-7 py-9 rounded-[28px] text-center transition-all duration-500 ${visible ? "scale-100 translate-y-0" : "scale-95 translate-y-4"}`}
-        style={{
-          background:
-            "linear-gradient(160deg, rgba(16,50,28,0.92), rgba(7,26,14,0.96))",
-          border: "1.5px solid rgba(34, 197, 94, 0.2)",
-          boxShadow:
-            "0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(34,197,94,0.1)",
-        }}
+        className={`max-w-[380px] w-full px-7 py-9 rounded-[28px] text-center glass transition-all duration-500 ${visible ? "scale-100 translate-y-0" : "scale-95 translate-y-4"}`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/logo.png"
           alt="Muallimi Soniy"
           className="w-28 h-28 mx-auto mb-7 object-contain"
-          style={{ filter: "brightness(1.4) contrast(1.1)" }}
         />
 
-        <h1 className="text-[28px] font-extrabold text-white mb-3 tracking-tight">
+        <h1 className="text-[28px] font-extrabold text-text-main mb-3 tracking-tight">
           {texts.welcome}
         </h1>
 
-        <p className="text-[15px] text-emerald-100/70 leading-relaxed mb-7">
+        <p className="text-[15px] text-text-muted leading-relaxed mb-7">
           {texts.description}
         </p>
 
-        <div
-          className="rounded-2xl px-5 py-4 mb-5 flex items-start gap-3.5 text-left"
-          style={{
-            background: "rgba(34, 197, 94, 0.1)",
-            border: "1px solid rgba(34, 197, 94, 0.2)",
-          }}
-        >
+        <div className="glass-green rounded-2xl px-5 py-4 mb-5 flex items-start gap-3.5 text-left">
           <span className="text-[26px] leading-none mt-0.5 shrink-0">🤲</span>
-          <p className="text-[13px] text-emerald-300 leading-[1.6] flex-1">
+          <p className="text-[13px] text-text-secondary leading-[1.6] flex-1">
             {texts.wuduReminder}
           </p>
         </div>
 
-        <p className="text-[12px] text-white/30 mb-7 leading-relaxed">
+        <p className="text-[12px] text-text-muted mb-7 leading-relaxed">
           {texts.offlineNote}
         </p>
 
@@ -120,9 +102,9 @@ export function WelcomeScreen() {
           onClick={handleContinue}
           className="w-full py-4 rounded-2xl font-bold text-[16px] text-white transition-all active:scale-[0.97] hover:brightness-110"
           style={{
-            background: "linear-gradient(135deg, #16a34a, #22c55e)",
+            background: "linear-gradient(135deg, var(--color-primary-dark), var(--color-primary))",
             boxShadow:
-              "0 4px 24px rgba(34, 197, 94, 0.35), inset 0 1px 0 rgba(255,255,255,0.15)",
+              "0 4px 24px var(--color-primary-glow), inset 0 1px 0 rgba(255,255,255,0.15)",
           }}
         >
           {texts.continueBtn}
