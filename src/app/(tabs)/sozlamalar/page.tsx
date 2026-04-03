@@ -14,10 +14,10 @@ const LANGUAGES: { value: Locale; label: string }[] = [
   { value: "en", label: "English" },
 ];
 
-const FONT_SIZES: { value: FontSize; label: string }[] = [
-  { value: "small", label: "A" },
-  { value: "medium", label: "A" },
-  { value: "large", label: "A" },
+const FONT_SIZES: { value: FontSize; label: string; sub: string; size: number }[] = [
+  { value: "small", label: "A", sub: "Kichik", size: 13 },
+  { value: "medium", label: "A", sub: "O'rta", size: 16 },
+  { value: "large", label: "A", sub: "Katta", size: 20 },
 ];
 
 const ABOUT_LABELS: Record<string, { title: string; items: { icon: string; label: string; sub?: string; key?: "privacyPolicy" | "termsOfUse" | "aboutApp" }[] }> = {
@@ -154,16 +154,14 @@ export default function SozlamalarPage() {
               <button
                 key={fs.value}
                 onClick={() => setFontSize(fs.value)}
-                className={`flex-1 py-2.5 rounded-xl font-medium transition-all ${
+                className={`flex-1 flex flex-col items-center gap-1 py-3 rounded-xl font-medium transition-all ${
                   settings.fontSize === fs.value
                     ? "bg-primary/20 text-primary border border-primary/40"
                     : "bg-white/5 text-text-muted border border-white/5 hover:bg-white/10"
                 }`}
-                style={{
-                  fontSize: fs.value === "small" ? 14 : fs.value === "medium" ? 16 : 20,
-                }}
               >
-                {fs.label}
+                <span style={{ fontSize: fs.size, fontWeight: 700 }}>{fs.label}</span>
+                <span className="text-[10px] opacity-70">{fs.sub}</span>
               </button>
             ))}
           </div>
