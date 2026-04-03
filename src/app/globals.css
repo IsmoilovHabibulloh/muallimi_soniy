@@ -47,13 +47,16 @@ body {
 
 /* ═══ Light theme ═══ */
 html[data-theme="light"] {
-  --color-bg-dark: #f5faf7;
-  --color-bg-card: rgba(0, 0, 0, 0.04);
-  --color-border-card: rgba(0, 0, 0, 0.1);
-  --color-text-main: #1a2e23;
-  --color-text-secondary: #15803d;
-  --color-text-muted: #6b7c72;
-  --color-primary-glow: rgba(34, 197, 94, 0.2);
+  --color-bg-dark: #f0f7f2;
+  --color-bg-card: rgba(0, 0, 0, 0.05);
+  --color-border-card: rgba(0, 0, 0, 0.12);
+  --color-text-main: #0f1f17;
+  --color-text-secondary: #0d6b30;
+  --color-text-muted: #4a6355;
+  --color-primary: #16a34a;
+  --color-primary-dark: #15803d;
+  --color-primary-light: #22c55e;
+  --color-primary-glow: rgba(22, 163, 74, 0.25);
 }
 
 /* ═══ Font sizes ═══ */
@@ -71,8 +74,9 @@ html[data-font-size="large"] { font-size: 18px; }
 }
 
 html[data-theme="light"] .glass {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .glass-green {
@@ -158,10 +162,13 @@ html[data-theme="light"] .glass-bright {
 html[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(34, 197, 94, 0.3); }
 
 /* Light theme: white/5, white/10 overrides */
-html[data-theme="light"] .bg-white\/5 { background: rgba(0, 0, 0, 0.04) !important; }
-html[data-theme="light"] .bg-white\/\[0\.05\] { background: rgba(0, 0, 0, 0.03) !important; }
+html[data-theme="light"] .bg-white\/5,
+html[data-theme="light"] .bg-white\/\[0\.05\] { background: rgba(0, 0, 0, 0.04) !important; }
+html[data-theme="light"] .hover\:bg-white\/10:hover { background: rgba(0, 0, 0, 0.06) !important; }
 html[data-theme="light"] .border-white\/5 { border-color: rgba(0, 0, 0, 0.06) !important; }
-html[data-theme="light"] .border-white\/10 { border-color: rgba(0, 0, 0, 0.08) !important; }
+html[data-theme="light"] .border-white\/10 { border-color: rgba(0, 0, 0, 0.1) !important; }
+html[data-theme="light"] .text-white\/60 { color: rgba(0, 0, 0, 0.5) !important; }
+html[data-theme="light"] .bg-primary\/20 { background: rgba(22, 163, 74, 0.12) !important; }
 
 /* ═══ Arabic text ═══ */
 .arabic-text {
