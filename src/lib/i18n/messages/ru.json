@@ -20,6 +20,8 @@
   "loop": "Повтор",
   "sequential": "Последовательно",
   "continue": "Продолжить",
+  "start": "Начать",
+  "start_subtitle": "Начните изучение книги",
   "greeting_morning": "Доброе утро!",
   "greeting_day": "Добрый день!",
   "greeting_evening": "Добрый вечер!",

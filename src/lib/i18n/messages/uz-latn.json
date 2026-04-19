@@ -20,6 +20,8 @@
   "loop": "Takror",
   "sequential": "Ketma-ket",
   "continue": "Davom eting",
+  "start": "Boshlash",
+  "start_subtitle": "Kitobni oʻrganishni boshlang",
   "greeting_morning": "Xayrli tong!",
   "greeting_day": "Xayrli kun!",
   "greeting_evening": "Xayrli kech!",
