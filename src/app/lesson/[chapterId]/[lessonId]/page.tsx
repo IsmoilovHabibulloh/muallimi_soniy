@@ -2,10 +2,11 @@
 
 import { useEffect, useState, useCallback, use } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ListOrdered } from "lucide-react";
 import { HorizontalPager } from "@/components/lesson/HorizontalPager";
 import { PageIndicator } from "@/components/lesson/PageIndicator";
 import { AudioControls } from "@/components/lesson/AudioControls";
+import { TocSheet } from "@/components/lesson/TocSheet";
 import { Spinner } from "@/components/ui/Spinner";
 import { useSettings } from "@/providers/SettingsProvider";
 import { useProgress } from "@/providers/ProgressProvider";
@@ -25,7 +26,7 @@ interface Props {
 export default function LessonPage({ params }: Props) {
   const { chapterId, lessonId } = use(params);
   const router = useRouter();
-  const { settings } = useSettings();
+  const { settings, t } = useSettings();
   const { setLastViewed } = useProgress();
 
   const [pages, setPages] = useState<Page[]>([]);
@@ -36,6 +37,7 @@ export default function LessonPage({ params }: Props) {
   const [isFullPlayback, setIsFullPlayback] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showHint, setShowHint] = useState(false);
+  const [tocOpen, setTocOpen] = useState(false);
 
   const audio = useAudio();
 
@@ -186,22 +188,36 @@ export default function LessonPage({ params }: Props) {
   return (
     <div className="flex flex-col h-dvh overflow-hidden">
       {/* Header */}
-      <header className="flex items-center gap-3 px-4 py-3 glass rounded-none border-t-0 border-x-0 shrink-0 z-30">
+      <header className="flex items-center gap-3 px-4 pt-6 pb-3 shrink-0 z-30">
         <button
           onClick={() => router.back()}
-          className="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
+          className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
+          aria-label="Back"
         >
           <ArrowLeft size={18} className="text-text-main" />
         </button>
         <div className="flex-1 min-w-0">
-          <h1 className="text-sm font-semibold text-text-main truncate">
+          <h1 className="text-base font-semibold text-text-main truncate">
             {lesson?.title[settings.locale] || ""}
           </h1>
           <p className="text-xs text-text-muted truncate">
             {chapter?.title[settings.locale] || ""}
           </p>
         </div>
+        <button
+          onClick={() => setTocOpen(true)}
+          className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
+          aria-label={t("lessons")}
+        >
+          <ListOrdered size={20} className="text-text-main" />
+        </button>
       </header>
+
+      <TocSheet
+        open={tocOpen}
+        onClose={() => setTocOpen(false)}
+        currentChapterId={chapterId}
+      />
 
       {/* Pager — scrollable with fade edges */}
       <div
