@@ -150,7 +150,7 @@ export const lessons: Record<string, Lesson[]> = {
       },
       order: 2,
       audioUrl: "/audio/02. Muqaddima.mp3",
-      pageCount: 2,
+      pageCount: 1,
     },
   ],
   ch_harflar: [
@@ -319,7 +319,7 @@ export const lessons: Record<string, Lesson[]> = {
 // Mapping: chapterId+lessonId → page image numbers
 const PAGE_MAP: Record<string, number[]> = {
   ls_muqova: [0],
-  ls_muqaddima: [1, 2],
+  ls_muqaddima: [1], // Pages 1 & 2 merged into single page 1 (continuous text)
   ls_alifbo: [3, 4],
   ls_harflar_1: [5, 6, 7, 8, 9, 10],
   ls_harflar_2: [11, 12, 13, 14, 15, 16],

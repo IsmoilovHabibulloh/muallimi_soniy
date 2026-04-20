@@ -28,6 +28,12 @@ const A = {
   h: (name: string) => `/audio/edit/04_harakat/${name}.mp3`,
   // Page 3+4 Ra harakat + birikma chunks — see Materiallar/harflar/ro.md
   r: (name: string) => `/audio/edit/05_ro/${name}.mp3`,
+  // Page 4 Za chunks — see Materiallar/harflar/za.md
+  z: (name: string) => `/audio/edit/06_za/${name}.mp3`,
+  // Page 4 Mim chunks
+  m: (name: string) => `/audio/edit/07_ma/${name}.mp3`,
+  // Page 4 Ta chunks
+  t: (name: string) => `/audio/edit/08_ta/${name}.mp3`,
   harakat: "/audio/04. harakat.mp3",
   ro: "/audio/05. ro.mp3",
   za: "/audio/06. za.mp3",
@@ -786,10 +792,11 @@ const p3: ED[] = [
   ["29", "harf", "اَ", "Alif fatha", A.h("h01_fatha"), 0, 0.51, 72, 56, 10, 7],
   ["30", "harf", "اِ", "Alif kasra", A.h("h02_kasra"), 0, 0.52, 44, 56, 10, 7],
   ["31", "harf", "اُ", "Alif damma", A.h("h03_damma"), 0, 0.54, 16, 56, 10, 7],
-  // Ra with harakats: رَ رِ رُ
-  ["32", "harf", "رَ", "Ra fatha", A.r("r01_fatha"), 0, 0.68, 72, 69, 10, 7],
-  ["33", "harf", "رِ", "Ra kasra", A.r("r02_kasra"), 0, 0.60, 44, 69, 10, 7],
-  ["34", "harf", "رُ", "Ra damma", A.r("r03_damma"), 0, 0.65, 16, 69, 10, 7],
+  // Ra — kitobdagi asl shakl: standalone + 2 connected forms (har xil harakat bilan)
+  // رَ (alohida, fatha) | ـرِ (bog'langan, kasra) | ـرُ (bog'langan, damma)
+  ["32", "harf", "رَ",  "Ra fatha (alohida)", A.r("r01_fatha"), 0, 0.68, 72, 69, 10, 7],
+  ["33", "harf", "ـرِ", "Ra kasra (bogʻlangan)", A.r("r02_kasra"), 0, 0.60, 44, 69, 10, 7],
+  ["34", "harf", "ـرُ", "Ra damma (bogʻlangan)", A.r("r03_damma"), 0, 0.65, 16, 69, 10, 7],
   // Combined: اَرْ اِرْ اُرْ
   ["35", "bogin", "اَرْ", "Ar", A.r("r04_ar"), 0, 0.70, 72, 82, 10, 7],
   ["36", "bogin", "اِرْ", "Ir", A.r("r05_ir"), 0, 0.63, 44, 82, 10, 7],
@@ -797,17 +804,57 @@ const p3: ED[] = [
 ];
 
 // ============================================================
-// PAGE 4 — Alifbo continued (same layout, review)
+// PAGE 4 — Za / Mim / Ta amaliyoti (image 4.jpg)
+// Audio: Za → 06. za.mp3, Mim → 07. ma.mp3, Ta → 08. ta.mp3
+// Placeholder timings (0, 2) — to be replaced with per-element timings
+// once the cut scripts for za / ma / ta audios are done.
 // ============================================================
 const p4: ED[] = [
-  // Harakatlar (review of harakat section) — same chunks as p3 elements 29-31
-  ["01", "harf", "اَ", "Alif fatha", A.h("h01_fatha"), 0, 0.51, 72, 56, 10, 7],
-  ["02", "harf", "اِ", "Alif kasra", A.h("h02_kasra"), 0, 0.52, 44, 56, 10, 7],
-  ["03", "harf", "اُ", "Alif damma", A.h("h03_damma"), 0, 0.54, 16, 56, 10, 7],
-  // Ra harakat section — same chunks as p3 elements 32-34
-  ["04", "harf", "رَ", "Ra fatha", A.r("r01_fatha"), 0, 0.68, 72, 69, 10, 7],
-  ["05", "harf", "رِ", "Ra kasra", A.r("r02_kasra"), 0, 0.60, 44, 69, 10, 7],
-  ["06", "harf", "رُ", "Ra damma", A.r("r03_damma"), 0, 0.65, 16, 69, 10, 7],
+  // ── Za (ز) section — 13 elements — audio from 06. za.mp3 ──
+  ["01", "harf",  "زَ",   "Za fatha", A.z("z01_fatha"), 0, 0.71, 72, 8, 10, 7],
+  ["02", "harf",  "زِ",   "Za kasra", A.z("z02_kasra"), 0, 0.68, 50, 8, 10, 7],
+  ["03", "harf",  "زُ",   "Za damma", A.z("z03_damma"), 0, 0.75, 28, 8, 10, 7],
+  ["04", "bogin", "اَزْ", "Az",  A.z("z04_az"),  0, 0.73, 84, 18, 10, 6],
+  ["05", "bogin", "اِزْ", "Iz",  A.z("z05_iz"),  0, 0.75, 68, 18, 10, 6],
+  ["06", "bogin", "اُزْ", "Uz",  A.z("z06_uz"),  0, 0.79, 52, 18, 10, 6],
+  ["07", "bogin", "زَرْ", "Zar", A.z("z07_zar"), 0, 0.63, 36, 18, 10, 6],
+  ["08", "bogin", "زِرْ", "Zir", A.z("z08_zir"), 0, 0.59, 20, 18, 10, 6],
+  ["09", "bogin", "زُرْ", "Zur", A.z("z09_zur"), 0, 0.33,  4, 18, 10, 6],
+  ["10", "soz", "اَزْرُ", "Azru", A.z("z10_azru"), 0, 1.13, 84, 28, 12, 6],
+  ["11", "soz", "اِزْرُ", "Izru", A.z("z11_izru"), 0, 1.07, 64, 28, 12, 6],
+  ["12", "soz", "اُزْرُ", "Uzru", A.z("z12_uzru"), 0, 1.15, 44, 28, 12, 6],
+  ["13", "soz", "اُرْزُ", "Urzu", A.z("z13_urzu"), 0, 1.13, 24, 28, 12, 6],
+
+  // ── Mim (م) section — 19 elements — audio from 07. ma.mp3 ──
+  ["14", "harf",  "مَ",   "Ma (boshida)",   A.m("m01_fatha"), 0, 0.88, 72, 40, 10, 7],
+  ["15", "harf",  "ـمِـ", "Mi (oʻrtasida)", A.m("m02_kasra"), 0, 0.88, 50, 40, 10, 7],
+  ["16", "harf",  "ـمُ",  "Mu (oxirida)",   A.m("m03_damma"), 0, 0.98, 28, 40, 10, 7],
+  ["17", "bogin", "اَمْ", "Am",  A.m("m04_am"),  0, 0.63, 84, 50, 10, 6],
+  ["18", "bogin", "اِمْ", "Im",  A.m("m05_im"),  0, 0.69, 68, 50, 10, 6],
+  ["19", "bogin", "اُمْ", "Um",  A.m("m06_um"),  0, 0.71, 52, 50, 10, 6],
+  ["20", "bogin", "مُرْ", "Mur", A.m("m07_mur"), 0, 0.59, 36, 50, 10, 6],
+  ["21", "bogin", "مُزْ", "Muz", A.m("m08_muz"), 0, 0.67, 20, 50, 10, 6],
+  ["22", "bogin", "رُمْ", "Rum", A.m("m09_rum"), 0, 0.71,  4, 50, 10, 6],
+  ["23", "soz",   "اَمَرَ", "Amara", A.m("m10_amara"), 0, 0.94, 85, 60, 12, 6],
+  ["24", "soz",   "اُمَرَ", "Umara", A.m("m11_umara"), 0, 1.02, 70, 60, 12, 6],
+  ["25", "soz",   "اَمْرُ", "Amru",  A.m("m12_amru"),  0, 1.15, 55, 60, 12, 6],
+  ["26", "soz",   "اِمْرُ", "Imru",  A.m("m13_imru"),  0, 1.12, 40, 60, 12, 6],
+  ["27", "soz",   "رَمْزُ", "Ramzu", A.m("m14_ramzu"), 0, 1.31, 25, 60, 12, 6],
+  ["28", "soz",   "اِرْم",  "Irm",   A.m("m15_irm"),   0, 1.07, 10, 60, 12, 6],
+  ["29", "soz",   "مَرْمَرْ", "Marmar", A.m("m16_marmar"), 0, 1.37, 80, 70, 14, 6],
+  ["30", "soz",   "رَمْزَمْ", "Ramzam", A.m("m17_ramzam"), 0, 1.33, 60, 70, 14, 6],
+  ["31", "soz",   "زَمْزَمْ", "Zamzam", A.m("m18_zamzam"), 0, 1.33, 40, 70, 14, 6],
+  ["32", "soz",   "اَرْزَمْ", "Arzam",  A.m("m19_arzam"),  0, 1.29, 20, 70, 14, 6],
+
+  // ── Ta (ت) section — 8 elements — audio from 08. ta.mp3 ──
+  ["33", "harf",  "تَ",   "Ta (boshida)",   A.t("t01_fatha"), 0, 0.76, 72, 82, 10, 7],
+  ["34", "harf",  "ـتِـ", "Ti (oʻrtasida)", A.t("t02_kasra"), 0, 0.90, 50, 82, 10, 7],
+  ["35", "harf",  "ـتُ",  "Tu (oxirida)",   A.t("t03_damma"), 0, 0.59, 28, 82, 10, 7],
+  ["36", "bogin", "مَتْ", "Mat",    A.t("t04_mat"),   0, 0.71, 82, 92, 10, 6],
+  ["37", "bogin", "مِتْ", "Mit",    A.t("t05_mit"),   0, 0.69, 66, 92, 10, 6],
+  ["38", "bogin", "مُتْ", "Mut",    A.t("t06_mut"),   0, 0.73, 50, 92, 10, 6],
+  ["39", "soz",   "تَمَرْ", "Tamar", A.t("t07_tamar"), 0, 0.89, 30, 92, 14, 6],
+  ["40", "soz",   "تَرِرْ", "Tarir", A.t("t08_tarir"), 0, 0.85, 10, 92, 14, 6],
 ];
 
 // ============================================================
@@ -1502,8 +1549,9 @@ const p50: ED[] = [
 // ============================================================
 export const PAGE_ELEMENTS: Record<number, Element[]> = {
   0: [],
-  1: make(1, p1),
-  2: make(2, p2),
+  // Muqaddima: p1 + p2 merged into a single page (was pages 1-2, now just page 1)
+  1: [...make(1, p1), ...make(2, p2)],
+  4: make(4, p4),
   3: make(3, p3),
   4: make(4, p4),
   5: make(5, p5),

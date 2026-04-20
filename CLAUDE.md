@@ -104,11 +104,21 @@ Element ikki darajada chaqirilishi kerak:
 ko'rsatadi — to'liq sound envelope'ni emas. Shuning uchun ular:
 - Vowel attack (boshidagi unli ko'tarilishi) — 50-100 ms kesib yuborilgan
 - Fricative tail (oxiridagi shhh/ssss cho'zilgan tovush) — 100-200 ms kesilgan
-- Ba'zi harflarni butunlay noto'g'ri joyga yo'naltirgan (masalan, alifbo'da `shin`)
-- Ba'zi harflarni umuman tushirib qoldirgan
+- Ba'zi harflarni butunlay noto'g'ri joyga yo'naltirgan (masalan, alifbo'da `shin` — PDF 82.36 ga yo'naltirgan lekin u yerda sod, asl joyi 79.40)
+- Ba'zi so'zlarni transkripsiyada tushirib qoldirgan (masalan, sahifa 4 Mim so'zlari: `umara`, `imru`, `irm` PDF to'liq bermagan)
+- So'zlar oxirini kesgan (amara/imra/amru — 180-340 ms tail yo'qolgan)
 
 **PDF'ni "markaz koordinatasi" sifatida boshlang'ich nuqta deb oling — har
 doim -50/+100 ms buffer qo'shing va eshitib tasdiqlang.**
+
+### ⚠️ Rasm bilan audio mos kelmasligi mumkin
+
+Kitob rasmi vizual referens, lekin yakuniy haqiqat — foydalanuvchi audio eshituvi:
+- Rasmda **تَرَرْ** (tarar) ko'ringan, lekin audio talaffuzi **تَرِرْ** (tarir).
+  Demak harakat sukun emas kasra bo'lishi kerak.
+- So'z oxiri ba'zida sukun, ba'zida damma/fatha/kasra — har birini eshitib tekshirish shart.
+
+**Qoida**: Rasm → vizual reja. Audio → haqiqiy matn. Ikkisi ziddiyatga tushsa — foydalanuvchidan so'rang.
 
 ### Qadamlar
 
@@ -159,6 +169,32 @@ Joriy arxitektura: **chunked files**. Har element o'z mp3 fayli bilan,
 - `soz` — so'z
 - `jumla` — jumla / oyat
 
+## Pozitsion shakllar
+
+Arab harflarining ikki toifasi bor:
+- **Connector harflar** (ب, ت, ث, ج, ح, م, etc.) — so'z boshi/o'rtasi/oxirida
+  shakli o'zgaradi. Boshida alohida (`مَ`), o'rtasida bog'langan (`ـمِـ`),
+  oxirida bog'langan (`ـمُ`).
+- **Non-connector harflar** (ا, د, ذ, ر, ز, و) — faqat o'ng tomondan bog'lanadi,
+  shakli o'zgarmaydi.
+
+### Qachon ko'rsatiladi
+
+- **Alifbo harakatlar bo'limi** (sahifa 3, `رَ رِ رُ`): **harakatlar** o'rgatiladi,
+  pozitsion shakllar aralashtirilmaydi. Kitob tartibiga mos.
+- **Harf amaliyoti sahifalari** (sahifa 4+, har bir harf o'qitiladigan sahifa):
+  **kitob ko'rsatgan shaklda** ishlatiladi. Odatda 3 ta harakat alohida, o'rtada
+  va oxirida shakllar bilan ko'rsatiladi (masalan: `مَ / ـمِـ / ـمُ`, `تَ / ـتِـ / ـتُ`).
+- **Non-connector harflar** (Za, Ra, Dal, Zal) — pozitsion shakllar alohida
+  ko'rsatilmaydi (shakli o'zgarmagani uchun).
+
+### Uslub
+
+- `element.arabic` da pozitsion bog'lovchilar yoziladi: `ـمِـ`, `ـتُ`, `ـرِ` va h.k.
+- `element.uzbek` label'ida pozitsiya ko'rsatiladi: `"Mi (oʻrtasida)"`, `"Tu (oxirida)"`.
+- Pozitsion shaklni **faqat kitob ko'rsatgan joyda** ishlating — yangi o'rinda
+  aralashtirmang.
+
 ---
 
 # UI Arxitekturasi
@@ -191,6 +227,21 @@ Tarkibi:
 uchun bu **bitta yirik kitob** (54 sahifa) — barcha boblarning barcha darslari
 ketma-ket sahifalardek ko'rinadi. Lesson chegaralari ko'rinmaydi —
 foydalanuvchi swipe / scroll qilib davom etishi mumkin.
+
+### Sahifa tuzilishi (kitobdagiga mos)
+
+| Global # | Mazmun | Renderer | Image |
+|----------|--------|----------|-------|
+| 1 | Muqova | Page0 | - |
+| 2 | Muqaddima (p1 + p2 birlashgan) | Page1 | - |
+| 3 | Alifbo + harakatlar + Ra | Page3 | 3.jpg |
+| 4 | Takrorlash: Za / Mim / Ta | Page4 | 4.jpg |
+| 5 | Harflar (1-qism) | Page5 | 5.jpg |
+| ... | ... | ... | ... |
+| 54 | Duolar (oxirgi) | Page50 | 50.jpg |
+
+Muhim: Muqaddima kitobda 2 sahifa bo'lgan, lekin uzluksiz matn —
+birlashtirilgan. Sahifa 4 kitob sahifa 4 bilan aynan mos.
 
 ### Tarkibiy ma'lumot
 

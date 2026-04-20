@@ -183,6 +183,43 @@ function Row({
   );
 }
 
+// Position-labelled row — shows labels (Boshida / O'rtasida / Oxirida) above
+// each element. els order maps to labels order; both render RTL visually.
+function PositionRow({
+  els,
+  labels,
+  activeId,
+  hasActive,
+  onClick,
+  size = "2xl",
+}: {
+  els: Element[];
+  labels: string[];
+  activeId: string | null;
+  hasActive: boolean;
+  onClick: (el: Element) => void;
+  size?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+}) {
+  return (
+    <div className="flex flex-row-reverse justify-center gap-6">
+      {els.map((el, i) => (
+        <div key={el.id} className="flex flex-col items-center gap-1.5">
+          <p className="text-[11px] uppercase tracking-wide text-text-muted">
+            {labels[i]}
+          </p>
+          <ArabicEl
+            el={el}
+            isActive={activeId === el.id}
+            hasActive={hasActive}
+            onClick={() => onClick(el)}
+            size={size}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // Helper: get element by suffix id from page elements
 function usePageElements(elements: Element[], pageNum: number) {
   const prefix = `p${pageNum}_`;
@@ -309,17 +346,12 @@ function Page1({ elements, activeId, hasActive, onElementClick }: PP) {
         </button>
       )}
       <h2 className="text-lg font-bold text-text-secondary text-center mb-2">MUQADDIMA</h2>
+      {/* Part 1 (originally p1, 4 paragraphs) */}
       <MuqaddimaParagraph elements={elements} startIdx={1} endIdx={104} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
       <MuqaddimaParagraph elements={elements} startIdx={105} endIdx={175} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
       <MuqaddimaParagraph elements={elements} startIdx={176} endIdx={276} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
       <MuqaddimaParagraph elements={elements} startIdx={277} endIdx={372} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
-    </div>
-  );
-}
-
-function Page2({ elements, activeId, hasActive, onElementClick }: PP) {
-  return (
-    <div className="flex flex-col gap-4">
+      {/* Part 2 (originally p2, 5 paragraphs — merged into this single page) */}
       <MuqaddimaParagraph elements={elements} startIdx={1} endIdx={26} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
       <MuqaddimaParagraph elements={elements} startIdx={27} endIdx={154} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
       <MuqaddimaParagraph elements={elements} startIdx={155} endIdx={237} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
@@ -417,13 +449,25 @@ function Page3({ elements, activeId, hasActive, onElementClick }: PP) {
         />
       )}
       {bismillah && (
-        <SentenceBtn
-          el={bismillah}
-          isActive={activeId === bismillah.id}
-          hasActive={hasActive}
-          onClick={() => onElementClick(bismillah)}
-          size="lg"
-        />
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onElementClick(bismillah);
+          }}
+          className="element-spring rounded-xl px-6 py-2 transition-all font-bismillah"
+          aria-label={bismillah.uzbek}
+          style={{
+            color: activeId === bismillah.id ? "#ffffff" : "var(--color-text-main)",
+            backgroundColor: activeId === bismillah.id ? "var(--color-primary)" : "transparent",
+            boxShadow: activeId === bismillah.id ? "0 6px 20px var(--color-primary-glow)" : "none",
+            opacity: hasActive && activeId !== bismillah.id ? 0.25 : 1,
+            textShadow: activeId === bismillah.id ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
+            fontSize: "2.25rem",
+            lineHeight: 1.4,
+          }}
+        >
+          <span aria-hidden="true">﷽</span>
+        </button>
       )}
       {rule1 && (
         <div className="w-full flex justify-center mt-1">
@@ -478,14 +522,25 @@ function Page3({ elements, activeId, hasActive, onElementClick }: PP) {
   );
 }
 
+// Page 4 — Za / Mim / Ta amaliyoti (image 4.jpg). 40 elements.
 function Page4({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 4);
   return (
-    <div className="flex flex-col items-center gap-2">
-      <Title text="تکرار" sub="Takrorlash" />
-      <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="3xl" gap="gap-6" />
+    <div className="flex flex-col items-center gap-1">
+      {/* Za section (13 items) */}
+      <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
+      <Row els={els(["04","05","06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-2" />
+      <Row els={els(["10","11","12","13"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
       <Divider />
-      <Row els={els(["04","05","06"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="3xl" gap="gap-6" />
+      {/* Mim section (19 items) */}
+      <Row els={els(["14","15","16"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
+      <Row els={els(["17","18","19","20","21","22"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-2" />
+      <Row els={els(["23","24","25","26","27","28"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
+      <Row els={els(["29","30","31","32"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
+      <Divider />
+      {/* Ta section (8 items) */}
+      <Row els={els(["33","34","35"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
+      <Row els={els(["36","37","38","39","40"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
     </div>
   );
 }
@@ -1123,7 +1178,7 @@ function Page50(props: PP) {
 
 const PAGE_RENDERERS: Record<number, React.ComponentType<PP>> = {
   0: Page0,
-  1: Page1, 2: Page2,
+  1: Page1,
   3: Page3, 4: Page4, 5: Page5, 6: Page6, 7: Page7,
   8: Page8, 9: Page9, 10: Page10, 11: Page11, 12: Page12,
   13: Page13, 14: Page14, 15: Page15, 16: Page16,

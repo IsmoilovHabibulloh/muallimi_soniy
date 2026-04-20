@@ -29,6 +29,19 @@
   font-display: swap;
 }
 
+/* Amiri — used for the bismillah ligature (U+FDFD) and other decorative
+   Arabic calligraphy. Amiri renders ﷽ as a beautiful thuluth-style ligature. */
+@font-face {
+  font-family: "Amiri";
+  src: url("/fonts/Amiri-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+.font-bismillah {
+  font-family: "Amiri", "Noto Naskh Arabic", serif;
+}
+
 /* ═══ Dark theme (default) ═══ */
 html {
   background: var(--color-bg-dark);
