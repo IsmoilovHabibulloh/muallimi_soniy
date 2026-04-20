@@ -24,21 +24,19 @@ function MuqaddimaWord({
   hasActive: boolean;
   onClick: () => void;
 }) {
-  const color = ELEMENT_COLORS[el.type];
   return (
     <button
       onClick={(e) => {
         e.stopPropagation();
         onClick();
       }}
-      className="element-spring rounded px-0.5 py-0 inline leading-relaxed transition-all"
+      className="element-spring rounded px-1 py-0 inline leading-relaxed transition-all font-semibold"
       style={{
-        color: isActive ? color : "var(--color-text-main)",
-        backgroundColor: isActive ? `${color}18` : "transparent",
-        borderBottom: isActive ? `2px solid ${color}` : "2px solid transparent",
-        boxShadow: isActive ? `0 2px 12px ${color}30` : "none",
-        transform: isActive ? "scale(1.05)" : "none",
-        opacity: hasActive && !isActive ? 0.6 : 1,
+        color: isActive ? "#ffffff" : "var(--color-text-main)",
+        backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+        boxShadow: isActive ? "0 4px 16px var(--color-primary-glow)" : "none",
+        opacity: hasActive && !isActive ? 0.3 : 1,
+        textShadow: isActive ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
       }}
     >
       {el.arabic}
@@ -102,7 +100,10 @@ function ArabicEl({
   onClick: () => void;
   size?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
 }) {
-  const color = ELEMENT_COLORS[el.type];
+  // Active state uses primary green for all element types (per UX decision).
+  // Type-specific colors (ELEMENT_COLORS) reserved for legend / future use.
+  void ELEMENT_COLORS;
+  void el.type;
   const sizeClasses: Record<string, string> = {
     sm: "text-lg px-1.5 py-0.5",
     md: "text-xl px-2 py-0.5",
@@ -119,15 +120,16 @@ function ArabicEl({
         e.stopPropagation();
         onClick();
       }}
-      className={`arabic-text element-spring rounded-lg inline-flex items-center justify-center leading-relaxed ${sizeClasses[size]}`}
+      className={`arabic-text element-spring rounded-lg inline-flex items-center justify-center leading-relaxed font-bold ${sizeClasses[size]}`}
       style={{
         fontFamily: "var(--font-arabic)",
-        color: isActive ? color : "var(--color-text-main)",
-        backgroundColor: isActive ? `${color}18` : "transparent",
-        border: isActive ? `2px solid ${color}` : "2px solid transparent",
-        boxShadow: isActive ? `0 4px 20px ${color}40` : "none",
-        transform: isActive ? "scale(1.1)" : "none",
-        opacity: hasActive && !isActive ? 0.5 : 1,
+        color: isActive ? "#ffffff" : "var(--color-text-main)",
+        backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+        border: isActive ? "2px solid var(--color-primary)" : "2px solid transparent",
+        boxShadow: isActive ? "0 8px 28px var(--color-primary-glow)" : "none",
+        transform: isActive ? "scale(1.18)" : "none",
+        opacity: hasActive && !isActive ? 0.25 : 1,
+        textShadow: isActive ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
       }}
     >
       {el.arabic}
@@ -327,13 +329,141 @@ function Page2({ elements, activeId, hasActive, onElementClick }: PP) {
   );
 }
 
+function SentenceBtn({
+  el,
+  isActive,
+  hasActive,
+  onClick,
+  size = "md",
+}: {
+  el: Element;
+  isActive: boolean;
+  hasActive: boolean;
+  onClick: () => void;
+  size?: "md" | "lg";
+}) {
+  const sizeClass = size === "lg" ? "text-2xl" : "text-xl";
+  return (
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+      className={`arabic-text element-spring rounded-lg font-bold text-center leading-relaxed px-4 py-1 ${sizeClass}`}
+      style={{
+        fontFamily: "var(--font-arabic)",
+        color: isActive ? "#ffffff" : "var(--color-text-main)",
+        backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+        boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+        opacity: hasActive && !isActive ? 0.25 : 1,
+        textShadow: isActive ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
+      }}
+    >
+      {el.arabic}
+    </button>
+  );
+}
+
+function RuleBlock({
+  el,
+  isActive,
+  hasActive,
+  onClick,
+  children,
+}: {
+  el: Element;
+  isActive: boolean;
+  hasActive: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  void el;
+  return (
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+      className="element-spring rounded-xl px-4 py-1 text-sm leading-relaxed text-center w-full max-w-[560px]"
+      style={{
+        color: isActive ? "#ffffff" : "var(--color-text-muted)",
+        backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+        boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+        opacity: hasActive && !isActive ? 0.3 : 1,
+        textShadow: isActive ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
 function Page3({ elements, activeId, hasActive, onElementClick }: PP) {
+  const auzubillah = elements.find((e) => e.id === "p3_i01_auzubillah");
+  const bismillah = elements.find((e) => e.id === "p3_i02_bismillah");
+  const rule1 = elements.find((e) => e.id === "p3_i03_rule1");
+  const misol = elements.find((e) => e.id === "p3_i04_misol");
+  const rule2 = elements.find((e) => e.id === "p3_i05_rule2");
   const { els } = usePageElements(elements, 3);
   return (
     <div className="flex flex-col items-center gap-1">
-      <div className="arabic-text text-2xl text-text-main mb-2 font-bold text-center leading-relaxed">
-        بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ
-      </div>
+      {auzubillah && (
+        <SentenceBtn
+          el={auzubillah}
+          isActive={activeId === auzubillah.id}
+          hasActive={hasActive}
+          onClick={() => onElementClick(auzubillah)}
+          size="md"
+        />
+      )}
+      {bismillah && (
+        <SentenceBtn
+          el={bismillah}
+          isActive={activeId === bismillah.id}
+          hasActive={hasActive}
+          onClick={() => onElementClick(bismillah)}
+          size="lg"
+        />
+      )}
+      {rule1 && (
+        <div className="w-full flex justify-center mt-1">
+          <RuleBlock
+            el={rule1}
+            isActive={activeId === rule1.id}
+            hasActive={hasActive}
+            onClick={() => onElementClick(rule1)}
+          >
+            {rule1.uzbek}
+          </RuleBlock>
+        </div>
+      )}
+      {misol && (
+        <div className="w-full flex justify-center">
+          <RuleBlock
+            el={misol}
+            isActive={activeId === misol.id}
+            hasActive={hasActive}
+            onClick={() => onElementClick(misol)}
+          >
+            <span>Misol uchun </span>
+            <span className="arabic-text" style={{ fontFamily: "var(--font-arabic)" }}>
+              اب. اج, اس
+            </span>
+          </RuleBlock>
+        </div>
+      )}
+      {rule2 && (
+        <div className="w-full flex justify-center mb-1">
+          <RuleBlock
+            el={rule2}
+            isActive={activeId === rule2.id}
+            hasActive={hasActive}
+            onClick={() => onElementClick(rule2)}
+          >
+            {rule2.uzbek}
+          </RuleBlock>
+        </div>
+      )}
       <Row els={els(["01","02","03","04","05","06","07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-1" />
       <Row els={els(["08","09","10","11","12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-1" />
       <Row els={els(["15","16","17","18","19","20","21"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-1" />

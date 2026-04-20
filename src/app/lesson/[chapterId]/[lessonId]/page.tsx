@@ -107,12 +107,16 @@ export default function LessonPage({ params }: Props) {
     }
   }, [loading, currentBookPage]);
 
-  // Preload current lesson audio (changes as user crosses lesson boundaries)
+  // Preload current lesson audio (changes as user crosses lesson boundaries).
+  // NOTE: do NOT include `audio` in deps — it's a fresh object on every render
+  // and would re-fire this effect, interrupting per-element chunk playback
+  // mid-flight (loadAudio internally stops the current source).
   useEffect(() => {
     if (currentLesson?.audioUrl) {
       audio.loadAudio(currentLesson.audioUrl).catch(() => {});
     }
-  }, [currentLesson?.audioUrl, audio]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentLesson?.audioUrl]);
 
   // Sync URL with current lesson (so refresh / share keeps position)
   useEffect(() => {

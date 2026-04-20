@@ -56,13 +56,33 @@ Shuning uchun:
 
 ## Audio arxitekturasi
 
-- Bizda **har bir darsda bitta to'liq audio fayl** mavjud (`public/audio/*.mp3`).
-- Bu audioni **harf / bo'g'in / so'z / jumla** kesimida bo'laklarga ajratamiz
-  (boshlanish va tugash vaqti — `start`, `end`).
-- Har bir bo'lakni sahifadagi mos elementga (matn ustidagi koordinata) biriktiramiz
-  (`src/lib/data/elements.ts`).
-- Foydalanuvchi harf/so'z/jumla ustiga bosganda — audio aynan o'sha segmentdan
-  ijro etiladi.
+Audio integratsiyasi — **chunked-files** yondashuvi:
+
+1. **Asl audio (backup)** — `public/audio/NN. <topic>.mp3` (har dars bitta katta fayl).
+   Foydalanuvchiga ko'rinmaydi, lekin saqlanadi:
+   - Audio control bar'dagi "to'liq ijro" (lesson.audioUrl) shuni ishlatadi.
+   - Xato bo'lsa, qayta cut qilish uchun manba.
+2. **Bo'lingan chunklar** — `public/audio/edit/<NN_topic>/eXX_<name>.mp3`:
+   - Har bir element o'z fayli bilan (28 harf → 28 chunk).
+   - App shu fayllardan ijro qiladi (per-element click).
+3. **Master nusxalar** — `Materiallar/<bob>/edit_audios/<NN_topic>/`:
+   - `public/audio/edit/...` ga aynan mos.
+   - Source-of-truth — qayta deploy/qayta yaratish uchun.
+
+### Element-chunk bog'lanishi
+
+`src/lib/data/elements.ts` da:
+```ts
+const A = {
+  alifbo: "/audio/03. alifbo.mp3",      // asl, backup
+  e: (n: string) => `/audio/edit/03_alifbo/${n}.mp3`,  // chunk helper
+};
+
+["02", "harf", "ب", "Ba", A.e("e02_ba"), 0, 0.50, ...]
+//                         ^chunkUrl  ^start  ^end (= chunk_duration)
+```
+
+Foydalanuvchi `ب` ustiga bosganda — `e02_ba.mp3` to'liq ijro etiladi.
 
 ## Ma'lumot olish (data API)
 
@@ -73,14 +93,64 @@ Element ikki darajada chaqirilishi kerak:
    elementlar va audio segmentlari birga** keladi (ketma-ket ijro yoki tanlab
    ijro uchun).
 
-## Har bir sahifa ustida ish tartibi
+## Har bir sahifa ustida ish tartibi (audio integratsiya protokoli)
 
-1. Darsning audio faylini **eshitib chiqish**.
-2. Har bir harf/bo'g'in/so'z/jumla uchun audiodagi **start–end vaqtini** belgilash.
-3. Sahifa rasmidagi har bir elementning **koordinatasini** (x, y, w, h) belgilash.
-4. Audio segmentni mos elementga biriktirish (`elements.ts`).
-5. **Tekshirish:** har element ustiga bosib, to'g'ri talaffuz chiqayotganini
-   eshitib qo'yish. Bu qadam o'tkazib yuborilmaydi.
+> **Bu CLAUDE.md darajasidagi qat'iy protokol — har bir sahifa uchun amal qiling.**
+
+### ⚠️ PDF'ga ko'r-ko'rona ishonmaslik
+
+`Materiallar/audio_qoidalar/<NN>_*.pdf` fayllari 80% aniqlikdagi qo'llanma.
+**PDF vaqtlari odatda tovushning markazi** (eng baland qism / loud peak)'ni
+ko'rsatadi — to'liq sound envelope'ni emas. Shuning uchun ular:
+- Vowel attack (boshidagi unli ko'tarilishi) — 50-100 ms kesib yuborilgan
+- Fricative tail (oxiridagi shhh/ssss cho'zilgan tovush) — 100-200 ms kesilgan
+- Ba'zi harflarni butunlay noto'g'ri joyga yo'naltirgan (masalan, alifbo'da `shin`)
+- Ba'zi harflarni umuman tushirib qoldirgan
+
+**PDF'ni "markaz koordinatasi" sifatida boshlang'ich nuqta deb oling — har
+doim -50/+100 ms buffer qo'shing va eshitib tasdiqlang.**
+
+### Qadamlar
+
+1. **PDF qo'llanmani o'qish** — boshlangich vaqt va matnlar uchun.
+2. **Sukunat aniqlash** asl audioda:
+   ```bash
+   ./tools/ffmpeg -i <audio.mp3> -af "silencedetect=noise=-40dB:duration=0.10" -f null -
+   ```
+   Bu sound boundary'larni beradi.
+3. **Energy profile tekshirish** (qisqa harflar uchun) — 25-50 ms oynalarda
+   `volumedetect` bilan vowel peak'lar qaerda ekanini topish.
+4. **Cut skript yozish** (`tools/cut_<topic>.sh`):
+   - PDF asoslangan harflar uchun: PDF vaqtidan **-50 ms / +100 ms** buffer
+     (vowel attack + fricative tail uchun).
+   - Maxsus harflar uchun (PDF xato): silence-detected boundary'lar.
+   - Re-encode `libmp3lame -b:a 192k` (sample-accurate).
+5. **Skript ishga tushirish** — chunklar `Materiallar/<bob>/edit_audios/<NN_topic>/` ga.
+6. **`public/audio/edit/<NN_topic>/` ga ko'chirish** — app shu joydan oladi.
+7. **`elements.ts` da har elementga chunk URL biriktirish** —
+   `audioUrl: A.e("eXX_name")`, `start: 0`, `end: chunk_duration`.
+8. **MAJBURIY: foydalanuvchi bilan eshitib tekshirish** — har element bosib
+   to'g'ri talaffuz chiqayotganini tasdiqlash. `afplay <chunk.mp3>` skript
+   ichida ham qo'shilishi mumkin.
+9. **`Materiallar/<bob>/<topic>.md` yozish** — yakuniy tasdiqlangan vaqtlar
+   jadvali (PDF emas, **haqiqiy** vaqtlar). Metodologiya bo'limi ham yozing —
+   keyingi safar qaytarish uchun.
+
+### Chunk fayli vs. timing
+
+Joriy arxitektura: **chunked files**. Har element o'z mp3 fayli bilan,
+`start: 0`, `end: file_duration`. Bu:
+- Backup-friendly (har chunk alohida tekshiriladi)
+- Network o'rniga local audio playback yoqimliroq
+- Asl audio `public/audio/<NN>.mp3` da saqlanadi (audio control bar uchun
+  va backup sifatida).
+
+### Asl audio = saqlanadi
+
+**Asl `public/audio/NN.mp3` fayli HECH QACHON o'chirilmaydi.** Bu:
+- Backup — chunk xato bo'lsa qayta cut qilish manbai
+- "Play full" tugmasi shuni ishlatadi (audio control bar)
+- Master nusxa Materiallar/<bob>/audiosi/ da ham saqlanadi
 
 ## Element turlari
 

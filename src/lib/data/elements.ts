@@ -22,6 +22,12 @@ function make(pg: number, data: ED[]): Element[] {
 // Audio paths
 const A = {
   alifbo: "/audio/03. alifbo.mp3",
+  // Page 3 (alifbo) per-element chunks — see Materiallar/harflar/alifbo.md
+  e: (name: string) => `/audio/edit/03_alifbo/${name}.mp3`,
+  // Page 3+4 harakat chunks — see Materiallar/harflar/harakat.md
+  h: (name: string) => `/audio/edit/04_harakat/${name}.mp3`,
+  // Page 3+4 Ra harakat + birikma chunks — see Materiallar/harflar/ro.md
+  r: (name: string) => `/audio/edit/05_ro/${name}.mp3`,
   harakat: "/audio/04. harakat.mp3",
   ro: "/audio/05. ro.mp3",
   za: "/audio/06. za.mp3",
@@ -734,63 +740,74 @@ const p2: ED[] = [
 // PAGE 3 — Alifbo: Alphabet grid + harakats + ra
 // ============================================================
 const p3: ED[] = [
-  // Alphabet Row 1 (right to left): ا ب ت ث ج ح خ
-  ["01", "harf", "ا", "Alif", A.alifbo, 0, 2, 88, 14, 7, 5],
-  ["02", "harf", "ب", "Ba", A.alifbo, 2, 4, 76, 14, 7, 5],
-  ["03", "harf", "ت", "Ta", A.alifbo, 4, 6, 64, 14, 7, 5],
-  ["04", "harf", "ث", "Tha", A.alifbo, 6, 8, 52, 14, 7, 5],
-  ["05", "harf", "ج", "Jim", A.alifbo, 8, 10, 40, 14, 7, 5],
-  ["06", "harf", "ح", "Ha", A.alifbo, 10, 12, 28, 14, 7, 5],
-  ["07", "harf", "خ", "Xo", A.alifbo, 12, 14, 16, 14, 7, 5],
+  // Intros (top of page): isteozah + bismillah + rule explanations
+  ["i01_auzubillah", "jumla", "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ", "Auzubillah", A.e("intro_a_auzubillah"), 0, 5.43, 0, 0, 100, 8],
+  ["i02_bismillah",  "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",         "Bismillah",  A.e("intro_b_bismillah"),  0, 5.35, 0, 0, 100, 8],
+  ["i03_rule1",      "jumla", "qoida_1", "Harfni joy-joyidan chiqarishlik uchun chiqarmoqchi boʻlayotgan harfimizni sukunli qilib oldiga fathali alif olib kelamiz.", A.e("intro_02_explain_1"), 0, 8.80, 0, 0, 100, 8],
+  ["i04_misol",      "jumla", "misol",   "Misol uchun اب. اج, اس", A.e("intro_03_misol"), 0, 3.08, 0, 0, 100, 8],
+  ["i05_rule2",      "jumla", "qoida_2", "Shunda harfni joyidan chiqarishlik ham qulay, ham oson boʻladi.", A.e("intro_04_explain_2"), 0, 4.50, 0, 0, 100, 8],
+
+  // Alphabet — each element uses a chunked audio file from
+  // /audio/edit/03_alifbo/ (cut from 03. alifbo.mp3 per PDF timings).
+  // start = 0, end = chunk duration in seconds.
+  // Row 1: ا ب ت ث ج ح خ
+  ["01", "harf", "ا", "Alif",  A.e("e01_alif"),  0, 0.41, 88, 14, 7, 5],
+  ["02", "harf", "ب", "Ba",    A.e("e02_ba"),    0, 0.65, 76, 14, 7, 5],
+  ["03", "harf", "ت", "Ta",    A.e("e03_ta"),    0, 0.51, 64, 14, 7, 5],
+  ["04", "harf", "ث", "Tha",   A.e("e04_tha"),   0, 0.47, 52, 14, 7, 5],
+  ["05", "harf", "ج", "Jim",   A.e("e05_jim"),   0, 0.51, 40, 14, 7, 5],
+  ["06", "harf", "ح", "Ha",    A.e("e06_ha"),    0, 0.69, 28, 14, 7, 5],
+  ["07", "harf", "خ", "Xo",    A.e("e07_xo"),    0, 1.27, 16, 14, 7, 5],
   // Row 2: د ذ ر ز س ش ص
-  ["08", "harf", "د", "Dal", A.alifbo, 14, 16, 88, 22, 7, 5],
-  ["09", "harf", "ذ", "Zal", A.alifbo, 16, 18, 76, 22, 7, 5],
-  ["10", "harf", "ر", "Ro", A.alifbo, 18, 20, 64, 22, 7, 5],
-  ["11", "harf", "ز", "Za", A.alifbo, 20, 22, 52, 22, 7, 5],
-  ["12", "harf", "س", "Sin", A.alifbo, 22, 24, 40, 22, 7, 5],
-  ["13", "harf", "ش", "Shin", A.alifbo, 24, 26, 28, 22, 7, 5],
-  ["14", "harf", "ص", "Sod", A.alifbo, 26, 28, 16, 22, 7, 5],
+  ["08", "harf", "د", "Dal",   A.e("e08_dal"),   0, 1.43, 88, 22, 7, 5],
+  ["09", "harf", "ذ", "Zal",   A.e("e09_zal"),   0, 0.49, 76, 22, 7, 5],
+  ["10", "harf", "ر", "Ro",    A.e("e10_ro"),    0, 1.60, 64, 22, 7, 5],
+  ["11", "harf", "ز", "Za",    A.e("e11_za"),    0, 0.99, 52, 22, 7, 5],
+  ["12", "harf", "س", "Sin",   A.e("e12_sin"),   0, 1.05, 40, 22, 7, 5],
+  ["13", "harf", "ش", "Shin",  A.e("e13_shin"),  0, 1.11, 28, 22, 7, 5],
+  ["14", "harf", "ص", "Sod",   A.e("e14_sod"),   0, 1.06, 16, 22, 7, 5],
   // Row 3: ض ط ظ ع غ ف ق
-  ["15", "harf", "ض", "Dod", A.alifbo, 28, 30, 88, 30, 7, 5],
-  ["16", "harf", "ط", "To", A.alifbo, 30, 32, 76, 30, 7, 5],
-  ["17", "harf", "ظ", "Zo", A.alifbo, 32, 34, 64, 30, 7, 5],
-  ["18", "harf", "ع", "Ayn", A.alifbo, 34, 36, 52, 30, 7, 5],
-  ["19", "harf", "غ", "G'ayn", A.alifbo, 36, 38, 40, 30, 7, 5],
-  ["20", "harf", "ف", "Fa", A.alifbo, 38, 40, 28, 30, 7, 5],
-  ["21", "harf", "ق", "Qof", A.alifbo, 40, 42, 16, 30, 7, 5],
-  // Row 4: ك ل م ن و ه لا ي ة
-  ["22", "harf", "ك", "Kaf", A.alifbo, 42, 44, 88, 38, 7, 5],
-  ["23", "harf", "ل", "Lam", A.alifbo, 44, 46, 76, 38, 7, 5],
-  ["24", "harf", "م", "Mim", A.alifbo, 46, 48, 64, 38, 7, 5],
-  ["25", "harf", "ن", "Nun", A.alifbo, 48, 50, 52, 38, 7, 5],
-  ["26", "harf", "و", "Vav", A.alifbo, 50, 52, 40, 38, 7, 5],
-  ["27", "harf", "ه", "Ha", A.alifbo, 52, 54, 28, 38, 7, 5],
-  ["28", "harf", "ي", "Ya", A.alifbo, 56, 58, 16, 38, 7, 5],
+  ["15", "harf", "ض", "Dod",   A.e("e15_dod"),   0, 1.93, 88, 30, 7, 5],
+  ["16", "harf", "ط", "To",    A.e("e16_to"),    0, 1.29, 76, 30, 7, 5],
+  ["17", "harf", "ظ", "Zo",    A.e("e17_zo"),    0, 0.94, 64, 30, 7, 5],
+  ["18", "harf", "ع", "Ayn",   A.e("e18_ayn"),   0, 0.87, 52, 30, 7, 5],
+  ["19", "harf", "غ", "G'ayn", A.e("e19_gayn"),  0, 0.91, 40, 30, 7, 5],
+  ["20", "harf", "ف", "Fa",    A.e("e20_fa"),    0, 0.99, 28, 30, 7, 5],
+  ["21", "harf", "ق", "Qof",   A.e("e21_qof"),   0, 0.55, 16, 30, 7, 5],
+  // Row 4: ك ل م ن و ه ي
+  ["22", "harf", "ك", "Kaf",   A.e("e22_kaf"),   0, 0.51, 88, 38, 7, 5],
+  ["23", "harf", "ل", "Lam",   A.e("e23_lam"),   0, 0.67, 76, 38, 7, 5],
+  ["24", "harf", "م", "Mim",   A.e("e24_mim"),   0, 0.69, 64, 38, 7, 5],
+  ["25", "harf", "ن", "Nun",   A.e("e25_nun"),   0, 1.49, 52, 38, 7, 5],
+  ["26", "harf", "و", "Vav",   A.e("e26_vav"),   0, 1.33, 40, 38, 7, 5],
+  ["27", "harf", "ه", "He",    A.e("e27_he"),    0, 0.67, 28, 38, 7, 5],
+  ["28", "harf", "ي", "Ya",    A.e("e28_ya"),    0, 0.81, 16, 38, 7, 5],
   // Harakat section: اَ اِ اُ
-  ["29", "harf", "اَ", "Alif fatha", A.harakat, 0, 3, 72, 56, 10, 7],
-  ["30", "harf", "اِ", "Alif kasra", A.harakat, 3, 6, 44, 56, 10, 7],
-  ["31", "harf", "اُ", "Alif damma", A.harakat, 6, 9, 16, 56, 10, 7],
+  ["29", "harf", "اَ", "Alif fatha", A.h("h01_fatha"), 0, 0.51, 72, 56, 10, 7],
+  ["30", "harf", "اِ", "Alif kasra", A.h("h02_kasra"), 0, 0.52, 44, 56, 10, 7],
+  ["31", "harf", "اُ", "Alif damma", A.h("h03_damma"), 0, 0.54, 16, 56, 10, 7],
   // Ra with harakats: رَ رِ رُ
-  ["32", "harf", "رَ", "Ra fatha", A.ro, 0, 2, 72, 69, 10, 7],
-  ["33", "harf", "رِ", "Ra kasra", A.ro, 2, 4, 44, 69, 10, 7],
-  ["34", "harf", "رُ", "Ra damma", A.ro, 4, 6, 16, 69, 10, 7],
+  ["32", "harf", "رَ", "Ra fatha", A.r("r01_fatha"), 0, 0.68, 72, 69, 10, 7],
+  ["33", "harf", "رِ", "Ra kasra", A.r("r02_kasra"), 0, 0.60, 44, 69, 10, 7],
+  ["34", "harf", "رُ", "Ra damma", A.r("r03_damma"), 0, 0.65, 16, 69, 10, 7],
   // Combined: اَرْ اِرْ اُرْ
-  ["35", "bogin", "اَرْ", "Ar", A.ro, 6, 9, 72, 82, 10, 7],
-  ["36", "bogin", "اِرْ", "Ir", A.ro, 9, 12, 44, 82, 10, 7],
-  ["37", "bogin", "اُرْ", "Ur", A.ro, 12, 15, 16, 82, 10, 7],
+  ["35", "bogin", "اَرْ", "Ar", A.r("r04_ar"), 0, 0.70, 72, 82, 10, 7],
+  ["36", "bogin", "اِرْ", "Ir", A.r("r05_ir"), 0, 0.63, 44, 82, 10, 7],
+  ["37", "bogin", "اُرْ", "Ur", A.r("r06_ur"), 0, 0.66, 16, 82, 10, 7],
 ];
 
 // ============================================================
 // PAGE 4 — Alifbo continued (same layout, review)
 // ============================================================
 const p4: ED[] = [
-  // Same alphabet - create elements for harakat section only (review)
-  ["01", "harf", "اَ", "Alif fatha", A.harakat, 0, 3, 72, 56, 10, 7],
-  ["02", "harf", "اِ", "Alif kasra", A.harakat, 3, 6, 44, 56, 10, 7],
-  ["03", "harf", "اُ", "Alif damma", A.harakat, 6, 9, 16, 56, 10, 7],
-  ["04", "harf", "رَ", "Ra fatha", A.ro, 0, 2, 72, 69, 10, 7],
-  ["05", "harf", "رِ", "Ra kasra", A.ro, 2, 4, 44, 69, 10, 7],
-  ["06", "harf", "رُ", "Ra damma", A.ro, 4, 6, 16, 69, 10, 7],
+  // Harakatlar (review of harakat section) — same chunks as p3 elements 29-31
+  ["01", "harf", "اَ", "Alif fatha", A.h("h01_fatha"), 0, 0.51, 72, 56, 10, 7],
+  ["02", "harf", "اِ", "Alif kasra", A.h("h02_kasra"), 0, 0.52, 44, 56, 10, 7],
+  ["03", "harf", "اُ", "Alif damma", A.h("h03_damma"), 0, 0.54, 16, 56, 10, 7],
+  // Ra harakat section — same chunks as p3 elements 32-34
+  ["04", "harf", "رَ", "Ra fatha", A.r("r01_fatha"), 0, 0.68, 72, 69, 10, 7],
+  ["05", "harf", "رِ", "Ra kasra", A.r("r02_kasra"), 0, 0.60, 44, 69, 10, 7],
+  ["06", "harf", "رُ", "Ra damma", A.r("r03_damma"), 0, 0.65, 16, 69, 10, 7],
 ];
 
 // ============================================================
