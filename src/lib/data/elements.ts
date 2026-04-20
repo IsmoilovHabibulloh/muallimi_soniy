@@ -1484,6 +1484,7 @@ const p50: ED[] = [
 // Export all page elements
 // ============================================================
 export const PAGE_ELEMENTS: Record<number, Element[]> = {
+  0: [],
   1: make(1, p1),
   2: make(2, p2),
   3: make(3, p3),

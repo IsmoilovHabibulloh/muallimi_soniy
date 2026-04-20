@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback, use } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState, useCallback, useMemo, use } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft, ListOrdered } from "lucide-react";
 import { HorizontalPager } from "@/components/lesson/HorizontalPager";
 import { PageIndicator } from "@/components/lesson/PageIndicator";
@@ -16,50 +16,87 @@ import {
   setMediaSessionHandlers,
   clearMediaSession,
 } from "@/lib/audio/mediaSession";
-import { getPages, getLesson, getChapter } from "@/lib/data/data-provider";
-import type { Page, Element, Lesson, Chapter } from "@/lib/data/types";
+import { getAllBookPages, type BookPage } from "@/lib/data/data-provider";
+import type { Element } from "@/lib/data/types";
 
 interface Props {
   params: Promise<{ chapterId: string; lessonId: string }>;
 }
 
+function buildMask(top: boolean, bottom: boolean): string {
+  const topPart = top ? "transparent, black 24px" : "black 0";
+  const bottomPart = bottom ? "black calc(100% - 24px), transparent" : "black 100%";
+  return `linear-gradient(to bottom, ${topPart}, ${bottomPart})`;
+}
+
 export default function LessonPage({ params }: Props) {
   const { chapterId, lessonId } = use(params);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const startPageParam = parseInt(searchParams.get("page") || "0", 10) || 0;
   const { settings, t } = useSettings();
   const { setLastViewed } = useProgress();
 
-  const [pages, setPages] = useState<Page[]>([]);
-  const [lesson, setLesson] = useState<Lesson | null>(null);
-  const [chapter, setChapter] = useState<Chapter | null>(null);
+  const [bookPages, setBookPages] = useState<BookPage[]>([]);
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [activeElement, setActiveElement] = useState<Element | null>(null);
   const [isFullPlayback, setIsFullPlayback] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showHint, setShowHint] = useState(false);
   const [tocOpen, setTocOpen] = useState(false);
+  const [scrolledFromTop, setScrolledFromTop] = useState(false);
+  const [hasMoreBelow, setHasMoreBelow] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const audio = useAudio();
 
-  // Load data
   useEffect(() => {
-    Promise.all([
-      getPages(lessonId),
-      getLesson(lessonId),
-      getChapter(chapterId),
-    ]).then(([p, l, c]) => {
-      setPages(p);
-      setLesson(l ?? null);
-      setChapter(c ?? null);
+    const el = scrollRef.current;
+    if (!el) return;
+    const update = () => {
+      setScrolledFromTop(el.scrollTop > 4);
+      setHasMoreBelow(el.scrollTop + el.clientHeight < el.scrollHeight - 4);
+    };
+    update();
+    el.addEventListener("scroll", update, { passive: true });
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    if (el.firstElementChild) ro.observe(el.firstElementChild);
+    return () => {
+      el.removeEventListener("scroll", update);
+      ro.disconnect();
+    };
+  }, [currentPageIndex]);
+
+  const currentBookPage = bookPages[currentPageIndex];
+  const currentLesson = currentBookPage?.lesson;
+  const currentChapter = currentBookPage?.chapter;
+
+  const pageElements = useMemo(
+    () => bookPages.map((p) => ({ ...p })),
+    [bookPages]
+  );
+
+  // Load all book pages once and jump to the right starting index
+  useEffect(() => {
+    getAllBookPages().then((all) => {
+      setBookPages(all);
+      const startIdx = all.findIndex(
+        (p) => p.lesson.id === lessonId && p.lessonPageIndex === startPageParam
+      );
+      const fallbackIdx = all.findIndex((p) => p.lesson.id === lessonId);
+      setCurrentPageIndex(
+        startIdx >= 0 ? startIdx : fallbackIdx >= 0 ? fallbackIdx : 0
+      );
       setLoading(false);
     });
-  }, [lessonId, chapterId]);
+  }, [lessonId, startPageParam]);
 
   // Show hint for first-time users
   useEffect(() => {
     if (!loading) {
       const hintSeen = localStorage.getItem("muallimi-hint-seen");
-      if (!hintSeen && pages[0]?.elements.length > 0) {
+      if (!hintSeen && currentBookPage?.elements.length) {
         setShowHint(true);
         const timer = setTimeout(() => {
           setShowHint(false);
@@ -68,14 +105,26 @@ export default function LessonPage({ params }: Props) {
         return () => clearTimeout(timer);
       }
     }
-  }, [loading, pages]);
+  }, [loading, currentBookPage]);
 
-  // Preload audio
+  // Preload current lesson audio (changes as user crosses lesson boundaries)
   useEffect(() => {
-    if (lesson?.audioUrl) {
-      audio.loadAudio(lesson.audioUrl).catch(() => {});
+    if (currentLesson?.audioUrl) {
+      audio.loadAudio(currentLesson.audioUrl).catch(() => {});
     }
-  }, [lesson?.audioUrl, audio]);
+  }, [currentLesson?.audioUrl, audio]);
+
+  // Sync URL with current lesson (so refresh / share keeps position)
+  useEffect(() => {
+    if (loading || !currentBookPage) return;
+    const expectedPath = `/lesson/${currentChapter!.id}/${currentLesson!.id}`;
+    if (
+      currentChapter!.id !== chapterId ||
+      currentLesson!.id !== lessonId
+    ) {
+      router.replace(expectedPath);
+    }
+  }, [loading, currentBookPage, currentChapter, currentLesson, chapterId, lessonId, router]);
 
   // Sync settings → audio engine
   useEffect(() => {
@@ -84,26 +133,30 @@ export default function LessonPage({ params }: Props) {
     audio.setLoopMode(settings.loopMode);
   }, [settings.speed, settings.repeatCount, settings.loopMode, audio]);
 
-  // Save progress
+  // Save progress (per-lesson page index)
   useEffect(() => {
-    if (!loading) {
-      setLastViewed(chapterId, lessonId, currentPageIndex);
+    if (!loading && currentBookPage) {
+      setLastViewed(
+        currentChapter!.id,
+        currentLesson!.id,
+        currentBookPage.lessonPageIndex
+      );
     }
-  }, [currentPageIndex, chapterId, lessonId, loading, setLastViewed]);
+  }, [loading, currentBookPage, currentChapter, currentLesson, setLastViewed]);
 
   // MediaSession
   useEffect(() => {
-    if (activeElement && lesson) {
+    if (activeElement && currentLesson) {
       updateMediaSession({
         title: activeElement.arabic,
         artist: activeElement.uzbek,
-        album: lesson.title[settings.locale],
+        album: currentLesson.title[settings.locale],
       });
     }
     return () => clearMediaSession();
-  }, [activeElement, lesson, settings.locale]);
+  }, [activeElement, currentLesson, settings.locale]);
 
-  // Auto-highlight: sync active element with audio currentTime (only in full playback)
+  // Auto-highlight element with audio currentTime (full playback only)
   useEffect(() => {
     if (!isFullPlayback || !audio.isPlaying) {
       if (isFullPlayback && !audio.isPlaying) {
@@ -112,18 +165,15 @@ export default function LessonPage({ params }: Props) {
       }
       return;
     }
-    const currentPage = pages[currentPageIndex];
-    if (!currentPage) return;
+    if (!currentBookPage) return;
     const t = audio.currentTime;
-    const match = currentPage.elements.find(
+    const match = currentBookPage.elements.find(
       (el) => el.start < el.end && t >= el.start && t < el.end
     );
     if (match && match.id !== activeElement?.id) {
       setActiveElement(match);
     }
-  }, [audio.currentTime, audio.isPlaying, isFullPlayback, currentPageIndex, pages, activeElement?.id]);
-
-
+  }, [audio.currentTime, audio.isPlaying, isFullPlayback, currentBookPage, activeElement?.id]);
 
   const handleElementClick = useCallback(
     async (el: Element) => {
@@ -133,7 +183,7 @@ export default function LessonPage({ params }: Props) {
         setShowHint(false);
         localStorage.setItem("muallimi-hint-seen", "1");
       }
-      const audioSrc = el.audioUrl || lesson?.audioUrl;
+      const audioSrc = el.audioUrl || currentLesson?.audioUrl;
       if (audioSrc && el.start !== el.end) {
         try {
           await audio.playSegment(audioSrc, el.start, el.end);
@@ -142,27 +192,25 @@ export default function LessonPage({ params }: Props) {
         }
       }
     },
-    [lesson, audio, showHint]
+    [currentLesson, audio, showHint]
   );
 
   const handlePrevElement = useCallback(() => {
-    const currentPage = pages[currentPageIndex];
-    if (!currentPage || !activeElement) return;
-    const idx = currentPage.elements.findIndex(
+    if (!currentBookPage || !activeElement) return;
+    const idx = currentBookPage.elements.findIndex(
       (e) => e.id === activeElement.id
     );
-    if (idx > 0) handleElementClick(currentPage.elements[idx - 1]);
-  }, [activeElement, currentPageIndex, pages, handleElementClick]);
+    if (idx > 0) handleElementClick(currentBookPage.elements[idx - 1]);
+  }, [activeElement, currentBookPage, handleElementClick]);
 
   const handleNextElement = useCallback(() => {
-    const currentPage = pages[currentPageIndex];
-    if (!currentPage || !activeElement) return;
-    const idx = currentPage.elements.findIndex(
+    if (!currentBookPage || !activeElement) return;
+    const idx = currentBookPage.elements.findIndex(
       (e) => e.id === activeElement.id
     );
-    if (idx < currentPage.elements.length - 1)
-      handleElementClick(currentPage.elements[idx + 1]);
-  }, [activeElement, currentPageIndex, pages, handleElementClick]);
+    if (idx < currentBookPage.elements.length - 1)
+      handleElementClick(currentBookPage.elements[idx + 1]);
+  }, [activeElement, currentBookPage, handleElementClick]);
 
   // MediaSession handlers
   useEffect(() => {
@@ -183,14 +231,34 @@ export default function LessonPage({ params }: Props) {
     [audio]
   );
 
-  if (loading) return <Spinner />;
+  // Keyboard arrow navigation
+  useEffect(() => {
+    if (loading || tocOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.key === "ArrowLeft" && currentPageIndex > 0) {
+        handlePageChange(currentPageIndex - 1);
+      } else if (e.key === "ArrowRight" && currentPageIndex < bookPages.length - 1) {
+        handlePageChange(currentPageIndex + 1);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [loading, tocOpen, currentPageIndex, bookPages.length, handlePageChange]);
+
+  if (loading || !currentBookPage) return <Spinner />;
+
+  const hasAudio = Boolean(
+    currentLesson?.audioUrl ||
+      currentBookPage.elements.some((e) => e.audioUrl)
+  );
 
   return (
     <div className="flex flex-col h-dvh overflow-hidden">
       {/* Header */}
-      <header className="flex items-center gap-3 px-4 pt-6 pb-3 shrink-0 z-30">
+      <header className="flex items-center gap-3 px-4 pt-6 pb-3 shrink-0 z-30 border-b border-white/10">
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push("/home")}
           className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
           aria-label="Back"
         >
@@ -198,10 +266,10 @@ export default function LessonPage({ params }: Props) {
         </button>
         <div className="flex-1 min-w-0">
           <h1 className="text-base font-semibold text-text-main truncate">
-            {lesson?.title[settings.locale] || ""}
+            {currentLesson?.title[settings.locale] || ""}
           </h1>
           <p className="text-xs text-text-muted truncate">
-            {chapter?.title[settings.locale] || ""}
+            {currentChapter?.title[settings.locale] || ""}
           </p>
         </div>
         <button
@@ -216,19 +284,22 @@ export default function LessonPage({ params }: Props) {
       <TocSheet
         open={tocOpen}
         onClose={() => setTocOpen(false)}
-        currentChapterId={chapterId}
+        currentChapterId={currentChapter?.id}
+        currentLessonId={currentLesson?.id}
+        currentLessonPageIndex={currentBookPage?.lessonPageIndex}
       />
 
-      {/* Pager — scrollable with fade edges */}
+      {/* Pager */}
       <div
+        ref={scrollRef}
         className="flex-1 px-3 pt-2 overflow-y-auto min-h-0"
         style={{
-          maskImage: "linear-gradient(to bottom, transparent, black 24px, black calc(100% - 24px), transparent)",
-          WebkitMaskImage: "linear-gradient(to bottom, transparent, black 24px, black calc(100% - 24px), transparent)",
+          maskImage: buildMask(scrolledFromTop, hasMoreBelow),
+          WebkitMaskImage: buildMask(scrolledFromTop, hasMoreBelow),
         }}
       >
         <HorizontalPager
-          pages={pages}
+          pages={pageElements}
           currentIndex={currentPageIndex}
           activeElementId={activeElement?.id ?? null}
           onPageChange={handlePageChange}
@@ -237,11 +308,11 @@ export default function LessonPage({ params }: Props) {
         />
       </div>
 
-      {/* Page indicator */}
-      {pages.length > 1 && (
+      {/* Page indicator (whole-book) */}
+      {bookPages.length > 1 && (
         <div className="shrink-0">
           <PageIndicator
-            total={pages.length}
+            total={bookPages.length}
             current={currentPageIndex}
             onSelect={handlePageChange}
           />
@@ -249,32 +320,34 @@ export default function LessonPage({ params }: Props) {
       )}
 
       {/* Audio controls */}
-      {(lesson?.audioUrl || pages[currentPageIndex]?.elements.some(e => e.audioUrl)) && (
-        <div className="shrink-0"><AudioControls
-          isPlaying={audio.isPlaying}
-          currentTime={audio.currentTime}
-          duration={audio.duration}
-          bufferProgress={audio.bufferProgress}
-          onPlayPause={() => {
-            if (audio.isPlaying) {
-              audio.pause();
-              return;
-            }
-            if (!isFullPlayback && activeElement && activeElement.start < activeElement.end) {
-              const audioSrc = activeElement.audioUrl || lesson?.audioUrl;
-              if (audioSrc) {
-                audio.playSegment(audioSrc, activeElement.start, activeElement.end);
+      {hasAudio && (
+        <div className="shrink-0">
+          <AudioControls
+            isPlaying={audio.isPlaying}
+            currentTime={audio.currentTime}
+            duration={audio.duration}
+            bufferProgress={audio.bufferProgress}
+            onPlayPause={() => {
+              if (audio.isPlaying) {
+                audio.pause();
+                return;
               }
-            } else if (lesson?.audioUrl) {
-              setIsFullPlayback(true);
-              setActiveElement(null);
-              audio.playFull(lesson.audioUrl);
-            }
-          }}
-          onPrev={handlePrevElement}
-          onNext={handleNextElement}
-          onSeek={audio.seek}
-        /></div>
+              if (!isFullPlayback && activeElement && activeElement.start < activeElement.end) {
+                const audioSrc = activeElement.audioUrl || currentLesson?.audioUrl;
+                if (audioSrc) {
+                  audio.playSegment(audioSrc, activeElement.start, activeElement.end);
+                }
+              } else if (currentLesson?.audioUrl) {
+                setIsFullPlayback(true);
+                setActiveElement(null);
+                audio.playFull(currentLesson.audioUrl);
+              }
+            }}
+            onPrev={handlePrevElement}
+            onNext={handleNextElement}
+            onSeek={audio.seek}
+          />
+        </div>
       )}
 
       {/* Onboarding hint */}
@@ -291,7 +364,6 @@ export default function LessonPage({ params }: Props) {
           </p>
         </div>
       )}
-
     </div>
   );
 }

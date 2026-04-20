@@ -5,6 +5,33 @@ import {
 } from "./mock-data";
 import type { Chapter, Lesson, Page } from "./types";
 
+export interface BookPage extends Page {
+  chapter: Chapter;
+  lesson: Lesson;
+  globalIndex: number;
+  lessonPageIndex: number;
+}
+
+let cachedBookPages: BookPage[] | null = null;
+
+export async function getAllBookPages(): Promise<BookPage[]> {
+  if (cachedBookPages) return cachedBookPages;
+  const pages: BookPage[] = [];
+  let globalIndex = 0;
+  for (const chapter of mockChapters) {
+    const chapterLessons = mockLessons[chapter.id] || [];
+    for (const lesson of chapterLessons) {
+      const lessonPages = mockGetPages(lesson.id);
+      lessonPages.forEach((page, lessonPageIndex) => {
+        pages.push({ ...page, chapter, lesson, globalIndex, lessonPageIndex });
+        globalIndex++;
+      });
+    }
+  }
+  cachedBookPages = pages;
+  return pages;
+}
+
 export async function getChapters(): Promise<Chapter[]> {
   return mockChapters;
 }

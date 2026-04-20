@@ -26,6 +26,9 @@ export function HorizontalPager({
     startIndex: currentIndex,
     watchDrag: true,
     containScroll: "trimSnaps",
+    duration: 28,
+    skipSnaps: false,
+    align: "center",
   });
 
   // Sync external index → embla

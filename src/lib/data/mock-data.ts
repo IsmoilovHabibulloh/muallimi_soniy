@@ -12,7 +12,7 @@ export const chapters: Chapter[] = [
     },
     order: 1,
     icon: "📖",
-    lessonCount: 1,
+    lessonCount: 2,
   },
   {
     id: "ch_harflar",
@@ -127,6 +127,19 @@ export const chapters: Chapter[] = [
 export const lessons: Record<string, Lesson[]> = {
   ch_muqaddima: [
     {
+      id: "ls_muqova",
+      chapterId: "ch_muqaddima",
+      title: {
+        "uz-latn": "Muqova",
+        "uz-cyrl": "Муқова",
+        ru: "Обложка",
+        en: "Cover",
+      },
+      order: 1,
+      audioUrl: "/audio/01. muqova.mp3",
+      pageCount: 1,
+    },
+    {
       id: "ls_muqaddima",
       chapterId: "ch_muqaddima",
       title: {
@@ -135,7 +148,7 @@ export const lessons: Record<string, Lesson[]> = {
         ru: "Введение",
         en: "Introduction",
       },
-      order: 1,
+      order: 2,
       audioUrl: "/audio/02. Muqaddima.mp3",
       pageCount: 2,
     },
@@ -305,6 +318,7 @@ export const lessons: Record<string, Lesson[]> = {
 
 // Mapping: chapterId+lessonId → page image numbers
 const PAGE_MAP: Record<string, number[]> = {
+  ls_muqova: [0],
   ls_muqaddima: [1, 2],
   ls_alifbo: [3, 4],
   ls_harflar_1: [5, 6, 7, 8, 9, 10],

@@ -228,6 +228,64 @@ function LetterSection({
 
 // ========== PAGE RENDERERS ==========
 
+// Cover page (muqova) — non-interactive title card
+function Page0(_: PP) {
+  return (
+    <div className="flex flex-col items-center justify-center text-center gap-6 py-10 min-h-[60vh]">
+      <div>
+        <p className="text-xs uppercase tracking-widest text-text-muted">Muallif</p>
+        <p
+          className="arabic-text text-xl mt-2"
+          style={{ color: "var(--color-el-jumla)" }}
+        >
+          أحمد هادي مقصودي
+        </p>
+      </div>
+
+      <h2
+        className="arabic-text text-6xl font-bold leading-tight"
+        style={{ color: "var(--color-primary-dark)" }}
+      >
+        معلم ثانى
+      </h2>
+
+      <CoverDivider />
+
+      <p className="arabic-text text-2xl text-text-main">ياكى</p>
+
+      <CoverDivider />
+
+      <h2
+        className="arabic-text text-5xl font-bold leading-tight"
+        style={{ color: "var(--color-primary-dark)" }}
+      >
+        الفباء عربى
+      </h2>
+
+      <p className="text-sm text-text-muted mt-6 flex items-center gap-2">
+        <span aria-hidden="true">🎧</span>
+        <span>O&apos;qidi: Jahongir qori Nematov</span>
+      </p>
+    </div>
+  );
+}
+
+function CoverDivider() {
+  return (
+    <div className="flex items-center gap-2 w-full max-w-[200px]">
+      <div
+        className="flex-1 h-px"
+        style={{ background: "var(--color-el-jumla)", opacity: 0.5 }}
+      />
+      <span style={{ color: "var(--color-el-jumla)", opacity: 0.7 }}>◇ ◇ ◇</span>
+      <div
+        className="flex-1 h-px"
+        style={{ background: "var(--color-el-jumla)", opacity: 0.5 }}
+      />
+    </div>
+  );
+}
+
 function Page1({ elements, activeId, hasActive, onElementClick }: PP) {
   const bismillah = elements.find((e) => e.id === "p1_000");
   return (
@@ -934,6 +992,7 @@ function Page50(props: PP) {
 // ========== REGISTRY ==========
 
 const PAGE_RENDERERS: Record<number, React.ComponentType<PP>> = {
+  0: Page0,
   1: Page1, 2: Page2,
   3: Page3, 4: Page4, 5: Page5, 6: Page6, 7: Page7,
   8: Page8, 9: Page9, 10: Page10, 11: Page11, 12: Page12,
