@@ -1551,7 +1551,6 @@ export const PAGE_ELEMENTS: Record<number, Element[]> = {
   0: [],
   // Muqaddima: p1 + p2 merged into a single page (was pages 1-2, now just page 1)
   1: [...make(1, p1), ...make(2, p2)],
-  4: make(4, p4),
   3: make(3, p3),
   4: make(4, p4),
   5: make(5, p5),
