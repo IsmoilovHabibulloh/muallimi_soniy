@@ -93,6 +93,60 @@ Element ikki darajada chaqirilishi kerak:
    elementlar va audio segmentlari birga** keladi (ketma-ket ijro yoki tanlab
    ijro uchun).
 
+## 🚨 Yangi sahifa ustida ishlashdan oldin — MAJBURIY checklist
+
+Bu checklist — avvalgi sessiyalarda o'rganilgan xatolarni takrorlamaslik uchun.
+Har bir yangi sahifa uchun, TO'G'RIDAN-TO'G'RI boshlamang. Avval:
+
+### 1. Kitob rasmini batafsil ko'ring
+
+```
+Read Materiallar/harflar/<N>.jpg  # yoki tegishli bob papkasi
+```
+
+- Rasmda **nechta element** borligini sanang (harflar, so'zlar, birikmalar).
+- Bo'limlar, qatorlar, dividerlarni yozib oling.
+- Agar shakllar bog'langan bo'lsa — **pozitsion shakllar** (ـمِـ, ـتُ kabi)
+  borligini qayd eting.
+
+### 2. PDF transkripsiyani tekshiring
+
+```
+Read Materiallar/audio_qoidalar/<NN>_*.pdf
+```
+
+- PDF dagi entry sonini **rasm dagi element soniga taqqoslang**.
+- Agar PDF kam bo'lsa — PDF yetmagan entry'lar bor, **audio'da sukunat aniqlash
+  bilan topish kerak**.
+- PDF transkripsiya matnlari har doim to'g'ri emas (shin/sod, tarir/tarar kabi).
+
+### 3. Audio ni batafsil analiz qiling
+
+```bash
+./tools/ffmpeg -i <audio> -af "silencedetect=noise=-40dB:duration=0.10" -f null -
+```
+
+- Sukunatlar orasidagi sound region'lar sonini PDF + rasm bilan taqqoslang.
+- Agar son farq qilsa — tekshirish kerak. Audio'da qo'shimcha / kam so'z bormi?
+
+### 4. Sahifalarni birlashtirishdan oldin rasmlarni taqqoslang
+
+**O'tgan sessiyada xato qildik**: 3.jpg va 4.jpg "bir xil" deb merged qildik,
+lekin ular butunlay boshqa sahifalar edi. Merge qilishdan oldin **ikkala rasmni
+parallel ko'ring va haqiqatan bir xil ekanligiga ishonch hosil qiling**.
+
+### 5. Build xatoni oldindan ushlash
+
+Deploy qilishdan oldin **lokal build** ishga tushiring — TypeScript xatolarini
+server build'da emas, lokal'da ushlash arzonroq:
+
+```bash
+cd muallimus-soniy && npx next build
+```
+
+Masalan duplicate object key (`4: make(4, p4)` ikki marta) xatolari bu bilan
+ushlanadi.
+
 ## Har bir sahifa ustida ish tartibi (audio integratsiya protokoli)
 
 > **Bu CLAUDE.md darajasidagi qat'iy protokol — har bir sahifa uchun amal qiling.**
@@ -117,8 +171,31 @@ Kitob rasmi vizual referens, lekin yakuniy haqiqat — foydalanuvchi audio eshit
 - Rasmda **تَرَرْ** (tarar) ko'ringan, lekin audio talaffuzi **تَرِرْ** (tarir).
   Demak harakat sukun emas kasra bo'lishi kerak.
 - So'z oxiri ba'zida sukun, ba'zida damma/fatha/kasra — har birini eshitib tekshirish shart.
+- Arab harakatlari ba'zan juda mayda chiziq — rasm past sifatli bo'lsa, farqlab
+  bo'lmaydi. Shubhada bo'lsangiz — foydalanuvchidan aniqlashtirib so'rang.
 
 **Qoida**: Rasm → vizual reja. Audio → haqiqiy matn. Ikkisi ziddiyatga tushsa — foydalanuvchidan so'rang.
+
+### ⚠️ PDF'da entry'lar tushib qolishi mumkin
+
+O'tgan sessiyada sahifa 4 Mim qatorida **3 ta so'z yetishmagan** edi (umara, imru, irm)
+— PDF transkripsiyasi buzuq yoki to'liq emas edi. Echim:
+
+1. **Rasm elementlarini sanash**: rasmda nechta so'z? PDF da nechta entry?
+2. **Audio'da sukunat aniqlash**: `silencedetect` butun audio bo'ylab ishga tushiring.
+   Sukunatlar orasidagi sound regions sonini PDF entry soniga taqqoslang.
+3. **Farq bo'lsa — audio'da yashirilgan entry'lar bor**: ularning timing'ini
+   silence boundary'laridan oling, foydalanuvchi tasdiqlaydi.
+
+### ⚠️ So'zlar oxiri 180-340 ms kesilgan bo'lishi mumkin
+
+PDF vaqtlari so'zning **loud peak markazini** ko'rsatadi. So'z oxiridagi tabiiy
+fade-out 180-340 ms davom etadi — PDF buni kesib yuboradi.
+
+Protokol:
+1. Har so'z uchun **silence-detected tugash vaqtini oling** (PDF emas).
+2. Buffer: +100 ms (ayniqsa cho'zilgan oxiri bor so'zlar uchun).
+3. Foydalanuvchi eshitadi: "oxiri kesilgan" desa — silence boundary + 50ms ga qo'shing.
 
 ### Qadamlar
 
@@ -172,25 +249,34 @@ Joriy arxitektura: **chunked files**. Har element o'z mp3 fayli bilan,
 ## Pozitsion shakllar
 
 Arab harflarining ikki toifasi bor:
-- **Connector harflar** (ب, ت, ث, ج, ح, م, etc.) — so'z boshi/o'rtasi/oxirida
-  shakli o'zgaradi. Boshida alohida (`مَ`), o'rtasida bog'langan (`ـمِـ`),
-  oxirida bog'langan (`ـمُ`).
-- **Non-connector harflar** (ا, د, ذ, ر, ز, و) — faqat o'ng tomondan bog'lanadi,
+- **Connector harflar** (ب, ت, ث, ج, ح, م, ف, ق, ك, ل, ن, ه, ي, etc.) — so'z
+  boshi/o'rtasi/oxirida shakli o'zgaradi. Boshida alohida (`مَ`), o'rtasida
+  bog'langan (`ـمِـ`), oxirida bog'langan (`ـمُ`).
+- **Non-connector harflar** (`ا د ذ ر ز و`) — faqat o'ng tomondan bog'lanadi,
   shakli o'zgarmaydi.
 
 ### Qachon ko'rsatiladi
 
-- **Alifbo harakatlar bo'limi** (sahifa 3, `رَ رِ رُ`): **harakatlar** o'rgatiladi,
-  pozitsion shakllar aralashtirilmaydi. Kitob tartibiga mos.
+- **Alifbo harakatlar bo'limi** (sahifa 3, `رَ رِ رُ` section): **harakatlar**
+  o'rgatiladi, pozitsion shakllar aralashtirilmaydi. Kitob tartibiga mos.
 - **Harf amaliyoti sahifalari** (sahifa 4+, har bir harf o'qitiladigan sahifa):
-  **kitob ko'rsatgan shaklda** ishlatiladi. Odatda 3 ta harakat alohida, o'rtada
-  va oxirida shakllar bilan ko'rsatiladi (masalan: `مَ / ـمِـ / ـمُ`, `تَ / ـتِـ / ـتُ`).
-- **Non-connector harflar** (Za, Ra, Dal, Zal) — pozitsion shakllar alohida
-  ko'rsatilmaydi (shakli o'zgarmagani uchun).
+  **kitobdagi shakllarga mos** ishlatiladi. Ko'p hollarda 3 ta harakat
+  alohida/o'rtada/oxirida shakllari bilan: `مَ / ـمِـ / ـمُ`, `تَ / ـتِـ / ـتُ`.
+- **Non-connector harflar** (Za, Ra, Dal, Zal, Vav, Alif) — pozitsion shakllar
+  alohida ko'rsatilmaydi (shakli o'zgarmagani uchun). Kitob ham shunday
+  qiladi — Za/Ra harakatlari hammasi alohida shaklda.
+
+### Tekshirish qoidasi
+
+Yangi harf sahifasini qurayotganda:
+1. Kitob rasmidagi harakatlar qatoriga qarang.
+2. Ikkinchi va uchinchi harf shakllarida **bog'lovchi chiziq** (ـ) bormi?
+   - **Bor** → connector harf, pozitsion shakllar ishlatish kerak
+   - **Yo'q** → non-connector, oddiy harakatlar
 
 ### Uslub
 
-- `element.arabic` da pozitsion bog'lovchilar yoziladi: `ـمِـ`, `ـتُ`, `ـرِ` va h.k.
+- `element.arabic` da pozitsion bog'lovchilar yoziladi: `ـمِـ`, `ـتُ` va h.k.
 - `element.uzbek` label'ida pozitsiya ko'rsatiladi: `"Mi (oʻrtasida)"`, `"Tu (oxirida)"`.
 - Pozitsion shaklni **faqat kitob ko'rsatgan joyda** ishlating — yangi o'rinda
   aralashtirmang.
@@ -230,18 +316,30 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
 
 ### Sahifa tuzilishi (kitobdagiga mos)
 
-| Global # | Mazmun | Renderer | Image |
-|----------|--------|----------|-------|
-| 1 | Muqova | Page0 | - |
-| 2 | Muqaddima (p1 + p2 birlashgan) | Page1 | - |
-| 3 | Alifbo + harakatlar + Ra | Page3 | 3.jpg |
-| 4 | Takrorlash: Za / Mim / Ta | Page4 | 4.jpg |
-| 5 | Harflar (1-qism) | Page5 | 5.jpg |
-| ... | ... | ... | ... |
-| 54 | Duolar (oxirgi) | Page50 | 50.jpg |
+| Global # | Mazmun | Renderer | Image | Audio |
+|----------|--------|----------|-------|-------|
+| 1  | Muqova | Page0 | - | `01. muqova.mp3` |
+| 2  | Muqaddima (p1 + p2 birlashgan) | Page1 | - | `02. Muqaddima.mp3` |
+| 3  | Alifbo + harakatlar + Ra | Page3 | 3.jpg | `03. alifbo.mp3`, `04. harakat.mp3`, `05. ro.mp3` |
+| 4  | Takrorlash: Za / Mim / Ta | Page4 | 4.jpg | `06. za.mp3`, `07. ma.mp3`, `08. ta.mp3` |
+| 5  | Harflar (1-qism) — Ro, Za, Ma so'zlari, Nun, Ya | Page5 | 5.jpg | ? (keyingi sessiyada aniqlanadi) |
+| 6+ | Qo'shimcha harflar va so'zlar | Page6+ | 6-16.jpg | `09`–`31` audio fayllari |
+| 17-21 | Madlar | — | 17-21.jpg | `32. madli 01.mp3`, `33. madli davomi...` |
+| 22-23 | Tashdid | — | 22-23.jpg | `34. tashdid.mp3` |
+| 24-25 | Tanvin | — | 24-25.jpg | `35. tanvin.mp3`, `36. tanvinli tashdid.mp3` |
+| ... | Qolgan boblar | ... | ... | ... |
+| 54 | Duolar (oxirgi) | Page50 | 50.jpg | ? |
 
-Muhim: Muqaddima kitobda 2 sahifa bo'lgan, lekin uzluksiz matn —
-birlashtirilgan. Sahifa 4 kitob sahifa 4 bilan aynan mos.
+**Muhim eslatmalar**:
+- Muqaddima kitobda 2 sahifa bo'lgan, lekin uzluksiz matn — birlashtirilgan.
+- Sahifa 4 kitob sahifa 4 bilan aynan mos. Za (non-connector) / Mim (connector,
+  pozitsion) / Ta (connector, pozitsion).
+- Audio fayllari `public/audio/NN. <topic>.mp3` formatda, chunklar
+  `public/audio/edit/NN_topic/` papkada.
+- Keyingi ishlaydigan sahifa: **5** (Harflar 1-qism) — PDF'lari
+  `05._ro_rus final.pdf` allaqachon saqlangan, lekin content 5-16 sahifalarga
+  tegishli (keng Ro/Za/Ma/Nun/Ya/Ba/Kaf/Lom/Vav/Ha/Fa/Qof/Sha/Sa/So/To/Ja/Xo
+  harflari).
 
 ### Tarkibiy ma'lumot
 
