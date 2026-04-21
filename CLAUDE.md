@@ -30,6 +30,68 @@ How to apply:
 
 # Muallimi Soniy
 
+---
+
+## 🛑 2 ENG MUHIM XATO — HAR YANGI HARF SAHIFASI BOSHIDA TEKSHIR
+
+Bu ikki xato o'tgan sessiyalarda (p3, p4, p5) qayta-qayta takrorlandi.
+Foydalanuvchi har safar tuzatadi. **Yangi sahifani boshlashdan oldin ikki
+qoidani birdek qattiqlik bilan qo'llash shart**.
+
+### Xato #1 — Connector harfning header'i isolated shaklda yozilgan
+
+**QAT'IY QOIDA**:
+
+```
+Agar harf ∈ {ب ت ث ج ح خ س ش ص ض ط ظ ع غ ف ق ك ل م ن ه ي} (connector):
+    HEADER MAJBURIY pozitsion shakllarda:
+        fatha → "Xَ"        label: "X (boshida)"
+        kasra → "ـXِـ"      label: "X (oʻrtasida)"
+        damma → "ـXُ"       label: "X (oxirida)"
+    ISOLATED shakl ("Xَ Xِ Xُ") YOZISH MUMKIN EMAS.
+
+Agar harf ∈ {ا د ذ ر ز و} (non-connector):
+    HEADER isolated shaklda:  "Xَ Xِ Xُ"
+    Label: "X fatha" / "X kasra" / "X damma"
+```
+
+**Unicode**: tatweel `ـ` = U+0640. Namunalar: `مَ` / `ـمِـ` / `ـمُ` (p4 Mim
+to'g'ri), `نَ` / `ـنِـ` / `ـنُ` (p5 Nun to'g'ri).
+
+**⚠️ PLACEHOLDER KODGA ISHONMASLIK**: `src/lib/data/elements.ts` da p6-p16 uchun
+**placeholder header'lar hozir isolated shaklda** (masalan `بَ بِ بُ`). Bu
+**xato** — integratsiya vaqtida **qayta yozib chiqish shart**. Copy qilib,
+faqat audio URL'ni yangilashga yo'l qo'ymang.
+
+### Xato #2 — Arab matn rasmdan noto'g'ri ko'chirilgan
+
+**Eng xato bo'lgan joylar** (oxirgi harfdagi harakat farqi katta ma'no beradi):
+- `اَمَرْتَ` (sen m) ≠ `اَمَرْتِ` (sen f) ≠ `اَمَرْتُ` (men) ≠ `اَمَرَتْ` (u f)
+- `مِيزَرْ` (mizar, xato) ≠ `مَيْزَرْ` (mayzar, to'g'ri)
+- `اَيْمَنَيْنِ` (xato qo'shimcha) ≠ `اَيْمَيْنِ` (to'g'ri)
+- `اَمْرَنَا` (xato, 1 ta ra) ≠ `اَمْرَرْنَا` (to'g'ri, 2 ta ra)
+- **p6 xatolari** (takrorlanmasin):
+  - `بَيْنَ` (xato, "bayna" mashhur preposition deb yozilgan) ≠ `بَيْنُ` (to'g'ri, ism shakli)
+  - `رَيْبْ` (xato, Qur'on `لَا رَيْبَ فِيهِ` ta'sirida) ≠ `رَيْبُ` (to'g'ri)
+  - `اَمْرَكَ` (xato, mim-sukun, 3 heca) ≠ `اَمَرَكَ` (to'g'ri, mim-fatha, 4 heca — u seni buyurdi)
+
+**QAT'IY QOIDA**: Har arab so'zini rasmdan **harf-harf** (tanimay) parse
+qiling. Struktura yozing:
+```
+alif+fatha → mim+fatha → ra+sukun → ta+kasra  →  اَمَرْتِ  →  "amarti"
+```
+So'zni "tanib", harakatlarini xotira asosida to'ldirish — **taqiqlangan**.
+PDF'ga ishonmang (80% aniqlik). Shubhada bo'lsangiz — foydalanuvchidan so'rang,
+taxmin qilmang.
+
+**Majburiy audio verify**: Har so'zni yozganingizdan keyin `afplay` bilan
+mos chunk'ni eshiting. Audio bilan transliteratsiya to'liq mos kelmasa —
+qayta parse qiling.
+
+To'liq protokol: `### ⚠️ Arab matnni rasmdan o'qish protokoli` bo'limida.
+
+---
+
 ## Loyiha haqida
 
 Bu — Ahmad Hodiy Maqsudiyning **"Muallimi Soniy"** (1892) klassik darsligini
@@ -135,7 +197,18 @@ Read Materiallar/audio_qoidalar/<NN>_*.pdf
 lekin ular butunlay boshqa sahifalar edi. Merge qilishdan oldin **ikkala rasmni
 parallel ko'ring va haqiqatan bir xil ekanligiga ishonch hosil qiling**.
 
-### 5. Build xatoni oldindan ushlash
+### 5. Connector harf bo'lsa — POZITSION SHAKLLAR majburiy
+
+Agar sahifa connector harf (`ب ت ث ج ح خ س ش ص ض ط ظ ع غ ف ق ك ل م ن ه ي`)
+ustida bo'lsa, header qatori **har doim** pozitsion shakllarda yoziladi:
+`X / ـXِـ / ـXُ`. Uzbek label: `"X (boshida)" / "X (oʻrtasida)" / "X (oxirida)"`.
+
+**Xato takror kelmasin**: Men p4 da mim/ta uchun to'g'ri qilganman, lekin p5
+da nun/ya uchun isolated shakl yozib xato qilganman. Har YANGI sahifaga yangi
+harf qo'shilsa — darhol ushbu qoidani qo'llash kerak, keyin tekshirmoq
+uchun qoldirmaslik.
+
+### 6. Build xatoni oldindan ushlash
 
 Deploy qilishdan oldin **lokal build** ishga tushiring — TypeScript xatolarini
 server build'da emas, lokal'da ushlash arzonroq:
@@ -197,6 +270,113 @@ Protokol:
 2. Buffer: +100 ms (ayniqsa cho'zilgan oxiri bor so'zlar uchun).
 3. Foydalanuvchi eshitadi: "oxiri kesilgan" desa — silence boundary + 50ms ga qo'shing.
 
+### ⚠️ Arab matnni rasmdan o'qish protokoli (eng ko'p xato keladigan joy)
+
+O'tgan sessiyalarda (p3, p4, p5, p6) matn noto'g'ri ko'chirilgani uchun foydalanuvchi
+qayta-qayta tuzatgan. **Xato pattern'lari**:
+
+1. **Oxirgi harfdagi harakat** — `ت` oxirida `fatha/kasra/damma/sukun` turli ma'no
+   beradi:
+   - `اَمَرْتَ` (amarta, 2-m "sen") vs `اَمَرْتِ` (amarti, 2-f "sen") vs
+     `اَمَرْتُ` (amartu, 1-sing "men") vs `اَمَرَتْ` (amarat, 3-f "u ayol")
+2. **Alif boshidagi harakat** — `اَ` (fatha) vs `اُ` (damma) vs `اِ` (kasra):
+   aktiv/passiv/predlog farqi
+3. **Tushib qolgan harflar** — `مَرَرْتُ` (ikki ra) vs `مَرْتُ` (bir ra);
+   `مَيْزَرْ` (m+y+z+r) vs `مِيزَرْ` (m+i+z+r — noto'g'ri)
+4. **Qo'shilgan harflar** — `اَيْمَيْنِ` (aymayni, to'g'ri) vs `اَيْمَنَيْنِ`
+   (aymanayni, qo'shimcha `نَ` bilan noto'g'ri)
+5. **PDF ga ishonish** — PDF 80% aniqlik. Rasm va audio asosiy manba
+6. **"Tanish so'z" pattern completion** — ko'rishga tanish ko'ringan so'zni
+   xotira asosida to'ldirish
+7. **O'rtadagi mim/ra/nun sukun vs fatha** — mayda nuqta/chiziq bo'lgani uchun
+   ko'rinmaydi, lekin hecani o'zgartiradi:
+   - `اَمْرَكَ` (amraka, 3 heca) vs `اَمَرَكَ` (amaraka, 4 heca — u seni
+     buyurdi) — mim ostida fatha borligi "ma" hecasini beradi
+   - `تَرْكُ` (tarku, 2 heca) vs `تَرَكَ` (taraka, 3 heca past fe'l)
+
+### 🚨 "Tanish so'zlar" qora ro'yxati — DOIM shubhali
+
+Bu so'zlar arab tilida ma'lum ma'no bilan keladi, lekin **darslikda odatdagidan
+boshqa harakat bilan bo'lishi mumkin**. Xotira asosida yozmang — rasmdan harf-harf
+parse qiling va audio bilan tasdiqlang:
+
+| Tanish so'z | Odatdagi harakat | Darslikdagi variant | Misol |
+|---|---|---|---|
+| bayn | `بَيْنَ` (preposition) | `بَيْنُ` (ism shakli) | p6 Ba |
+| rayb | `رَيْبَ` / `رَيْبْ` (Qur'on) | `رَيْبُ` | p6 Ba |
+| amr | `اَمْر` (3 heca) | `اَمَرَ` (4 heca past fe'l) | p6 Kaf |
+| qalb | `قَلْبْ` | `قَلْبُ` (ism shakli) | p9 |
+| 'abd | `عَبْد` | `عَبْدُ` / `عَبَدَ` | — |
+
+**Qoida**: Agar so'z ma'lum/mashhur tuyulsa — **bu qizil alarm**. Rasmni lupa
+bilan ko'ring, audio'ni eshiting, foydalanuvchidan aniqlashtiring.
+
+### 🔔 Juftlangan fe'llar — ikkisi birga keladi
+
+Arab darsliklarida fe'l shakllari juft (3-m erkak + 3-f ayol) yonma-yon beriladi.
+Agar biri ko'rinsa — ikkinchisini ham tekshiring:
+
+| 3-erkak (u) | 3-ayol (u f) | 2-erkak + 2-f object |
+|---|---|---|
+| `اَمَرَ` (amara) | `اَمَرَتْ` (amarat) | — |
+| `اَمَرَكَ` (amaraka, u erkakni b.) | `اَمَرَتْكَ` (amaratka, u ayol b.) | ↔ |
+| `كَتَبَ` (kataba) | `كَتَبَتْ` (katabat) | — |
+
+**Qoida**: Agar ro'yxatda `اَمَرَتْكَ` (ayol) ko'rinsa — unga juft erkak shakli
+`اَمَرَكَ` bo'lishi dominant. `اَمْرَكَ` (3 heca) emas — juft buzilmaydi.
+
+### Harakat shakllari — vizual xaritasi
+
+Mayda xatolar oldini olish uchun, rasmda harakat qidirayotganda quyidagi
+shakllarga diqqat bering:
+
+```
+ــَ  fatha   — harf USTIDA qiyaroq chiziq (tilted /)
+ــِ  kasra   — harf OSTIDA qiyaroq chiziq (tilted \)
+ــُ  damma   — harf USTIDA kichik "9" yoki "و" shakli
+ــْ  sukun   — harf USTIDA kichik doira/halqa (°)
+ــّ  tashdid — harf USTIDA kichik "w" shakli
+ــً ــٍ ــٌ  tanvin — ikki fatha/kasra/damma (qo'sh chiziq)
+```
+
+**Damma vs sukun** — eng ko'p aralashtiriladi: damma "9" shaklida ko'rinadi
+(oyoqli), sukun ideal doira. Rasm past sifatli bo'lsa, **ikkisini ham kuzating**
+va audio bilan tasdiqlang.
+
+### Har arab so'z uchun MAJBURIY qadam
+
+1. **Harf-harf parse qilish** — so'zni "tanimang":
+   - Har harfni alohida aniqla: bu alif/mim/ra/ta/...?
+   - Har harakat shaklini aniqla: yuqorida chiziq (fatha)? curly (damma)?
+     pastida chiziq (kasra)? kichik doira (sukun)?
+2. **Qo'sh-ishonch texti** — strukturani yozing:
+   `alif+fatha → mim+fatha → ra+sukun → ta+kasra` → `اَمَرْتِ` → "amarti"
+3. **Harf sonini sanash** — rasm 4 harf ko'rsatyaptimi 3 mi? Ikki bir xil harf
+   ketma-ket (`ر ر`, `م م`) borligini aniqlash
+4. **Tanish so'z shkali** — agar so'z tanish tuyulsa → qora ro'yxatda bo'lsa
+   **darhol ogohlantir** va qo'shimcha tekshiruv qil
+5. **Juft fe'lni izlash** — agar past fe'l (3-f `اَمَرَتْ`) yonida — juft
+   3-erkak shakli bo'lishini ko'z oldiga tuting
+6. **Audio chunkni eshitish MAJBURIY** — har so'z yozilganidan so'ng:
+   ```bash
+   afplay muallimus-soniy/public/audio/edit/NN_topic/<chunk>.mp3
+   ```
+   Yozgan transliteratsiya audioga to'liq mos kelishi shart. Mos emasmi →
+   qayta parse qil.
+7. **Shubhada bo'lsa** — taxmin qilmay, foydalanuvchidan aniqlash so'rang
+
+### Shubha signal'lari
+
+- Harakat "xayolan to'g'ri" ko'rinadigan joylar
+- PDF va rasm matnlari turlicha
+- Rasm skan sifatsiz, harakat noaniq
+- Qo'shimchalar (`-ayni`, `-um`, `-nā`, `-ti`, `-tu`) — eng ko'p xato joylar
+- 2 ta bir xil harf ketma-ket (`ررْ`, `ممْ`, `نن`) — birini tushirish oson
+- Oxirgi harfda sukun ko'ringan — **damma bo'lishi mumkin** (p6 da `رَيْبُ` xato)
+- Mashhur so'z / Qur'on iborasi tanildi — avtomatik shubha
+
+---
+
 ### Qadamlar
 
 1. **PDF qo'llanmani o'qish** — boshlangich vaqt va matnlar uchun.
@@ -246,25 +426,37 @@ Joriy arxitektura: **chunked files**. Har element o'z mp3 fayli bilan,
 - `soz` — so'z
 - `jumla` — jumla / oyat
 
-## Pozitsion shakllar
+## Pozitsion shakllar — ⚠️ MAJBURIY, xato takror bo'lgan joy
 
 Arab harflarining ikki toifasi bor:
-- **Connector harflar** (ب, ت, ث, ج, ح, م, ف, ق, ك, ل, ن, ه, ي, etc.) — so'z
-  boshi/o'rtasi/oxirida shakli o'zgaradi. Boshida alohida (`مَ`), o'rtasida
-  bog'langan (`ـمِـ`), oxirida bog'langan (`ـمُ`).
-- **Non-connector harflar** (`ا د ذ ر ز و`) — faqat o'ng tomondan bog'lanadi,
-  shakli o'zgarmaydi.
+- **Connector harflar**: `ب ت ث ج ح خ س ش ص ض ط ظ ع غ ف ق ك ل م ن ه ي` — so'z
+  boshi/o'rtasi/oxirida shakli **o'zgaradi**. Harf amaliyoti sahifalarida
+  3 ta harakat qatori **majburiy** pozitsion shakllar bilan:
+  - Fatha — `X` (boshida) → `مَ`, `تَ`, `نَ`, `يَ`, `بَ`, ...
+  - Kasra — `ـXِـ` (o'rtasida) → `ـمِـ`, `ـتِـ`, `ـنِـ`, `ـيِـ`, `ـبِـ`, ...
+  - Damma — `ـXُ` (oxirida) → `ـمُ`, `ـتُ`, `ـنُ`, `ـيُ`, `ـبُ`, ...
+- **Non-connector harflar**: `ا د ذ ر ز و` — faqat o'ng tomondan bog'lanadi,
+  shakli o'zgarmaydi. Alohida shakllar ishlatiladi.
+
+### ⚠️ Xato pattern (p5 da qayta takrorlandi)
+
+Sessiyalarda men (Claude) p4 da mim/ta uchun pozitsion shakl yozdim (to'g'ri),
+lekin **p5 da nun/ya uchun isolated shakl yozdim** (xato — foydalanuvchi aytgan).
+Bu — bir xil qoida, lekin har yangi harfga qayta qo'llanilmagan.
+
+**Qoida**: Har YANGI harf amaliyoti sahifasi qurilganda, `connector` bo'lsa
+— pozitsion shakllar AVTOMATIK ravishda ishlatiladi, tekshirishni ertasiga
+qoldirmang.
 
 ### Qachon ko'rsatiladi
 
 - **Alifbo harakatlar bo'limi** (sahifa 3, `رَ رِ رُ` section): **harakatlar**
   o'rgatiladi, pozitsion shakllar aralashtirilmaydi. Kitob tartibiga mos.
-- **Harf amaliyoti sahifalari** (sahifa 4+, har bir harf o'qitiladigan sahifa):
-  **kitobdagi shakllarga mos** ishlatiladi. Ko'p hollarda 3 ta harakat
-  alohida/o'rtada/oxirida shakllari bilan: `مَ / ـمِـ / ـمُ`, `تَ / ـتِـ / ـتُ`.
+- **Harf amaliyoti sahifalari** (sahifa 4+): connector harflar **har doim**
+  `alohida / ـo'rtasidaـ / ـoxirida` — isolated shakllar aralashtirilmaydi.
+  Uzbek label'da: `"Ma (boshida)"`, `"Mi (oʻrtasida)"`, `"Mu (oxirida)"`.
 - **Non-connector harflar** (Za, Ra, Dal, Zal, Vav, Alif) — pozitsion shakllar
-  alohida ko'rsatilmaydi (shakli o'zgarmagani uchun). Kitob ham shunday
-  qiladi — Za/Ra harakatlari hammasi alohida shaklda.
+  alohida ko'rsatilmaydi (shakli o'zgarmagani uchun).
 
 ### Tekshirish qoidasi
 
@@ -322,7 +514,7 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
 | 2  | Muqaddima (p1 + p2 birlashgan) | Page1 | - | `02. Muqaddima.mp3` |
 | 3  | Alifbo + harakatlar + Ra | Page3 | 3.jpg | `03. alifbo.mp3`, `04. harakat.mp3`, `05. ro.mp3` |
 | 4  | Takrorlash: Za / Mim / Ta | Page4 | 4.jpg | `06. za.mp3`, `07. ma.mp3`, `08. ta.mp3` |
-| 5  | Harflar (1-qism) — Ro, Za, Ma so'zlari, Nun, Ya | Page5 | 5.jpg | ? (keyingi sessiyada aniqlanadi) |
+| 5  | Harflar (1-qism) — Ro davom so'zlari, Nun, Ya | Page5 | 5.jpg | `08. ta.mp3` (20.4s+ Ro davom), `09. na.mp3` (Nun), `10. ya.mp3` (Ya) |
 | 6+ | Qo'shimcha harflar va so'zlar | Page6+ | 6-16.jpg | `09`–`31` audio fayllari |
 | 17-21 | Madlar | — | 17-21.jpg | `32. madli 01.mp3`, `33. madli davomi...` |
 | 22-23 | Tashdid | — | 22-23.jpg | `34. tashdid.mp3` |
@@ -336,10 +528,24 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   pozitsion) / Ta (connector, pozitsion).
 - Audio fayllari `public/audio/NN. <topic>.mp3` formatda, chunklar
   `public/audio/edit/NN_topic/` papkada.
-- Keyingi ishlaydigan sahifa: **5** (Harflar 1-qism) — PDF'lari
-  `05._ro_rus final.pdf` allaqachon saqlangan, lekin content 5-16 sahifalarga
-  tegishli (keng Ro/Za/Ma/Nun/Ya/Ba/Kaf/Lom/Vav/Ha/Fa/Qof/Sha/Sa/So/To/Ja/Xo
-  harflari).
+- **Sahifa 5 tugallangan**: Ro davom (9 so'z, t09-t17 chunks), Nun
+  (20 element, 09_na/), Ya (18 element, 10_ya/). Muhim topilma —
+  Ro davom so'zlari `08. ta.mp3` ning 20.4s+ qismida edi, alohida audio
+  fayli yo'q.
+- **Sahifa 6 tugallangan**: Ba (18 element, 11_ba/: 3 header + 15 so'z),
+  Kaf (21 element, 12_ka/: 3 header + 18 so'z). Jami 39 element.
+  Header'lar pozitsion shakllarda: `بَ / ـبِـ / ـبُ` va `كَ / ـكِـ / ـكُ`.
+- **Sahifa 7 tugallangan**: Lam (26 element, 13_la/: 3 header + 23 so'z),
+  Vav (23 element, 14_va/: 3 header + 20 so'z). Jami 49 element.
+  Lam (connector) header'lari pozitsion: `لَ / ـلِـ / ـلُ`.
+  Vav (non-connector) header'lari isolated: `وَ / وِ / وُ`.
+  Row 3 Lam'da 6 akala fe'li shakli: akalta / akalna / akalat / akalti / akaltu / akaltum.
+- **Sahifa 8 tugallangan**: Ha ه (21 element, 15_ha/: 3 header + 7+6+5 so'z),
+  Fa ف (25 element, 16_fa/: 3 header + 6+6+6+4 so'z). Jami 46 element.
+  Ikkalasi connector — header'lar pozitsion: `هَ / ـهِـ / ـهُ`, `فَ / ـفِـ / ـفُ`.
+  Row 4 Fa'da past/present juft fe'llar: iftatana/yaftatinu, iftakara/yaftakiru.
+- Keyingi ishlaydigan sahifa: **9** (Qof + Shin) — audio: `17. qo.mp3`,
+  `18. sha.mp3`.
 
 ### Tarkibiy ma'lumot
 
