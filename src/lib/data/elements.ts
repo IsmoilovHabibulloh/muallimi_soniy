@@ -50,6 +50,36 @@ const A = {
   hh: (name: string) => `/audio/edit/15_ha/${name}.mp3`,
   // Page 8 Fa (ف) chunks
   f: (name: string) => `/audio/edit/16_fa/${name}.mp3`,
+  // Page 9 Qof (ق) chunks
+  q: (name: string) => `/audio/edit/17_qo/${name}.mp3`,
+  // Page 9 Shin (ش) chunks
+  sh: (name: string) => `/audio/edit/18_sha/${name}.mp3`,
+  // Page 10 Sin (س) chunks
+  s: (name: string) => `/audio/edit/19_sa/${name}.mp3`,
+  // Page 10 Tsa (ث) chunks
+  th: (name: string) => `/audio/edit/20_tsa/${name}.mp3`,
+  // Page 11 Sod (ص) chunks
+  so: (name: string) => `/audio/edit/21_so/${name}.mp3`,
+  // Page 11 Tho (ط) chunks
+  to_: (name: string) => `/audio/edit/22_to/${name}.mp3`,
+  // Page 15 Dod (ض) chunks
+  do_: (name: string) => `/audio/edit/29_dod/${name}.mp3`,
+  // Page 15 Zal (ذ) chunks
+  za_: (name: string) => `/audio/edit/30_zal/${name}.mp3`,
+  // Page 12 Jim (ج) chunks
+  j: (name: string) => `/audio/edit/23_ja/${name}.mp3`,
+  // Page 12 Xo (خ) chunks
+  x: (name: string) => `/audio/edit/24_xo/${name}.mp3`,
+  // Page 13 Ha (ح) chunks
+  ha_: (name: string) => `/audio/edit/25_ha/${name}.mp3`,
+  // Page 13 G'ayn (غ) chunks
+  gho_: (name: string) => `/audio/edit/26_gho/${name}.mp3`,
+  // Page 14 Ayn (ع) chunks
+  ay: (name: string) => `/audio/edit/27_ayn/${name}.mp3`,
+  // Page 14 Dal (د) chunks
+  da: (name: string) => `/audio/edit/28_dal/${name}.mp3`,
+  // Page 16 Zo (ظ) chunks
+  zh: (name: string) => `/audio/edit/31_zho/${name}.mp3`,
   harakat: "/audio/04. harakat.mp3",
   ro: "/audio/05. ro.mp3",
   za: "/audio/06. za.mp3",
@@ -75,9 +105,9 @@ const A = {
   gho: "/audio/26. g'o.mp3",
   ayn: "/audio/27. ayn.mp3",
   dal: "/audio/28. da.mp3",
-  zol: "/audio/29. zo.mp3",
-  zho: "/audio/30. za.mp3",
-  dod: "/audio/31. zo.mp3",
+  dod: "/audio/29. zo.mp3",
+  zol: "/audio/30. za.mp3",
+  zho: "/audio/31. zo.mp3",
   mad1: "/audio/32. madli 01.mp3",
   mad2: "/audio/33. madli 02.mp3",
   tash: "/audio/34. tashdid.mp3",
@@ -1138,182 +1168,544 @@ const p8: ED[] = [
 ];
 
 // ============================================================
-// PAGE 9 — Qof + Shin
+// PAGE 9 — Qof (ق) + Shin (ش)
 // ============================================================
 const p9: ED[] = [
-  // Qof section
-  ["01", "harf", "قَ", "Qof fatha", A.qo, 0, 2, 72, 4, 10, 6],
-  ["02", "harf", "قِ", "Qof kasra", A.qo, 2, 4, 44, 4, 10, 6],
-  ["03", "harf", "قُ", "Qof damma", A.qo, 4, 6, 16, 4, 10, 6],
-  ["04", "soz", "قَلْبْ", "Yurak", A.qo, 10, 13, 82, 18, 14, 5],
-  ["05", "soz", "قَبْلَ", "Oldin", A.qo, 13, 16, 64, 18, 14, 5],
-  ["06", "soz", "قَلَمْ", "Qalam", A.qo, 18, 21, 40, 18, 14, 5],
-  ["07", "soz", "قَمَرْ", "Oy", A.qo, 21, 24, 24, 18, 14, 5],
-  // Shin section
-  ["08", "harf", "شَ", "Shin fatha", A.sha, 0, 2, 72, 50, 10, 6],
-  ["09", "harf", "شِ", "Shin kasra", A.sha, 2, 4, 44, 50, 10, 6],
-  ["10", "harf", "شُ", "Shin damma", A.sha, 4, 6, 16, 50, 10, 6],
-  ["11", "soz", "شَهْرْ", "Oy (vaqt)", A.sha, 12, 15, 48, 62, 14, 5],
-  ["12", "soz", "نَشْرْ", "Nashr", A.sha, 15, 18, 32, 62, 14, 5],
-  ["13", "soz", "شُكْرْ", "Shukr", A.sha, 18, 21, 64, 62, 14, 5],
-  ["14", "soz", "مَشْرَبْ", "Ichimlik", A.sha, 24, 27, 82, 72, 16, 5],
-  ["15", "soz", "مُشْتَرَكْ", "Umumiy", A.sha, 30, 34, 16, 72, 20, 5],
+  // ── Qof (ق) bo'limi (17. qo.mp3) — 26 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["01", "harf", "قَ",    "Qo (boshida)",   A.q("q01_fatha"), 0, 0.53, 72, 4, 10, 6],
+  ["02", "harf", "ـقِـ",  "Qi (oʻrtasida)", A.q("q02_kasra"), 0, 0.57, 46, 4, 10, 6],
+  ["03", "harf", "ـقُ",   "Qu (oxirida)",   A.q("q03_damma"), 0, 0.57, 20, 4, 10, 6],
+  // Row 1 (6 so'z): زُقْ، قِنْ، قُلْ، قُمْ، قِفْ، قِهْ
+  ["04", "soz", "زُقْ",  "Zuq",          A.q("q04_zuq"), 0, 0.86, 86, 13, 10, 5],
+  ["05", "soz", "قِنْ",  "Qin",          A.q("q05_qin"), 0, 0.77, 72, 13, 10, 5],
+  ["06", "soz", "قُلْ",  "Qul (ayt)",    A.q("q06_qul"), 0, 0.74, 58, 13, 10, 5],
+  ["07", "soz", "قُمْ",  "Qum (tur)",    A.q("q07_qum"), 0, 0.76, 44, 13, 10, 5],
+  ["08", "soz", "قِفْ",  "Qif (to'xta)", A.q("q08_qif"), 0, 0.83, 30, 13, 10, 5],
+  ["09", "soz", "قِهْ",  "Qih",          A.q("q09_qih"), 0, 0.75, 16, 13, 10, 5],
+  // Row 2 (7 so'z): قَلْبُ، قَبْلُ، فَوْقُ، قَلَمُ، قَمَرُ، لَقَبُ، قُمْقُمْ
+  ["10", "soz", "قَلْبُ",   "Qalbu (yurak)",   A.q("q10_qalbu"),  0, 1.21, 88, 22, 12, 5],
+  ["11", "soz", "قَبْلُ",   "Qablu (oldin)",   A.q("q11_qablu"),  0, 1.07, 74, 22, 12, 5],
+  ["12", "soz", "فَوْقُ",   "Fawqu (yuqori)",  A.q("q12_fawqu"),  0, 1.32, 60, 22, 12, 5],
+  ["13", "soz", "قَلَمُ",   "Qalamu",          A.q("q13_qalamu"), 0, 0.95, 46, 22, 12, 5],
+  ["14", "soz", "قَمَرُ",   "Qamaru (oy)",     A.q("q14_qamaru"), 0, 0.87, 32, 22, 12, 5],
+  ["15", "soz", "لَقَبُ",   "Laqabu",          A.q("q15_laqabu"), 0, 1.05, 18, 22, 12, 5],
+  ["16", "soz", "قُمْقُمْ",  "Qumqum",          A.q("q16_qumqum"), 0, 1.40,  4, 22, 12, 5],
+  // Row 3 (4 so'z): اِقْتَرَبَ، يَقْتَرِبُ، اِنْقَلَبَ، يَنْقَلِبُ
+  ["17", "soz", "اِقْتَرَبَ", "Iqtaraba (yaqinlashdi)",     A.q("q17_iqtaraba"),  0, 1.51, 80, 31, 18, 5],
+  ["18", "soz", "يَقْتَرِبُ", "Yaqtaribu (yaqinlashadi)",   A.q("q18_yaqtaribu"), 0, 1.66, 58, 31, 18, 5],
+  ["19", "soz", "اِنْقَلَبَ",  "Inqalaba (ag'darildi)",      A.q("q19_inqalaba"),  0, 1.79, 34, 31, 18, 5],
+  ["20", "soz", "يَنْقَلِبُ",  "Yanqalibu (ag'dariladi)",    A.q("q20_yanqalibu"), 0, 1.94, 10, 31, 18, 5],
+  // Row 4 (6 so'z, 3 juftlik): كَمَرْ-قَمَرْ، فَلَكْ-فَلَقْ، فَرْكُ-فَرْقُ
+  ["21", "soz", "كَمَرْ", "Kamar",        A.q("q21_kamar"), 0, 0.81, 86, 42, 10, 5],
+  ["22", "soz", "قَمَرْ", "Qamar (oy)",   A.q("q22_qamar"), 0, 0.84, 74, 42, 10, 5],
+  ["23", "soz", "فَلَكْ", "Falak",        A.q("q23_falak"), 0, 0.78, 58, 42, 10, 5],
+  ["24", "soz", "فَلَقْ", "Falaq",        A.q("q24_falaq"), 0, 0.85, 46, 42, 10, 5],
+  ["25", "soz", "فَرْكُ", "Farku",        A.q("q25_farku"), 0, 1.18, 28, 42, 10, 5],
+  ["26", "soz", "فَرْقُ", "Farqu (farq)", A.q("q26_farqu"), 0, 1.17, 14, 42, 10, 5],
+
+  // ── Shin (ش) bo'limi (18. sha.mp3) — 24 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["27", "harf", "شَ",    "Sha (boshida)",   A.sh("s01_fatha"), 0, 0.83, 72, 52, 10, 6],
+  ["28", "harf", "ـشِـ",  "Shi (oʻrtasida)", A.sh("s02_kasra"), 0, 0.63, 46, 52, 10, 6],
+  ["29", "harf", "ـشُ",   "Shu (oxirida)",   A.sh("s03_damma"), 0, 0.68, 20, 52, 10, 6],
+  // Row 1 (6 so'z): رَشْ، بُشْ، شَرْ، شَقْ، شَمْ، شَكْ
+  ["30", "soz", "رَشْ", "Rash",          A.sh("s04_rash"), 0, 0.86, 86, 62, 10, 5],
+  ["31", "soz", "بُشْ", "Bush",          A.sh("s05_bush"), 0, 0.93, 72, 62, 10, 5],
+  ["32", "soz", "شَرْ", "Shar (yomon)",  A.sh("s06_shar"), 0, 0.79, 58, 62, 10, 5],
+  ["33", "soz", "شَقْ", "Shaq",          A.sh("s07_shaq"), 0, 0.76, 44, 62, 10, 5],
+  ["34", "soz", "شَمْ", "Sham",          A.sh("s08_sham"), 0, 0.96, 30, 62, 10, 5],
+  ["35", "soz", "شَكْ", "Shak (shubha)", A.sh("s09_shak"), 0, 0.64, 16, 62, 10, 5],
+  // Row 2 (6 so'z): بِشْرُ، شِرْبُ، شَهْرُ، نَشْرُ، شُكْرُ، شُرْبُ
+  ["36", "soz", "بِشْرُ", "Bishru (quvonch)",   A.sh("s10_bishru"), 0, 1.24, 87, 71, 12, 5],
+  ["37", "soz", "شِرْبُ", "Shirbu (ichish)",    A.sh("s11_shirbu"), 0, 1.20, 73, 71, 12, 5],
+  ["38", "soz", "شَهْرُ", "Shahru (oy)",        A.sh("s12_shahru"), 0, 1.33, 59, 71, 12, 5],
+  ["39", "soz", "نَشْرُ", "Nashru (nashr)",     A.sh("s13_nashru"), 0, 1.22, 45, 71, 12, 5],
+  ["40", "soz", "شُكْرُ", "Shukru (shukr)",     A.sh("s14_shukru"), 0, 1.35, 31, 71, 12, 5],
+  ["41", "soz", "شُرْبُ", "Shurbu (ichimlik)",  A.sh("s15_shurbu"), 0, 1.20, 17, 71, 12, 5],
+  // Row 3 (5 so'z): مَشْرَبْ، مَشْرِبْ، مَشْرِقْ، مُشْتَهِرْ، مُشْتَرَكْ
+  ["42", "soz", "مَشْرَبْ",   "Mashrab (ichimlik joyi)",  A.sh("s16_mashrab"),   0, 1.41, 86, 80, 14, 5],
+  ["43", "soz", "مَشْرِبْ",   "Mashrib (ichuvchi)",       A.sh("s17_mashrib"),   0, 1.36, 68, 80, 14, 5],
+  ["44", "soz", "مَشْرِقْ",   "Mashriq (sharq)",          A.sh("s18_mashriq"),   0, 1.30, 50, 80, 14, 5],
+  ["45", "soz", "مُشْتَهِرْ",  "Mushtahir (mashhur)",      A.sh("s19_mushtahir"), 0, 1.56, 30, 80, 16, 5],
+  ["46", "soz", "مُشْتَرَكْ",  "Mushtarak (umumiy)",       A.sh("s20_mushtarak"), 0, 1.48, 10, 80, 16, 5],
+  // Row 4 (4 so'z): اِشْتَهَرَ، يَشْتَهِرُ، اِبْرَنْشَقَ، يَبْرَنْشِقُ
+  ["47", "soz", "اِشْتَهَرَ",   "Ishtahara (mashhur bo'ldi)",    A.sh("s21_ishtahara"),   0, 1.58, 82, 90, 18, 5],
+  ["48", "soz", "يَشْتَهِرُ",   "Yashtahiru (mashhur bo'ladi)",  A.sh("s22_yashtahiru"), 0, 1.73, 58, 90, 18, 5],
+  ["49", "soz", "اِبْرَنْشَقَ",  "Ibranshaqa (yorildi)",           A.sh("s23_ibranshaqa"),  0, 2.25, 32, 90, 20, 5],
+  ["50", "soz", "يَبْرَنْشِقُ",  "Yabranshiqu (yoriladi)",         A.sh("s24_yabranshiqu"), 0, 2.37,  8, 90, 20, 5],
 ];
 
 // ============================================================
-// PAGE 10 — Sin + Tha
+// PAGE 10 — Sin (س) + Tsa (ث)
 // ============================================================
 const p10: ED[] = [
-  // Sin section
-  ["01", "harf", "سَ", "Sin fatha", A.sin, 0, 2, 72, 4, 10, 6],
-  ["02", "harf", "سِ", "Sin kasra", A.sin, 2, 4, 44, 4, 10, 6],
-  ["03", "harf", "سُ", "Sin damma", A.sin, 4, 6, 16, 4, 10, 6],
-  ["04", "soz", "سَفَرْ", "Safar", A.sin, 10, 13, 82, 18, 14, 5],
-  ["05", "soz", "سَمَكْ", "Baliq", A.sin, 16, 19, 34, 18, 14, 5],
-  ["06", "soz", "مُسْلِمْ", "Muslim", A.sin, 22, 25, 54, 27, 16, 5],
-  ["07", "soz", "اَسْلَمَ", "Islomga kirdi", A.sin, 28, 31, 82, 36, 16, 5],
-  // Tha section
-  ["08", "harf", "ثَ", "Tha fatha", A.tho, 0, 2, 72, 50, 10, 6],
-  ["09", "harf", "ثِ", "Tha kasra", A.tho, 2, 4, 44, 50, 10, 6],
-  ["10", "harf", "ثُ", "Tha damma", A.tho, 4, 6, 16, 50, 10, 6],
-  ["11", "soz", "ثَمَرْ", "Meva", A.tho, 8, 11, 54, 58, 14, 5],
-  ["12", "soz", "ثَمَنْ", "Narx", A.tho, 11, 14, 34, 58, 14, 5],
-  ["13", "soz", "ثَوْبْ", "Kiyim", A.tho, 16, 19, 64, 67, 14, 5],
-  ["14", "soz", "مَثَلْ", "Masalan", A.tho, 19, 22, 34, 67, 14, 5],
-  ["15", "soz", "كَوْثَرْ", "Kavsar", A.tho, 24, 27, 82, 77, 16, 5],
+  // ── Sin (س) bo'limi (19. sa.mp3) — 23 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["01", "harf", "سَ",    "Sa (boshida)",   A.s("si01_fatha"), 0, 0.64, 72, 3, 10, 6],
+  ["02", "harf", "ـسِـ",  "Si (oʻrtasida)", A.s("si02_kasra"), 0, 0.64, 46, 3, 10, 6],
+  ["03", "harf", "ـسُ",   "Su (oxirida)",   A.s("si03_damma"), 0, 0.66, 20, 3, 10, 6],
+  // Row 1 (5 so'z): بَسْ سَمْ سِرْ سِنْ سِلْ
+  ["04", "soz", "بَسْ", "Bas",           A.s("si04_bas"), 0, 0.92, 86, 11, 10, 5],
+  ["05", "soz", "سَمْ", "Sam (zahar)",   A.s("si05_sam"), 0, 0.84, 70, 11, 10, 5],
+  ["06", "soz", "سِرْ", "Sir",           A.s("si06_sir"), 0, 0.69, 54, 11, 10, 5],
+  ["07", "soz", "سِنْ", "Sin (yosh)",    A.s("si07_sin"), 0, 0.85, 38, 11, 10, 5],
+  ["08", "soz", "سِلْ", "Sil",           A.s("si08_sil"), 0, 0.86, 22, 11, 10, 5],
+  // Row 2 (6 so'z): سَفَرْ سَقَرْ سَبَقْ سَلَفْ سَمَكْ فَرَسْ
+  ["09", "soz", "سَفَرْ", "Safar (sayohat)",  A.s("si09_safar"), 0, 0.97, 86, 19, 11, 5],
+  ["10", "soz", "سَقَرْ", "Saqar",            A.s("si10_saqar"), 0, 1.03, 72, 19, 11, 5],
+  ["11", "soz", "سَبَقْ", "Sabaq (dars)",     A.s("si11_sabaq"), 0, 0.94, 58, 19, 11, 5],
+  ["12", "soz", "سَلَفْ", "Salaf (o'tgan)",   A.s("si12_salaf"), 0, 0.98, 44, 19, 11, 5],
+  ["13", "soz", "سَمَكْ", "Samak (baliq)",    A.s("si13_samak"), 0, 0.81, 30, 19, 11, 5],
+  ["14", "soz", "فَرَسْ", "Faras (ot)",       A.s("si14_faras"), 0, 1.10, 16, 19, 11, 5],
+  // Row 3 (5 so'z): مَسْلَكْ مَسْكَنْ مُسْلِمْ مُسْرِفْ سِمْسِمْ
+  ["15", "soz", "مَسْلَكْ",  "Maslak (yo'l)",        A.s("si15_maslak"), 0, 1.11, 85, 27, 13, 5],
+  ["16", "soz", "مَسْكَنْ",  "Maskan (turar-joy)",   A.s("si16_maskan"), 0, 1.39, 68, 27, 13, 5],
+  ["17", "soz", "مُسْلِمْ",  "Muslim",               A.s("si17_muslim"), 0, 1.45, 51, 27, 13, 5],
+  ["18", "soz", "مُسْرِفْ",  "Musrif (isrofchi)",    A.s("si18_musrif"), 0, 1.46, 34, 27, 13, 5],
+  ["19", "soz", "سِمْسِمْ",  "Simsim (kunjut)",      A.s("si19_simsim"), 0, 1.56, 17, 27, 13, 5],
+  // Row 4 (4 so'z): اَسْلَمَ يُسْلِمُ اِسْتَيْسَرَ يَسْتَيْسِرُ
+  ["20", "soz", "اَسْلَمَ",      "Aslama (taslim bo'ldi)",      A.s("si20_aslama"),     0, 1.34, 85, 35, 15, 5],
+  ["21", "soz", "يُسْلِمُ",      "Yuslimu (taslim bo'ladi)",    A.s("si21_yuslimu"),    0, 1.42, 65, 35, 15, 5],
+  ["22", "soz", "اِسْتَيْسَرَ",  "Istaysara (oson bo'ldi)",     A.s("si22_istaysara"),  0, 1.99, 42, 35, 19, 5],
+  ["23", "soz", "يَسْتَيْسِرُ",  "Yastaysiru (oson bo'ladi)",   A.s("si23_yastaysiru"), 0, 2.11, 18, 35, 19, 5],
+
+  // ── Tsa (ث) bo'limi (20. sa.mp3) — 30 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["24", "harf", "ثَ",    "Tha (boshida)",   A.th("th01_fatha"), 0, 0.66, 72, 43, 10, 6],
+  ["25", "harf", "ـثِـ",  "Thi (oʻrtasida)", A.th("th02_kasra"), 0, 0.75, 46, 43, 10, 6],
+  ["26", "harf", "ـثُ",   "Thu (oxirida)",   A.th("th03_damma"), 0, 0.67, 20, 43, 10, 6],
+  // Row 1 (6 so'z): بَثْ ثِبْ ثَمْ ثِنْ ثَمَرُ ثَمَنٌ
+  ["27", "soz", "بَثْ",    "Bath",             A.th("th04_bath"),     0, 0.95, 88, 51, 8, 5],
+  ["28", "soz", "ثِبْ",    "Thib",             A.th("th05_thib"),     0, 0.75, 74, 51, 8, 5],
+  ["29", "soz", "ثَمْ",    "Tham",             A.th("th06_tham"),     0, 0.95, 60, 51, 8, 5],
+  ["30", "soz", "ثِنْ",    "Thin",             A.th("th07_thin"),     0, 0.91, 46, 51, 8, 5],
+  ["31", "soz", "ثَمَرُ",  "Thamaru (meva)",    A.th("th08_thamaru"),  0, 0.97, 30, 51, 12, 5],
+  ["32", "soz", "ثَمَنٌ",  "Thamanun (narx)",   A.th("th09_thamanun"), 0, 1.10, 12, 51, 12, 5],
+  // Row 2 (6 so'z): ثَوْرُ ثَوْبُ ثَيْبُ مِثْلُ مُثْلُ مَثَلٌ
+  ["33", "soz", "ثَوْرُ",  "Thawru (ho'kiz)",   A.th("th10_thawru"),   0, 1.29, 88, 59, 11, 5],
+  ["34", "soz", "ثَوْبُ",  "Thawbu (kiyim)",    A.th("th11_thawbu"),   0, 1.25, 72, 59, 11, 5],
+  ["35", "soz", "ثَيْبُ",  "Thaybu",            A.th("th12_thaybu"),   0, 1.28, 56, 59, 11, 5],
+  ["36", "soz", "مِثْلُ",  "Mithlu (misli)",    A.th("th13_mithlu"),   0, 1.26, 40, 59, 11, 5],
+  ["37", "soz", "مُثْلُ",  "Muthlu",            A.th("th14_muthlu"),   0, 1.33, 24, 59, 11, 5],
+  ["38", "soz", "مَثَلٌ",  "Mathalun (misol)",  A.th("th15_mathalun"), 0, 1.07,  8, 59, 11, 5],
+  // Row 3 (5 so'z): كَوْثَرُ اَكْثَرَ يُكْثِرُ اَثْبَتَ يُثْبِتُ
+  ["39", "soz", "كَوْثَرُ", "Kawtharu (mo'l-ko'l)",    A.th("th16_kawtharu"), 0, 1.27, 84, 67, 14, 5],
+  ["40", "soz", "اَكْثَرَ", "Aksara (ko'paytirdi)",    A.th("th17_aksara"),   0, 1.30, 66, 67, 14, 5],
+  ["41", "soz", "يُكْثِرُ", "Yuksiru (ko'paytiradi)",  A.th("th18_yuksiru"),  0, 1.39, 48, 67, 14, 5],
+  ["42", "soz", "اَثْبَتَ", "Asbata (tasdiqladi)",     A.th("th19_asbata"),   0, 1.37, 30, 67, 14, 5],
+  ["43", "soz", "يُثْبِتُ", "Yusbitu (tasdiqlaydi)",   A.th("th20_yusbitu"),  0, 1.45, 12, 67, 14, 5],
+  // Row 4 (4 so'z): اِسْتَكْثَرَ يَسْتَكْثِرُ اِسْتَثْقَلَ يَسْتَثْقِلُ
+  ["44", "soz", "اِسْتَكْثَرَ",  "Istaksara (ko'p so'radi)",    A.th("th21_istaksara"),  0, 1.91, 80, 75, 18, 5],
+  ["45", "soz", "يَسْتَكْثِرُ",  "Yastaksiru (ko'p so'raydi)",  A.th("th22_yastaksiru"), 0, 2.00, 58, 75, 18, 5],
+  ["46", "soz", "اِسْتَثْقَلَ",  "Istasqala (og'ir topdi)",     A.th("th23_istasqala"),  0, 2.06, 32, 75, 20, 5],
+  ["47", "soz", "يَسْتَثْقِلُ",  "Yastasqilu (og'ir topadi)",   A.th("th24_yastasqilu"), 0, 2.11,  8, 75, 20, 5],
+  // Row 5 (6 so'z, 3 juftlik — sin vs tsa taqqoslash): سَمَرُ-ثَمَرُ، سَبْتُ-ثَبْتُ، سَلْسُ-ثَلْثُ
+  ["48", "soz", "سَمَرُ", "Samaru (suhbat)",       A.th("th25_samar"),  0, 0.89, 86, 87, 12, 5],
+  ["49", "soz", "ثَمَرُ", "Thamaru (meva)",        A.th("th26_thamar"), 0, 0.91, 72, 87, 12, 5],
+  ["50", "soz", "سَبْتُ", "Sabtu (shanba)",        A.th("th27_sabt"),   0, 1.20, 58, 87, 12, 5],
+  ["51", "soz", "ثَبْتُ", "Thabtu (ro'yxat)",      A.th("th28_thabt"),  0, 1.19, 44, 87, 12, 5],
+  ["52", "soz", "سَلْسُ", "Salsu (yumshoq)",       A.th("th29_sals"),   0, 1.40, 30, 87, 12, 5],
+  ["53", "soz", "ثَلْثُ", "Thalthu (uchdan bir)",  A.th("th30_thalth"), 0, 1.46, 16, 87, 12, 5],
 ];
 
 // ============================================================
-// PAGE 11 — Sod + To
+// PAGE 11 — Sod (ص) + Tho (ط)
 // ============================================================
 const p11: ED[] = [
-  // Sod section
-  ["01", "harf", "صَ", "Sod fatha", A.sod, 0, 2, 72, 4, 10, 6],
-  ["02", "harf", "صِ", "Sod kasra", A.sod, 2, 4, 44, 4, 10, 6],
-  ["03", "harf", "صُ", "Sod damma", A.sod, 4, 6, 16, 4, 10, 6],
-  ["04", "soz", "صَبْرْ", "Sabr", A.sod, 8, 11, 48, 10, 14, 5],
-  ["05", "soz", "بَصَرْ", "Ko'rish", A.sod, 11, 14, 32, 10, 14, 5],
-  ["06", "soz", "نَصَرَ", "Yordam berdi", A.sod, 18, 21, 82, 20, 14, 5],
-  ["07", "soz", "يَنْصُرُ", "Yordam beradi", A.sod, 21, 24, 62, 20, 18, 5],
-  // To section
-  ["08", "harf", "طَ", "To fatha", A.to, 0, 2, 72, 44, 10, 6],
-  ["09", "harf", "طِ", "To kasra", A.to, 2, 4, 44, 44, 10, 6],
-  ["10", "harf", "طُ", "To damma", A.to, 4, 6, 16, 44, 10, 6],
-  ["11", "soz", "طَلَبَ", "Izladi", A.to, 10, 13, 64, 58, 14, 5],
-  ["12", "soz", "طِفْلْ", "Bola", A.to, 13, 16, 34, 58, 14, 5],
-  ["13", "soz", "وَطَنْ", "Vatan", A.to, 16, 19, 82, 58, 14, 5],
-  ["14", "soz", "مَطْلَبْ", "Maqsad", A.to, 22, 25, 82, 72, 16, 5],
-  ["15", "soz", "مُسْقَطْ", "Musqat", A.to, 25, 28, 56, 72, 16, 5],
+  // ── Sod (ص) bo'limi (21. so.mp3) — 20 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["01", "harf", "صَ",    "So (boshida)",   A.so("so01_fatha"), 0, 0.74, 72, 3, 10, 6],
+  ["02", "harf", "ـصِـ",  "Si (oʻrtasida)", A.so("so02_kasra"), 0, 0.70, 46, 3, 10, 6],
+  ["03", "harf", "ـصُ",   "Su (oxirida)",   A.so("so03_damma"), 0, 0.72, 20, 3, 10, 6],
+  // Row 2 (7 so'z): صُمْ صِفْ فَصْ صَرَفْ صَبَرْ بَصَرْ قَصَبْ
+  ["04", "soz", "قَصَبْ",  "Qasab (qamish)",     A.so("so10_qasab"), 0, 0.93, 87, 11, 11, 5],
+  ["05", "soz", "بَصَرْ",  "Basar (ko'rish)",    A.so("so09_basar"), 0, 1.05, 75, 11, 11, 5],
+  ["06", "soz", "صَبَرْ",  "Sabar (sabr qildi)", A.so("so08_sabar"), 0, 1.09, 63, 11, 11, 5],
+  ["07", "soz", "صَرَفْ",  "Saraf (sarfladi)",   A.so("so07_saraf"), 0, 1.12, 51, 11, 11, 5],
+  ["08", "soz", "فَصْ",    "Fas (yonoq)",        A.so("so06_fas"),   0, 0.93, 40, 11, 9,  5],
+  ["09", "soz", "صِفْ",    "Sif (ta'rifla)",     A.so("so05_sif"),   0, 0.86, 28, 11, 9,  5],
+  ["10", "soz", "صُمْ",    "Sum (ro'za tut)",    A.so("so04_sum"),   0, 0.94, 14, 11, 10, 5],
+  // Row 3 (4 so'z): نَصَرْ يَنْصُرُ اِسْتَبْصَرَ يَسْتَبْصِرُ
+  ["11", "soz", "نَصَرَ",       "Nasara (yordam berdi)",      A.so("so11_nasar"),      0, 1.13, 85, 19, 12, 5],
+  ["12", "soz", "يَنْصُرُ",     "Yansuru (yordam beradi)",    A.so("so12_yansuru"),    0, 1.70, 66, 19, 14, 5],
+  ["13", "soz", "اِسْتَبْصَرَ",  "Istabsara (bilib oldi)",     A.so("so13_istabsara"),  0, 1.84, 40, 19, 20, 5],
+  ["14", "soz", "يَسْتَبْصِرُ",  "Yastabsiru (bilib oladi)",   A.so("so14_yastabsiru"), 0, 1.90, 14, 19, 20, 5],
+  // Row 4 (6 so'z, 3 juftlik — sin vs sod taqqoslash): سَفَرْ-صَفَرْ، سَيْفْ-صَيْفْ، اِنْتَسَبَ-اِنْتَصَبَ
+  ["15", "soz", "سَفَرْ",       "Safar (sayohat)",               A.so("so15_safar_sin"),     0, 0.98, 87, 27, 12, 5],
+  ["16", "soz", "صَفَرْ",       "Safar (Safar oyi)",             A.so("so16_safar_sod"),     0, 1.08, 73, 27, 12, 5],
+  ["17", "soz", "سَيْفُ",       "Sayfu (qilich)",                A.so("so17_sayf_sin"),      0, 1.34, 59, 27, 11, 5],
+  ["18", "soz", "صَيْفُ",       "Sayfu (yoz)",                   A.so("so18_sayf_sod"),      0, 1.38, 46, 27, 11, 5],
+  ["19", "soz", "اِنْتَسَبَ",    "Intasaba (nasab aniqladi)",    A.so("so19_intasaba_sin"),  0, 1.93, 25, 27, 18, 5],
+  ["20", "soz", "اِنْتَصَبَ",    "Intasaba (tik turdi)",         A.so("so20_intasaba_sod"),  0, 1.94,  4, 27, 18, 5],
+
+  // ── Tho (ط) bo'limi (22. to.mp3) — 29 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["21", "harf", "طَ",    "To (boshida)",   A.to_("to01_fatha"), 0, 0.52, 72, 40, 10, 6],
+  ["22", "harf", "ـطِـ",  "Ti (oʻrtasida)", A.to_("to02_kasra"), 0, 0.57, 46, 40, 10, 6],
+  ["23", "harf", "ـطُ",   "Tu (oxirida)",   A.to_("to03_damma"), 0, 0.55, 20, 40, 10, 6],
+  // Row 5 (6 so'z): طَلْ طَيْ شَطْ بَطْ قَطْ فَقَطْ
+  ["24", "soz", "طَلْ",    "Tal (shudring)",    A.to_("to04_tal"),   0, 0.81, 87, 48, 10, 5],
+  ["25", "soz", "طَيْ",    "Tay (o'rash)",      A.to_("to05_tay"),   0, 0.82, 73, 48, 10, 5],
+  ["26", "soz", "شَطْ",    "Shat (qirg'oq)",    A.to_("to06_shat"),  0, 0.77, 59, 48, 10, 5],
+  ["27", "soz", "بَطْ",    "Bat (o'rdak)",      A.to_("to07_bat"),   0, 0.80, 45, 48, 10, 5],
+  ["28", "soz", "قَطْ",    "Qat (aslo)",        A.to_("to08_qat"),   0, 0.72, 31, 48, 10, 5],
+  ["29", "soz", "فَقَطْ",  "Faqat (faqatgina)", A.to_("to09_faqat"), 0, 0.99, 14, 48, 12, 5],
+  // Row 6 (6 so'z): وَطَنْ طَلَبْ طَرَفْ طُهْرْ طِفْلُ مَطَرْ
+  ["30", "soz", "وَطَنْ",   "Watan (vatan)",      A.to_("to10_watan"), 0, 1.12, 86, 56, 12, 5],
+  ["31", "soz", "طَلَبْ",   "Talab (so'radi)",    A.to_("to11_talab"), 0, 0.90, 72, 56, 12, 5],
+  ["32", "soz", "طَرَفْ",   "Taraf (chet)",       A.to_("to12_taraf"), 0, 0.97, 58, 56, 12, 5],
+  ["33", "soz", "طُهْرُ",   "Tuhru (poklik)",     A.to_("to13_tuhr"),  0, 1.23, 44, 56, 12, 5],
+  ["34", "soz", "طِفْلُ",   "Tiflu (bola)",       A.to_("to14_tiflu"), 0, 1.21, 30, 56, 12, 5],
+  ["35", "soz", "مَطَرْ",   "Matar (yomg'ir)",    A.to_("to15_matar"), 0, 1.04, 14, 56, 12, 5],
+  // Row 7 (4 so'z): مَطْلَبْ مَسْقَطْ مَوْطِنْ مَرْبِطْ
+  ["36", "soz", "مَطْلَبْ", "Matlab (maqsad)",       A.to_("to16_matlab"), 0, 1.28, 80, 64, 16, 5],
+  ["37", "soz", "مَسْقَطْ", "Masqat (tushish joyi)", A.to_("to17_masqat"), 0, 1.27, 58, 64, 16, 5],
+  ["38", "soz", "مَوْطِنْ", "Mawtin (vatan)",         A.to_("to18_mawtin"), 0, 1.60, 36, 64, 16, 5],
+  ["39", "soz", "مَرْبِطْ", "Marbit (bog'lash joyi)", A.to_("to19_marbit"), 0, 1.41, 14, 64, 16, 5],
+  // Row 8 (4 so'z): اِصْطَبَرْ يَصْطَبِرُ اِسْتَوْطَنَ يَسْتَوْطِنُ
+  ["40", "soz", "اِصْطَبَرَ",   "Istabara (sabr qildi)",   A.to_("to20_istabar"),    0, 1.67, 80, 72, 18, 5],
+  ["41", "soz", "يَصْطَبِرُ",   "Yastabiru (sabr qiladi)", A.to_("to21_yastabiru"),  0, 1.79, 58, 72, 18, 5],
+  ["42", "soz", "اِسْتَوْطَنَ", "Istawtana (makon tutdi)", A.to_("to22_istawtana"),  0, 1.97, 32, 72, 22, 5],
+  ["43", "soz", "يَسْتَوْطِنُ", "Yastawtinu (makon tutadi)",A.to_("to23_yastawtinu"), 0, 2.12,  6, 72, 22, 5],
+  // Row 9 (6 so'z, 3 juftlik — ta vs tho taqqoslash): تَرَفْ-طَرَفْ، سَبْتُ-سَبْطُ، مُسْتَتِرْ-مُسْتَطِرْ
+  ["44", "soz", "تَرَفْ",      "Taraf (noz-ne'mat)",    A.to_("to24_taraf_ta"),      0, 0.90, 87, 80, 11, 5],
+  ["45", "soz", "طَرَفْ",      "Taraf (chet)",          A.to_("to25_taraf_tho"),     0, 0.94, 74, 80, 11, 5],
+  ["46", "soz", "سَبْتُ",      "Sabtu (shanba)",        A.to_("to26_sabtu_ta"),      0, 1.17, 60, 80, 11, 5],
+  ["47", "soz", "سَبْطُ",      "Sabtu (o'ralgan soch)", A.to_("to27_sabtu_tho"),     0, 1.10, 47, 80, 11, 5],
+  ["48", "soz", "مُسْتَتِرْ",  "Mustatir (yashiringan)",A.to_("to28_mustatir_ta"),   0, 1.51, 28, 80, 17, 5],
+  ["49", "soz", "مُسْتَطِرْ",  "Mustatir (yozilgan)",   A.to_("to29_mustatir_tho"),  0, 1.53,  5, 80, 17, 5],
 ];
 
 // ============================================================
-// PAGE 12 — Jim + Xo
+// PAGE 12 — Jim (ج) + Xo (خ)
 // ============================================================
 const p12: ED[] = [
-  // Jim section
-  ["01", "harf", "جَ", "Jim fatha", A.jim, 0, 2, 72, 4, 10, 6],
-  ["02", "harf", "جِ", "Jim kasra", A.jim, 2, 4, 44, 4, 10, 6],
-  ["03", "harf", "جُ", "Jim damma", A.jim, 4, 6, 16, 4, 10, 6],
-  ["04", "soz", "جَبَلْ", "Tog'", A.jim, 10, 13, 82, 18, 14, 5],
-  ["05", "soz", "جَمَلْ", "Tuya", A.jim, 13, 16, 64, 18, 14, 5],
-  ["06", "soz", "فَجْرْ", "Tong", A.jim, 16, 19, 44, 18, 14, 5],
-  ["07", "soz", "جَوْهَرْ", "Javhar", A.jim, 19, 22, 24, 18, 16, 5],
-  // Xo section
-  ["08", "harf", "خَ", "Xo fatha", A.xo, 0, 2, 72, 48, 10, 6],
-  ["09", "harf", "خِ", "Xo kasra", A.xo, 2, 4, 44, 48, 10, 6],
-  ["10", "harf", "خُ", "Xo damma", A.xo, 4, 6, 16, 48, 10, 6],
-  ["11", "soz", "خَبَرْ", "Xabar", A.xo, 10, 13, 48, 57, 14, 5],
-  ["12", "soz", "خَشَبْ", "Yog'och", A.xo, 13, 16, 30, 57, 14, 5],
-  ["13", "soz", "خَيْرْ", "Yaxshilik", A.xo, 18, 21, 82, 67, 14, 5],
-  ["14", "soz", "خَوْفْ", "Qo'rquv", A.xo, 21, 24, 54, 67, 14, 5],
-  ["15", "soz", "مَخْرَجْ", "Chiqish", A.xo, 24, 27, 38, 67, 16, 5],
+  // ── Jim (ج) bo'limi (23. ja.mp3) — 18 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["01", "harf", "جَ",    "Ja (boshida)",   A.j("ja01_fatha"), 0, 0.65, 72, 3, 10, 6],
+  ["02", "harf", "ـجِـ",  "Ji (oʻrtasida)", A.j("ja02_kasra"), 0, 0.68, 46, 3, 10, 6],
+  ["03", "harf", "ـجُ",   "Ju (oxirida)",   A.j("ja03_damma"), 0, 0.73, 20, 3, 10, 6],
+  // Row 2 (5 so'z): جَمْ جَرْ جِنْ جَبْ جُلْ
+  ["04", "soz", "جَمْ",    "Jam",          A.j("ja04_jam"), 0, 0.94, 86, 11, 10, 5],
+  ["05", "soz", "جَرْ",    "Jar",          A.j("ja05_jar"), 0, 0.86, 72, 11, 10, 5],
+  ["06", "soz", "جِنْ",    "Jin (jin)",    A.j("ja06_jin"), 0, 0.94, 58, 11, 10, 5],
+  ["07", "soz", "جَبْ",    "Jab",          A.j("ja07_jab"), 0, 0.84, 43, 11, 10, 5],
+  ["08", "soz", "جُلْ",    "Jul",          A.j("ja08_jul"), 0, 0.91, 14, 11, 10, 5],
+  // Row 3 (6 so'z): جَبَلْ جَمَلْ اَجْرْ فَجْرْ جَوْهَرْ جَوْرَبْ
+  ["09", "soz", "جَبَلْ",  "Jabal (tog')",        A.j("ja09_jabal"),  0, 1.07, 87, 19, 11, 5],
+  ["10", "soz", "جَمَلْ",  "Jamal (tuya)",        A.j("ja10_jamal"),  0, 1.10, 73, 19, 11, 5],
+  ["11", "soz", "اَجْرُ",  "Ajru (mukofot)",      A.j("ja11_ajr"),    0, 1.05, 59, 19, 11, 5],
+  ["12", "soz", "فَجْرُ",  "Fajru (tong)",        A.j("ja12_fajr"),   0, 1.07, 45, 19, 11, 5],
+  ["13", "soz", "جَوْهَرْ", "Jawhar (gavhar)",     A.j("ja13_jawhar"), 0, 1.31, 27, 19, 14, 5],
+  ["14", "soz", "جَوْرَبْ", "Jawrab (paypoq)",     A.j("ja14_jawrab"), 0, 1.31,  8, 19, 14, 5],
+  // Row 4 (4 so'z): تَجَوْرَبَ يَتَجَوْرَبُ اِسْتَجْلَبَ يَسْتَجْلِبُ (past/present juftliklar)
+  ["15", "soz", "تَجَوْرَبَ",   "Tajawraba (paypoq kiydi)",   A.j("ja15_tajawraba"),   0, 1.49, 80, 27, 18, 5],
+  ["16", "soz", "يَتَجَوْرَبُ", "Yatajawrabu (paypoq kiyadi)",A.j("ja16_yatajawrabu"), 0, 1.86, 57, 27, 21, 5],
+  ["17", "soz", "اِسْتَجْلَبَ", "Istajlaba (jalb qildi)",     A.j("ja17_istajlaba"),   0, 1.84, 30, 27, 20, 5],
+  ["18", "soz", "يَسْتَجْلِبُ", "Yastajlibu (jalb qiladi)",   A.j("ja18_yastajlibu"),  0, 1.93,  6, 27, 20, 5],
+
+  // ── Xo (خ) bo'limi (24. xo.mp3) — 23 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["19", "harf", "خَ",    "Xa (boshida)",   A.x("xo01_fatha"), 0, 0.74, 72, 45, 10, 6],
+  ["20", "harf", "ـخِـ",  "Xi (oʻrtasida)", A.x("xo02_kasra"), 0, 0.64, 46, 45, 10, 6],
+  ["21", "harf", "ـخُ",   "Xu (oxirida)",   A.x("xo03_damma"), 0, 0.75, 20, 45, 10, 6],
+  // Row 2 (6 so'z): خَبْ خَلْ خَرَجْ خَبَرْ خَشَبْ خَلَفْ
+  ["22", "soz", "خَبْ",    "Xab",                   A.x("xo04_xab"),    0, 0.81, 87, 54, 10, 5],
+  ["23", "soz", "خَلْ",    "Xal (sirka)",           A.x("xo05_xal"),    0, 0.98, 73, 54, 10, 5],
+  ["24", "soz", "خَرَجْ",  "Xaraj (chiqdi)",        A.x("xo06_xaraj"),  0, 0.96, 58, 54, 12, 5],
+  ["25", "soz", "خَبَرْ",  "Xabar (xabar)",         A.x("xo07_xabar"),  0, 0.96, 43, 54, 12, 5],
+  ["26", "soz", "خَشَبْ",  "Xashab (yog'och)",      A.x("xo08_xashab"), 0, 1.02, 28, 54, 12, 5],
+  ["27", "soz", "خَلَفْ",  "Xalaf (orqa)",          A.x("xo09_xalaf"),  0, 1.05, 13, 54, 12, 5],
+  // Row 3 (6 so'z, damma ending): خَيْرُ خَتْمُ خَمْرُ خَوْفُ مَخْرَجُ مُخْبِرُ
+  ["28", "soz", "خَيْرُ",   "Xayru (yaxshilik)",         A.x("xo10_xayru"),   0, 1.37, 87, 62, 11, 5],
+  ["29", "soz", "خَتْمُ",   "Xatmu (tamom, muhr)",       A.x("xo11_xatmu"),   0, 1.26, 73, 62, 11, 5],
+  ["30", "soz", "خَمْرُ",   "Xamru (may)",               A.x("xo12_xamru"),   0, 1.25, 59, 62, 11, 5],
+  ["31", "soz", "خَوْفُ",   "Xawfu (qo'rquv)",           A.x("xo13_xawfu"),   0, 1.45, 45, 62, 11, 5],
+  ["32", "soz", "مَخْرَجُ", "Maxraju (chiqish joyi)",    A.x("xo14_maxraju"), 0, 1.34, 27, 62, 15, 5],
+  ["33", "soz", "مُخْبِرُ", "Muxbiru (xabar beruvchi)",  A.x("xo15_muxbiru"), 0, 1.24,  8, 62, 15, 5],
+  // Row 4 (4 so'z, past/present juftliklar — form IV أفعل): اَخْرَجَ يُخْرِجُ اَخْبَرَ يُخْبِرُ
+  ["34", "soz", "اَخْرَجَ", "Axraja (chiqardi)",        A.x("xo16_axraja"),  0, 1.29, 82, 71, 15, 5],
+  ["35", "soz", "يُخْرِجُ", "Yuxriju (chiqaradi)",      A.x("xo17_yuxriju"), 0, 1.39, 61, 71, 15, 5],
+  ["36", "soz", "اَخْبَرَ", "Axbara (xabar berdi)",     A.x("xo18_axbara"),  0, 1.27, 39, 71, 15, 5],
+  ["37", "soz", "يُخْبِرُ", "Yuxbiru (xabar beradi)",   A.x("xo19_yuxbiru"), 0, 1.36, 15, 71, 15, 5],
+  // Row 5 (4 so'z, past/present juftliklar — form X استفعل): اِسْتَخْبَرَ يَسْتَخْبِرُ اِسْتَخْرَجَ يَسْتَخْرِجُ
+  ["38", "soz", "اِسْتَخْبَرَ", "Istaxbara (xabar izladi)",   A.x("xo20_istaxbara"),  0, 1.85, 78, 80, 20, 5],
+  ["39", "soz", "يَسْتَخْبِرُ", "Yastaxbiru (xabar izlaydi)", A.x("xo21_yastaxbiru"), 0, 2.00, 54, 80, 22, 5],
+  ["40", "soz", "اِسْتَخْرَجَ", "Istaxraja (chiqarib oldi)",  A.x("xo22_istaxraja"),  0, 1.88, 30, 80, 20, 5],
+  ["41", "soz", "يَسْتَخْرِجُ", "Yastaxriju (chiqarib oladi)",A.x("xo23_yastaxriju"), 0, 1.99,  6, 80, 22, 5],
 ];
 
 // ============================================================
-// PAGE 13 — Ha (ح) + G'ayn
+// PAGE 13 — Ha (ح) + G'ayn (غ)
 // ============================================================
 const p13: ED[] = [
-  // Ha section
-  ["01", "harf", "حَ", "Ha fatha", A.ha, 0, 2, 72, 4, 10, 6],
-  ["02", "harf", "حِ", "Ha kasra", A.ha, 2, 4, 44, 4, 10, 6],
-  ["03", "harf", "حُ", "Ha damma", A.ha, 4, 6, 16, 4, 10, 6],
-  ["04", "soz", "حَجْ", "Haj", A.ha, 8, 11, 64, 12, 10, 5],
-  ["05", "soz", "حَسَنْ", "Hasan", A.ha, 11, 14, 44, 12, 14, 5],
-  ["06", "soz", "مُحْسِنْ", "Muhsin", A.ha, 16, 19, 82, 22, 16, 5],
-  ["07", "soz", "اَحْسَنَ", "Yaxshiladi", A.ha, 19, 22, 16, 22, 16, 5],
-  ["08", "soz", "اِمْتَحَنَ", "Sinadi", A.ha, 25, 28, 82, 32, 18, 5],
-  // G'ayn section
-  ["09", "harf", "غَ", "G'ayn fatha", A.gho, 0, 2, 72, 52, 10, 6],
-  ["10", "harf", "غِ", "G'ayn kasra", A.gho, 2, 4, 44, 52, 10, 6],
-  ["11", "harf", "غُ", "G'ayn damma", A.gho, 4, 6, 16, 52, 10, 6],
-  ["12", "soz", "غَمْ", "G'am", A.gho, 6, 9, 82, 62, 10, 5],
-  ["13", "soz", "غَيْرْ", "Boshqa", A.gho, 11, 14, 40, 62, 14, 5],
-  ["14", "soz", "مَبْلَغْ", "Summa", A.gho, 16, 19, 62, 72, 16, 5],
-  ["15", "soz", "مَغْرِبْ", "Mag'rib", A.gho, 19, 22, 44, 72, 16, 5],
-  ["16", "soz", "اِسْتَغْفَرَ", "Istig'for qildi", A.gho, 28, 32, 44, 82, 22, 5],
+  // ── Ha (ح) bo'limi (25. ha.mp3) — 28 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["01", "harf", "حَ",    "Ha (boshida)",   A.ha_("ha01_fatha"), 0, 0.68, 72, 3, 10, 6],
+  ["02", "harf", "ـحِـ",  "Hi (oʻrtasida)", A.ha_("ha02_kasra"), 0, 0.70, 46, 3, 10, 6],
+  ["03", "harf", "ـحُ",   "Hu (oxirida)",   A.ha_("ha03_damma"), 0, 0.74, 20, 3, 10, 6],
+  // Row 1 (6 so'z): حَى حِلْ حَجْ حَسَنْ حَسْبْ حَسَفْ
+  ["04", "soz", "حَى",     "Hâ",                  A.ha_("ha04_haa"),    0, 0.81, 87, 11, 10, 5],
+  ["05", "soz", "حِلْ",    "Hil (yech)",          A.ha_("ha05_hil"),    0, 0.76, 73, 11, 10, 5],
+  ["06", "soz", "حَجْ",    "Haj",                 A.ha_("ha06_haj"),    0, 0.71, 59, 11, 10, 5],
+  ["07", "soz", "حَسَنْ",  "Hasan (yaxshi)",      A.ha_("ha07_hasan"),  0, 0.95, 45, 11, 11, 5],
+  ["08", "soz", "حَسْبْ",  "Hasb (kifoya)",       A.ha_("ha08_hasb"),   0, 0.88, 30, 11, 11, 5],
+  ["09", "soz", "حَسَفْ",  "Hasaf (qoldiq)",      A.ha_("ha09_hasaf"),  0, 0.87, 14, 11, 11, 5],
+  // Row 2 (5 so'z): مُحْسِنْ مَحْشَرْ مِنْحَرْ مَحْفَلْ اَحْسَنْ
+  ["10", "soz", "مُحْسِنْ", "Muhsin (yaxshilik qiluvchi)", A.ha_("ha10_muhsin"),  0, 1.42, 84, 19, 14, 5],
+  ["11", "soz", "مَحْشَرْ", "Mahshar (to'planish joyi)",   A.ha_("ha11_mahshar"), 0, 1.28, 66, 19, 14, 5],
+  ["12", "soz", "مِنْحَرْ", "Minhar (qurbonlik joyi)",     A.ha_("ha12_minhar"),  0, 1.29, 48, 19, 14, 5],
+  ["13", "soz", "مَحْفَلْ", "Mahfal (yig'in)",             A.ha_("ha13_mahfal"),  0, 1.41, 30, 19, 14, 5],
+  ["14", "soz", "اَحْسَنْ", "Ahsan (eng yaxshi)",          A.ha_("ha14_ahsan"),   0, 1.37, 12, 19, 14, 5],
+  // Row 3 (4 so'z): اِمْتَحَنَ يَمْتَحِنُ اِحْتَمَلَ يَحْتَمِلُ
+  ["15", "soz", "اِمْتَحَنَ",  "Imtahana (sinadi)",       A.ha_("ha15_imtahana"),  0, 1.60, 80, 27, 18, 5],
+  ["16", "soz", "يَمْتَحِنُ", "Yamtahinu (sinaydi)",     A.ha_("ha16_yamtahinu"), 0, 1.70, 58, 27, 18, 5],
+  ["17", "soz", "اِحْتَمَلَ",  "Ihtamala (chidadi)",      A.ha_("ha17_ihtamala"),  0, 1.54, 36, 27, 18, 5],
+  ["18", "soz", "يَحْتَمِلُ", "Yahtamilu (chidaydi)",    A.ha_("ha18_yahtamilu"), 0, 1.70, 12, 27, 18, 5],
+  // Row 4 (4 so'z): اِسْتَحْسَنَ يَسْتَحْسِنُ اِحْرَنْجَمَ يَحْرَنْجِمُ
+  ["19", "soz", "اِسْتَحْسَنَ",  "Istahsana (yaxshi topdi)",  A.ha_("ha19_istahsana"),  0, 1.94, 78, 35, 20, 5],
+  ["20", "soz", "يَسْتَحْسِنُ", "Yastahsinu (yaxshi topadi)",A.ha_("ha20_yastahsinu"), 0, 2.21, 54, 35, 22, 5],
+  ["21", "soz", "اِحْرَنْجَمَ",  "Ihranjama (to'planishdi)",  A.ha_("ha21_ihranjama"),  0, 2.04, 30, 35, 20, 5],
+  ["22", "soz", "يَحْرَنْجِمُ", "Yahranjimu (to'planadilar)",A.ha_("ha22_yahranjimu"), 0, 2.16,  6, 35, 22, 5],
+  // Row 5 (6 so'z, 3 juftlik — kha vs ha taqqoslash): خَلْقُ-حَلْقُ، خَتْمُ-حَتْمُ، اَرْخَمْ-اَرْحَمْ
+  ["23", "soz", "خَلْقُ",   "Xalqu (yaratish)",        A.ha_("ha23_khalqu_kha"),  0, 1.27, 87, 46, 11, 5],
+  ["24", "soz", "حَلْقُ",   "Halqu (tomoq)",           A.ha_("ha24_halqu_ha"),    0, 1.26, 74, 46, 11, 5],
+  ["25", "soz", "خَتْمُ",   "Xatmu (tamomlash)",       A.ha_("ha25_khatmu_kha"),  0, 1.16, 60, 46, 11, 5],
+  ["26", "soz", "حَتْمُ",   "Hatmu (qat'iylik)",       A.ha_("ha26_hatmu_ha"),    0, 1.20, 47, 46, 11, 5],
+  ["27", "soz", "اَرْخَمْ", "Arkham (yumshoqroq)",     A.ha_("ha27_arkham_kha"),  0, 1.35, 28, 46, 13, 5],
+  ["28", "soz", "اَرْحَمْ", "Arham (rahmliroq)",       A.ha_("ha28_arham_ha"),    0, 1.38,  6, 46, 13, 5],
+
+  // ── G'ayn (غ) bo'limi (26. g'o.mp3) — 18 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["29", "harf", "غَ",    "G'a (boshida)",   A.gho_("gho01_fatha"), 0, 0.77, 72, 55, 10, 6],
+  ["30", "harf", "ـغِـ",  "G'i (oʻrtasida)", A.gho_("gho02_kasra"), 0, 0.73, 46, 55, 10, 6],
+  ["31", "harf", "ـغُ",   "G'u (oxirida)",   A.gho_("gho03_damma"), 0, 0.72, 20, 55, 10, 6],
+  // Row 1 (6 so'z): غَمْ غَبْ غِلْ غَيْرُ بَغْلُ فَرْغُ
+  ["32", "soz", "غَمْ",    "G'am (qayg'u)",       A.gho_("gho04_gham"),   0, 0.94, 87, 63, 10, 5],
+  ["33", "soz", "غَبْ",    "G'ab (yo'q bo'l)",    A.gho_("gho05_ghab"),   0, 0.88, 73, 63, 10, 5],
+  ["34", "soz", "غِلْ",    "G'ill (hasad)",       A.gho_("gho06_ghil"),   0, 0.97, 59, 63, 10, 5],
+  ["35", "soz", "غَيْرُ",  "G'oyru (boshqa)",     A.gho_("gho07_ghayru"), 0, 1.29, 44, 63, 12, 5],
+  ["36", "soz", "بَغْلُ",  "Baghlu (xachir)",     A.gho_("gho08_baghlu"), 0, 1.34, 28, 63, 12, 5],
+  ["37", "soz", "فَرْغُ",  "Farghu (bo'sh joy)",  A.gho_("gho09_farghu"), 0, 1.27, 12, 63, 12, 5],
+  // Row 2 (5 so'z): غَبْغَبْ مَبْلَغْ مَغْرِبْ اِغْلِبْ اِغْفِرْ
+  ["38", "soz", "غَبْغَبْ", "G'abg'ab (jo'g'i)",         A.gho_("gho10_ghabghab"), 0, 1.30, 84, 71, 14, 5],
+  ["39", "soz", "مَبْلَغْ", "Mablag' (summa)",           A.gho_("gho11_mablag"),   0, 1.38, 66, 71, 14, 5],
+  ["40", "soz", "مَغْرِبْ", "Maghrib (g'arb, shom)",     A.gho_("gho12_maghrib"),  0, 1.28, 48, 71, 14, 5],
+  ["41", "soz", "اِغْلِبْ", "Ig'lib (yengib ol!)",       A.gho_("gho13_ighlib"),   0, 1.24, 30, 71, 14, 5],
+  ["42", "soz", "اِغْفِرْ", "Ig'fir (kechir!)",          A.gho_("gho14_ighfir"),   0, 1.22, 12, 71, 14, 5],
+  // Row 3 (4 so'z, past/present juftliklar): اِشْتَغَلَ يَشْتَغِلُ اِسْتَغْفَرَ يَسْتَغْفِرُ
+  ["43", "soz", "اِشْتَغَلَ",   "Ishtaghala (band bo'ldi)",      A.gho_("gho15_ishtaghala"),   0, 1.51, 80, 79, 18, 5],
+  ["44", "soz", "يَشْتَغِلُ",   "Yashtaghilu (band bo'ladi)",    A.gho_("gho16_yashtaghilu"),  0, 1.64, 58, 79, 18, 5],
+  ["45", "soz", "اِسْتَغْفَرَ", "Istaghfara (kechirim so'radi)", A.gho_("gho17_istaghfara"),   0, 1.94, 32, 79, 22, 5],
+  ["46", "soz", "يَسْتَغْفِرُ", "Yastaghfiru (kechirim so'raydi)",A.gho_("gho18_yastaghfiru"), 0, 2.02,  6, 79, 22, 5],
 ];
 
 // ============================================================
-// PAGE 14 — Ayn + Dal
+// PAGE 14 — Ayn (ع) + Dal (د)
 // ============================================================
 const p14: ED[] = [
-  // Ayn section
-  ["01", "harf", "عَ", "Ayn fatha", A.ayn, 0, 2, 72, 4, 10, 6],
-  ["02", "harf", "عِ", "Ayn kasra", A.ayn, 2, 4, 44, 4, 10, 6],
-  ["03", "harf", "عُ", "Ayn damma", A.ayn, 4, 6, 16, 4, 10, 6],
-  ["04", "soz", "عَرَبْ", "Arab", A.ayn, 8, 11, 30, 12, 14, 5],
-  ["05", "soz", "عَجَبْ", "Ajablanish", A.ayn, 14, 17, 82, 22, 14, 5],
-  ["06", "soz", "عَمَلْ", "Amal", A.ayn, 17, 20, 64, 22, 14, 5],
-  ["07", "soz", "عِلْمُ", "Ilm", A.ayn, 20, 23, 46, 22, 14, 5],
-  ["08", "soz", "عُمَرْ", "Umar", A.ayn, 23, 26, 28, 22, 14, 5],
-  // Dal section
-  ["09", "harf", "دَ", "Dal fatha", A.dal, 0, 2, 72, 52, 10, 6],
-  ["10", "harf", "دِ", "Dal kasra", A.dal, 2, 4, 44, 52, 10, 6],
-  ["11", "harf", "دُ", "Dal damma", A.dal, 4, 6, 16, 52, 10, 6],
-  ["12", "soz", "دَرَسَ", "O'qidi", A.dal, 10, 13, 82, 65, 14, 5],
-  ["13", "soz", "دَفَعَ", "Itardi", A.dal, 13, 16, 62, 65, 14, 5],
-  ["14", "soz", "دَهْرْ", "Davr", A.dal, 18, 21, 24, 65, 14, 5],
-  ["15", "soz", "اِعْتَدَلَ", "Tekislandi", A.dal, 28, 32, 82, 82, 20, 5],
+  // ── Ayn (ع) bo'limi (27. ayn.mp3) — 27 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["01", "harf", "عَ",    "Ayn (boshida)",   A.ay("ay01_fatha"), 0, 0.65, 72, 3, 10, 6],
+  ["02", "harf", "ـعِـ",  "Ayn (oʻrtasida)", A.ay("ay02_kasra"), 0, 0.67, 46, 3, 10, 6],
+  ["03", "harf", "ـعُ",   "Ayn (oxirida)",   A.ay("ay03_damma"), 0, 0.72, 20, 3, 10, 6],
+  // Row 1 (7 so'z): بِعْ عَنْ عَمْ سَعْ مَعَ عَرَبْ عَجَمْ
+  ["04", "soz", "بِعْ",   "Bi'",   A.ay("ay04_bi3"),   0, 0.81, 91, 11, 8,  5],
+  ["05", "soz", "عَنْ",   "An",    A.ay("ay05_3an"),   0, 0.84, 80, 11, 9,  5],
+  ["06", "soz", "عَمْ",   "Am",    A.ay("ay06_3am"),   0, 0.87, 68, 11, 9,  5],
+  ["07", "soz", "سَعْ",   "Sa'",   A.ay("ay07_sa3"),   0, 0.90, 56, 11, 9,  5],
+  ["08", "soz", "مَعَ",   "Maa",   A.ay("ay08_ma3a"),  0, 1.01, 43, 11, 10, 5],
+  ["09", "soz", "عَرَبْ", "Arab",  A.ay("ay09_3arab"), 0, 1.02, 28, 11, 11, 5],
+  ["10", "soz", "عَجَمْ", "Ajam",  A.ay("ay10_3ajam"), 0, 1.09, 14, 11, 11, 5],
+  // Row 2 (6 so'z): عَجَبْ عَمَلْ عِلْمُ عُمْرُ جَمْعُ جَعْلُ
+  ["11", "soz", "عَجَبْ", "Ajab", A.ay("ay11_3ajab"), 0, 1.01, 87, 19, 11, 5],
+  ["12", "soz", "عَمَلْ", "Amal", A.ay("ay12_3amal"), 0, 1.04, 73, 19, 11, 5],
+  ["13", "soz", "عِلْمُ", "Ilm",  A.ay("ay13_3ilmu"), 0, 1.34, 59, 19, 11, 5],
+  ["14", "soz", "عُمْرُ", "Umr",  A.ay("ay14_3umru"), 0, 1.31, 45, 19, 11, 5],
+  ["15", "soz", "جَمْعُ", "Jam'", A.ay("ay15_jam3u"), 0, 1.41, 31, 19, 11, 5],
+  ["16", "soz", "جَعْلُ", "Ja'l", A.ay("ay16_ja3lu"), 0, 1.34, 17, 19, 11, 5],
+  // Row 3 (5 so'z): عَبْعَبْ عَسْكَرْ عَیْلَمْ جَعْفَرْ عَنْبَرْ — barchasi sukun bilan tugaydi
+  ["17", "soz", "عَبْعَبْ", "Ab'ab", A.ay("ay17_3ab3ab"),  0, 1.19, 85, 27, 13, 5],
+  ["18", "soz", "عَسْكَرْ", "Askar", A.ay("ay18_3askaru"), 0, 1.29, 69, 27, 13, 5],
+  ["19", "soz", "عَیْلَمْ", "Aylam", A.ay("ay19_3aylam"),  0, 1.40, 52, 27, 13, 5],
+  ["20", "soz", "جَعْفَرْ", "Jafar", A.ay("ay20_ja3faru"), 0, 1.40, 35, 27, 13, 5],
+  ["21", "soz", "عَنْبَرْ", "Ambar", A.ay("ay21_3anbaru"), 0, 1.58, 18, 27, 13, 5],
+  // Row 4 (6 so'z, 3 juftlik — ğayn vs ayn taqqoslash): غَیْنُ-عَیْنُ، بَغْلُ-بَعْلُ، بَلْغُ-بَلْعُ
+  ["22", "soz", "غَیْنُ", "G'ayn", A.ay("ay22_ghaynu"), 0, 1.36, 87, 35, 12, 5],
+  ["23", "soz", "عَیْنُ", "Ayn",   A.ay("ay23_3aynu"),  0, 1.21, 73, 35, 12, 5],
+  ["24", "soz", "بَغْلُ", "Bag'l", A.ay("ay24_baghlu"), 0, 1.32, 59, 35, 11, 5],
+  ["25", "soz", "بَعْلُ", "Ba'l",  A.ay("ay25_ba3lu"),  0, 1.30, 45, 35, 11, 5],
+  ["26", "soz", "بَلْغُ", "Balg'", A.ay("ay26_balghu"), 0, 1.40, 30, 35, 12, 5],
+  ["27", "soz", "بَلْعُ", "Bal'",  A.ay("ay27_bal3u"),  0, 1.40, 16, 35, 12, 5],
+
+  // ── Dal (د) bo'limi (28. da.mp3) — 23 element ──
+  // Headers — non-connector harf, isolated shakllar
+  ["28", "harf", "دَ",    "Da",  A.da("da01_fatha"), 0, 0.64, 72, 45, 10, 6],
+  ["29", "harf", "دِ",    "Di",  A.da("da02_kasra"), 0, 0.67, 46, 45, 10, 6],
+  ["30", "harf", "دُ",    "Du",  A.da("da03_damma"), 0, 0.72, 20, 45, 10, 6],
+  // Row 1 (6 so'z): دُمْ دُبْ دُفْ رِدْ زِدْ تَدْ
+  ["31", "soz", "دُمْ", "Dum", A.da("da04_dum"), 0, 0.94, 87, 53, 11, 5],
+  ["32", "soz", "دُبْ", "Dub", A.da("da05_dub"), 0, 0.77, 73, 53, 11, 5],
+  ["33", "soz", "دُفْ", "Duf", A.da("da06_duf"), 0, 1.01, 59, 53, 11, 5],
+  ["34", "soz", "رِدْ", "Rid", A.da("da07_rid"), 0, 0.70, 45, 53, 11, 5],
+  ["35", "soz", "زِدْ", "Zid", A.da("da08_zid"), 0, 1.16, 31, 53, 11, 5],
+  ["36", "soz", "تَدْ", "Tad", A.da("da09_tad"), 0, 0.68, 17, 53, 11, 5],
+  // Row 2 (6 so'z): دَرْسُ دَفْعُ دَبْغُ دَلْكُ دَهْرُ دَهْنُ
+  ["37", "soz", "دَرْسُ", "Dars",  A.da("da10_darasu"), 0, 1.23, 87, 61, 11, 5],
+  ["38", "soz", "دَفْعُ", "Daf'",  A.da("da11_daf3u"),  0, 1.31, 73, 61, 11, 5],
+  ["39", "soz", "دَبْغُ", "Dabg'", A.da("da12_dabghu"), 0, 1.23, 59, 61, 11, 5],
+  ["40", "soz", "دَلْكُ", "Dalk",  A.da("da13_dalku"),  0, 1.27, 45, 61, 11, 5],
+  ["41", "soz", "دَهْرُ", "Dahr",  A.da("da14_dahru"),  0, 1.26, 31, 61, 11, 5],
+  ["42", "soz", "دَهْنُ", "Dahn",  A.da("da15_dahnu"),  0, 1.36, 17, 61, 11, 5],
+  // Row 3 (4 so'z): دُلْدُلْ فُدْفُدْ هُدْهُدْ اُشْدُدْ
+  ["43", "soz", "دُلْدُلْ", "Duldul", A.da("da16_duldul"), 0, 1.47, 82, 69, 14, 5],
+  ["44", "soz", "فُدْفُدْ", "Fudfud", A.da("da17_fudfud"), 0, 1.21, 64, 69, 14, 5],
+  ["45", "soz", "هُدْهُدْ", "Hudhud", A.da("da18_hudhud"), 0, 1.35, 46, 69, 14, 5],
+  ["46", "soz", "اُشْدُدْ", "Ushdud", A.da("da19_ushdud"), 0, 1.32, 28, 69, 14, 5],
+  // Row 4 (4 so'z, past/present juftliklar): اِعْتَدَلَ-يَعْتَدِلُ، اِسْتَرْشَدَ-يَسْتَرْشِدُ
+  ["47", "soz", "اِعْتَدَلَ",   "I'tadala",   A.da("da20_i3tadala"),   0, 1.62, 80, 77, 18, 5],
+  ["48", "soz", "يَعْتَدِلُ",   "Ya'tadilu",  A.da("da21_ya3tadilu"),  0, 1.69, 60, 77, 18, 5],
+  ["49", "soz", "اِسْتَرْشَدَ", "Istarshada", A.da("da22_istarshada"), 0, 1.92, 38, 77, 20, 5],
+  ["50", "soz", "يَسْتَرْشِدُ", "Yastarshidu",A.da("da23_yastarshid"), 0, 2.01, 16, 77, 20, 5],
 ];
 
 // ============================================================
 // PAGE 15 — Dod (ض) + Zal (ذ)
+// Dod (connector): header pozitsion — ضَ / ـضِـ / ـضُ
+// Zal (non-connector): header isolated — ذَ / ذِ / ذُ
 // ============================================================
 const p15: ED[] = [
-  // Dod section
-  ["01", "harf", "ضَ", "Dod fatha", A.dod, 0, 2, 72, 4, 10, 6],
-  ["02", "harf", "ضِ", "Dod kasra", A.dod, 2, 4, 44, 4, 10, 6],
-  ["03", "harf", "ضُ", "Dod damma", A.dod, 4, 6, 16, 4, 10, 6],
-  ["04", "soz", "ضَيْفْ", "Mehmon", A.dod, 6, 9, 82, 12, 14, 5],
-  ["05", "soz", "ضَعْفْ", "Zaiflik", A.dod, 9, 12, 44, 12, 14, 5],
-  ["06", "soz", "عَرَضْ", "Ko'rsatdi", A.dod, 12, 15, 16, 12, 14, 5],
-  ["07", "soz", "مَضْرَبْ", "Urish joyi", A.dod, 18, 21, 82, 22, 16, 5],
-  // Zal section
-  ["08", "harf", "ذَ", "Zal fatha", A.zol, 0, 2, 72, 50, 10, 6],
-  ["09", "harf", "ذِ", "Zal kasra", A.zol, 2, 4, 44, 50, 10, 6],
-  ["10", "harf", "ذُ", "Zal damma", A.zol, 4, 6, 16, 50, 10, 6],
-  ["11", "soz", "ذَهَبَ", "Ketdi/Oltin", A.zol, 10, 13, 40, 64, 14, 5],
-  ["12", "soz", "مَذْهَبْ", "Mazhab", A.zol, 13, 16, 16, 64, 16, 5],
-  ["13", "soz", "بَذَلَ", "Sarfladi", A.zol, 18, 21, 54, 75, 14, 5],
-  ["14", "soz", "يَذْهَبُ", "Ketadi", A.zol, 24, 27, 16, 75, 18, 5],
+  // ── Dod (ض) ─── 25 element: 3 header + 6 + 6 + 4 + 6 ──
+  ["01", "harf", "ضَ",   "Dod (boshida)",    A.do_("do01_fatha"),     0, 0.72, 72, 4, 10, 6],
+  ["02", "harf", "ـضِـ", "Dod (oʻrtasida)",  A.do_("do02_kasra"),     0, 0.82, 44, 4, 10, 6],
+  ["03", "harf", "ـضُ",  "Dod (oxirida)",    A.do_("do03_damma"),     0, 0.78, 16, 4, 10, 6],
+  // Row 2 (6 ism — oxiri damma): ضَيْفُ عَضَلُ ضَهْبُ ضَبْطُ ضَعْفُ عَرَضُ
+  ["04", "soz", "ضَيْفُ", "Mehmon",           A.do_("do04_dayf"),      0, 1.39, 84, 13, 12, 5],
+  ["05", "soz", "عَضَلُ", "Mushak",           A.do_("do05_adal"),      0, 1.33, 70, 13, 12, 5],
+  ["06", "soz", "ضَهْبُ", "Pishirish",        A.do_("do06_dahb"),      0, 1.48, 56, 13, 12, 5],
+  ["07", "soz", "ضَبْطُ", "Nazorat",          A.do_("do07_dabt"),      0, 1.29, 42, 13, 12, 5],
+  ["08", "soz", "ضَعْفُ", "Zaiflik",          A.do_("do08_daf"),       0, 1.39, 28, 13, 12, 5],
+  ["09", "soz", "عَرَضُ", "Ko'rsatish",       A.do_("do09_arad"),      0, 1.17, 14, 13, 12, 5],
+  // Row 3 (ض-ر-ب: 2 ism + 1 imperativ + 3 present fe'l)
+  ["10", "soz", "مَضْرِبْ", "Urish joyi",     A.do_("do10_madrib"),    0, 1.40, 84, 22, 12, 5],
+  ["11", "soz", "مِضْرَبُ", "Urish asbobi / kaltak", A.do_("do11_mudrib"), 0, 1.50, 70, 22, 12, 5],
+  ["12", "soz", "اِضْرِبْ", "Ur!",            A.do_("do12_idrib"),     0, 1.37, 56, 22, 12, 5],
+  ["13", "soz", "تَضْرِبُ", "Sen urasan",     A.do_("do13_tadribu"),   0, 1.42, 42, 22, 12, 5],
+  ["14", "soz", "اَضْرِبُ", "Men uraman",     A.do_("do14_adribu"),    0, 1.42, 28, 22, 12, 5],
+  ["15", "soz", "نَضْرِبُ", "Biz uramiz",     A.do_("do15_nadribu"),   0, 1.56, 14, 22, 12, 5],
+  // Row 4 (4 so'z — Form VIII + Form X)
+  ["16", "soz", "اِضْطَرَبَ",   "Bezovtalandi",    A.do_("do16_idtaraba"),   0, 1.89, 80, 31, 16, 5],
+  ["17", "soz", "يَضْطَرِبُ",  "Bezovtalanadi",   A.do_("do17_yadtaribu"),  0, 1.85, 62, 31, 16, 5],
+  ["18", "soz", "اِسْتَضْعَفَ",  "Zaif deb bildi",  A.do_("do18_istadafa"),   0, 1.99, 44, 31, 16, 5],
+  ["19", "soz", "يَسْتَضْعِفُ", "Zaif deb biladi", A.do_("do19_yastadifu"),  0, 2.16, 26, 31, 16, 5],
+  // Row 5 (6 so'z, 3 juftlik — dal/dod taqqoslash)
+  ["20", "soz", "دَرْسُ",  "Dars (د)",         A.do_("do20_darsu_dal"),  0, 1.22, 84, 41, 10, 5],
+  ["21", "soz", "ضَرْسُ",  "Oziq tish (ض)",    A.do_("do21_darsu_dod"),  0, 1.33, 72, 41, 10, 5],
+  ["22", "soz", "وَدْعُ",  "Xayrlashuv (د)",   A.do_("do22_wadu_dal"),   0, 1.17, 58, 41, 10, 5],
+  ["23", "soz", "وَضْعُ",  "Holat (ض)",        A.do_("do23_wadu_dod"),   0, 1.29, 46, 41, 10, 5],
+  ["24", "soz", "بَعْدُ",  "Keyin (د)",        A.do_("do24_badu_dal"),   0, 1.33, 32, 41, 10, 5],
+  ["25", "soz", "بَعْضُ",  "Ba'zi (ض)",        A.do_("do25_badu_dod"),   0, 1.29, 20, 41, 10, 5],
+
+  // ── Zal (ذ) ─── 29 element: 3 header + 8 + 6 + 6 + 6 ──
+  ["26", "harf", "ذَ", "Zal fatha",  A.za_("za01_fatha"),  0, 0.67, 72, 52, 10, 6],
+  ["27", "harf", "ذِ", "Zal kasra",  A.za_("za02_kasra"),  0, 0.68, 44, 52, 10, 6],
+  ["28", "harf", "ذُ", "Zal damma",  A.za_("za03_damma"),  0, 0.70, 16, 52, 10, 6],
+  // Row 2 (8 qisqa so'z)
+  ["29", "soz", "اِذْ",   "O'shanda",          A.za_("za04_idh"),      0, 0.73, 88, 61, 10, 5],
+  ["30", "soz", "مُذْ",   "...dan beri",       A.za_("za05_mudh"),     0, 0.88, 78, 61, 10, 5],
+  ["31", "soz", "خُذْ",   "Ol!",               A.za_("za06_khudh"),    0, 0.95, 68, 61, 10, 5],
+  ["32", "soz", "عُذْ",   "Panoh qidir!",      A.za_("za07_udh"),      0, 0.94, 58, 61, 10, 5],
+  ["33", "soz", "ذُبْ",   "Eri!",              A.za_("za08_dhub"),     0, 0.85, 48, 61, 10, 5],
+  ["34", "soz", "ذُقْ",   "Tat!",              A.za_("za09_dhuq"),     0, 0.83, 38, 61, 10, 5],
+  ["35", "soz", "ذَرْ",   "Qoldir!",           A.za_("za10_dhar"),     0, 0.82, 28, 61, 10, 5],
+  ["36", "soz", "مُنْذُ",  "...dan beri",       A.za_("za11_mundh"),    0, 1.59, 16, 61, 10, 5],
+  // Row 3 (6 ism — oxiri damma)
+  ["37", "soz", "اِذْنُ",   "Ruxsat",           A.za_("za12_idhnu"),    0, 1.18, 84, 70, 12, 5],
+  ["38", "soz", "بَذْلُ",   "Sarflash",         A.za_("za13_badhlu"),   0, 1.33, 70, 70, 12, 5],
+  ["39", "soz", "ذِكْرُ",   "Zikr",             A.za_("za14_dhikru"),   0, 1.18, 56, 70, 12, 5],
+  ["40", "soz", "ذِهْنُ",   "Aql / xotira",     A.za_("za15_dhihnu"),   0, 1.37, 42, 70, 12, 5],
+  ["41", "soz", "ذَهَبْ",   "Oltin",            A.za_("za16_dhahab"),   0, 1.28, 28, 70, 12, 5],
+  ["42", "soz", "مَذْهَبْ",  "Mazhab",           A.za_("za17_madhhab"),  0, 1.38, 14, 70, 12, 5],
+  // Row 4 (3 juft past/present fe'l — oxirgi juft Form IV "olib ketdi / ketkazadi")
+  ["43", "soz", "ذَهَلَ",   "Hayratlandi",      A.za_("za18_dhahala"),  0, 1.15, 84, 79, 12, 5],
+  ["44", "soz", "يَذْهَلُ",  "Hayratlanadi",     A.za_("za19_yadhhalu"), 0, 1.47, 70, 79, 12, 5],
+  ["45", "soz", "بَذَلَ",   "Sarfladi",         A.za_("za20_badhala"),  0, 1.09, 56, 79, 12, 5],
+  ["46", "soz", "يَبْذُلُ",  "Sarflaydi",        A.za_("za21_yabdhulu"), 0, 1.47, 42, 79, 12, 5],
+  ["47", "soz", "اَذْهَبَ",  "Olib ketdi",       A.za_("za22_idhhab"),   0, 1.39, 28, 79, 12, 5],
+  ["48", "soz", "يُذْهِبُ",  "Olib ketadi",      A.za_("za23_yadhhabu"), 0, 1.59, 14, 79, 12, 5],
+  // Row 5 (6 so'z, 3 juftlik — zal/zain taqqoslash)
+  ["49", "soz", "ذِفْرُ",   "Dum (ذ)",          A.za_("za24_dhifru"),      0, 1.22, 84, 88, 10, 5],
+  ["50", "soz", "زِفْرُ",   "Qichqiriq (ز)",    A.za_("za25_zifru"),       0, 1.21, 72, 88, 10, 5],
+  ["51", "soz", "بَذْلُ",   "Sarflash (ذ)",     A.za_("za26_badhlu_zal"),  0, 1.24, 58, 88, 10, 5],
+  ["52", "soz", "بَزْلُ",   "Ajratish (ز)",     A.za_("za27_bazlu_zain"),  0, 1.30, 46, 88, 10, 5],
+  ["53", "soz", "اَبْذَلُ",  "Sarflayman (ذ)",  A.za_("za28_abdhalu"),     0, 1.30, 32, 88, 10, 5],
+  ["54", "soz", "اَبْزَلُ",  "Ajrataman (ز)",   A.za_("za29_abzalu"),      0, 1.30, 20, 88, 10, 5],
 ];
 
 // ============================================================
-// PAGE 16 — Zo (ظ) + explanation text
+// PAGE 16 — Zo (ظ) — 49 element
 // ============================================================
 const p16: ED[] = [
-  // Zo section
-  ["01", "harf", "ظَ", "Zo fatha", A.zho, 0, 2, 72, 4, 10, 6],
-  ["02", "harf", "ظِ", "Zo kasra", A.zho, 2, 4, 44, 4, 10, 6],
-  ["03", "harf", "ظُ", "Zo damma", A.zho, 4, 6, 16, 4, 10, 6],
-  ["04", "soz", "ظَنْ", "Gumon", A.zho, 6, 9, 82, 12, 10, 5],
-  ["05", "soz", "ظُلْمْ", "Zulm", A.zho, 9, 12, 56, 12, 12, 5],
-  ["06", "soz", "نَظَرَ", "Qaradi", A.zho, 14, 17, 62, 24, 14, 5],
-  ["07", "soz", "حَظَرَ", "Taqiqladi", A.zho, 17, 20, 42, 24, 14, 5],
-  ["08", "soz", "مُظْهِرْ", "Ko'rsatuvchi", A.zho, 24, 27, 64, 38, 16, 5],
-  ["09", "soz", "مُظْلِمْ", "Qorong'i", A.zho, 27, 30, 16, 38, 16, 5],
-  ["10", "soz", "اِنْتَظَمَ", "Tartibga tushdi", A.zho, 34, 38, 82, 48, 20, 5],
-  ["11", "soz", "اِسْتَعْظَمَ", "Ulug'ladi", A.zho, 38, 42, 44, 48, 22, 5],
+  // ── Zo (ظ) bo'limi (31. zo.mp3) — 49 element ──
+  // Headers — pozitsion shakllar (connector harf)
+  ["01", "harf", "ظَ",    "Zo (boshida)",   A.zh("zh01_fatha"), 0, 0.67, 60, 5, 10, 6],
+  ["02", "harf", "ـظِـ",  "Zi (oʻrtasida)", A.zh("zh02_kasra"), 0, 0.72, 48, 5, 10, 6],
+  ["03", "harf", "ـظُ",   "Zu (oxirida)",   A.zh("zh03_damma"), 0, 0.72, 36, 5, 10, 6],
+  // Row 1 (6 so'z): ظَنْ ظِلْ فَظْ حَظْ عَظْ لَظْ
+  ["04", "soz", "ظَنْ",    "Zan (gumon)",        A.zh("zh04_zan"), 0, 0.97, 87, 16, 10, 5],
+  ["05", "soz", "ظِلْ",    "Zil (soya)",         A.zh("zh05_zil"), 0, 0.96, 73, 16, 10, 5],
+  ["06", "soz", "فَظْ",    "Faz (qo'pol)",       A.zh("zh06_faz"), 0, 0.90, 59, 16, 10, 5],
+  ["07", "soz", "حَظْ",    "Haz (nasiba)",       A.zh("zh07_haz"), 0, 0.97, 45, 16, 10, 5],
+  ["08", "soz", "عَظْ",    "Az (tishla)",        A.zh("zh08_az"),  0, 0.92, 31, 16, 10, 5],
+  ["09", "soz", "لَظْ",    "Laz (olov)",         A.zh("zh09_laz"), 0, 1.00, 15, 16, 10, 5],
+  // Row 2 (6 so'z): ظَفَرْ نَظَرْ حَظَرْ ظَمَرْ ظَلْفْ عِظَمْ
+  ["10", "soz", "ظَفَرْ",   "Zafar (g'alaba)",     A.zh("zh10_zafar"), 0, 1.05, 87, 25, 12, 5],
+  ["11", "soz", "نَظَرْ",   "Nazar (qaradi)",      A.zh("zh11_nazar"), 0, 1.10, 73, 25, 12, 5],
+  ["12", "soz", "حَظَرْ",   "Hazar (taqiqladi)",   A.zh("zh12_hazar"), 0, 1.18, 59, 25, 12, 5],
+  ["13", "soz", "ظَمَرْ",   "Zamar",               A.zh("zh13_zamar"), 0, 1.14, 45, 25, 12, 5],
+  ["14", "soz", "ظَلْفْ",   "Zalf (tuyoq)",        A.zh("zh14_zalf"),  0, 1.04, 31, 25, 12, 5],
+  ["15", "soz", "عِظَمْ",   "Izam (suyaklar)",     A.zh("zh15_izam"),  0, 1.18, 15, 25, 12, 5],
+  // Row 3 (6 so'z): نَظْمُ ظَلْفُ ظِلْفُ خِظْلُ ظُلْمُ ظُهْرُ
+  ["16", "soz", "نَظْمُ",   "Nazmu (tartib)",      A.zh("zh16_nizam"), 0, 1.34, 87, 34, 14, 5],
+  ["17", "soz", "ظَلْفُ",   "Zalfu (tuyoq)",       A.zh("zh17_zalfu"), 0, 1.52, 72, 34, 12, 5],
+  ["18", "soz", "ظِلْفُ",   "Zilfu (tuyoq)",       A.zh("zh18_zilf"),  0, 1.42, 58, 34, 12, 5],
+  ["19", "soz", "خِظْلُ",   "Xizlu",               A.zh("zh19_hazl"),  0, 1.35, 44, 34, 12, 5],
+  ["20", "soz", "ظُلْمُ",   "Zulmu (zulm)",        A.zh("zh20_zulmu"), 0, 1.36, 30, 34, 12, 5],
+  ["21", "soz", "ظُهْرُ",   "Zuhru (peshin)",      A.zh("zh21_zuhru"), 0, 1.42, 15, 34, 12, 5],
+  // Row 4 (6 so'z): اَظْهَرْ اَظْفَرْ مَظْهَرْ مَنْظَرْ مُظْهِرْ مُظْلِمْ
+  ["22", "soz", "اَظْهَرْ",  "Azhar (oshkor qildi)",      A.zh("zh22_azhar"),  0, 1.36, 86, 43, 14, 5],
+  ["23", "soz", "اَظْفَرْ",  "Azfar (g'olib qildi)",      A.zh("zh23_azfar"),  0, 1.37, 72, 43, 14, 5],
+  ["24", "soz", "مَظْهَرْ",  "Mazhar (ko'rinish joyi)",   A.zh("zh24_mazhar"), 0, 1.50, 58, 43, 14, 5],
+  ["25", "soz", "مَنْظَرْ",  "Manzar (manzara)",          A.zh("zh25_manzar"), 0, 1.74, 44, 43, 14, 5],
+  ["26", "soz", "مُظْهِرْ",  "Muzhir (oshkor qiluvchi)",  A.zh("zh26_muzhir"), 0, 1.37, 30, 43, 14, 5],
+  ["27", "soz", "مُظْلِمْ",  "Muzlim (qorong'i)",         A.zh("zh27_muzlim"), 0, 1.48, 14, 43, 14, 5],
+  // Row 5 (6 so'z, past/present juftliklar): ظَهَرَ يَظْهَرُ نَظَرَ يَنْظُرُ ظَلَمَ يَظْلِمُ
+  ["28", "soz", "ظَهَرَ",    "Zahara (zohir bo'ldi)",   A.zh("zh28_zahara"),  0, 1.20, 87, 52, 12, 5],
+  ["29", "soz", "يَظْهَرُ",  "Yazharu (zohir bo'ladi)", A.zh("zh29_yazharu"), 0, 1.51, 72, 52, 14, 5],
+  ["30", "soz", "نَظَرَ",    "Nazara (qaradi)",         A.zh("zh30_nazara"),  0, 1.18, 58, 52, 12, 5],
+  ["31", "soz", "يَنْظُرُ",  "Yanzuru (qaraydi)",       A.zh("zh31_yanzuru"), 0, 1.71, 43, 52, 14, 5],
+  ["32", "soz", "ظَلَمَ",    "Zalama (zulm qildi)",     A.zh("zh32_zalama"),  0, 1.16, 29, 52, 12, 5],
+  ["33", "soz", "يَظْلِمُ",  "Yazlimu (zulm qiladi)",   A.zh("zh33_yazlimu"), 0, 1.51, 14, 52, 14, 5],
+  // Row 6 (4 so'z, past/present juftliklar): اِنْتَظَمَ يَنْتَظِمُ اِسْتَعْظَمَ يَسْتَعْظِمُ
+  ["34", "soz", "اِنْتَظَمَ",    "Intazama (tartibga tushdi)",   A.zh("zh34_intazama"),   0, 1.96, 82, 62, 18, 5],
+  ["35", "soz", "يَنْتَظِمُ",    "Yantazimu (tartibga tushadi)", A.zh("zh35_yantazimu"),  0, 2.11, 60, 62, 18, 5],
+  ["36", "soz", "اِسْتَعْظَمَ",  "Istazama (ulug' dedi)",         A.zh("zh36_istazama"),   0, 2.01, 37, 62, 20, 5],
+  ["37", "soz", "يَسْتَعْظِمُ",  "Yastazimu (ulug' deydi)",       A.zh("zh37_yastazimu"),  0, 2.36, 14, 62, 20, 5],
+  // ── Taqqoslash qatori 1 (6 so'z, 3 juftlik — ذ/ظ, ح-ظ/ح-ض, ظ/ض) ──
+  ["38", "soz", "ذَفَرْ",   "Zafar (yomon hid)",     A.zh("zh38_zafar_zal"), 0, 1.04, 86, 74, 12, 5],
+  ["39", "soz", "ظَفَرْ",   "Zafar (g'alaba)",       A.zh("zh39_zafar_zo"),  0, 1.07, 72, 74, 12, 5],
+  ["40", "soz", "حَظَرْ",   "Hazar (taqiqladi)",     A.zh("zh40_hazar_zo"),  0, 1.02, 58, 74, 12, 5],
+  ["41", "soz", "حَضَرْ",   "Hadar (hozir bo'ldi)",  A.zh("zh41_hadar_dod"), 0, 1.05, 44, 74, 12, 5],
+  ["42", "soz", "ظَهْرْ",   "Zahr (orqa)",           A.zh("zh42_zahr_zo"),   0, 1.38, 30, 74, 12, 5],
+  ["43", "soz", "ضَهْرْ",   "Dahr",                   A.zh("zh43_dahr_dod"),  0, 1.40, 14, 74, 12, 5],
+  // ── Taqqoslash qatori 2 (6 so'z, 3 juftlik — ز/ظ) ──
+  ["44", "soz", "زَهْرْ",    "Zahr (gul)",            A.zh("zh44_zahr_za"),   0, 1.05, 86, 83, 12, 5],
+  ["45", "soz", "ظَهْرْ",    "Zahr (orqa)",           A.zh("zh45_zahr_zo2"),  0, 1.15, 72, 83, 12, 5],
+  ["46", "soz", "اَزْهَرْ",  "Azhar (gulladi)",       A.zh("zh46_azhar_za"),  0, 1.31, 58, 83, 14, 5],
+  ["47", "soz", "اَظْهَرْ",  "Azhar (oshkor qildi)",  A.zh("zh47_azhar_zo"),  0, 1.33, 44, 83, 14, 5],
+  ["48", "soz", "اَعْزَمْ",  "A'zam (qat'iy qildi)",  A.zh("zh48_azam_za"),   0, 1.42, 30, 83, 14, 5],
+  ["49", "soz", "اَعْظَمْ",  "A'zam (ulug'roq)",      A.zh("zh49_azam_zo"),   0, 1.52, 14, 83, 14, 5],
 ];
 
 // ============================================================

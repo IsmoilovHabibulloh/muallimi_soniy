@@ -641,14 +641,22 @@ function Page9({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 9);
   return (
     <div className="flex flex-col items-center gap-1">
+      {/* Qof (ق) — 26 element */}
       <Title text="حرف قاف" sub="Qof harfi" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["04","05","06","07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["04","05","06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["10","11","12","13","14","15","16"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["17","18","19","20"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
+      <Row els={els(["21","22","23","24","25","26"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Divider />
+      {/* Shin (ش) — 24 element */}
       <Title text="حرف شین" sub="Shin harfi" />
-      <Row els={els(["08","09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["11","12","13"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["14","15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["27","28","29"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
+      <Row els={els(["30","31","32","33","34","35"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["36","37","38","39","40","41"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["42","43","44","45","46"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["47","48","49","50"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
     </div>
   );
 }
@@ -657,16 +665,23 @@ function Page10({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 10);
   return (
     <div className="flex flex-col items-center gap-1">
+      {/* Sin (س) — 23 element */}
       <Title text="حرف سین" sub="Sin harfi" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["04","05"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["06","07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["04","05","06","07","08"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["09","10","11","12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["15","16","17","18","19"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["20","21","22","23"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
+      {/* Tsa (ث) — 30 element */}
       <Title text="حرف ثاء" sub="Tho harfi" />
-      <Row els={els(["08","09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["11","12"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["24","25","26"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
+      <Row els={els(["27","28","29","30","31","32"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["33","34","35","36","37","38"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["39","40","41","42","43"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["44","45","46","47"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Divider />
+      <Row els={els(["48","49","50","51","52","53"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
     </div>
   );
 }
@@ -675,15 +690,23 @@ function Page11({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 11);
   return (
     <div className="flex flex-col items-center gap-1">
+      {/* Sod (ص) — 20 element */}
       <Title text="حرف صاد" sub="Sod harfi" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["04","05"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["06","07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["04","05","06","07","08","09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["11","12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
+      <Row els={els(["15","16","17","18","19","20"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Divider />
+      {/* Tho (ط) — 29 element */}
       <Title text="حرف طاء" sub="To harfi" />
-      <Row els={els(["08","09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["11","12","13"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["14","15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["21","22","23"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
+      <Row els={els(["24","25","26","27","28","29"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["30","31","32","33","34","35"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["36","37","38","39"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["40","41","42","43"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Divider />
+      <Row els={els(["44","45","46","47","48","49"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
     </div>
   );
 }
@@ -692,14 +715,20 @@ function Page12({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 12);
   return (
     <div className="flex flex-col items-center gap-1">
+      {/* Jim (ج) — 18 element */}
       <Title text="حرف جیم" sub="Jim harfi" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["04","05","06","07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["04","05","06","07","08"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["09","10","11","12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["15","16","17","18"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
+      {/* Xo (خ) — 23 element */}
       <Title text="حرف خاء" sub="Xo harfi" />
-      <Row els={els(["08","09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["11","12"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["13","14","15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["19","20","21"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
+      <Row els={els(["22","23","24","25","26","27"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["28","29","30","31","32","33"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["34","35","36","37"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["38","39","40","41"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
     </div>
   );
 }
@@ -708,17 +737,23 @@ function Page13({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 13);
   return (
     <div className="flex flex-col items-center gap-1">
+      {/* Ha (ح) — 28 element: 3 header + 6 + 5 + 4 + 4 + 6 taqqoslash */}
       <Title text="حرف حاء" sub="Ha harfi" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["04","05"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["06","07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["08"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["04","05","06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["10","11","12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["15","16","17","18"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["19","20","21","22"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
+      {/* Taqqoslash: خَلْقُ-حَلْقُ، خَتْمُ-حَتْمُ، اَرْخَمْ-اَرْحَمْ */}
+      <Row els={els(["23","24","25","26","27","28"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Divider />
+      {/* G'ayn (غ) — 18 element: 3 header + 6 + 5 + 4 */}
       <Title text="حرف غین" sub="G'ayn harfi" />
-      <Row els={els(["09","10","11"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["12","13"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["14","15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["16"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["29","30","31"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
+      <Row els={els(["32","33","34","35","36","37"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["38","39","40","41","42"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["43","44","45","46"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
     </div>
   );
 }
@@ -727,15 +762,22 @@ function Page14({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 14);
   return (
     <div className="flex flex-col items-center gap-1">
+      {/* Ayn (ع) — 27 element */}
       <Title text="حرف عین" sub="Ayn harfi" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["04"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["05","06","07","08"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["04","05","06","07","08","09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["11","12","13","14","15","16"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["17","18","19","20","21"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
+      <Row els={els(["22","23","24","25","26","27"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Divider />
+      {/* Dal (د) — 23 element */}
       <Title text="حرف دال" sub="Dal harfi" />
-      <Row els={els(["09","10","11"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["28","29","30"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
+      <Row els={els(["31","32","33","34","35","36"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["37","38","39","40","41","42"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["43","44","45","46"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["47","48","49","50"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
     </div>
   );
 }
@@ -744,15 +786,25 @@ function Page15({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 15);
   return (
     <div className="flex flex-col items-center gap-1">
+      {/* Dod (ض) — 25 element: 3 header + 6 + 6 + 4 + 6 taqqoslash */}
       <Title text="حرف ضاد" sub="Dod harfi" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["04","05","06"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["04","05","06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["10","11","12","13","14","15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-0.5" />
+      <Row els={els(["16","17","18","19"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <Divider />
+      {/* Taqqoslash: دَرْسُ-ضَرْسُ، وَدْعُ-وَضْعُ، بَعْدُ-بَعْضُ */}
+      <Row els={els(["20","21","22","23","24","25"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Divider />
+      {/* Zal (ذ) — 29 element: 3 header + 8 + 6 + 6 + 6 taqqoslash */}
       <Title text="حرف ذال" sub="Zal harfi" />
-      <Row els={els(["08","09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["11","12"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["26","27","28"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
+      <Row els={els(["29","30","31","32","33","34","35","36"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-0.5" />
+      <Row els={els(["37","38","39","40","41","42"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["43","44","45","46","47","48"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Divider />
+      {/* Taqqoslash: ذِفْرُ-زِفْرُ، بَذْلُ-بَزْلُ، اَبْذَلُ-اَبْزَلُ */}
+      <Row els={els(["49","50","51","52","53","54"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
     </div>
   );
 }
@@ -761,12 +813,19 @@ function Page16({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 16);
   return (
     <div className="flex flex-col items-center gap-1">
+      {/* Zo (ظ) — 49 element */}
       <Title text="حرف ظاء" sub="Zo harfi" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
-      <Row els={els(["04","05"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["06","07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["10","11"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+      <Row els={els(["04","05","06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["10","11","12","13","14","15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["16","17","18","19","20","21"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["22","23","24","25","26","27"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["28","29","30","31","32","33"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["34","35","36","37"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Divider />
+      {/* Taqqoslash qatori — 12 so'z, 6 juftlik (ذ/ظ, ح-ظ/ح-ض, ظ/ض va ز/ظ) */}
+      <Row els={els(["38","39","40","41","42","43"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <Row els={els(["44","45","46","47","48","49"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
     </div>
   );
 }

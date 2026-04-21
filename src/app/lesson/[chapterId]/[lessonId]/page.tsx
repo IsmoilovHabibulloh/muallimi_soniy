@@ -118,14 +118,18 @@ export default function LessonPage({ params }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLesson?.audioUrl]);
 
-  // Sync URL with current lesson (so refresh / share keeps position)
+  // Sync URL with current lesson (so refresh / share keeps position).
+  // When the user crosses a lesson boundary via prev/next/swipe, we must
+  // include `?page=<lessonPageIndex>` so the init effect re-lands on the
+  // exact target page — otherwise it would reset to the new lesson's first
+  // page (e.g. prev from p.11 → first page of harflar_1 instead of p.10).
   useEffect(() => {
     if (loading || !currentBookPage) return;
-    const expectedPath = `/lesson/${currentChapter!.id}/${currentLesson!.id}`;
     if (
       currentChapter!.id !== chapterId ||
       currentLesson!.id !== lessonId
     ) {
+      const expectedPath = `/lesson/${currentChapter!.id}/${currentLesson!.id}?page=${currentBookPage.lessonPageIndex}`;
       router.replace(expectedPath);
     }
   }, [loading, currentBookPage, currentChapter, currentLesson, chapterId, lessonId, router]);

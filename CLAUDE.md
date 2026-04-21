@@ -544,8 +544,54 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   Fa ف (25 element, 16_fa/: 3 header + 6+6+6+4 so'z). Jami 46 element.
   Ikkalasi connector — header'lar pozitsion: `هَ / ـهِـ / ـهُ`, `فَ / ـفِـ / ـفُ`.
   Row 4 Fa'da past/present juft fe'llar: iftatana/yaftatinu, iftakara/yaftakiru.
-- Keyingi ishlaydigan sahifa: **9** (Qof + Shin) — audio: `17. qo.mp3`,
-  `18. sha.mp3`.
+- **Sahifa 9 tugallangan**: Qof ق (26 element, 17_qo/: 3 header + 6+7+4+6 so'z),
+  Shin ش (24 element, 18_sha/: 3 header + 6+6+5+4 so'z). Jami 50 element.
+  Ikkalasi connector — header'lar pozitsion: `قَ / ـقِـ / ـقُ`, `شَ / ـشِـ / ـشُ`.
+  Qof Row 2 (`قَلْبُ..قُمْقُمْ`) 7 element — `size="sm"` bilan sig'adi.
+  Qof Row 4 juftliklar: kamar/qamar, falak/falaq, farku/farqu (k↔q farqi).
+  Shin Row 2 da PDF ko'plik fe'l yozgan — rasm/audio singular ism shakllari (ustun).
+- **Sahifa 10 tugallangan**: Sin س (23 element, 19_sa/: 3 header + 5+6+5+4 so'z),
+  Tsa ث (30 element, 20_tsa/: 3 header + 6+6+5+4 so'z + 6 taqqoslash). Jami 53 element.
+  Ikkalasi connector — header'lar pozitsion: `سَ / ـسِـ / ـسُ`, `ثَ / ـثِـ / ـثُ`.
+  Tsa Row 5 — sin/tsa taqqoslash juftliklari damma bilan: سَمَرُ-ثَمَرُ، سَبْتُ-ثَبْتُ، سَلْسُ-ثَلْثُ.
+- **Sahifa 11 tugallangan**: Sod ص (20 element, 21_so/: 3 header + 7+4+6 so'z),
+  Tho ط (29 element, 22_to/: 3 header + 6+6+4+4+6 so'z). Jami 49 element.
+  Ikkalasi connector — header'lar pozitsion: `صَ / ـصِـ / ـصُ`, `طَ / ـطِـ / ـطُ`.
+  Sod Row 4 — sin/sod taqqoslash juftliklari: سَفَرْ-صَفَرْ، سَيْفْ-صَيْفْ، اِنْتَسَبَ-اِنْتَصَبَ.
+  Tho Row 9 — ta/tho taqqoslash juftliklari: تَرَفْ-طَرَفْ، سَبْتُ-سَبْطُ، مُسْتَتِرْ-مُسْتَطِرْ.
+  Sod Row 2 (7 so'z) `size="sm"` bilan sig'adi.
+- **Sahifa 14 tugallangan**: Ayn ع (27 element, 27_ayn/: 3 header + 7+6+5+6 so'z),
+  Dal د (23 element, 28_dal/: 3 header + 6+6+4+4 so'z). Jami 50 element.
+  Ayn (connector) header'lar pozitsion: `عَ / ـعِـ / ـعُ`.
+  Dal (non-connector) header'lar isolated: `دَ / دِ / دُ`.
+  Ayn Row 4 — ğayn/ayn taqqoslash juftliklari (damma bilan):
+  غَیْنُ-عَیْنُ، بَغْلُ-بَعْلُ، بَلْغُ-بَلْعُ.
+  Dal Row 4 — past/present fe'l juftliklari: اِعْتَدَلَ-يَعْتَدِلُ، اِسْتَرْشَدَ-يَسْتَرْشِدُ.
+  Ayn Row 1 (7 so'z) `size="sm"` bilan sig'adi.
+- **Sahifa 16 tugallangan**: Zo ظ (49 element, 31_zho/: 3 header + 6+6+6+6+6+4 asosiy +
+  6+6 taqqoslash so'z). Connector — header'lar pozitsion: `ظَ / ـظِـ / ـظُ`.
+  Audio: `31. zo.mp3` (2:15). Row 4-5-6 (4-letter words) `size="sm"` bilan sig'adi.
+  Taqqoslash qatorlari: ذ/ظ, ح-ظ/ح-ض, ظ/ض (L1) va ز/ظ (L2).
+  PDF→audio mapping tuzatildi: `dod` → 29, `zol` → 30, `zho` → 31 (audio nomlari
+  chalg'itadi — "29. zo.mp3" aslida Dod; PDF nomiga ishoning).
+- **Sahifa 15 tugallangan**: Dod ض (25 element, 29_dod/: 3 header + 6+6+4+6 taqqoslash),
+  Zal ذ (29 element, 30_zal/: 3 header + 8+6+6+6 taqqoslash). Jami 54 element.
+  Dod (connector) — pozitsion header: `ضَ / ـضِـ / ـضُ`.
+  Zal (non-connector) — isolated header: `ذَ / ذِ / ذُ`.
+  Dod Row 3 (ض-ر-ب konjugatsiya): مَضْرِبْ مُضْرِبْ اِضْرِبْ تَضْرِبُ اَضْرِبُ نَضْرِبُ.
+  Dod Row 5 — dal/dod taqqoslash (damma): دَرْسُ-ضَرْسُ، وَدْعُ-وَضْعُ، بَعْدُ-بَعْضُ.
+  Zal Row 5 — zal/zain taqqoslash (damma): ذِفْرُ-زِفْرُ، بَذْلُ-بَزْلُ، اَبْذَلُ-اَبْزَلُ.
+  Dod Row 3 (6 so'z) 1 so'z wrap bo'ladi `size="sm"` da; qolganlari sig'adi.
+- **Sahifa 12 tugallangan**: Jim ج (18 element, 23_ja/: 3 header + 5+6+4 so'z),
+  Xo خ (23 element, 24_xo/: 3 header + 6+6+4+4 so'z). Jami 41 element.
+  Ikkalasi connector — header'lar pozitsion: `جَ / ـجِـ / ـجُ`, `خَ / ـخِـ / ـخُ`.
+- **Sahifa 13 tugallangan**: Ha ح (28 element, 25_ha/: 3 header + 6+5+4+4+6 taqqoslash),
+  G'ayn غ (18 element, 26_gho/: 3 header + 6+5+4 so'z). Jami 46 element.
+  Ikkalasi connector — header'lar pozitsion: `حَ / ـحِـ / ـحُ`, `غَ / ـغِـ / ـغُ`.
+  Ha Row 5 — kha/ha taqqoslash juftliklari: خَلْقُ-حَلْقُ، خَتْمُ-حَتْمُ، اَرْخَمْ-اَرْحَمْ
+  (birinchi 2 juftlik damma, oxirgi sukun — اَفْعَل sifat shakl).
+  Ha Row 4 — `اِحْرَنْجَمَ / يَحْرَنْجِمُ` (form X اِفْعَنْلَلَ — نج cluster, PDF transliteratsiyada `احرجم` deb noto'g'ri).
+- Barcha sahifalar tugallangan: 11, 12, 13, 14, 15, 16 (Sod-Zo boblari).
 
 ### Tarkibiy ma'lumot
 
