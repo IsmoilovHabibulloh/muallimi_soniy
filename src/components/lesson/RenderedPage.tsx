@@ -454,7 +454,7 @@ function Page3({ elements, activeId, hasActive, onElementClick }: PP) {
             e.stopPropagation();
             onElementClick(bismillah);
           }}
-          className="element-spring rounded-xl px-6 py-2 transition-all font-bismillah"
+          className="element-spring rounded-xl px-1 sm:px-6 py-2 transition-all font-bismillah max-w-full"
           aria-label={bismillah.uzbek}
           style={{
             color: activeId === bismillah.id ? "#ffffff" : "var(--color-text-main)",
@@ -462,7 +462,7 @@ function Page3({ elements, activeId, hasActive, onElementClick }: PP) {
             boxShadow: activeId === bismillah.id ? "0 6px 20px var(--color-primary-glow)" : "none",
             opacity: hasActive && activeId !== bismillah.id ? 0.25 : 1,
             textShadow: activeId === bismillah.id ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
-            fontSize: "2.25rem",
+            fontSize: "clamp(1rem, 5.8vw, 2.25rem)",
             lineHeight: 1.4,
           }}
         >
