@@ -44,17 +44,17 @@ function ArabicEl({
   // Type-specific colors (ELEMENT_COLORS) reserved for legend / future use.
   void ELEMENT_COLORS;
   void el.type;
-  // Fluid sizing: scales with viewport width via clamp() so rows never orphan
-  // a letter on narrow phones. Mins tuned so 7-item 2xl rows fit at 320px;
-  // max values match the previous fixed sizes on ≥640px.
+  // Fluid sizing: scales with CARD container width via cqi so letters fill
+  // ~75-80% of the card at typical phone sizes. Mins keep 7-item 2xl rows
+  // fitting at 250px container; max values match original fixed sizes.
   const sizeClasses: Record<string, string> = {
-    sm: "text-[clamp(0.8125rem,3.2vw,1.125rem)] px-[clamp(0.125rem,0.6vw,0.375rem)] py-[clamp(0.0625rem,0.3vw,0.125rem)]",
-    md: "text-[clamp(0.875rem,3.6vw,1.25rem)] px-[clamp(0.125rem,0.7vw,0.5rem)] py-[clamp(0.0625rem,0.3vw,0.125rem)]",
-    lg: "text-[clamp(1rem,4.2vw,1.5rem)] px-[clamp(0.1875rem,0.9vw,0.625rem)] py-[clamp(0.125rem,0.4vw,0.25rem)]",
-    xl: "text-[clamp(1.125rem,4.8vw,1.875rem)] px-[clamp(0.1875rem,1vw,0.75rem)] py-[clamp(0.125rem,0.4vw,0.25rem)]",
-    "2xl": "text-[clamp(1.25rem,5.4vw,2.25rem)] px-[clamp(0.1875rem,1vw,0.75rem)] py-[clamp(0.1875rem,0.5vw,0.375rem)]",
-    "3xl": "text-[clamp(1.625rem,6.6vw,3rem)] px-[clamp(0.25rem,1.4vw,1rem)] py-[clamp(0.25rem,0.6vw,0.5rem)]",
-    "4xl": "text-[clamp(2rem,7.8vw,3.75rem)] px-[clamp(0.375rem,1.8vw,1.25rem)] py-[clamp(0.25rem,0.6vw,0.5rem)]",
+    sm: "text-[clamp(0.8125rem,5cqi,1.125rem)] px-[clamp(0.1875rem,1.2cqi,0.375rem)] py-[clamp(0.0625rem,0.5cqi,0.125rem)]",
+    md: "text-[clamp(1rem,5.6cqi,1.25rem)] px-[clamp(0.25rem,1.6cqi,0.5rem)] py-[clamp(0.0625rem,0.5cqi,0.125rem)]",
+    lg: "text-[clamp(1.125rem,6.6cqi,1.5rem)] px-[clamp(0.3125rem,1.8cqi,0.625rem)] py-[clamp(0.125rem,0.6cqi,0.25rem)]",
+    xl: "text-[clamp(1.25rem,7.8cqi,1.875rem)] px-[clamp(0.375rem,2.2cqi,0.75rem)] py-[clamp(0.125rem,0.7cqi,0.25rem)]",
+    "2xl": "text-[clamp(1.25rem,8.2cqi,2.25rem)] px-[clamp(0.25rem,1.8cqi,0.75rem)] py-[clamp(0.1875rem,0.8cqi,0.375rem)]",
+    "3xl": "text-[clamp(1.625rem,12cqi,3rem)] px-[clamp(0.5rem,3cqi,1rem)] py-[clamp(0.25rem,1cqi,0.5rem)]",
+    "4xl": "text-[clamp(2rem,14cqi,3.75rem)] px-[clamp(0.625rem,3.6cqi,1.25rem)] py-[clamp(0.25rem,1.2cqi,0.5rem)]",
   };
 
   return (
@@ -93,16 +93,17 @@ function Title({ text, sub }: { text: string; sub?: string }) {
   );
 }
 
-// Map legacy fixed Tailwind gap classes → fluid clamp() so rows stay together
-// on narrow phones. Max values equal the original fixed size; min kept small
-// enough that 7-item 2xl rows fit at 320px without wrapping.
+// Map legacy fixed Tailwind gap classes → fluid clamp() keyed on card
+// container width (cqi) so gaps scale with card, not viewport. Max values
+// equal the original fixed size; mins keep 7-item 2xl rows fitting at 250px
+// container.
 const FLUID_GAP: Record<string, string> = {
-  "gap-1": "gap-[clamp(0.125rem,0.8vw,0.25rem)]",
-  "gap-1.5": "gap-[clamp(0.1875rem,1vw,0.375rem)]",
-  "gap-2": "gap-[clamp(0.25rem,1.2vw,0.5rem)]",
-  "gap-3": "gap-[clamp(0.375rem,1.6vw,0.75rem)]",
-  "gap-5": "gap-[clamp(0.625rem,2.4vw,1.25rem)]",
-  "gap-6": "gap-[clamp(0.75rem,3vw,1.5rem)]",
+  "gap-1": "gap-[clamp(0.125rem,0.9cqi,0.25rem)]",
+  "gap-1.5": "gap-[clamp(0.1875rem,1.6cqi,0.375rem)]",
+  "gap-2": "gap-[clamp(0.25rem,2cqi,0.5rem)]",
+  "gap-3": "gap-[clamp(0.375rem,2.8cqi,0.75rem)]",
+  "gap-5": "gap-[clamp(0.625rem,4.2cqi,1.25rem)]",
+  "gap-6": "gap-[clamp(0.75rem,5cqi,1.5rem)]",
 };
 
 function Row({
@@ -1274,6 +1275,7 @@ export function RenderedPage({
   return (
     <div
       className="w-full bg-white/[0.05] rounded-2xl border border-white/10 p-4"
+      style={{ containerType: "inline-size" }}
       onClick={onBackgroundClick}
     >
       <PageRenderer
