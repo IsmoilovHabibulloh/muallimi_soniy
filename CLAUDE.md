@@ -510,8 +510,8 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
 
 | Global # | Mazmun | Renderer | Image | Audio |
 |----------|--------|----------|-------|-------|
-| 1  | Muqova | Page0 | - | `01. muqova.mp3` |
-| 2  | Muqaddima (p1 + p2 birlashgan) | Page1 | - | `02. Muqaddima.mp3` |
+| 1  | Muqova (interaktiv: 3 sarlavha) | Page0 | - | `01. muqova.mp3` + chunks `01_muqova/` |
+| 2  | Muqaddima (read-along, p1+p2 birlashgan) | Page1 | - | `02. Muqaddima.mp3` |
 | 3  | Alifbo + harakatlar + Ra | Page3 | 3.jpg | `03. alifbo.mp3`, `04. harakat.mp3`, `05. ro.mp3` |
 | 4  | Takrorlash: Za / Mim / Ta | Page4 | 4.jpg | `06. za.mp3`, `07. ma.mp3`, `08. ta.mp3` |
 | 5  | Harflar (1-qism) — Ro davom so'zlari, Nun, Ya | Page5 | 5.jpg | `08. ta.mp3` (20.4s+ Ro davom), `09. na.mp3` (Nun), `10. ya.mp3` (Ya) |
@@ -523,6 +523,18 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
 | 54 | Duolar (oxirgi) | Page50 | 50.jpg | ? |
 
 **Muhim eslatmalar**:
+- **Muqova (Sahifa 1) tugallangan**: 3 ta interaktiv sarlavha tugmasi —
+  `معلم ثانى` (m01, 1.64s), `ياكى` (m02, 0.69s), `الفباء عربى` (m03, 1.44s).
+  Chunks: `public/audio/edit/01_muqova/`. Muallif ismi (`أحمد هادي مقصودي`)
+  va o'quvchi ismi (Jahongir qori Nematov) audio'da yo'q — static qoldirildi.
+  Butun audio AudioControls orqali ijro etiladi.
+- **Muqaddima (Sahifa 2)** — read-along rejimida: tepada Bismillah
+  (`p1_000`, `A.muq` 0-5s) tugmasi + "MUQADDIMA" sarlavha + 9 paragrafli
+  o'zbekcha prose (plain `<p>`, click yo'q). To'liq 7:32 audio
+  AudioControls orqali ijro etiladi. Prose matnlar `RenderedPage.tsx`
+  dagi `MUQADDIMA_PARAGRAPHS` arrayida hardcoded — `elements.ts` da
+  faqat Bismillah element'i qolgan. (Avval 659 so'z alohida
+  button edi, lekin placeholder timings bilan — olib tashlandi.)
 - Muqaddima kitobda 2 sahifa bo'lgan, lekin uzluksiz matn — birlashtirilgan.
 - Sahifa 4 kitob sahifa 4 bilan aynan mos. Za (non-connector) / Mim (connector,
   pozitsion) / Ta (connector, pozitsion).

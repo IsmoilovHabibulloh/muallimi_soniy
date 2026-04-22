@@ -13,77 +13,17 @@ interface RenderedPageProps {
 
 // ========== MUQADDIMA COMPONENTS ==========
 
-function MuqaddimaWord({
-  el,
-  isActive,
-  hasActive,
-  onClick,
-}: {
-  el: Element;
-  isActive: boolean;
-  hasActive: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick();
-      }}
-      className="element-spring rounded px-1 py-0 inline leading-relaxed transition-all font-semibold"
-      style={{
-        color: isActive ? "#ffffff" : "var(--color-text-main)",
-        backgroundColor: isActive ? "var(--color-primary)" : "transparent",
-        boxShadow: isActive ? "0 4px 16px var(--color-primary-glow)" : "none",
-        opacity: hasActive && !isActive ? 0.3 : 1,
-        textShadow: isActive ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
-      }}
-    >
-      {el.arabic}
-    </button>
-  );
-}
-
-function MuqaddimaParagraph({
-  elements,
-  startIdx,
-  endIdx,
-  pageNum,
-  activeId,
-  hasActive,
-  onClick,
-}: {
-  elements: Element[];
-  startIdx: number;
-  endIdx: number;
-  pageNum: number;
-  activeId: string | null;
-  hasActive: boolean;
-  onClick: (el: Element) => void;
-}) {
-  const prefix = `p${pageNum}_`;
-  const wordEls: Element[] = [];
-  for (let i = startIdx; i <= endIdx; i++) {
-    const id = `${prefix}${String(i).padStart(3, "0")}`;
-    const el = elements.find((e) => e.id === id);
-    if (el) wordEls.push(el);
-  }
-
-  return (
-    <p className="text-sm leading-relaxed text-text-main text-justify indent-6">
-      {wordEls.map((el) => (
-        <span key={el.id} className="inline">
-          <MuqaddimaWord
-            el={el}
-            isActive={activeId === el.id}
-            hasActive={hasActive}
-            onClick={() => onClick(el)}
-          />{" "}
-        </span>
-      ))}
-    </p>
-  );
-}
+const MUQADDIMA_PARAGRAPHS: string[] = [
+  "Qo‘lingizdagi ushbu kitobcha va uning muallifiga chin ma’noda baxtli taqdir nasib etgan. 1868-yilning 26-sentyabrida Qozon uyezdining Toshsuv qishlog‘ida tug‘ilib, Qozondagi “Qosimiya” madrasasida ta’lim olgan Ahmad Hodiy Maqsudiy rahmatullohi alayhi hali ancha yoshligida ushbu qo‘llanmani tuzar ekan, u asrlar osha avloddan-avlodga Alloh taoloning Kalomi asosida arab alifbosida xat-savod o‘rgatish bilan birga dastlabki qur’oniy saboq berishda davom etishini Parvardigori olamdan so‘ragani aniq. Hozirgi paytda bu sohada ko‘plab biri-biridan qiziqarli, salmoqli darslik va qo‘llanmalar yaratilganiga qaramasdan, muallifning boshqa asarlari, jumladan, “Ibodati islomiya” singari bu mo‘’jaz kitobcha ham sodda, o‘zlashtirishga oson va dilga yaqinligi bilan hanuzgacha ko‘plab musulmon diyorlarida ilm toliblarini o‘ziga tortib kelayotgani, albatta, bu duoning ijobatidir.",
+  "O‘zbekiston Respublikasi Fanlar akademiyasi Sharqshunoslik instituti ko‘lyozmalar xazinasida saqlanayotgan hujjatlarga va boshqa manbalarga asosan, kitobchaning Markaziy Osiyo hududida tarqalish tarixi quyidagicha kechganini taxmin qilish mumkin. 1902-yilda Toshkentda rus-tuzem maktablari o‘zbek sinflari uchun Saidrasul Saidazizov (1866–1933) “Ustodi avval” (“Birinchi ustoz”) qo‘llanmasi nashrdan chiqadi. Bu Urta Osiyoda tovush usuli (usuli savtiya)da tuzilgan birinchi darslik bo‘lib, oktyabr inqilobiga qadar rus-tuzem maktablaridagina emas, yangi usuldagi maktablarda ham o‘zbek tilidan asosiy savod chiqarish kitobi sifatida qo‘llangan.",
+  "O‘sha davrda Rossiyada Ahmad Hodiy Maqsudiyning ruscha-tatarcha “Muallimi avval” qo‘llanmasi keng shuhrat qozongan edi. Kitobchaning bizning yurtimizda nashr etilgan keyingi barcha nashrlariga asos bo‘lib xizmat qilgan nusxasi sarvarag‘ida buni tasdiqlovchi rasmiy ma’lumotlar keltiriladi. Ushbu alifbo 1913-yil 9-aprelda muayyan raqamli hujjat bilan tatar va rus-tatar maktablarida sinfda foydalanishga kiritilgani qayd etilgach, yana bunday ta’kidlanadi: “Un to‘rtinchi nashri. Birinchi nashriga 1892-yil 28-yanvarda Petrograd senzurasi ruxsat bergan. ‘Umid’ shirkati matbaasi. Qozon, 1917 y.”. Bundan kelib chiqadiki, birinchi nashriga ruxsat berilgach, kitobcha yigirma yildan ko‘proq muddat mobaynida norasmiy ravishda xalq ta’limi sohasida obru qozonib ulgurgach, davlat unga maktablar uchun rasmiy qo‘llanma maqomini berishga majbur bo‘lgan.",
+  "Shu davrdan e’tiboran kitobcha Rossiya imperiyasi, keyinchalik sobiq Sovet Ittifoqi hududidagi musulmon o‘lkalarda avval lotin, so‘ngra kirill alifbosi muomalaga kiritilganiga qadar shu vazifani bajarib keldi. Kitobcha 1917-yilga qadar o‘n to‘rt marta, keyingi davrlarda yana necha o‘nlab bora nashr etilganining o‘zi buning yorqin isbotidir. Jumladan, 1913-yili Toshkentda ham faqat noshir Ali Asg‘ar (Kalinin) ismi ko‘rsatilgan “Muallimi soniy” kitobchasi paydo bo‘ladiki, u mazmunan aynan Maqsudiyning biz fikr yuritayotgan qo‘llanmasiga muvofiq kelardi. Albatta, qo‘llanmaning keyingi nashrlari muallif ismi sharifi bilan qayta-qayta chiqib turdi. O‘shandan buyon u faqat bizdagina emas, balki boshqa ko‘plab mamlakatlarda avlodlarga tengsiz beminnat muallimlik qilib keladi.",
+  "Shularni hisobga olgan holda, mazkur qo‘llanmani holicha, ya’ni nusxa ko‘chirilaverishidan xiralashib qolgan xatini tiniqlashtirgan va boshqa juz’iy texnik xatolarni tuzatgan holda, o‘quvchilarga taqdim etishga qaror qilindi.",
+  "Albatta, bugungi kunda Madina bosma mushaflar keng ommalashgani bois dastalab ushbu kitobchani ham ularga monand o‘zgartirish rejasi ham yo‘q emasdi. Birok, bir jihati, uzoq davr davomida xalqlarga qadrdon bo‘lib, yaxshi xizmat kilib kelayotgan kitobchani asl xolicha saqlab kolish uni yaratgan va shu asosda ilm maydoniga qadam qo‘ygan ajdodlarimiz xotirasiga hurmat va minnatdorlik belgisi bo‘lib tuyuldi. Shunga ko‘ra, qo‘llanmaning asl ruhiyatini saqlab qolish maqsadidan kelib chiqib, kitobga deyarli o‘zgarish kiritilmadi. Faqatgina suralarning xati diyorimizda Madina bosma mushaflar ommalashgani bois harflar ko‘zga moslashishi oson bo‘lishi uchun Madina bosma xatida, harakatlari esa Qozon bosma holatida qoldi. Shuningdek, asosiy maqsad o‘quvchi arab xatini shunchaki o‘qishnigina emas, balki boshdanok har bir harfni maxraji (joy-joyidan) chiqarishni yaxshi o‘rganish orqali Qur’on suralari qiroatiga go‘zal talaffuz bilan kirishuvini ko‘zlab, kitobga ovoz tushirilgan disk ham ilova qilinmoqda.",
+  "Talaba darsni o‘zlashtirish jarayonida diskdagi ovozga diqqat qilgan holda, harflarning talaffuz sifati hamda fatha, kasra, zammadan iborat harakatlarning ado etilishiga e’tibor qaratmog‘i lozim. Chunki Qur’on qiroatida aksar xatolar (zod) o‘rniga (zo) tovushi, (sod) o‘rniga (sin) yoki (se) tovushiga o‘xshatib, maxrajidan boshqa joydan chiqarilishi; jarangli (be) jarangsiz (pe) tovushiga o‘xshatib talaffuz etilishi; sukunli “mim”, “nun” va “lom” harflarining qalqala bo‘lib tebranib qolishi kabi sifatlar va harakatlarda lablarning keragicha harakatlanmay, ixtilos (harakatning 2/3 qismi yo‘qolib, 1/3 qismi talaffuzda namoyon) bo‘lishi kabi holatlar yuz berishida kuzatiladi.",
+  "Shu jihatlarga e’tibor qaratilsa, ushbu ilovali qo‘llanma Qur’oni karimni to‘g‘ri o‘qishni o‘rganishda yana bir muhim vosita bo‘lib xizmat qiladi, degan umiddamiz.",
+  "Garchi Qur’oni karim kalimalaridan boshqa so‘zlarni talaffuz qilishda tajvid qoidalariga rioya qilish vojib bo‘lmasa-da, maqsad Qur’oni karimni to‘g‘ri o‘qishga odatlantirish bo‘lgani uchun imon kalimalari ham tajvid asosida o‘qib ko‘rsatildi.",
+];
 
 // ========== SHARED COMPONENTS ==========
 
@@ -104,14 +44,17 @@ function ArabicEl({
   // Type-specific colors (ELEMENT_COLORS) reserved for legend / future use.
   void ELEMENT_COLORS;
   void el.type;
+  // Fluid sizing: scales with viewport width via clamp() so rows never orphan
+  // a letter on narrow phones. Mins tuned so 7-item 2xl rows fit at 320px;
+  // max values match the previous fixed sizes on ≥640px.
   const sizeClasses: Record<string, string> = {
-    sm: "text-lg px-1.5 py-0.5",
-    md: "text-xl px-2 py-0.5",
-    lg: "text-2xl px-2.5 py-1",
-    xl: "text-3xl px-3 py-1",
-    "2xl": "text-4xl px-3 py-1.5",
-    "3xl": "text-5xl px-4 py-2",
-    "4xl": "text-6xl px-5 py-2",
+    sm: "text-[clamp(0.8125rem,3.2vw,1.125rem)] px-[clamp(0.125rem,0.6vw,0.375rem)] py-[clamp(0.0625rem,0.3vw,0.125rem)]",
+    md: "text-[clamp(0.875rem,3.6vw,1.25rem)] px-[clamp(0.125rem,0.7vw,0.5rem)] py-[clamp(0.0625rem,0.3vw,0.125rem)]",
+    lg: "text-[clamp(1rem,4.2vw,1.5rem)] px-[clamp(0.1875rem,0.9vw,0.625rem)] py-[clamp(0.125rem,0.4vw,0.25rem)]",
+    xl: "text-[clamp(1.125rem,4.8vw,1.875rem)] px-[clamp(0.1875rem,1vw,0.75rem)] py-[clamp(0.125rem,0.4vw,0.25rem)]",
+    "2xl": "text-[clamp(1.25rem,5.4vw,2.25rem)] px-[clamp(0.1875rem,1vw,0.75rem)] py-[clamp(0.1875rem,0.5vw,0.375rem)]",
+    "3xl": "text-[clamp(1.625rem,6.6vw,3rem)] px-[clamp(0.25rem,1.4vw,1rem)] py-[clamp(0.25rem,0.6vw,0.5rem)]",
+    "4xl": "text-[clamp(2rem,7.8vw,3.75rem)] px-[clamp(0.375rem,1.8vw,1.25rem)] py-[clamp(0.25rem,0.6vw,0.5rem)]",
   };
 
   return (
@@ -150,6 +93,18 @@ function Title({ text, sub }: { text: string; sub?: string }) {
   );
 }
 
+// Map legacy fixed Tailwind gap classes → fluid clamp() so rows stay together
+// on narrow phones. Max values equal the original fixed size; min kept small
+// enough that 7-item 2xl rows fit at 320px without wrapping.
+const FLUID_GAP: Record<string, string> = {
+  "gap-1": "gap-[clamp(0.125rem,0.8vw,0.25rem)]",
+  "gap-1.5": "gap-[clamp(0.1875rem,1vw,0.375rem)]",
+  "gap-2": "gap-[clamp(0.25rem,1.2vw,0.5rem)]",
+  "gap-3": "gap-[clamp(0.375rem,1.6vw,0.75rem)]",
+  "gap-5": "gap-[clamp(0.625rem,2.4vw,1.25rem)]",
+  "gap-6": "gap-[clamp(0.75rem,3vw,1.5rem)]",
+};
+
 function Row({
   els,
   all,
@@ -167,8 +122,9 @@ function Row({
   size?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
   gap?: string;
 }) {
+  const gapClass = FLUID_GAP[gap] ?? gap;
   return (
-    <div className={`flex flex-row-reverse flex-wrap justify-center ${gap}`}>
+    <div className={`flex w-full flex-row-reverse flex-wrap justify-center ${gapClass}`}>
       {els.map((el) => (
         <ArabicEl
           key={el.id}
@@ -267,8 +223,37 @@ function LetterSection({
 
 // ========== PAGE RENDERERS ==========
 
-// Cover page (muqova) — non-interactive title card
-function Page0(_: PP) {
+// Cover page (muqova) — 3 interactive title buttons + static author/reader.
+function Page0({ elements, activeId, hasActive, onElementClick }: PP) {
+  const titleMain = elements.find((e) => e.id === "p0_m01_title_main");
+  const yoki      = elements.find((e) => e.id === "p0_m02_yoki");
+  const titleSub  = elements.find((e) => e.id === "p0_m03_title_sub");
+
+  const coverBtn = (el: Element | undefined, sizeClass: string) => {
+    if (!el) return null;
+    const isActive = activeId === el.id;
+    return (
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onElementClick(el);
+        }}
+        className={`arabic-text element-spring rounded-2xl font-bold leading-tight px-5 py-2 ${sizeClass}`}
+        style={{
+          fontFamily: "var(--font-arabic)",
+          color: isActive ? "#ffffff" : "var(--color-primary-dark)",
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          boxShadow: isActive ? "0 8px 28px var(--color-primary-glow)" : "none",
+          transform: isActive ? "scale(1.05)" : "none",
+          opacity: hasActive && !isActive ? 0.3 : 1,
+          textShadow: isActive ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
+        }}
+      >
+        {el.arabic}
+      </button>
+    );
+  };
+
   return (
     <div className="flex flex-col items-center justify-center text-center gap-6 py-10 min-h-[60vh]">
       <div>
@@ -281,25 +266,33 @@ function Page0(_: PP) {
         </p>
       </div>
 
-      <h2
-        className="arabic-text text-6xl font-bold leading-tight"
-        style={{ color: "var(--color-primary-dark)" }}
-      >
-        معلم ثانى
-      </h2>
+      {coverBtn(titleMain, "text-6xl")}
 
       <CoverDivider />
 
-      <p className="arabic-text text-2xl text-text-main">ياكى</p>
+      {yoki && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onElementClick(yoki);
+          }}
+          className="arabic-text element-spring rounded-xl px-4 py-1 text-2xl"
+          style={{
+            fontFamily: "var(--font-arabic)",
+            color: activeId === yoki.id ? "#ffffff" : "var(--color-text-main)",
+            backgroundColor: activeId === yoki.id ? "var(--color-primary)" : "transparent",
+            boxShadow: activeId === yoki.id ? "0 6px 20px var(--color-primary-glow)" : "none",
+            opacity: hasActive && activeId !== yoki.id ? 0.3 : 1,
+            textShadow: activeId === yoki.id ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
+          }}
+        >
+          {yoki.arabic}
+        </button>
+      )}
 
       <CoverDivider />
 
-      <h2
-        className="arabic-text text-5xl font-bold leading-tight"
-        style={{ color: "var(--color-primary-dark)" }}
-      >
-        الفباء عربى
-      </h2>
+      {coverBtn(titleSub, "text-5xl")}
 
       <p className="text-sm text-text-muted mt-6 flex items-center gap-2">
         <span aria-hidden="true">🎧</span>
@@ -346,17 +339,11 @@ function Page1({ elements, activeId, hasActive, onElementClick }: PP) {
         </button>
       )}
       <h2 className="text-lg font-bold text-text-secondary text-center mb-2">MUQADDIMA</h2>
-      {/* Part 1 (originally p1, 4 paragraphs) */}
-      <MuqaddimaParagraph elements={elements} startIdx={1} endIdx={104} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
-      <MuqaddimaParagraph elements={elements} startIdx={105} endIdx={175} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
-      <MuqaddimaParagraph elements={elements} startIdx={176} endIdx={276} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
-      <MuqaddimaParagraph elements={elements} startIdx={277} endIdx={372} pageNum={1} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
-      {/* Part 2 (originally p2, 5 paragraphs — merged into this single page) */}
-      <MuqaddimaParagraph elements={elements} startIdx={1} endIdx={26} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
-      <MuqaddimaParagraph elements={elements} startIdx={27} endIdx={154} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
-      <MuqaddimaParagraph elements={elements} startIdx={155} endIdx={237} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
-      <MuqaddimaParagraph elements={elements} startIdx={238} endIdx={258} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
-      <MuqaddimaParagraph elements={elements} startIdx={259} endIdx={287} pageNum={2} activeId={activeId} hasActive={hasActive} onClick={onElementClick} />
+      {MUQADDIMA_PARAGRAPHS.map((text, i) => (
+        <p key={i} className="text-sm leading-relaxed text-text-main text-justify indent-6">
+          {text}
+        </p>
+      ))}
     </div>
   );
 }

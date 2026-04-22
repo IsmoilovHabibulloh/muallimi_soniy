@@ -75,7 +75,7 @@ export const DEFAULT_SETTINGS: UserSettings = {
   repeatCount: 1,
   speed: 1.0,
   locale: "uz-latn",
-  theme: "dark",
+  theme: "light",
   fontSize: "medium",
   loopMode: false,
   sequentialMode: false,

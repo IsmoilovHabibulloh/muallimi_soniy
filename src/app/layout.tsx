@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="uz" className="h-full antialiased">
+    <html lang="uz" className="h-full antialiased" data-theme="light">
       <head>
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
