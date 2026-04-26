@@ -146,20 +146,27 @@ export class AudioEngine {
       this.onTimeUpdate?.(this.audio.currentTime);
 
       if (!this.isSegmentMode) return;
-      if (this.audio.currentTime < this.segmentEnd) return;
+      // Boundary: either we've reached segmentEnd, or the file itself ended
+      // naturally before segmentEnd (chunk durations can be slightly shorter
+      // than declared `end` values in elements.ts).
+      const atBoundary =
+        this.audio.currentTime >= this.segmentEnd || this.audio.ended;
+      if (!atBoundary) return;
 
       // Segment boundary reached
       this._repeatIndex++;
       this.onRepeatUpdate?.(this._repeatIndex);
 
       if (this._repeatIndex < this.repeatTarget) {
-        // Repeat: seek back to start
+        // Repeat: seek back to start and continue playing
         this.audio.currentTime = this.segmentStart;
+        if (this.audio.paused) this.audio.play();
       } else if (this._loopMode) {
         // Loop: reset counter and replay
         this._repeatIndex = 0;
         this.onRepeatUpdate?.(0);
         this.audio.currentTime = this.segmentStart;
+        if (this.audio.paused) this.audio.play();
       } else {
         // Done
         this.pause();

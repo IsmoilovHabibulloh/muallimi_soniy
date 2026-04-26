@@ -32,6 +32,135 @@ How to apply:
 
 ---
 
+## 🛑 Mad boblari (Sahifa 17-21) — QAT'IY QOIDA
+
+> ⚠️ **DOIRA**: Bu bo'limdagi BARCHA qoidalar **FAQAT** mad sahifalarida
+> (17, 18, 19, 20 va shartli 21-sahifaning mad qismida) qo'llanadi.
+> Boshqa harf/bo'g'in/so'z sahifalari (1-16, 22+) **odatdagicha** —
+> oddiy `arabic-text` class, oddiy `U+064E/U+0650/U+064F` harakat'lar,
+> oddiy element rendereri ishlatadi. **Mad logikasini boshqa joylarga
+> ko'chirmang.**
+
+### 1. Pedagogik asos (nima uchun)
+
+Kitob muqaddimasida (`32. madli 01.mp3` 0-29 soniya) o'qituvchi aniq aytadi:
+
+> "Arabcha so'zlar madliy bo'lganda fatha, kasra va zamma alomatlari
+> boshqacha yoziladi. **Fatha va kasra alomatlari yonboshlatilmay, balki
+> tikka yoziladi.** **Zamma alomati odatiy zammadan ko'ra kattaroq,
+> yo'g'onroq yoziladi.** O'quvchilar bu o'zgarishlarga diqqat qilishlari
+> kerak."
+
+Foydalanuvchi (2026-04 sessiyalari) qat'iy talab qildi: bu qoida UI da
+ham vizual va matn sifatida ko'rinishi shart. Aks holda darslikning
+pedagogik yaxlitligi buziladi.
+
+### 2. Mad-only Unicode almashtirish (eng muhim qism)
+
+Mad syllable yozganda **harakat belgilarini ALMASHTIRISH SHART**:
+
+| Sahifa turi | Fatha       | Kasra        | Damma      |
+|-------------|-------------|--------------|------------|
+| Oddiy       | `U+064E ـَ` | `U+0650 ـِ`  | `U+064F ـُ`|
+| **Mad**     | `U+0670 ـٰ` | `U+0656 ـٖ`  | `U+064F ـُ`|
+
+```
+Oddiy (xato mad uchun):  بَا     بِى     بُو
+Mad   (to'g'ri):         بٰا     بٖى     بُو   ← damma o'zgarmaydi
+Alif:                     آ      إٖى     أُو   ← آ U+0622, qolgani standart
+```
+
+**Eslatma**:
+- Fatha/kasra'ning yangi belgilari — *Superscript/Subscript Alef* —
+  ular tabiati bo'yicha tik vertikal chiziq, hech qanday shriftda ham
+  yonbosh chiqmaydi. Bu kitobdagi "tikka yoziladi" qoidasini hal qiladi.
+- Damma `U+064F` qoladi. **`U+0657 ـٗ` (Inverted Damma) ISHLATMANG** —
+  u "teskari" damma chizadi (foydalanuvchi 2026-04-26 da rad etdi).
+  Damma'ning kattaligi shrift orqali (pastdagi `MadDammaFont`) hal
+  qilinadi.
+
+### 3. Mad-only shrift kombinatsiyasi (`.mad-arabic-text` class)
+
+`globals.css` da:
+
+```css
+@font-face {
+  font-family: "MadDammaFont";
+  src: url("/fonts/AmiriQuran.ttf") format("truetype");
+  unicode-range: U+064F;     /* Faqat damma uchun */
+}
+
+.mad-arabic-text {
+  font-family: "MadDammaFont", "Noto Naskh Arabic",
+               "Amiri Quran", "UthmanicHafs", serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "mark" 1, "mkmk" 1, "kern" 1;
+}
+```
+
+**Qoidalar**:
+- `unicode-range` orqali brauzer **faqat U+064F** ni Amiri Quran'dan
+  oladi (kattaroq, prominent damma). Qolgan barcha belgilar Noto Naskh
+  Arabic'da renderlanadi (kasra/fatha tikka chiqadi).
+- 6 ta shrift solishtirildi (Noto Naskh, Amiri, Amiri Quran, Scheherazade
+  New, Kitab, KFGQPC). Har birining kuchli/zaif tomoni boshqacha:
+  KFGQPC fatha'ga juda yaxshi, lekin kasra'ni yonbosh qiladi; Noto Naskh
+  kasra'da tikka; Amiri Quran damma'da kattaroq. Shu sababli
+  kombinatsiya qilingan.
+- `mad-arabic-text` faqat madli element'lar uchun. Boshqa joyda
+  `arabic-text` qo'llanadi.
+
+### 4. Mad-only komponentlar
+
+- **`<MadRule />`** (`RenderedPage.tsx`) — kitob muqaddimasi qoidasini
+  ko'rsatuvchi banner. **FAQAT 17-sahifada** ko'rsatiladi (audio narration
+  bilan, click qilinsa `intro_rule.mp3` 0-29s ijro etadi). 18-21 sahifalarda
+  **TAKROR KO'RSATILMAYDI** — foydalanuvchi 17-da o'qib bo'lgan, qayta
+  takrorlash sahifa joyini behuda egallaydi.
+  - Matn audio bilan **1:1 verbatim**: 6 gap to'liq, hech narsa
+    qisqartirilmagan ("audiodagi hech narsa qob ketmasin").
+  - Asosiy 2 qoida (fatha/kasra tikka + damma kattaroq) **bold**.
+  - Olib tashlash, qisqartirish — **xato**.
+- **`<TitleBlock />`** (Page17 ichida) — `<Title />` o'rniga, click bilan
+  `intro_title.mp3` (30.5-31.9s "Madliy harflar") ijro etadi. Element
+  `intro_title` ID bilan `elements.ts` da yoziladi.
+- **`<ArabicEl mad />`** — `mad={true}` prop bersangiz ArabicEl
+  `mad-arabic-text` class'ni qo'llaydi (`font-bold` qo'shilmaydi —
+  shrift o'z weight'ida). Mad grid'dagi barcha element'lar shu prop
+  bilan render qilinadi.
+- **Header letters** (`ا ي و` mad sahifa tepasida) — oddiy `arabic-text`
+  (Noto Naskh) ishlatiladi, mad-arabic-text **emas**. Sabab: KFGQPC da
+  isolated `ي` nuqtasiz chiqadi (Quranic imlo), darslikda nuqtali kerak.
+
+### 5. Mad-only audio struktura (`32. madli 01.mp3`)
+
+Asl audio 4:31, quyidagi chunklar yaratilgan (`/audio/edit/32_madli_01/`):
+
+| Chunk fayli            | Davomi   | Maqsad                                |
+|------------------------|----------|---------------------------------------|
+| `intro_rule.mp3`       | 0-29.6s  | Kitob muqaddimasi narration (qoida)   |
+| `intro_title.mp3`      | 30.5-32s | "Madliy harflar" sarlavhasi           |
+| `m01_alif_aa.mp3` ...  | har biri | 84 syllable (28 harf × 3 mad shakl)   |
+| `m84_ya_uu.mp3`        | ~1s      |                                       |
+
+`elements.ts` da `intro_rule` va `intro_title` element'lari `jumla`
+type bilan, qolgan 84 element `bogin` type bilan kiritilgan.
+
+### 6. Yangi mad sahifa qo'shish jadvali (checklist)
+
+1. ☐ `MadRule` **faqat 17-sahifa uchun** (intro_rule + intro_title element bilan).
+     18-21 da MadRule ishlatmang.
+2. ☐ Mad syllable matnlarida Unicode belgilarni almashtirish
+   (fatha→U+0670, kasra→U+0656, damma U+064F qolsin)
+3. ☐ Grid renderda `<ArabicEl mad={true} />` ishlatish
+4. ☐ Header'larda oddiy `arabic-text` (mad emas)
+5. ☐ Preview'da tekshirish: fatha/kasra tikka, damma katta
+
+**Odatiy `arabic-text` + odatiy harakat'lar bilan qoldirish — xato.**
+
+---
+
 ## 🛑 2 ENG MUHIM XATO — HAR YANGI HARF SAHIFASI BOSHIDA TEKSHIR
 
 Bu ikki xato o'tgan sessiyalarda (p3, p4, p5) qayta-qayta takrorlandi.
@@ -603,7 +732,87 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   Ha Row 5 — kha/ha taqqoslash juftliklari: خَلْقُ-حَلْقُ، خَتْمُ-حَتْمُ، اَرْخَمْ-اَرْحَمْ
   (birinchi 2 juftlik damma, oxirgi sukun — اَفْعَل sifat shakl).
   Ha Row 4 — `اِحْرَنْجَمَ / يَحْرَنْجِمُ` (form X اِفْعَنْلَلَ — نج cluster, PDF transliteratsiyada `احرجم` deb noto'g'ri).
-- Barcha sahifalar tugallangan: 11, 12, 13, 14, 15, 16 (Sod-Zo boblari).
+- **Sahifa 17 tugallangan**: Madli harflar to'liq jadval (84 element, 32_madli_01/:
+  28 harf × 3 mad shakl = fatha+alif / kasra+ya / damma+waw).
+  Layout: 3 tashqi ustun × 10 qator (o'ng/o'rta/chap), header qatori `ا ي و`
+  (statik, click yo'q). Row 10 faqat ي da (3 syllable), middle/left empty.
+  Ustun tartibi kitobga mos: o'ng (alif, tsa, kha, ra, sha, tho, gha, ka, na, ya),
+  o'rta (ba, ja, da, za, sa, zho, fa, la, wa), chap (ta, hha, dza, sa, dho, ayn,
+  qa, ma, ha). Row 9 da و ه oldin emas keyin (non-standart, kitob ko'rinishiga mos).
+  Audio: `32. madli 01.mp3` (4:31).
+- **Sahifa 18 tugallangan**: 17-sahifaning takrorlash (mashq) sahifasi
+  (82 element: 81 syllable + 1 outro). Layout: 3 tashqi ustun × 9 qator
+  (cell ichida 3 syllable), header qatori yo'q. Cell ichida tartib
+  (RTL) — uu / ii / aa, harflar random aralash (kitobga mos): masalan
+  Row 1 o'ng cell `بُو يٖى بٰا`, o'rta `يُو بٖى يٰا`, chap `تُو هٖى تٰا`.
+  Audio chunklar 17-sahifa bilan SHARED (`32_madli_01/m01..m84.mp3`) —
+  yangi syllable audio yo'q. Element 80 = alif_ii (`إٖى` → m02), faqat
+  alif syllable; dho_ii va alif_aa/uu kitobga ko'ra qo'shilmagan.
+  **Outro element**: pastdagi chig'atoy turkiy tavsiya ("Ushbu darsda
+  yozilgan harflarning har qaysisini xatosiz mad qilmaguncha keyingi
+  darslarni ko'rsatma talabaga") clickable button — chunk
+  `32_madli_01/p18_outro.mp3` (`32. madli 01.mp3` ning 262.9-271.7s
+  qismidan kesilgan, 8.81s).
+- **Sahifa 19 tugallangan**: Madli so'zlar — 71 element (`33_madli_02/m19rR_wW_*.mp3`),
+  `33. madli 02.mp3` ning 0:00.74-2:58.66 qismidan kesilgan.
+  Layout: 12 qator (yuqori bo'lim — 9 qator divider'gacha; pastki bo'lim — 3 qator).
+  Yuqori (R1-R9): R1 `مٰالْ حٰالْ نٰارْ جٰاهْ شٰامْ سٰامْ` (6, fatha+alif mad);
+  R2 `بٰارٖى عٰالٖى رٰاضٖى قٰاضٖى هٰادٖى حٰالٖى` (6, fatha+alif + kasra+ya);
+  R3 `كَلٰامْ سَلٰامْ حَلٰالْ حَرٰامْ جَلٰالْ جَمٰالْ كَمٰالْ` (7);
+  R4 `اِمٰامْ حِسٰابْ نِظٰامْ غُرٰابْ غُلٰامْ غُبٰارْ تُرٰابْ` (7);
+  R5 `اَمْوٰالْ ... اَمْرٰاضْ` (6, ko'plik shakllar); R6 `قَوٰاعِدْ ... مَكٰاتِبْ` (6);
+  R7 `اِكْرٰامْ ... اِفْسٰادْ` (6, IV bob masdari); R8 `عٰالِمْ ... صٰالِحْ` (6, اسم فاعل);
+  R9 `قٰامَ طٰافَ تٰابَ قُولٖى طُوفٖى تُوبٖى` (6, 3 past + 3 fem imperative).
+  Pastki (R10-R12): R10 `يُقٰالُ يُطٰافُ تُتٰابُ يَقُولُ تَقُومُ يَطُوفُ` (6, passive/active imperfect);
+  R11 `يَتُوبٰانِ يَقُولُونَ تَقُومُونَ يَطُوفُونَ تَقُولُونَ` (5, dual+plural);
+  R12 `يَنْصُرُونَ تَدْخُلُونَ يَعْلَمُونَ تَعْمَلُونَ` (4).
+  Sizes: R1-R2 `md`, R3-R7 `sm`, R8-R10 `md`, R11-R12 `sm`. **MadRule banner yo'q**
+  (faqat 17-sahifada ko'rsatiladi — takror ko'rsatish bekor). Mad-style harakat:
+  `ٰا` (U+0670+alif), `ٖى` (U+0656+ya), `ُو` (damma+waw).
+- **Sahifa 20 tugallangan**: Mad davomi — 48 element (`33_madli_02/p20_NN_*.mp3`).
+  Layout: 3 ta block:
+  - **Top** (Row 1-4, 15 ta uzun fe'l shakl, mad-end + waw bilan): Row 1
+    `يَشْهَدُونَ يَرْجِعُونَ تَضْرِبُونَ تَجْلِسُونَ`, Row 2 `يُكْرِمُونَ تُسْلِمُونَ تُخْلِصُونَ تُكْرِمُونَ`,
+    Row 3 `يَنْصُرُونَ تَضْرِبُونَ يَجْتَمِعُونَ تَكْتَسِبُونَ`, Row 4 (3 ta) `يَحْتَسِبُونَ تَسْتَشْهِدُونَ يَسْتَخْرِجُونَ`.
+  - **Mid** (Row 5-8, 18 ta): Row 5 (6 ta dual+fem past fe'l) `اُشْكُرَا اُنْصُرَا اِعْلَمَا اُشْكُرِى اُنْصُرِى اِعْلَمِى`
+    — `size="sm"` bilan sig'adi; Row 6 dual ism `مُكْرِمَانِ مُسْلِمَانِ مُخْلِصَانِ مُنْفِقَانِ`;
+    Row 7 erkak ko'plik `مُكْرِمُونَ مُسْلِمُونَ مُخْلِصُونَ مُنْفِقُونَ`;
+    Row 8 ayol ko'plik + passiv `مُسْلِمَاتْ مُخْلِصَاتْ مَنْصُورُونَ مَطْلُوبُونَ`.
+  - **Bottom** (Row 9-11, 15 ta ya-mad so'z) — `<YaNuqtasizRule>` banner
+    bilan ajratilgan ("ي ، يـ = ى" — nuqtasiz `ى` = oddiy `ي`):
+    Row 9 `مِيلْ نِيلْ فِيلْ حِينْ سِينْ شِينْ`, Row 10 `كَرِيمْ عَلِيمْ سَمِيعْ عَزِيزْ حَكِيمْ`,
+    Row 11 `مِسْكِينْ مِعْطِيرْ عِفْرِيتْ اِدْرِيسْ`.
+  Audio: `33. madli 02.mp3` (6:05) ning 03:04-05:25 qismi. PDF da
+  Row 11 `معطیل` (xato), audio'da `مِعْطِيرْ` (mi'tiyr — kasra bilan,
+  damma emas; foydalanuvchi 2026-04-26 da rasmga ishora qilib tasdiqladi).
+  PDF da Row 5 dual fe'llar singular (`اشكر انصر اعلم`) sifatida
+  transkripsiyalangan (yana xato), audio aslida dual `اُشْكُرَا اُنْصُرَا اِعْلَمَا`.
+  `Row` komponentiga `mad?: boolean` prop qo'shilgan — `mad-arabic-text`
+  classni qo'llaydi.
+- **Sahifa 21 tugallangan**: Mad davomi + Tashdid boshlanishi (61 element).
+  Yuqori qism — mad davomi (15 so'z, 3 qator: 4+6+5) `33. madli 02.mp3`
+  ning 5:28-6:04 qismidan, chunklar `33_madli_02/m21r1..r3_*.mp3`:
+  Row 1 (lg) `تَعْلِيمْ تَدْرِيسْ تَبْرِيكْ تَحْسِينْ`,
+  Row 2 (sm) `بِيعَة مِيلَة عِيشَة يَبِيعُ يَمِيلُ تَعِيشُ`,
+  Row 3 (sm) `تَبِيعِينَ تَوَارِيخْ تَرَاوِيحْ مُكْرَمِينَ مُسْلِمِينَ`.
+  Pastki qism — Tashdid (`34. tashdid.mp3` 0-1:46 dan, chunklar
+  `34_tashdid/...`): clickable intro sarlavha (`تشدیدلی حرفلر` +
+  "ikkilantirib o'qiladi" tushuntirish, `t_intro.mp3` 9.45s); statik
+  `ـَّ ـِّ ـُّ` vizual; 3 ربب misol (`رَبَّ رَبِّ رَبُّ`, uncontracted
+  shakl `(= رَبْبَ)` uzbek label'da); 6 mashq qatori × 7 so'z = 42
+  element. Mashq pattern'lari: R1 fatha+fatha (`اِنَّ اَنَّ اَمَّ بَرَّ
+  جَرَّ حَجَّ شَكَّ`), R2 fatha+damma (`بَرُّ جَرُّ حَجُّ شَكُّ ذَمُّ
+  حَقُّ شَرُّ`), R3 kasra+damma (`بِرُّ سِرُّ سِتُّ عِزُّ طِلُّ حِلُّ
+  حِسُّ`), R4 damma+damma (`بُرُّ دُرُّ خُفُّ كُلُّ دُبُّ زُقُّ اُمُّ`),
+  R5 damma+fatha (`بُرَّ ذُمَّ سُبَّ فُكَّ سُرَّ سُمَّ ثُمَّ`), R6
+  damma+kasra (`بُرِّ دُرِّ خُفِّ كُلِّ دُبِّ زُقِّ ضُرِّ`).
+  Audio helperlar: `A.md2(name)` (33_madli_02/), `A.td(name)` (34_tashdid/).
+  Element ID'lar: `m01-m15` (mad), `t_intro`, `t_rab1-3`, `t11-t67`
+  (qator-so'z indekslari). Layout: mashq qatorlari `size="sm"`
+  `gap-1.5` (7 so'z 1 qatorga sig'adi). PDF/rasm farqi: PDF Row 6 ning
+  3-so'zini `خُرِّ` deydi, rasm `خُفِّ` ko'rsatadi (rasmga ergashildi);
+  Row 6 oxirgi so'z PDF `دُرِّ`, rasm `ضُرِّ` (rasmga ergashildi).
+- Barcha sahifalar tugallangan: 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 (Sod-Madli/Tashdid).
 
 ### Tarkibiy ma'lumot
 

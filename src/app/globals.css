@@ -38,6 +38,40 @@
   font-display: swap;
 }
 
+/* KFGQPC Uthmanic Hafs — rasmiy Madina Mushaf fonti (King Fahd Complex).
+   Mad sahifalari (17-21) uchun: fatha/kasra tikkaroq (ananaviy), damma
+   katta va yo'g'on — kitob tipografiyasiga yaqin.
+   Litsenziya: bepul non-commercial Qur'oniy/ta'limiy foydalanish. */
+@font-face {
+  font-family: "UthmanicHafs";
+  src: url("/fonts/UthmanicHafs.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* Amiri Quran — to'liq fallback (lighter weight, ananaviy rendering). */
+@font-face {
+  font-family: "Amiri Quran";
+  src: url("/fonts/AmiriQuran.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* MadDammaFont — U+064F (NORMAL damma) uchun maxsus shrift.
+   U+0657 (inverted damma) `teskari` chiqdi (xato edi) — endi U+064F
+   normal damma ishlatamiz, faqat kattaroq render qilish uchun
+   Amiri Quran'dan glyph olamiz. Noto Naskh damma'ni juda kichik
+   chizadi, Amiri Quran kattaroq beradi.
+   unicode-range orqali faqat U+064F bu shriftdan, qolgan barcha
+   belgilar Noto Naskh'da qoladi. */
+@font-face {
+  font-family: "MadDammaFont";
+  src: url("/fonts/AmiriQuran.ttf") format("truetype");
+  unicode-range: U+064F;
+  font-weight: 400;
+  font-display: swap;
+}
+
 .font-bismillah {
   font-family: "Amiri", "Noto Naskh Arabic", serif;
 }
@@ -188,4 +222,24 @@ html[data-theme="light"] .bg-primary\/20 { background: rgba(22, 163, 74, 0.12) !
   font-family: var(--font-arabic);
   direction: rtl;
   line-height: 1.8;
+}
+
+/* ═══ Mad harflar (sahifa 17-21) ═══
+   Mad mark'lari — Unicode darajasida tik (U+0670 superscript alef,
+   U+0656 subscript alef, U+0657 inverted damma).
+   Font tartibi: Noto Naskh Arabic kasra (U+0656) ni eng aniq vertikal
+   render qiladi — solishtirildi (2026-04-24). Amiri Quran damma
+   render'ida kuchli (kattaroq curl). KFGQPC fatha'ga juda mos
+   lekin kasra'ni yonbosh qiladi.
+   Compromise stack: Noto Naskh primary (kasra to'g'ri), KFGQPC va
+   Amiri Quran fallback. Bold weight + antialiasing harakat'ni
+   yo'g'onroq ko'rsatadi. */
+.mad-arabic-text {
+  /* MadDammaFont birinchi — faqat U+0657 ni qamrab oladi (Amiri Quran
+     katta damma). Qolgan barcha belgilar Noto Naskh'ga tushadi
+     (kasra/fatha/letterforms uchun). */
+  font-family: "MadDammaFont", "Noto Naskh Arabic", "Amiri Quran", "UthmanicHafs", serif;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "mark" 1, "mkmk" 1, "kern" 1;
 }

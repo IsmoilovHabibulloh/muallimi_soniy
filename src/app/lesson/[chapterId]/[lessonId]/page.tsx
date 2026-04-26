@@ -40,8 +40,12 @@ export default function LessonPage({ params }: Props) {
   const [bookPages, setBookPages] = useState<BookPage[]>([]);
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [activeElement, setActiveElement] = useState<Element | null>(null);
-  const [isFullPlayback, setIsFullPlayback] = useState(false);
   const [loading, setLoading] = useState(true);
+  const sequentialRef = useRef<{
+    active: boolean;
+    index: number;
+    elements: Element[];
+  } | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [tocOpen, setTocOpen] = useState(false);
   const [scrolledFromTop, setScrolledFromTop] = useState(false);
@@ -164,28 +168,55 @@ export default function LessonPage({ params }: Props) {
     return () => clearMediaSession();
   }, [activeElement, currentLesson, settings.locale]);
 
-  // Auto-highlight element with audio currentTime (full playback only)
-  useEffect(() => {
-    if (!isFullPlayback || !audio.isPlaying) {
-      if (isFullPlayback && !audio.isPlaying) {
-        setIsFullPlayback(false);
-        setActiveElement(null);
-      }
-      return;
+  const cancelSequential = useCallback(() => {
+    if (sequentialRef.current) {
+      sequentialRef.current.active = false;
+      sequentialRef.current = null;
     }
+    audio.setOnSegmentComplete(null);
+  }, [audio]);
+
+  const startSequentialPlay = useCallback(() => {
     if (!currentBookPage) return;
-    const t = audio.currentTime;
-    const match = currentBookPage.elements.find(
-      (el) => el.start < el.end && t >= el.start && t < el.end
+    const fallbackSrc = currentLesson?.audioUrl;
+    const elements = currentBookPage.elements.filter(
+      (e) => (e.audioUrl || fallbackSrc) && e.start !== e.end
     );
-    if (match && match.id !== activeElement?.id) {
-      setActiveElement(match);
-    }
-  }, [audio.currentTime, audio.isPlaying, isFullPlayback, currentBookPage, activeElement?.id]);
+    if (elements.length === 0) return;
+
+    sequentialRef.current = { active: true, index: 0, elements };
+
+    const playAtIndex = (idx: number) => {
+      const seq = sequentialRef.current;
+      if (!seq || !seq.active) return;
+      if (idx >= seq.elements.length) {
+        seq.active = false;
+        sequentialRef.current = null;
+        audio.setOnSegmentComplete(null);
+        setActiveElement(null);
+        return;
+      }
+      seq.index = idx;
+      const el = seq.elements[idx];
+      setActiveElement(el);
+      const src = el.audioUrl || fallbackSrc;
+      if (src) {
+        audio.playSegment(src, el.start, el.end).catch(() => {});
+      }
+    };
+
+    audio.setOnSegmentComplete(() => {
+      const seq = sequentialRef.current;
+      if (!seq || !seq.active) return;
+      playAtIndex(seq.index + 1);
+    });
+
+    playAtIndex(0);
+  }, [currentBookPage, currentLesson, audio]);
 
   const handleElementClick = useCallback(
     async (el: Element) => {
-      setIsFullPlayback(false);
+      cancelSequential();
       setActiveElement(el);
       if (showHint) {
         setShowHint(false);
@@ -200,7 +231,7 @@ export default function LessonPage({ params }: Props) {
         }
       }
     },
-    [currentLesson, audio, showHint]
+    [currentLesson, audio, showHint, cancelSequential]
   );
 
   const handlePrevElement = useCallback(() => {
@@ -232,11 +263,12 @@ export default function LessonPage({ params }: Props) {
 
   const handlePageChange = useCallback(
     (idx: number) => {
+      cancelSequential();
       setCurrentPageIndex(idx);
       setActiveElement(null);
       audio.stop();
     },
-    [audio]
+    [audio, cancelSequential]
   );
 
   // Keyboard arrow navigation
@@ -340,16 +372,18 @@ export default function LessonPage({ params }: Props) {
                 audio.pause();
                 return;
               }
-              if (!isFullPlayback && activeElement && activeElement.start < activeElement.end) {
+              if (sequentialRef.current?.active && activeElement) {
+                audio.resume();
+                return;
+              }
+              if (activeElement && activeElement.start < activeElement.end) {
                 const audioSrc = activeElement.audioUrl || currentLesson?.audioUrl;
                 if (audioSrc) {
                   audio.playSegment(audioSrc, activeElement.start, activeElement.end);
                 }
-              } else if (currentLesson?.audioUrl) {
-                setIsFullPlayback(true);
-                setActiveElement(null);
-                audio.playFull(currentLesson.audioUrl);
+                return;
               }
+              startSequentialPlay();
             }}
             onPrev={handlePrevElement}
             onNext={handleNextElement}
