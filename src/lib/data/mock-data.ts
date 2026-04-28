@@ -323,7 +323,7 @@ const PAGE_MAP: Record<string, number[]> = {
   ls_alifbo: [3, 4],
   ls_harflar_1: [5, 6, 7, 8, 9, 10],
   ls_harflar_2: [11, 12, 13, 14, 15, 16],
-  ls_madlar: [17, 18, 19, 20, 21],
+  ls_madlar: [17, 18, 19, 20],
   ls_tashdid: [21, 22, 23],
   ls_tanvin: [23, 24, 25],
   ls_alif: [25, 26, 27, 28, 29, 30],

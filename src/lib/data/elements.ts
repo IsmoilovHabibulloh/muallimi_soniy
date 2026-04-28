@@ -87,8 +87,10 @@ const A = {
   md1: (name: string) => `/audio/edit/32_madli_01/${name}.mp3`,
   // Page 18-21 Madli 02 chunks — mad davomi so'zlari
   md2: (name: string) => `/audio/edit/33_madli_02/${name}.mp3`,
-  // Page 21-23 Tashdid chunks — intro + ربب + 6 qator × 7 + davomi
+  // Page 21-23 Tashdid chunks — intro + ربب + 6 qator × 7 + p23 davomi
   td: (name: string) => `/audio/edit/34_tashdid/${name}.mp3`,
+  // Page 23 Tanvin chunks — intro narration + an/in/un sound demos
+  tn: (name: string) => `/audio/edit/35_tanvin/${name}.mp3`,
   harakat: "/audio/04. harakat.mp3",
   ro: "/audio/05. ro.mp3",
   za: "/audio/06. za.mp3",
@@ -1514,12 +1516,12 @@ const p21: ED[] = [
 
   // ── Tashdid boshlanishi — manba: 34. tashdid.mp3 ────
   // Sarlavha + tushuntirish (audio narration)
-  ["t_intro", "jumla", "تشدیدلی حرفلر", "Tashdidli harflar — ushbu tashdid alomatlari qoʻyilgan harflar ikkilantirib oʻqiladi",
-    A.td("t_intro"), 0, 9.45, 0, 0, 0, 0],
-  // 3 ربب misoli: رَبَّ — رَبِّ — رَبُّ
-  ["t_rab1", "soz", "رَبَّ", "Rabba (= رَبْبَ)", A.td("t_rab1_rabba"), 0, 0.94, 0, 0, 0, 0],
-  ["t_rab2", "soz", "رَبِّ", "Rabbi (= رَبْبِ)", A.td("t_rab2_rabbi"), 0, 0.50, 0, 0, 0, 0],
-  ["t_rab3", "soz", "رَبُّ", "Rabbu (= رَبْبُ)", A.td("t_rab3_rabbu"), 0, 0.45, 0, 0, 0, 0],
+  ["t_intro", "jumla", "تشدیدلی حرفلر", "Tashdidli harflar ustiga ushbu tashdid alomatlari qoʻyilgan harflar ikkilantirib oʻqiladi",
+    A.td("t_intro"), 0, 7.75, 0, 0, 0, 0],
+  // 3 ربب misoli: رَبَّ — رَبِّ — رَبُّ (kitobda har biri yonida (رَبْبَ) shakli)
+  ["t_rab1", "soz", "رَبَّ", "Rabba (= رَبْبَ)", A.td("t_rab1_rabba"), 0, 0.90, 0, 0, 0, 0],
+  ["t_rab2", "soz", "رَبِّ", "Rabbi (= رَبْبِ)", A.td("t_rab2_rabbi"), 0, 0.95, 0, 0, 0, 0],
+  ["t_rab3", "soz", "رَبُّ", "Rabbu (= رَبْبُ)", A.td("t_rab3_rabbu"), 0, 0.95, 0, 0, 0, 0],
   // Row 1 (fatha+tashdid+fatha): اِنَّ اَنَّ اَمَّ بَرَّ جَرَّ حَجَّ شَكَّ
   ["t11", "soz", "اِنَّ", "Inna",   A.td("t_r1_w1_inna"),   0, 1.55, 0, 0, 0, 0],
   ["t12", "soz", "اَنَّ", "Anna",   A.td("t_r1_w2_anna"),   0, 1.25, 0, 0, 0, 0],
@@ -1571,54 +1573,306 @@ const p21: ED[] = [
 ];
 
 // ============================================================
-// PAGE 22 — Tashdid continued
+// PAGE 22 — Tashdid mashqi: 10 qator × 6 so'z = 60 element
+// Audio: 34. tashdid.mp3 (1:47.5–4:04.0), chunklar 34_tashdid/p22_*
+// R1-R4: fatha+tashdid+fatha — past fe'l aktiv (faaala)
+// R5-R8: damma+tashdid+kasra — passive shakli (fuiila)
+// R9-R10: تَفَعَّلَ (Form V) past fe'l, oxiri sukun bilan
 // ============================================================
 const p22: ED[] = [
-  ["01", "soz", "بَرَّ", "Yaxshilik qildi", A.tash, 28, 31, 82, 6, 12, 5],
-  ["02", "soz", "جَرَّ", "Tortdi", A.tash, 31, 34, 56, 6, 12, 5],
-  ["03", "soz", "سِتَّ", "Olti", A.tash, 36, 39, 82, 14, 12, 5],
-  ["04", "soz", "عِزَّ", "Izzat", A.tash, 39, 42, 56, 14, 12, 5],
-  ["05", "soz", "طِلَّ", "Soya", A.tash, 42, 45, 40, 14, 12, 5],
-  ["06", "soz", "حِلَّ", "Halol bo'ldi", A.tash, 45, 48, 24, 14, 12, 5],
-  ["07", "soz", "تَوَطَّرَ", "Taravvuh", A.tash, 50, 54, 82, 32, 18, 5],
-  ["08", "soz", "تَنَعَّمَ", "Huzurda bo'ldi", A.tash, 54, 58, 54, 32, 18, 5],
-  ["09", "soz", "تَفَكَّرَ", "Fikrladi", A.tash, 58, 62, 20, 32, 18, 5],
-  ["10", "soz", "مُتَدَبِّرْ", "Fikr qiluvchi", A.tash, 64, 68, 82, 42, 20, 5],
-  ["11", "soz", "اِسْوَدَّ", "Qoraydi", A.tash, 72, 75, 82, 60, 18, 5],
-  ["12", "soz", "اِحْمَرَّ", "Qizardi", A.tash, 75, 78, 54, 60, 18, 5],
+  // ─── Row 1 (aktiv): دَبَّرَ كَثَّرَ فَجَّرَ وَحَّدَ سَخَّرَ أَدَّبَ ───
+  ["r1_w1", "soz", "دَبَّرَ",  "Rejaladi",         A.td("p22_r1_w1_dabbara"),   0, 1.25, 0, 0, 0, 0],
+  ["r1_w2", "soz", "كَثَّرَ",  "Koʻpaytirdi",      A.td("p22_r1_w2_kaththara"), 0, 1.14, 0, 0, 0, 0],
+  ["r1_w3", "soz", "فَجَّرَ",  "Yorildi",           A.td("p22_r1_w3_fajjara"),   0, 1.66, 0, 0, 0, 0],
+  ["r1_w4", "soz", "وَحَّدَ",  "Birlashtirdi",     A.td("p22_r1_w4_wahhada"),   0, 1.25, 0, 0, 0, 0],
+  ["r1_w5", "soz", "سَخَّرَ",  "Boʻysundirdi",     A.td("p22_r1_w5_sakhkhara"), 0, 1.22, 0, 0, 0, 0],
+  ["r1_w6", "soz", "أَدَّبَ",  "Tarbiyaladi",      A.td("p22_r1_w6_addaba"),    0, 1.13, 0, 0, 0, 0],
+  // ─── Row 2: حَرَّمَ رَزَّقَ يَسَّرَ بَشَّرَ فَصَّلَ فَضَّلَ ───
+  ["r2_w1", "soz", "حَرَّمَ",  "Man qildi",        A.td("p22_r2_w1_harrama"),   0, 1.13, 0, 0, 0, 0],
+  ["r2_w2", "soz", "رَزَّقَ",  "Rizq berdi",       A.td("p22_r2_w2_razzaqa"),   0, 1.27, 0, 0, 0, 0],
+  ["r2_w3", "soz", "يَسَّرَ",  "Osonlashtirdi",    A.td("p22_r2_w3_yassara"),   0, 1.20, 0, 0, 0, 0],
+  ["r2_w4", "soz", "بَشَّرَ",  "Xushxabar berdi",  A.td("p22_r2_w4_bashshara"), 0, 1.21, 0, 0, 0, 0],
+  ["r2_w5", "soz", "فَصَّلَ",  "Batafsil bayon qildi", A.td("p22_r2_w5_fassala"), 0, 1.16, 0, 0, 0, 0],
+  ["r2_w6", "soz", "فَضَّلَ",  "Ustun qildi",      A.td("p22_r2_w6_faddala"),   0, 1.23, 0, 0, 0, 0],
+  // ─── Row 3: عَطَّرَ عَظَّمَ نَعَّمَ كَفَّنَ لَقَّبَ ذَكَّرَ ───
+  ["r3_w1", "soz", "عَطَّرَ",  "Xushboʻy qildi",   A.td("p22_r3_w1_attara"),    0, 1.17, 0, 0, 0, 0],
+  ["r3_w2", "soz", "عَظَّمَ",  "Ulugʻladi",        A.td("p22_r3_w2_azzama"),    0, 1.25, 0, 0, 0, 0],
+  ["r3_w3", "soz", "نَعَّمَ",  "Huzur berdi",      A.td("p22_r3_w3_naama"),     0, 1.32, 0, 0, 0, 0],
+  ["r3_w4", "soz", "كَفَّنَ",  "Kafanladi",        A.td("p22_r3_w4_kaffana"),   0, 1.18, 0, 0, 0, 0],
+  ["r3_w5", "soz", "لَقَّبَ",  "Laqab berdi",      A.td("p22_r3_w5_laqqaba"),   0, 1.20, 0, 0, 0, 0],
+  ["r3_w6", "soz", "ذَكَّرَ",  "Eslatdi",          A.td("p22_r3_w6_dhakkara"),  0, 1.19, 0, 0, 0, 0],
+  // ─── Row 4: شَمَّرَ عَلَّمَ كَمَّلَ صَنَّفَ صَوَّرَ غَيَّرَ ───
+  ["r4_w1", "soz", "شَمَّرَ",  "Tirishdi",         A.td("p22_r4_w1_shammara"),  0, 1.53, 0, 0, 0, 0],
+  ["r4_w2", "soz", "عَلَّمَ",  "Oʻrgatdi",         A.td("p22_r4_w2_allama"),    0, 1.18, 0, 0, 0, 0],
+  ["r4_w3", "soz", "كَمَّلَ",  "Mukammal qildi",   A.td("p22_r4_w3_kammala"),   0, 1.44, 0, 0, 0, 0],
+  ["r4_w4", "soz", "صَنَّفَ",  "Tasnifladi",       A.td("p22_r4_w4_sannafa"),   0, 1.69, 0, 0, 0, 0],
+  ["r4_w5", "soz", "صَوَّرَ",  "Suratga oldi",     A.td("p22_r4_w5_sawwara"),   0, 1.25, 0, 0, 0, 0],
+  ["r4_w6", "soz", "غَيَّرَ",  "Oʻzgartirdi",      A.td("p22_r4_w6_ghayyara"),  0, 1.32, 0, 0, 0, 0],
+
+  // ─── Row 5 (passiv): دُبِّرَ كُثِّرَ فُجِّرَ وُحِّدَ سُخِّرَ أُدِّبَ ───
+  ["r5_w1", "soz", "دُبِّرَ",  "Rejalandi",        A.td("p22_r5_w1_dubbira"),   0, 1.24, 0, 0, 0, 0],
+  ["r5_w2", "soz", "كُثِّرَ",  "Koʻpaytirildi",    A.td("p22_r5_w2_kuththira"), 0, 1.10, 0, 0, 0, 0],
+  ["r5_w3", "soz", "فُجِّرَ",  "Yorildirildi",     A.td("p22_r5_w3_fujjira"),   0, 1.11, 0, 0, 0, 0],
+  ["r5_w4", "soz", "وُحِّدَ",  "Birlashtirildi",   A.td("p22_r5_w4_wuhhida"),   0, 1.25, 0, 0, 0, 0],
+  ["r5_w5", "soz", "سُخِّرَ",  "Boʻysundirildi",   A.td("p22_r5_w5_sukhkhira"), 0, 1.23, 0, 0, 0, 0],
+  ["r5_w6", "soz", "أُدِّبَ",  "Tarbiyalandi",     A.td("p22_r5_w6_uddiba"),    0, 1.08, 0, 0, 0, 0],
+  // ─── Row 6: حُرِّمَ رُزِّقَ يُسِّرَ بُشِّرَ فُصِّلَ فُضِّلَ ───
+  ["r6_w1", "soz", "حُرِّمَ",  "Man qilindi",      A.td("p22_r6_w1_hurrima"),   0, 1.02, 0, 0, 0, 0],
+  ["r6_w2", "soz", "رُزِّقَ",  "Rizq berildi",     A.td("p22_r6_w2_ruzziqa"),   0, 1.24, 0, 0, 0, 0],
+  ["r6_w3", "soz", "يُسِّرَ",  "Osonlashtirildi",  A.td("p22_r6_w3_yussira"),   0, 1.22, 0, 0, 0, 0],
+  ["r6_w4", "soz", "بُشِّرَ",  "Xushxabar berildi",A.td("p22_r6_w4_bushshira"), 0, 1.14, 0, 0, 0, 0],
+  ["r6_w5", "soz", "فُصِّلَ",  "Batafsil qilindi", A.td("p22_r6_w5_fussila"),   0, 1.10, 0, 0, 0, 0],
+  ["r6_w6", "soz", "فُضِّلَ",  "Ustun qilindi",    A.td("p22_r6_w6_fuddila"),   0, 1.18, 0, 0, 0, 0],
+  // ─── Row 7: عُطِّرَ عُظِّمَ نُعِّمَ كُفِّنَ لُقِّبَ ذُكِّرَ ───
+  ["r7_w1", "soz", "عُطِّرَ",  "Xushboʻy qilindi", A.td("p22_r7_w1_uttira"),    0, 1.16, 0, 0, 0, 0],
+  ["r7_w2", "soz", "عُظِّمَ",  "Ulugʻlandi",       A.td("p22_r7_w2_uzzima"),    0, 1.23, 0, 0, 0, 0],
+  ["r7_w3", "soz", "نُعِّمَ",  "Huzur berildi",    A.td("p22_r7_w3_nuima"),     0, 1.26, 0, 0, 0, 0],
+  ["r7_w4", "soz", "كُفِّنَ",  "Kafanlandi",       A.td("p22_r7_w4_kuffina"),   0, 1.11, 0, 0, 0, 0],
+  ["r7_w5", "soz", "لُقِّبَ",  "Laqab berildi",    A.td("p22_r7_w5_luqqiba"),   0, 1.13, 0, 0, 0, 0],
+  ["r7_w6", "soz", "ذُكِّرَ",  "Eslatildi",        A.td("p22_r7_w6_dhukkira"),  0, 1.27, 0, 0, 0, 0],
+  // ─── Row 8: عُلِّمَ كُمِّلَ شُمِّرَ صُنِّفَ صُوِّرَ غُيِّرَ ───
+  ["r8_w1", "soz", "عُلِّمَ",  "Oʻrgatildi",       A.td("p22_r8_w1_ullima"),    0, 1.12, 0, 0, 0, 0],
+  ["r8_w2", "soz", "كُمِّلَ",  "Mukammal qilindi", A.td("p22_r8_w2_kummila"),   0, 1.43, 0, 0, 0, 0],
+  ["r8_w3", "soz", "شُمِّرَ",  "Tayyorlandi",      A.td("p22_r8_w3_shummira"),  0, 1.64, 0, 0, 0, 0],
+  ["r8_w4", "soz", "صُنِّفَ",  "Tasniflandi",      A.td("p22_r8_w4_sunnifa"),   0, 1.58, 0, 0, 0, 0],
+  ["r8_w5", "soz", "صُوِّرَ",  "Tasvirlandi",      A.td("p22_r8_w5_suwwira"),   0, 1.21, 0, 0, 0, 0],
+  ["r8_w6", "soz", "غُيِّرَ",  "Oʻzgartirildi",    A.td("p22_r8_w6_ghuyyira"),  0, 1.25, 0, 0, 0, 0],
+
+  // ─── Row 9 (Form V past fe'l): تَدَبُّرْ تَكَبُّرْ تَحَجُّرْ تَوَحُّدْ تَسَخُّنْ تَبَدُّلْ ───
+  ["r9_w1", "soz", "تَدَبُّرْ", "Mulohaza qilish",   A.td("p22_r9_w1_tadabbur"),   0, 1.18, 0, 0, 0, 0],
+  ["r9_w2", "soz", "تَكَبُّرْ", "Kibrlanish",        A.td("p22_r9_w2_takabbur"),   0, 1.21, 0, 0, 0, 0],
+  ["r9_w3", "soz", "تَحَجُّرْ", "Toshqotish",        A.td("p22_r9_w3_tahajjur"),   0, 1.32, 0, 0, 0, 0],
+  ["r9_w4", "soz", "تَوَحُّدْ", "Yagonalashish",     A.td("p22_r9_w4_tawahhud"),   0, 1.36, 0, 0, 0, 0],
+  ["r9_w5", "soz", "تَسَخُّنْ", "Qizib ketish",      A.td("p22_r9_w5_tasakhkhun"), 0, 1.85, 0, 0, 0, 0],
+  ["r9_w6", "soz", "تَبَدُّلْ", "Oʻzgarish",         A.td("p22_r9_w6_tabaddul"),   0, 1.55, 0, 0, 0, 0],
+  // ─── Row 10: تَحَرُّزْ تَعَزُّزْ تَيَسُّرْ تَعَشُّقْ تَعَصُّبْ تَفَضُّلْ ───
+  ["r10_w1", "soz", "تَحَرُّزْ", "Saqlanish",        A.td("p22_r10_w1_taharruz"),  0, 1.32, 0, 0, 0, 0],
+  ["r10_w2", "soz", "تَعَزُّزْ", "Aziz boʻlish",     A.td("p22_r10_w2_taazzuz"),   0, 1.42, 0, 0, 0, 0],
+  ["r10_w3", "soz", "تَيَسُّرْ", "Osonlashish",      A.td("p22_r10_w3_tayassur"),  0, 1.22, 0, 0, 0, 0],
+  ["r10_w4", "soz", "تَعَشُّقْ", "Sevib qolish",     A.td("p22_r10_w4_taashshuq"), 0, 1.24, 0, 0, 0, 0],
+  ["r10_w5", "soz", "تَعَصُّبْ", "Taassub",          A.td("p22_r10_w5_taassub"),   0, 1.33, 0, 0, 0, 0],
+  ["r10_w6", "soz", "تَفَضُّلْ", "Marhamat",         A.td("p22_r10_w6_tafaddul"),  0, 1.49, 0, 0, 0, 0],
 ];
 
 // ============================================================
-// PAGE 23 — Tashdid end + Tanvin start
+// PAGE 23 — Tashdid davomi (40 so'z) + Tanvin boshlanishi
+// Tashdid manba: 34. tashdid.mp3 ning 4:06-5:53 qismi.
+//   R1-R2: V bob masdari (تَفَعُّلْ) — 6 + 5 = 11 so'z
+//   R3-R6: V bob ism fail (مُتَفَعِّلْ) — 4 × 5 = 20 so'z
+//   R7:    IX bob (اِفْعَلَّ — ranglar/holatlar) — 5 so'z
+//   R8:    X bob idgham (اِسْتَفْعَلَ tashdid bilan) — 4 so'z
+// Tanvin manba: 35. tanvin.mp3 ning 0:02-0:16 qismi (intro + an/in/un).
 // ============================================================
 const p23: ED[] = [
-  // Tashdid continuation
-  ["01", "soz", "مُتَبَدِّلْ", "O'zgaruvchi", A.tash, 80, 84, 82, 5, 20, 5],
-  ["02", "soz", "مُتَيَسِّرْ", "Oson bo'lgan", A.tash, 84, 88, 16, 5, 20, 5],
-  ["03", "soz", "مُتَوَطِّنْ", "O'rnashgan", A.tash, 88, 92, 82, 14, 20, 5],
-  // Tanvin section
-  ["04", "jumla", "تنوینلی حرفلر", "Tanvinli harflar", A.tanv, 0, 4, 44, 56, 30, 5],
-  // Tanvin forms
-  ["05", "harf", "اً", "Fathali tanvin", A.tanv, 6, 9, 72, 80, 10, 6],
-  ["06", "harf", "اٍ", "Kasrali tanvin", A.tanv, 9, 12, 44, 80, 10, 6],
-  ["07", "harf", "اٌ", "Dammali tanvin", A.tanv, 12, 15, 16, 80, 10, 6],
+  // ── R1: V bob masdari (تَفَعُّلْ) — 6 so'z ──
+  ["t01", "soz", "تَوَطُّرْ", "Tavatturr",   A.td("p23_r1_w1_tawatturr"), 0, 1.15, 0, 0, 0, 0],
+  ["t02", "soz", "تَنَعُّمْ", "Tana'um",     A.td("p23_r1_w2_tanaum"),    0, 1.35, 0, 0, 0, 0],
+  ["t03", "soz", "تَوَغُّلْ", "Tavaghghul",  A.td("p23_r1_w3_tawaghul"),  0, 1.37, 0, 0, 0, 0],
+  ["t04", "soz", "تَنَفُّسْ", "Tanaffus",    A.td("p23_r1_w4_tanaffus"),  0, 1.46, 0, 0, 0, 0],
+  ["t05", "soz", "تَرَقُّبْ", "Taraqqub",    A.td("p23_r1_w5_taraqqub"),  0, 1.32, 0, 0, 0, 0],
+  ["t06", "soz", "تَفَكُّرْ", "Tafakkur",    A.td("p23_r1_w6_tafakkur"),  0, 1.22, 0, 0, 0, 0],
+  // ── R2: V bob masdari davomi — 5 so'z ──
+  ["t07", "soz", "تَعَلُّمْ", "Ta'allum",    A.td("p23_r2_w1_taallum"),   0, 1.34, 0, 0, 0, 0],
+  ["t08", "soz", "تَكَمُّلْ", "Takammul",    A.td("p23_r2_w2_takammul"),  0, 1.65, 0, 0, 0, 0],
+  ["t09", "soz", "تَفَنُّنْ", "Tafannun",    A.td("p23_r2_w3_tafannun"),  0, 1.77, 0, 0, 0, 0],
+  ["t10", "soz", "تَصَوُّرْ", "Tasavvur",    A.td("p23_r2_w4_tasawwur"),  0, 1.32, 0, 0, 0, 0],
+  ["t11", "soz", "تَغَيُّرْ", "Tag'ayyur",   A.td("p23_r2_w5_taghayyur"), 0, 1.34, 0, 0, 0, 0],
+  // ── R3: V bob ism fail (مُتَفَعِّلْ) — 5 so'z ──
+  ["t12", "soz", "مُتَكَبِّرْ", "Mutakabbir",   A.td("p23_r3_w1_mutakabbir"),    0, 1.60, 0, 0, 0, 0],
+  ["t13", "soz", "مُتَكَثِّرْ", "Mutakaththir", A.td("p23_r3_w2_mutakaththir"),  0, 1.59, 0, 0, 0, 0],
+  ["t14", "soz", "مُتَحَجِّرْ", "Mutahajjir",   A.td("p23_r3_w3_mutahajjir"),    0, 1.60, 0, 0, 0, 0],
+  ["t15", "soz", "مُتَوَحِّدْ", "Mutavahhid",   A.td("p23_r3_w4_mutawahhid"),    0, 1.66, 0, 0, 0, 0],
+  ["t16", "soz", "مُتَسَخِّنْ", "Mutasakhkhin", A.td("p23_r3_w5_mutasakhkhin"),  0, 1.63, 0, 0, 0, 0],
+  // ── R4: V bob ism fail davomi — 5 so'z ──
+  ["t17", "soz", "مُتَبَدِّلْ", "Mutabaddil",   A.td("p23_r4_w1_mutabaddil"),    0, 1.66, 0, 0, 0, 0],
+  ["t18", "soz", "مُتَهَذِّبْ", "Mutahadhdhib", A.td("p23_r4_w2_mutahadhdhib"),  0, 1.72, 0, 0, 0, 0],
+  ["t19", "soz", "مُتَحَرِّزْ", "Mutaharriz",   A.td("p23_r4_w3_mutaharriz"),    0, 1.66, 0, 0, 0, 0],
+  ["t20", "soz", "مُتَعَزِّزْ", "Muta'azziz",   A.td("p23_r4_w4_mutaazziz"),     0, 1.89, 0, 0, 0, 0],
+  ["t21", "soz", "مُتَيَسِّرْ", "Mutayassir",   A.td("p23_r4_w5_mutayassir"),    0, 1.63, 0, 0, 0, 0],
+  // ── R5: V bob ism fail davomi — 5 so'z ──
+  ["t22", "soz", "مُتَوَطِّنْ", "Mutavattin",   A.td("p23_r5_w1_mutawattin"),    0, 1.67, 0, 0, 0, 0],
+  ["t23", "soz", "مُتَنَعِّمْ", "Mutana'im",    A.td("p23_r5_w2_mutanaim"),      0, 1.78, 0, 0, 0, 0],
+  ["t24", "soz", "مُتَوَغِّلْ", "Mutavaghghil", A.td("p23_r5_w3_mutawaghil"),    0, 1.72, 0, 0, 0, 0],
+  ["t25", "soz", "مُتَنَفِّسْ", "Mutanaffis",   A.td("p23_r5_w4_mutanaffis"),    0, 1.76, 0, 0, 0, 0],
+  ["t26", "soz", "مُتَفَكِّرْ", "Mutafakkir",   A.td("p23_r5_w5_mutafakkir"),    0, 1.61, 0, 0, 0, 0],
+  // ── R6: V bob ism fail davomi — 5 so'z ──
+  ["t27", "soz", "مُتَعَلِّمْ", "Muta'allim",   A.td("p23_r6_w1_mutaallim"),     0, 1.82, 0, 0, 0, 0],
+  ["t28", "soz", "مُتَكَمِّلْ", "Mutakammil",   A.td("p23_r6_w2_mutakammil"),    0, 2.12, 0, 0, 0, 0],
+  ["t29", "soz", "مُتَفَنِّنْ", "Mutafannin",   A.td("p23_r6_w3_mutafannin"),    0, 2.25, 0, 0, 0, 0],
+  ["t30", "soz", "مُتَصَوِّرْ", "Mutasavvir",   A.td("p23_r6_w4_mutasawwir"),    0, 1.66, 0, 0, 0, 0],
+  ["t31", "soz", "مُتَغَيِّرْ", "Mutag'ayyir",  A.td("p23_r6_w5_mutaghayyir"),   0, 1.66, 0, 0, 0, 0],
+  // ── R7: IX bob ranglar/holatlar (اِفْعَلَّ) — 5 so'z ──
+  ["t32", "soz", "اِسْوَدَّ", "Iswadda",  A.td("p23_r7_w1_iswadda"),  0, 1.43, 0, 0, 0, 0],
+  ["t33", "soz", "اِصْفَرَّ", "Isfarra",  A.td("p23_r7_w2_isfarra"),  0, 1.45, 0, 0, 0, 0],
+  ["t34", "soz", "اِحْمَرَّ", "Ihmarra",  A.td("p23_r7_w3_ihmarra"),  0, 1.48, 0, 0, 0, 0],
+  ["t35", "soz", "اِغْتَرَّ", "Ightarra", A.td("p23_r7_w4_ightarra"), 0, 1.45, 0, 0, 0, 0],
+  ["t36", "soz", "اِهْتَزَّ", "Ihtazza",  A.td("p23_r7_w5_ihtazza"),  0, 1.52, 0, 0, 0, 0],
+  // ── R8: X bob idgham bilan (اِسْتَفْعَلَ + tashdid) — 4 so'z ──
+  ["t37", "soz", "اِسْتَرَدَّ", "Istaradda", A.td("p23_r8_w1_istaradda"), 0, 1.59, 0, 0, 0, 0],
+  ["t38", "soz", "اِسْتَحَبَّ", "Istahabba", A.td("p23_r8_w2_istahabba"), 0, 1.68, 0, 0, 0, 0],
+  ["t39", "soz", "اِسْتَحَلَّ", "Istahalla", A.td("p23_r8_w3_istahalla"), 0, 1.79, 0, 0, 0, 0],
+  ["t40", "soz", "اِسْتَدَلَّ", "Istadalla", A.td("p23_r8_w4_istadalla"), 0, 1.71, 0, 0, 0, 0],
+
+  // ── Tanvin boshlanishi ──
+  // Title button — intro narration: "Tanvinli harflar ustida bu uch tanvin
+  // alomatlarining biri qoʻyilgan harflardan soʻng bir sukunli nun artirib
+  // oʻqiladi". Click bilan to'liq audio (7.47s) ijro etiladi.
+  ["tn_intro", "jumla", "تنوينلي حرفلر",
+    "Tanvinli harflar ustida bu uch tanvin alomatlarining biri qoʻyilgan harflardan soʻng bir sukunli nun ortirib oʻqiladi.",
+    A.tn("p23_intro_tanvin"), 0, 9.10, 0, 0, 0, 0],
+  // 3 tanvin shakllari — har biri tegishli "an/in/un" tovushini ijro etadi
+  ["tn_fath", "harf", "ـً", "Fathali tanvin (an)", A.tn("p23_an_demo"), 0, 0.64, 0, 0, 0, 0],
+  ["tn_kasr", "harf", "ـٍ", "Kasrali tanvin (in)", A.tn("p23_in_demo"), 0, 0.68, 0, 0, 0, 0],
+  ["tn_damm", "harf", "ـٌ", "Dammali tanvin (un)", A.tn("p23_un_demo"), 0, 0.72, 0, 0, 0, 0],
+  // 3 misol juftliklari (A=(AN)) — "alif fatha tanvin = an" pattern
+  ["tn_an", "bogin", "اً", "An (= اَنْ)", A.tn("p23_an_demo"), 0, 0.64, 0, 0, 0, 0],
+  ["tn_in", "bogin", "اٍ", "In (= اِنْ)", A.tn("p23_in_demo"), 0, 0.68, 0, 0, 0, 0],
+  ["tn_un", "bogin", "اٌ", "Un (= اُنْ)", A.tn("p23_un_demo"), 0, 0.72, 0, 0, 0, 0],
 ];
 
 // ============================================================
-// PAGE 24 — Tanvin examples
+// PAGE 24 — Tanvin alifboi (28×3 = 84 syllable) + 30 so'z
 // ============================================================
+// Yuqori bo'lim: 3 ta blok × 28 ta tanvin syllable
+//   Block 1 (R1-R3): fatha tanvin -an (`اً بًا تًا...`)
+//   Block 2 (R4-R6): kasra tanvin -in (`اٍ بٍ تٍ...`)
+//   Block 3 (R7-R9): damma tanvin -un (`اٌ بٌ تٌ...`)
+// Pastki bo'lim (R10-R14): 30 ta misol so'z (5 qator × 6) — har juftlik
+// raf'/jarr/nasb yoki turli holatlar.
+// Audio: 35. tanvin.mp3 (3:10) ning 20.4-189.7s qismi (23-sahifadan keyin).
 const p24: ED[] = [
-  ["01", "soz", "كِتَابًا", "Kitob (nasb)", A.tanv, 16, 19, 82, 8, 16, 5],
-  ["02", "soz", "كِتَابٍ", "Kitob (jarr)", A.tanv, 19, 22, 54, 8, 16, 5],
-  ["03", "soz", "كِتَابٌ", "Kitob (raf')", A.tanv, 22, 25, 24, 8, 16, 5],
-  ["04", "soz", "رَجُلًا", "Erkak (nasb)", A.tanv, 28, 31, 82, 22, 16, 5],
-  ["05", "soz", "رَجُلٍ", "Erkak (jarr)", A.tanv, 31, 34, 54, 22, 16, 5],
-  ["06", "soz", "رَجُلٌ", "Erkak (raf')", A.tanv, 34, 37, 24, 22, 16, 5],
-  ["07", "soz", "عَلِيمًا", "Biluvchi (nasb)", A.tanv, 40, 43, 82, 44, 18, 5],
-  ["08", "soz", "حَكِيمٍ", "Dono (jarr)", A.tanv, 43, 46, 54, 44, 16, 5],
-  ["09", "soz", "بَصِيرٌ", "Ko'ruvchi (raf')", A.tanv, 46, 49, 24, 44, 16, 5],
-  ["10", "soz", "رَحِيمًا", "Rahimli (nasb)", A.tanv, 52, 55, 82, 64, 18, 5],
-  ["11", "soz", "سَمِيعٌ", "Eshituvchi", A.tanv, 55, 58, 24, 64, 18, 5],
+  // ── Block 1: fatha tanvin (-an), R1 (9 ta) ──
+  ["r1_01", "bogin", "اً",  "an",   A.tn("p24_r1_01_alif_an"),  0, 0.69, 0, 0, 0, 0],
+  ["r1_02", "bogin", "بًا", "ban",  A.tn("p24_r1_02_ba_an"),    0, 0.70, 0, 0, 0, 0],
+  ["r1_03", "bogin", "تًا", "tan",  A.tn("p24_r1_03_ta_an"),    0, 0.66, 0, 0, 0, 0],
+  ["r1_04", "bogin", "ثًا", "tsan", A.tn("p24_r1_04_tsa_an"),   0, 0.65, 0, 0, 0, 0],
+  ["r1_05", "bogin", "جًا", "jan",  A.tn("p24_r1_05_jim_an"),   0, 0.78, 0, 0, 0, 0],
+  ["r1_06", "bogin", "حًا", "han",  A.tn("p24_r1_06_ha_an"),    0, 0.76, 0, 0, 0, 0],
+  ["r1_07", "bogin", "خًا", "khan", A.tn("p24_r1_07_kha_an"),   0, 0.75, 0, 0, 0, 0],
+  ["r1_08", "bogin", "دًا", "dan",  A.tn("p24_r1_08_dal_an"),   0, 0.77, 0, 0, 0, 0],
+  ["r1_09", "bogin", "ذًا", "zan",  A.tn("p24_r1_09_zal_an"),   0, 0.76, 0, 0, 0, 0],
+  // R2 (10 ta)
+  ["r2_10", "bogin", "رًا", "ran",   A.tn("p24_r2_10_ra_an"),    0, 0.78, 0, 0, 0, 0],
+  ["r2_11", "bogin", "زًا", "zan",   A.tn("p24_r2_11_za_an"),    0, 0.83, 0, 0, 0, 0],
+  ["r2_12", "bogin", "سًا", "san",   A.tn("p24_r2_12_sa_an"),    0, 0.81, 0, 0, 0, 0],
+  ["r2_13", "bogin", "شًا", "shan",  A.tn("p24_r2_13_sha_an"),   0, 0.82, 0, 0, 0, 0],
+  ["r2_14", "bogin", "صًا", "sodan", A.tn("p24_r2_14_sod_an"),   0, 0.83, 0, 0, 0, 0],
+  ["r2_15", "bogin", "ضًا", "dodan", A.tn("p24_r2_15_dod_an"),   0, 0.84, 0, 0, 0, 0],
+  ["r2_16", "bogin", "طًا", "thoan", A.tn("p24_r2_16_tho_an"),   0, 0.71, 0, 0, 0, 0],
+  ["r2_17", "bogin", "ظًا", "zhoan", A.tn("p24_r2_17_zo_an"),    0, 0.83, 0, 0, 0, 0],
+  ["r2_18", "bogin", "عًا", "aynan", A.tn("p24_r2_18_ayn_an"),   0, 0.76, 0, 0, 0, 0],
+  ["r2_19", "bogin", "غًا", "ghoan", A.tn("p24_r2_19_ghayn_an"), 0, 0.78, 0, 0, 0, 0],
+  // R3 (9 ta)
+  ["r3_20", "bogin", "فًا", "fan",  A.tn("p24_r3_20_fa_an"),    0, 0.67, 0, 0, 0, 0],
+  ["r3_21", "bogin", "قًا", "qan",  A.tn("p24_r3_21_qof_an"),   0, 0.73, 0, 0, 0, 0],
+  ["r3_22", "bogin", "كًا", "kan",  A.tn("p24_r3_22_kaf_an"),   0, 0.72, 0, 0, 0, 0],
+  ["r3_23", "bogin", "لًا", "lan",  A.tn("p24_r3_23_lam_an"),   0, 0.77, 0, 0, 0, 0],
+  ["r3_24", "bogin", "مًا", "man",  A.tn("p24_r3_24_mim_an"),   0, 0.77, 0, 0, 0, 0],
+  ["r3_25", "bogin", "نًا", "nan",  A.tn("p24_r3_25_nun_an"),   0, 0.83, 0, 0, 0, 0],
+  ["r3_26", "bogin", "وًا", "wan",  A.tn("p24_r3_26_waw_an"),   0, 0.77, 0, 0, 0, 0],
+  ["r3_27", "bogin", "هًا", "han",  A.tn("p24_r3_27_ha2_an"),   0, 0.81, 0, 0, 0, 0],
+  ["r3_28", "bogin", "يًا", "yan",  A.tn("p24_r3_28_ya_an"),    0, 0.81, 0, 0, 0, 0],
+
+  // ── Block 2: kasra tanvin (-in), R4 (9 ta) ──
+  ["r4_01", "bogin", "اٍ",  "in",   A.tn("p24_r4_01_alif_in"),  0, 0.66, 0, 0, 0, 0],
+  ["r4_02", "bogin", "بٍ", "bin",   A.tn("p24_r4_02_ba_in"),    0, 0.81, 0, 0, 0, 0],
+  ["r4_03", "bogin", "تٍ", "tin",   A.tn("p24_r4_03_ta_in"),    0, 0.69, 0, 0, 0, 0],
+  ["r4_04", "bogin", "ثٍ", "tsin",  A.tn("p24_r4_04_tsa_in"),   0, 0.70, 0, 0, 0, 0],
+  ["r4_05", "bogin", "جٍ", "jin",   A.tn("p24_r4_05_jim_in"),   0, 0.81, 0, 0, 0, 0],
+  ["r4_06", "bogin", "حٍ", "hin",   A.tn("p24_r4_06_ha_in"),    0, 0.80, 0, 0, 0, 0],
+  ["r4_07", "bogin", "خٍ", "khin",  A.tn("p24_r4_07_kha_in"),   0, 0.82, 0, 0, 0, 0],
+  ["r4_08", "bogin", "دٍ", "din",   A.tn("p24_r4_08_dal_in"),   0, 0.84, 0, 0, 0, 0],
+  ["r4_09", "bogin", "ذٍ", "zin",   A.tn("p24_r4_09_zal_in"),   0, 0.85, 0, 0, 0, 0],
+  // R5 (10 ta)
+  ["r5_10", "bogin", "رٍ", "rin",   A.tn("p24_r5_10_ra_in"),    0, 0.82, 0, 0, 0, 0],
+  ["r5_11", "bogin", "زٍ", "zin",   A.tn("p24_r5_11_za_in"),    0, 0.86, 0, 0, 0, 0],
+  ["r5_12", "bogin", "سٍ", "sin",   A.tn("p24_r5_12_sa_in"),    0, 0.80, 0, 0, 0, 0],
+  ["r5_13", "bogin", "شٍ", "shin",  A.tn("p24_r5_13_sha_in"),   0, 0.79, 0, 0, 0, 0],
+  ["r5_14", "bogin", "صٍ", "sodin", A.tn("p24_r5_14_sod_in"),   0, 0.79, 0, 0, 0, 0],
+  ["r5_15", "bogin", "ضٍ", "dodin", A.tn("p24_r5_15_dod_in"),   0, 0.82, 0, 0, 0, 0],
+  ["r5_16", "bogin", "طٍ", "thoin", A.tn("p24_r5_16_tho_in"),   0, 0.73, 0, 0, 0, 0],
+  ["r5_17", "bogin", "ظٍ", "zhoin", A.tn("p24_r5_17_zo_in"),    0, 0.89, 0, 0, 0, 0],
+  ["r5_18", "bogin", "عٍ", "aynin", A.tn("p24_r5_18_ayn_in"),   0, 0.86, 0, 0, 0, 0],
+  ["r5_19", "bogin", "غٍ", "ghoin", A.tn("p24_r5_19_ghayn_in"), 0, 0.88, 0, 0, 0, 0],
+  // R6 (9 ta)
+  ["r6_20", "bogin", "فٍ", "fin",   A.tn("p24_r6_20_fa_in"),    0, 0.77, 0, 0, 0, 0],
+  ["r6_21", "bogin", "قٍ", "qin",   A.tn("p24_r6_21_qof_in"),   0, 1.06, 0, 0, 0, 0],
+  ["r6_22", "bogin", "كٍ", "kin",   A.tn("p24_r6_22_kaf_in"),   0, 0.73, 0, 0, 0, 0],
+  ["r6_23", "bogin", "لٍ", "lin",   A.tn("p24_r6_23_lam_in"),   0, 0.77, 0, 0, 0, 0],
+  ["r6_24", "bogin", "مٍ", "min",   A.tn("p24_r6_24_mim_in"),   0, 0.75, 0, 0, 0, 0],
+  ["r6_25", "bogin", "نٍ", "nin",   A.tn("p24_r6_25_nun_in"),   0, 0.80, 0, 0, 0, 0],
+  ["r6_26", "bogin", "وٍ", "win",   A.tn("p24_r6_26_waw_in"),   0, 0.77, 0, 0, 0, 0],
+  ["r6_27", "bogin", "هٍ", "hin",   A.tn("p24_r6_27_ha2_in"),   0, 0.81, 0, 0, 0, 0],
+  ["r6_28", "bogin", "يٍ", "yin",   A.tn("p24_r6_28_ya_in"),    0, 0.84, 0, 0, 0, 0],
+
+  // ── Block 3: damma tanvin (-un), R7 (9 ta) ──
+  ["r7_01", "bogin", "اٌ",  "un",   A.tn("p24_r7_01_alif_un"),  0, 0.62, 0, 0, 0, 0],
+  ["r7_02", "bogin", "بٌ", "bun",   A.tn("p24_r7_02_ba_un"),    0, 0.74, 0, 0, 0, 0],
+  ["r7_03", "bogin", "تٌ", "tun",   A.tn("p24_r7_03_ta_un"),    0, 0.70, 0, 0, 0, 0],
+  ["r7_04", "bogin", "ثٌ", "tsun",  A.tn("p24_r7_04_tsa_un"),   0, 0.70, 0, 0, 0, 0],
+  ["r7_05", "bogin", "جٌ", "jun",   A.tn("p24_r7_05_jim_un"),   0, 0.86, 0, 0, 0, 0],
+  ["r7_06", "bogin", "حٌ", "hun",   A.tn("p24_r7_06_ha_un"),    0, 0.67, 0, 0, 0, 0],
+  ["r7_07", "bogin", "خٌ", "khun",  A.tn("p24_r7_07_kha_un"),   0, 0.77, 0, 0, 0, 0],
+  ["r7_08", "bogin", "دٌ", "dun",   A.tn("p24_r7_08_dal_un"),   0, 0.80, 0, 0, 0, 0],
+  ["r7_09", "bogin", "ذٌ", "zun",   A.tn("p24_r7_09_zal_un"),   0, 0.81, 0, 0, 0, 0],
+  // R8 (10 ta)
+  ["r8_10", "bogin", "رٌ", "run",   A.tn("p24_r8_10_ra_un"),    0, 0.85, 0, 0, 0, 0],
+  ["r8_11", "bogin", "زٌ", "zun",   A.tn("p24_r8_11_za_un"),    0, 0.90, 0, 0, 0, 0],
+  ["r8_12", "bogin", "سٌ", "sun",   A.tn("p24_r8_12_sa_un"),    0, 0.91, 0, 0, 0, 0],
+  ["r8_13", "bogin", "شٌ", "shun",  A.tn("p24_r8_13_sha_un"),   0, 0.86, 0, 0, 0, 0],
+  ["r8_14", "bogin", "صٌ", "sodun", A.tn("p24_r8_14_sod_un"),   0, 0.82, 0, 0, 0, 0],
+  ["r8_15", "bogin", "ضٌ", "dodun", A.tn("p24_r8_15_dod_un"),   0, 0.93, 0, 0, 0, 0],
+  ["r8_16", "bogin", "طٌ", "thoun", A.tn("p24_r8_16_tho_un"),   0, 0.68, 0, 0, 0, 0],
+  ["r8_17", "bogin", "ظٌ", "zhoun", A.tn("p24_r8_17_zo_un"),    0, 0.84, 0, 0, 0, 0],
+  ["r8_18", "bogin", "عٌ", "aynun", A.tn("p24_r8_18_ayn_un"),   0, 0.80, 0, 0, 0, 0],
+  ["r8_19", "bogin", "غٌ", "ghoun", A.tn("p24_r8_19_ghayn_un"), 0, 0.82, 0, 0, 0, 0],
+  // R9 (9 ta)
+  ["r9_20", "bogin", "فٌ", "fun",   A.tn("p24_r9_20_fa_un"),    0, 0.66, 0, 0, 0, 0],
+  ["r9_21", "bogin", "قٌ", "qun",   A.tn("p24_r9_21_qof_un"),   0, 0.70, 0, 0, 0, 0],
+  ["r9_22", "bogin", "كٌ", "kun",   A.tn("p24_r9_22_kaf_un"),   0, 0.64, 0, 0, 0, 0],
+  ["r9_23", "bogin", "لٌ", "lun",   A.tn("p24_r9_23_lam_un"),   0, 0.77, 0, 0, 0, 0],
+  ["r9_24", "bogin", "مٌ", "mun",   A.tn("p24_r9_24_mim_un"),   0, 0.79, 0, 0, 0, 0],
+  ["r9_25", "bogin", "نٌ", "nun",   A.tn("p24_r9_25_nun_un"),   0, 0.83, 0, 0, 0, 0],
+  ["r9_26", "bogin", "وٌ", "wun",   A.tn("p24_r9_26_waw_un"),   0, 0.81, 0, 0, 0, 0],
+  ["r9_27", "bogin", "هٌ", "hun",   A.tn("p24_r9_27_ha2_un"),   0, 0.94, 0, 0, 0, 0],
+  ["r9_28", "bogin", "يٌ", "yun",   A.tn("p24_r9_28_ya_un"),    0, 0.83, 0, 0, 0, 0],
+
+  // ── Pastki bo'lim: 30 ta so'z (R10-R14) ──
+  // R10: fawt + thawb (har juftlik raf'/jarr/nasb)
+  ["w01", "soz", "فَوْتُ",   "Fawtu (raf')",  A.tn("p24_w01_fawtu"),   0, 1.13, 0, 0, 0, 0],
+  ["w02", "soz", "فَوْتٍ",   "Fawtin (jarr)", A.tn("p24_w02_fawtin"),  0, 1.16, 0, 0, 0, 0],
+  ["w03", "soz", "فَوْتًا",  "Fawtan (nasb)", A.tn("p24_w03_fawtan"),  0, 1.21, 0, 0, 0, 0],
+  ["w04", "soz", "ثَوْبُ",   "Tsawbu (raf')", A.tn("p24_w04_thawbu"),  0, 1.24, 0, 0, 0, 0],
+  ["w05", "soz", "ثَوْبٍ",   "Tsawbin (jarr)", A.tn("p24_w05_thawbin"),0, 1.32, 0, 0, 0, 0],
+  ["w06", "soz", "ثَوْبًا",  "Tsawban (nasb)", A.tn("p24_w06_thawban"),0, 1.31, 0, 0, 0, 0],
+  // R11: 'awdh, tawd, farq, lawh, fawj, layth (aralash holat)
+  ["w07", "soz", "عَوْذٌ",   "'Awzun",  A.tn("p24_w07_awdhun"),  0, 1.40, 0, 0, 0, 0],
+  ["w08", "soz", "طَوْدٌ",   "Thoudun", A.tn("p24_w08_tawdun"),  0, 1.22, 0, 0, 0, 0],
+  ["w09", "soz", "فَرْقًا",  "Farqan",  A.tn("p24_w09_farqan"),  0, 1.38, 0, 0, 0, 0],
+  ["w10", "soz", "لَوْحٌ",   "Lawhun",  A.tn("p24_w10_lawhun"),  0, 1.29, 0, 0, 0, 0],
+  ["w11", "soz", "فَوْجٌ",   "Fawjun",  A.tn("p24_w11_fawjun"),  0, 1.17, 0, 0, 0, 0],
+  ["w12", "soz", "لَيْثًا",  "Laythan", A.tn("p24_w12_laythan"), 0, 1.41, 0, 0, 0, 0],
+  // R12: hawd, 'ard, 'arsh, qaws, fawz, dawr
+  ["w13", "soz", "حَوْضٌ",   "Hawdun",  A.tn("p24_w13_hawdun"),  0, 1.29, 0, 0, 0, 0],
+  ["w14", "soz", "عَرْضٍ",   "'Ardin",  A.tn("p24_w14_ardin"),   0, 1.23, 0, 0, 0, 0],
+  ["w15", "soz", "عَرْشًا",  "'Arshan", A.tn("p24_w15_arshan"),  0, 1.22, 0, 0, 0, 0],
+  ["w16", "soz", "قَوْسٌ",   "Qawsun",  A.tn("p24_w16_qawsun"),  0, 1.32, 0, 0, 0, 0],
+  ["w17", "soz", "فَوْزٍ",   "Fawzin",  A.tn("p24_w17_fawzin"),  0, 1.30, 0, 0, 0, 0],
+  ["w18", "soz", "دَوْرًا",  "Dawran",  A.tn("p24_w18_dawran"),  0, 1.31, 0, 0, 0, 0],
+  // R13: shawq, khawf, fargh, shar', ghayz, sawt
+  ["w19", "soz", "شَوْقٌ",   "Shawqun", A.tn("p24_w19_shawqun"), 0, 1.44, 0, 0, 0, 0],
+  ["w20", "soz", "خَوْفٍ",   "Khawfin", A.tn("p24_w20_khawfin"), 0, 1.49, 0, 0, 0, 0],
+  ["w21", "soz", "فَرْغًا",  "Farghan", A.tn("p24_w21_farghan"), 0, 1.37, 0, 0, 0, 0],
+  ["w22", "soz", "شَرْعُ",   "Shar'u",  A.tn("p24_w22_sharu"),   0, 1.32, 0, 0, 0, 0],
+  ["w23", "soz", "غَيْظٍ",   "Ghayzin", A.tn("p24_w23_ghayzin"), 0, 1.41, 0, 0, 0, 0],
+  ["w24", "soz", "سَوْطًا",  "Sawthan", A.tn("p24_w24_sawtan"),  0, 1.39, 0, 0, 0, 0],
+  // R14: sharah, dalw, lawn, nawm, hawl, dark
+  ["w25", "soz", "شَرَهْ",   "Sharah",  A.tn("p24_w25_sharah"),  0, 1.41, 0, 0, 0, 0],
+  ["w26", "soz", "دَلْوٍ",   "Dalwin",  A.tn("p24_w26_dalwin"),  0, 1.23, 0, 0, 0, 0],
+  ["w27", "soz", "لَوْنًا",  "Lawnan",  A.tn("p24_w27_lawnan"),  0, 1.47, 0, 0, 0, 0],
+  ["w28", "soz", "نَوْمٌ",   "Nawmun",  A.tn("p24_w28_nawmun"),  0, 1.40, 0, 0, 0, 0],
+  ["w29", "soz", "حَوْلٍ",   "Hawlin",  A.tn("p24_w29_hawlin"),  0, 1.45, 0, 0, 0, 0],
+  ["w30", "soz", "دَرْكًا",  "Darkan",  A.tn("p24_w30_darkan"),  0, 1.35, 0, 0, 0, 0],
 ];
 
 // ============================================================

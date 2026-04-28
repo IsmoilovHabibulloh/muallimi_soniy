@@ -82,6 +82,10 @@ export class AudioEngine {
     this.segmentEnd = end;
     this._repeatIndex = 0;
     this.onRepeatUpdate?.(0);
+    // Audio.ended=true holatda currentTime=start qo'yilsa ham, ba'zi
+    // brauzerlarda play() qayta boshlamaydi. Avval pause + load + seek
+    // qilamiz, shundan keyin play — har ikkinchi click ham qayta ijro etadi.
+    if (!this.audio.paused) this.audio.pause();
     this.audio.currentTime = start;
     await this.audio.play();
     this.startPolling();

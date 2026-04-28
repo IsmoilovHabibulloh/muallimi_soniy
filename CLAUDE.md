@@ -133,6 +133,85 @@ Alif:                     آ      إٖى     أُو   ← آ U+0622, qolgani sta
   (Noto Naskh) ishlatiladi, mad-arabic-text **emas**. Sabab: KFGQPC da
   isolated `ي` nuqtasiz chiqadi (Quranic imlo), darslikda nuqtali kerak.
 
+---
+
+## 🛑 Tashdid + kasra — kasra DOIM harf OSTIDA (kitob bo'ylab)
+
+**Qoida**: `harf + ّ + ِ` (shadda + kasra) kombinatsiyasida kasra **harf
+ostida** (an'anaviy joyda) chizilishi shart, **shadda yonida emas**
+(kompakt kombinatsiya emas).
+
+### Texnik yechim — Custom Noto Naskh (universal)
+
+Foydalanuvchi 2026-04-27 da bu xato'ni qayd etdi. Sabab: Noto Naskh
+Arabic shriftida `GSUB Lookup 5` da `uni0651 + uni0650 -> uni06510650`
+ligature qoidasi bor — bu ligature `رِّ` ni "kompakt" shaklda (kasra
+shadda yonida, harf ustida) chizadi. Foydalanuvchi global Amiri'ni rad
+etdi ("bijr-bijr tushunarsiz"); shartli Amiri (faqat shadda+kasra
+so'zlar uchun) ham rad etildi — bitta toza shrift xohlangan.
+
+**Yechim**: source Noto Naskh shriftidan shu 2 ta ligature qoidasini
+(to'g'ri va teskari yo'nalish) o'chirgan custom shrift yasaymiz.
+HarfBuzz standart `mark`/`mkmk` yo'liga tushadi — kasra harf ostida
+(an'anaviy joyga) chiziladi.
+
+**Build skripti**: `tools/build_custom_font.py`
+- Source: `muallimus-soniy/public/fonts/NotoNaskhArabic-VariableFont_wght.ttf`
+- Output: `muallimus-soniy/public/fonts/NotoNaskhArabic-MuallimiSoniy.ttf`
+- O'chiriladigan ligature: `uni06510650` (2 qoida — to'g'ri + teskari)
+- Saqlanadigan ligature: `uni0651064B`, `uni0651064D`, `uni06510670`
+  (tanvin fatha/kasratan + shadda, superscript-alef + shadda) — ularni
+  kerak qilgan boshqa joylar (Allah ligature, tanvin so'zlari) buzilmaydi
+- Family name: "Noto Naskh Arabic Muallimi" (asl Noto Naskh bilan
+  kollyziya bo'lmasin)
+
+`globals.css`:
+```css
+@font-face {
+  font-family: "Noto Naskh Arabic Muallimi";
+  src: url("/fonts/NotoNaskhArabic-MuallimiSoniy.ttf") format("truetype");
+  font-weight: 400 700;
+}
+
+:root {
+  --font-arabic: "Noto Naskh Arabic Muallimi", "Noto Naskh Arabic", ...;
+}
+```
+
+`ArabicEl` (`RenderedPage.tsx`) — endi inline `fontFamily` mantiqi YO'Q.
+`arabic-text` class allaqachon `var(--font-arabic)` ni qo'llaydi —
+custom shrift har joyda avtomatik ishlaydi.
+
+### 🚦 Yangi sahifa qurayotganda — qoida (foydalanuvchi tasdig'i 2026-04-27)
+
+> "endi shu shriftni ishlatamiz keyingi sahifalar uchun" — foydalanuvchi.
+
+✅ **Qiling**:
+- Oddiy `<ArabicEl el={...} />` yoki `<Row els={...} />` ishlating —
+  custom shrift avtomatik qo'llaniladi.
+- Tashdid+kasra so'zlar (`رَبِّ`, `بُرِّ`, `كُلِّ` va h.k.) **alohida
+  muomalaga muhtoj emas** — kasra harf ostida o'z-o'zidan chiqadi.
+
+❌ **QILMANG**:
+- `fontFamily: "'Amiri', var(--font-arabic)"` kabi inline shrift YOZMANG.
+- `hasShaddaKasra(...)` ga o'xshash tekshiruv funksiya QO'SHMANG —
+  bunday funksiya kodda yo'q va kerak ham emas.
+- Tashdid/kasra so'zlar uchun `<span>` ichida maxsus shrift mantiqi
+  QO'YMANG. Bitta toza shrift — butun kitob bo'ylab universal.
+- Mad sahifalar (17-21) ga ta'sir qilmang — ular `mad-arabic-text`
+  class orqali alohida stack ishlatadi.
+
+**Mad sahifa ta'sirsiz**: `.mad-arabic-text` class shrift stack'ida
+`"Noto Naskh Arabic"` (asl, "Muallimi" suffiksisiz) ishlatadi — mad
+logikasi (MadDammaFont + Noto Naskh + Amiri Quran) buzilmagan.
+
+**Yangilash**: agar source Noto Naskh shrifti yangilansa, qayta build:
+```bash
+python3 tools/build_custom_font.py
+```
+Skript output'ida 6 ta ligature saqlanganini va `uni06510650` o'chirilganini
+tasdiqlaydi.
+
 ### 5. Mad-only audio struktura (`32. madli 01.mp3`)
 
 Asl audio 4:31, quyidagi chunklar yaratilgan (`/audio/edit/32_madli_01/`):
@@ -812,7 +891,32 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   `gap-1.5` (7 so'z 1 qatorga sig'adi). PDF/rasm farqi: PDF Row 6 ning
   3-so'zini `خُرِّ` deydi, rasm `خُفِّ` ko'rsatadi (rasmga ergashildi);
   Row 6 oxirgi so'z PDF `دُرِّ`, rasm `ضُرِّ` (rasmga ergashildi).
-- Barcha sahifalar tugallangan: 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 (Sod-Madli/Tashdid).
+- **Sahifa 23 tugallangan**: Tashdid davomi (40 so'z) + Tanvin boshlanishi
+  (47 element jami). Tashdid manba: `34. tashdid.mp3` ning 4:06-5:53 qismi,
+  chunklar `34_tashdid/p23_r1..r8_w*.mp3`. Tanvin manba: `35. tanvin.mp3`
+  ning 0:02-0:16 qismi, chunklar `35_tanvin/p23_*.mp3`.
+  Tashdid 8 qator (3 yuqori + 5 pastki, divider bilan):
+  R1 (sm, 6) `تَوَطُّرْ تَنَعُّمْ تَوَغُّلْ تَنَفُّسْ تَرَقُّبْ تَفَكُّرْ`,
+  R2 (sm, 5) `تَعَلُّمْ تَكَمُّلْ تَفَنُّنْ تَصَوُّرْ تَغَيُّرْ` (V bob masdari تَفَعُّلْ),
+  R3 (sm, 5) `مُتَكَبِّرْ مُتَكَثِّرْ مُتَحَجِّرْ مُتَوَحِّدْ مُتَسَخِّنْ`,
+  R4 (sm, 5) `مُتَبَدِّلْ مُتَهَذِّبْ مُتَحَرِّزْ مُتَعَزِّزْ مُتَيَسِّرْ`,
+  R5 (sm, 5) `مُتَوَطِّنْ مُتَنَعِّمْ مُتَوَغِّلْ مُتَنَفِّسْ مُتَفَكِّرْ`,
+  R6 (sm, 5) `مُتَعَلِّمْ مُتَكَمِّلْ مُتَفَنِّنْ مُتَصَوِّرْ مُتَغَيِّرْ` (V bob ism fail مُتَفَعِّلْ),
+  R7 (sm, 5) `اِسْوَدَّ اِصْفَرَّ اِحْمَرَّ اِغْتَرَّ اِهْتَزَّ` (IX bob — ranglar/holatlar),
+  R8 (sm, 4) `اِسْتَرَدَّ اِسْتَحَبَّ اِسْتَحَلَّ اِسْتَدَلَّ` (X bob idgham bilan).
+  Tanvin section — yangi `<TanvinRule>` komponenti: clickable title
+  (`تنوينلي حرفلر`, `tn_intro` element, 9.10s narration — to'liq jumlani
+  qamraydi: "...bir sukunli nun ortirib oʻqiladi"); chig'atoy izoh
+  (statik); 3 ustun (RTL) — har ustunda belgi (`tn_fath/kasr/damm`,
+  `*_demo.mp3` 0.6-0.7s), uzbek label, va misol juftligi
+  (`tn_an/in/un` → `اَ = اَنْ` format). Audio helper: `A.tn(name)`
+  (35_tanvin/) — yangi qo'shildi.
+  Layout: parent `gap-0.5`, custom `<Sep>` (`my-1` divider) — 47 element
+  bitta viewportga sig'adi (677px → ~620px). Tashdid R3 birinchi so'z:
+  PDF `مُتَكَبِّرْ` deydi, rasm `مُتَدَبِّرْ` ko'rinadi — audio'ga ishonib
+  `مُتَكَبِّرْ` qoldirildi (foydalanuvchi qayta ko'rib bersa o'zgarishi
+  mumkin).
+- Barcha sahifalar tugallangan: 11-21, 23 (22 hali placeholder).
 
 ### Tarkibiy ma'lumot
 

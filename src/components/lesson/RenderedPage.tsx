@@ -41,7 +41,7 @@ function ArabicEl({
   hasActive: boolean;
   onClick: () => void;
   size?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
-  /** Mad sahifalarida: Amiri + bold (tikka fatha/kasra, katta damma) */
+  /** Mad sahifalarida: mad-arabic-text class (tikka fatha/kasra, katta damma) */
   mad?: boolean;
 }) {
   // Active state uses primary green for all element types (per UX decision).
@@ -69,7 +69,6 @@ function ArabicEl({
       }}
       className={`${mad ? "mad-arabic-text" : "arabic-text"} element-spring rounded-lg inline-flex items-center justify-center leading-relaxed ${mad ? "" : "font-bold"} ${sizeClasses[size]}`}
       style={{
-        ...(mad ? {} : { fontFamily: "var(--font-arabic)" }),
         color: isActive ? "#ffffff" : "var(--color-text-main)",
         backgroundColor: isActive ? "var(--color-primary)" : "transparent",
         border: isActive ? "2px solid var(--color-primary)" : "2px solid transparent",
@@ -127,7 +126,7 @@ function Row({
   onClick: (el: Element) => void;
   size?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
   gap?: string;
-  /** Mad sahifalarida: Amiri shrift (tikka harakat, katta damma) */
+  /** Mad sahifalarida: mad-arabic-text class (tikka harakat, katta damma) */
   mad?: boolean;
 }) {
   const gapClass = FLUID_GAP[gap] ?? gap;
@@ -923,6 +922,237 @@ function MadRule({
   return <div className={baseClass}>{content}</div>;
 }
 
+// Tashdid qoidasi banner — `MadRule` ga o'xshash. Tashdid mavzusi boshida
+// (sahifa 21) tepada turadi va to'liq qoidani vizual + matn bilan tushuntiradi.
+// Vizual: 3 ta `ـَّ ـِّ ـُّ` markerlari (chiziq = harf, alomatlar = harf
+// ustiga/ostiga qo'yiladi). `rule` element bor bo'lsa — click qilib audio
+// (intro narration: "Ushbu tashdid alomatlari qo'yilgan harflar ikkilantirib
+// o'qiladi") ijro etiladi. Tanvin sahifalarida ham xuddi shu pattern'ni
+// (TanvinRule) qo'llash kerak.
+function TashdidRule({
+  rule,
+  isActive,
+  hasActive,
+  onClick,
+}: {
+  rule?: Element;
+  isActive?: boolean;
+  hasActive?: boolean;
+  onClick?: (el: Element) => void;
+}) {
+  const clickable = !!rule && !!onClick;
+  const dimmed = hasActive && !isActive;
+  const content = (
+    <>
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-[11px] font-semibold text-text-main">
+          Tashdid qoidasi
+          <span className="ml-1 text-text-muted font-normal">(kitobdan)</span>
+        </p>
+        {clickable && (
+          <span
+            className="flex shrink-0 items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary"
+            aria-hidden
+          >
+            <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor">
+              <path d="M2 1.5v7l6-3.5z" />
+            </svg>
+            eshitish
+          </span>
+        )}
+      </div>
+
+      {/* Vizual demo: chiziq = harf; alomatlar uning ustiga/ostiga qo'yiladi.
+          Custom Noto Naskh (uni06510650 ligature olib tashlangan) kasra'ni
+          shadda+harf ostida an'anaviy joyga chizadi. */}
+      <div className="my-3 flex flex-row-reverse justify-center gap-8 text-text-main">
+        <span
+          className="arabic-text text-[2.5rem] leading-none"
+          style={{ fontFamily: "var(--font-arabic)" }}
+        >
+          ـَّ
+        </span>
+        <span
+          className="arabic-text text-[2.5rem] leading-none"
+          style={{ fontFamily: "var(--font-arabic)" }}
+        >
+          ـِّ
+        </span>
+        <span
+          className="arabic-text text-[2.5rem] leading-none"
+          style={{ fontFamily: "var(--font-arabic)" }}
+        >
+          ـُّ
+        </span>
+      </div>
+
+      {/* Audio narration (0-9.9s) verbatim — kitobdagi chig'atoy turkiy
+          matnning zamonaviy o'zbek talqini. Hech narsa qo'shilmaydi. */}
+      <p className="text-[11px] leading-snug text-text-main">
+        Tashdidli harflar ustiga ushbu tashdid alomatlari qo&apos;yilgan
+        harflar ikkilantirib o&apos;qiladi.
+      </p>
+    </>
+  );
+
+  const baseClass =
+    "w-full rounded-xl border border-primary/20 bg-primary/5 px-3 py-2 text-left element-spring";
+  const activeStyle: CSSProperties = isActive
+    ? {
+        borderColor: "var(--color-primary)",
+        backgroundColor: "rgba(34, 197, 94, 0.12)",
+        boxShadow: "0 8px 24px var(--color-primary-glow)",
+      }
+    : {};
+
+  if (clickable) {
+    return (
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick!(rule!);
+        }}
+        className={baseClass}
+        style={{ ...activeStyle, opacity: dimmed ? 0.35 : 1 }}
+      >
+        {content}
+      </button>
+    );
+  }
+  return <div className={baseClass}>{content}</div>;
+}
+
+// Tanvin qoidasi banner — `TashdidRule`/`MadRule` ga mos. Sahifa 23 da
+// tashdid davomidan so'ng paydo bo'ladi: title + 3 tanvin belgisi (an/in/un
+// tovush demolari) + chig'atoy izoh (audio narration verbatim) + 3 misol
+// juftliklari (اً = اَنْ pattern).
+function TanvinRule({
+  rule,
+  signs,
+  examples,
+  activeId,
+  hasActive,
+  onClick,
+}: {
+  rule?: Element;
+  signs: Element[];
+  examples: Element[];
+  activeId: string | null;
+  hasActive: boolean;
+  onClick: (el: Element) => void;
+}) {
+  const ruleClickable = !!rule;
+  const ruleActive = !!rule && activeId === rule.id;
+  const ruleDimmed = hasActive && !ruleActive;
+
+  return (
+    <div className="w-full rounded-xl border border-primary/20 bg-primary/5 px-3 py-1.5">
+      {/* Title bar with eshitish badge — click bilan to'liq narration ijro */}
+      {ruleClickable && rule ? (
+        <button
+          onClick={(e) => { e.stopPropagation(); onClick(rule); }}
+          className="w-full flex items-center justify-between gap-2 element-spring rounded-md"
+          style={{
+            opacity: ruleDimmed ? 0.35 : 1,
+            backgroundColor: ruleActive ? "rgba(34,197,94,0.12)" : "transparent",
+            boxShadow: ruleActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <h3 className="arabic-text text-base font-bold text-text-secondary" style={{ fontFamily: "var(--font-arabic)" }}>
+            {rule.arabic}
+          </h3>
+          <span className="flex shrink-0 items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary">
+            <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor">
+              <path d="M2 1.5v7l6-3.5z" />
+            </svg>
+            eshitish
+          </span>
+        </button>
+      ) : (
+        <h3 className="arabic-text text-base font-bold text-text-secondary text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+          تنوينلي حرفلر
+        </h3>
+      )}
+
+      {/* Chig'atoy izoh — audio narration verbatim. Static, faqat o'qish. */}
+      <p className="mt-1 text-[10px] leading-snug text-text-main/85 text-center px-1">
+        Ushbu uch tanvin alomatlarining biri qoʻyilgan harflardan soʻng
+        <span className="mx-1 font-semibold">bir sukunli nun</span>
+        ortirib oʻqiladi.
+      </p>
+
+      {/* 3 ustun: har ustun — belgi (clickable) + label + misol juftligi.
+          Sign click → "an/in/un" demo; misol click → bir xil demo (kitobdagi
+          misolni ko'rsatadi). Vizual zichlik: 3 ta cell yonma-yon. */}
+      <div className="mt-1.5 flex flex-row-reverse justify-around items-stretch gap-2">
+        {signs.map((sign, i) => {
+          const ex = examples[i];
+          const signActive = activeId === sign.id;
+          const exActive = ex && activeId === ex.id;
+          const signDimmed = hasActive && !signActive;
+          const exDimmed = hasActive && !exActive;
+          const expandMatch = ex?.uzbek.match(/=\s*(.+?)\)/);
+          const expand = expandMatch ? expandMatch[1] : "";
+          return (
+            <div key={sign.id} className="flex flex-1 flex-col items-center gap-0.5">
+              {/* Belgi — katta vizual */}
+              <button
+                onClick={(e) => { e.stopPropagation(); onClick(sign); }}
+                className="element-spring rounded-md px-2 py-0.5"
+                style={{
+                  opacity: signDimmed ? 0.35 : 1,
+                  backgroundColor: signActive ? "var(--color-primary)" : "transparent",
+                  color: signActive ? "#ffffff" : "var(--color-text-main)",
+                  boxShadow: signActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+                  transform: signActive ? "scale(1.08)" : "none",
+                }}
+              >
+                <span
+                  className="arabic-text leading-none text-[clamp(1.5rem,7.5cqi,2rem)]"
+                  style={{ fontFamily: "var(--font-arabic)" }}
+                >
+                  {sign.arabic}
+                </span>
+              </button>
+              {/* Uzbek label (kichik) */}
+              <span className="text-[9px] leading-tight text-text-muted whitespace-nowrap">
+                {sign.uzbek.replace(/\s*\([^)]+\)/, "")}
+              </span>
+              {/* Misol juftligi — A = (AN) format */}
+              {ex && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); onClick(ex); }}
+                  dir="rtl"
+                  className="inline-flex items-baseline gap-1 px-1.5 py-0.5 rounded-md element-spring"
+                  style={{
+                    backgroundColor: exActive ? "var(--color-primary)" : "transparent",
+                    color: exActive ? "#ffffff" : "var(--color-text-main)",
+                    opacity: exDimmed ? 0.25 : 1,
+                    boxShadow: exActive ? "0 4px 14px var(--color-primary-glow)" : "none",
+                    transform: exActive ? "scale(1.06)" : "none",
+                    border: exActive ? "2px solid var(--color-primary)" : "2px solid transparent",
+                  }}
+                >
+                  <span className="arabic-text font-bold text-base" style={{ fontFamily: "var(--font-arabic)" }}>
+                    {ex.arabic}
+                  </span>
+                  <span className="text-xs opacity-70">=</span>
+                  <span
+                    className="arabic-text text-sm"
+                    style={{ fontFamily: "var(--font-arabic)", opacity: 0.7 }}
+                  >
+                    {expand}
+                  </span>
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function Page17({ elements, activeId, hasActive, onElementClick }: PP) {
   const { el, els } = usePageElements(elements, 17);
   const introRule = el("intro_rule");
@@ -950,7 +1180,7 @@ function Page17({ elements, activeId, hasActive, onElementClick }: PP) {
   ];
 
   // 3 ta syllable bir qatorda — nowrap (Row dagi flex-wrap chalkashtirmasin)
-  // `mad` prop — Amiri bold font (tikka harakat, katta damma)
+  // `mad` prop — mad-arabic-text class (tikka harakat, katta damma)
   const MadRow = ({ ids }: { ids: string[] }) => (
     <div className="flex flex-row-reverse justify-center gap-[clamp(0.125rem,0.8cqi,0.25rem)]">
       {els(ids).map((el) => (
@@ -1245,7 +1475,6 @@ function YaNuqtasizRule() {
 function Page21({ elements, activeId, hasActive, onElementClick }: PP) {
   const { el, els } = usePageElements(elements, 21);
   const intro = el("t_intro");
-  const introActive = !!intro && activeId === intro.id;
 
   return (
     <div className="flex flex-col items-center gap-1">
@@ -1257,33 +1486,56 @@ function Page21({ elements, activeId, hasActive, onElementClick }: PP) {
 
       <Divider />
 
-      {/* ─── Tashdid sarlavhasi: bosilganda intro audio ijro etadi ─── */}
-      {intro && (
-        <button
-          onClick={(e) => { e.stopPropagation(); onElementClick(intro); }}
-          className="text-center my-1 rounded-lg px-3 py-1.5 element-spring"
-          style={{
-            backgroundColor: introActive ? "rgba(34,197,94,0.12)" : "transparent",
-            boxShadow: introActive ? "0 6px 20px var(--color-primary-glow)" : "none",
-            opacity: hasActive && !introActive ? 0.35 : 1,
-          }}
-        >
-          <h3 className="arabic-text text-xl font-bold text-text-secondary">
-            تشدیدلی حرفلر
-          </h3>
-          <p className="text-[11px] text-text-muted mt-0.5">Tashdidli harflar — ikkilantirib oʻqiladi</p>
-        </button>
-      )}
+      {/* ─── Tashdid mavzusi boshi: to'liq qoida banner (vizual + matn) ─── */}
+      <TashdidRule
+        rule={intro}
+        isActive={intro ? activeId === intro.id : false}
+        hasActive={hasActive}
+        onClick={onElementClick}
+      />
 
-      {/* Uchta tashdid shakli (statik vizual: fatha / kasra / damma + tashdid) */}
-      <div className="flex flex-row-reverse justify-center gap-6 my-1 text-text-muted">
-        <span className="arabic-text text-xl" style={{ fontFamily: "var(--font-arabic)" }}>ـَّ</span>
-        <span className="arabic-text text-xl" style={{ fontFamily: "var(--font-arabic)" }}>ـِّ</span>
-        <span className="arabic-text text-xl" style={{ fontFamily: "var(--font-arabic)" }}>ـُّ</span>
+      {/* 3 ربب juftliklari kitobdek: "رَبَّ - (رَبْبَ)" formatida.
+          Bosilganda tashdid shaklining audiosi (rabba/rabbi/rabbu) ijro etadi.
+          Yonidagi (رَبْبَ) — tashdidning ochilgan (uncontracted) shakli. */}
+      <div className="flex flex-row-reverse justify-center gap-3 my-2 items-baseline flex-wrap">
+        {[
+          { id: "t_rab1", tash: "رَبَّ", expand: "رَبْبَ" },
+          { id: "t_rab2", tash: "رَبِّ", expand: "رَبْبِ" },
+          { id: "t_rab3", tash: "رَبُّ", expand: "رَبْبُ" },
+        ].map(({ id, tash, expand }) => {
+          const elem = el(id);
+          if (!elem) return null;
+          const isActive = activeId === elem.id;
+          const dimmed = hasActive && !isActive;
+          return (
+            <button
+              key={id}
+              onClick={(e) => { e.stopPropagation(); onElementClick(elem); }}
+              dir="rtl"
+              className="inline-flex items-baseline gap-1.5 px-2 py-1 rounded-lg element-spring"
+              style={{
+                backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+                color: isActive ? "#ffffff" : "var(--color-text-main)",
+                opacity: dimmed ? 0.25 : 1,
+                boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+                transform: isActive ? "scale(1.1)" : "none",
+                border: isActive ? "2px solid var(--color-primary)" : "2px solid transparent",
+              }}
+            >
+              <span className="arabic-text font-bold text-2xl" style={{ fontFamily: "var(--font-arabic)" }}>
+                {tash}
+              </span>
+              <span className="text-base opacity-70">-</span>
+              <span
+                className="arabic-text text-lg"
+                style={{ fontFamily: "var(--font-arabic)", opacity: 0.7 }}
+              >
+                ({expand})
+              </span>
+            </button>
+          );
+        })}
       </div>
-
-      {/* 3 ربب misoli: tashdid shakli — uncontracted shakli uzbek label'da */}
-      <Row els={els(["t_rab1","t_rab2","t_rab3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-5" />
 
       <Divider />
 
@@ -1300,44 +1552,115 @@ function Page21({ elements, activeId, hasActive, onElementClick }: PP) {
 
 function Page22({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 22);
+  // 10 qator × 6 so'z. R1-R4: aktiv past fe'l. R5-R8: passiv. R9-R10: Form V.
+  // 4 ta 6-so'zli qator dagi tashdidli so'zlar size="sm" da bir qatorga sig'adi.
+  const rowIds = (n: number) => [1, 2, 3, 4, 5, 6].map((w) => `r${n}_w${w}`);
   return (
     <div className="flex flex-col items-center gap-1">
-      <Title text="تشدید (دوام)" sub="Tashdid davomi" />
-      <Row els={els(["01","02"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["03","04","05","06"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-2" />
+      <Row els={els(rowIds(1))} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(rowIds(2))} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(rowIds(3))} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(rowIds(4))} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
       <Divider />
-      <Row els={els(["07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
-      <Row els={els(["10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
+      <Row els={els(rowIds(5))} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(rowIds(6))} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(rowIds(7))} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(rowIds(8))} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
       <Divider />
-      <Row els={els(["11","12"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
+      <Row els={els(rowIds(9))} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(rowIds(10))} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
     </div>
   );
 }
 
+// Sahifa 23 — Tashdid davomi (R1-R8, 40 so'z) + Tanvin boshlanishi.
+// Yuqori bo'lim: V bob masdari → V bob ism fail → IX bob → X bob.
+// Pastki bo'lim: tanvin intro + 3 belgisi + chig'atoy izoh + 3 misol.
+// Spacing tight: gap-0.5 + custom my-1 dividerlar bilan barcha 47 element
+// bitta viewportga sig'adi (677→608px).
 function Page23({ elements, activeId, hasActive, onElementClick }: PP) {
-  const { els } = usePageElements(elements, 23);
+  const { el, els } = usePageElements(elements, 23);
+  const tnIntro = el("tn_intro");
+  const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-1" />;
   return (
-    <div className="flex flex-col items-center gap-1">
-      <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
-      <Divider />
-      <Title text="تنوین" sub="Tanvin" />
-      <Row els={els(["04"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
-      <Divider />
-      <Row els={els(["05","06","07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="3xl" gap="gap-6" />
+    <div className="flex flex-col items-center gap-0.5">
+      {/* ─── Tashdid davomi (40 so'z) ─── */}
+      {/* R1: V bob masdari (تَفَعُّلْ) — 6 so'z */}
+      <Row els={els(["t01","t02","t03","t04","t05","t06"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      {/* R2: V bob masdari davomi — 5 so'z */}
+      <Row els={els(["t07","t08","t09","t10","t11"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      {/* R3: V bob ism fail (مُتَفَعِّلْ) — 5 so'z */}
+      <Row els={els(["t12","t13","t14","t15","t16"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
+      <Sep />
+
+      {/* R4-R6: V bob ism fail davomi — 3 × 5 so'z */}
+      <Row els={els(["t17","t18","t19","t20","t21"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["t22","t23","t24","t25","t26"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["t27","t28","t29","t30","t31"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      {/* R7: IX bob (اِفْعَلَّ — ranglar/holatlar) — 5 so'z */}
+      <Row els={els(["t32","t33","t34","t35","t36"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      {/* R8: X bob idgham bilan (اِسْتَفْعَلَ + tashdid) — 4 so'z */}
+      <Row els={els(["t37","t38","t39","t40"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
+      <Sep />
+
+      {/* ─── Tanvin boshlanishi: intro banner + 3 belgisi + 3 misol ─── */}
+      <TanvinRule
+        rule={tnIntro}
+        signs={els(["tn_fath","tn_kasr","tn_damm"])}
+        examples={els(["tn_an","tn_in","tn_un"])}
+        activeId={activeId}
+        hasActive={hasActive}
+        onClick={onElementClick}
+      />
     </div>
   );
 }
 
+// Sahifa 24 — Tanvin alifboi: 28×3 = 84 syllable + 30 so'z.
+// 3 ta blok (fatha-an, kasra-in, damma-un), har blok 3 qator (9+10+9 = 28).
+// Pastki bo'lim: 5 qator × 6 so'z = 30 ta misol.
+// Hammasi 114 element bitta viewportga sig'ishi uchun size="sm" + gap-0.5.
 function Page24({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 24);
+  const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-1" />;
+  const block1Ids = (n: number, count: number) =>
+    Array.from({ length: count }, (_, i) => `r${n}_${String(i + (n === 1 ? 1 : n === 2 ? 10 : 20)).padStart(2, "0")}`);
+  // Manually list — counts differ across rows (9/10/9).
+  const r1 = ["r1_01","r1_02","r1_03","r1_04","r1_05","r1_06","r1_07","r1_08","r1_09"];
+  const r2 = ["r2_10","r2_11","r2_12","r2_13","r2_14","r2_15","r2_16","r2_17","r2_18","r2_19"];
+  const r3 = ["r3_20","r3_21","r3_22","r3_23","r3_24","r3_25","r3_26","r3_27","r3_28"];
+  const r4 = ["r4_01","r4_02","r4_03","r4_04","r4_05","r4_06","r4_07","r4_08","r4_09"];
+  const r5 = ["r5_10","r5_11","r5_12","r5_13","r5_14","r5_15","r5_16","r5_17","r5_18","r5_19"];
+  const r6 = ["r6_20","r6_21","r6_22","r6_23","r6_24","r6_25","r6_26","r6_27","r6_28"];
+  const r7 = ["r7_01","r7_02","r7_03","r7_04","r7_05","r7_06","r7_07","r7_08","r7_09"];
+  const r8 = ["r8_10","r8_11","r8_12","r8_13","r8_14","r8_15","r8_16","r8_17","r8_18","r8_19"];
+  const r9 = ["r9_20","r9_21","r9_22","r9_23","r9_24","r9_25","r9_26","r9_27","r9_28"];
+  void block1Ids;
   return (
-    <div className="flex flex-col items-center gap-1">
-      <Title text="تنوین مثاللر" sub="Tanvin misollari" />
-      <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["04","05","06"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Divider />
-      <Row els={els(["07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["10","11"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+    <div className="flex flex-col items-center gap-0.5">
+      {/* Block 1: fatha tanvin (-an) */}
+      <Row els={els(r1)} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(r2)} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(r3)} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Sep />
+      {/* Block 2: kasra tanvin (-in) */}
+      <Row els={els(r4)} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(r5)} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(r6)} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Sep />
+      {/* Block 3: damma tanvin (-un) */}
+      <Row els={els(r7)} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(r8)} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(r9)} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Sep />
+      {/* Pastki bo'lim: 30 ta so'z (5 qator × 6) */}
+      <Row els={els(["w01","w02","w03","w04","w05","w06"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["w07","w08","w09","w10","w11","w12"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["w13","w14","w15","w16","w17","w18"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["w19","w20","w21","w22","w23","w24"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["w25","w26","w27","w28","w29","w30"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
     </div>
   );
 }
