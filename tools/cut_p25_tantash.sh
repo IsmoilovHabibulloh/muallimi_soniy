@@ -26,10 +26,11 @@ echo "=== Page 25 tanvinli tashdid (37 chunks) ==="
 echo "--- Title ---"
 cut p25_title 0 2.00
 
-echo "--- R1: 3 rabb examples (rabbun / rabbin / rabban) ---"
-cut p25_r1_w1_rabbun 3.40 4.55
+echo "--- R1: 3 rabb examples (source order: rabban → rabbin → rabbun, fatha→kasra→damma) ---"
+# Audio file names match content (the spoken word), not source position.
+cut p25_r1_w3_rabban 3.40 4.55
 cut p25_r1_w2_rabbin 5.78 6.90
-cut p25_r1_w3_rabban 8.10 9.30
+cut p25_r1_w1_rabbun 8.10 9.30
 
 echo "--- R2: tanvin fatha, 6 words ---"
 cut p25_r2_w1_habban 11.34 12.55
@@ -57,24 +58,24 @@ cut p25_r4_w6_kullun  60.27 61.55
 
 echo "--- R5: colors (form II passive participle), 5 words ---"
 cut p25_r5_w1_mubayyadan 65.55 67.40
-cut p25_r5_w2_musawwadun 68.53 70.35
+cut p25_r5_w2_musawwadin 68.53 70.35
 cut p25_r5_w3_musaffarun 71.62 73.40
 cut p25_r5_w4_muhammaran 74.83 76.70
-cut p25_r5_w5_mukhaddarun 77.97 79.75
+cut p25_r5_w5_mukhaddarin 77.97 79.75
 
 echo "--- R6: form VIII/VII participles, 5 words ---"
 cut p25_r6_w1_muhtazzan  82.27 84.05
-cut p25_r6_w2_muhtajjun  85.24 87.05
+cut p25_r6_w2_muhtajjin  85.24 87.05
 cut p25_r6_w3_munsaddun  88.43 90.70
-cut p25_r6_w4_mudtarrun  92.16 94.25
+cut p25_r6_w4_mudtarrin  92.16 94.25
 cut p25_r6_w5_mukhtassun 96.06 98.00
 
 echo "--- R7: form X participles, 5 words ---"
 cut p25_r7_w1_mustariddan 100.93 102.90
-cut p25_r7_w2_mustahibbun 104.30 106.30
+cut p25_r7_w2_mustahibbin 104.30 106.30
 cut p25_r7_w3_mustahillun 107.71 109.80
 cut p25_r7_w4_mustadillan 111.06 113.10
-cut p25_r7_w5_mustaiddun  114.27 117.62
+cut p25_r7_w5_mustaiddin  114.27 117.62
 
 echo ""
 echo "=== Copying to public/audio/edit/ ==="

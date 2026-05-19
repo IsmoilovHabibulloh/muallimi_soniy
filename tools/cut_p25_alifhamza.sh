@@ -47,31 +47,31 @@ cut() {
 echo "=== Page 25 alif va hamza (18 chunks, REMAPPED 2026-05-19) ==="
 
 echo "--- Title (الف و همزة) ---"
-cut p25_ah_title 0.25 1.55
+cut p25_ah_title 0.30 2.20
 
-echo "--- 9 forms (RTL: ا أ ـا إ ؤ ئ ـئ ـئـ ء) ---"
-cut p25_ah_f1_alif         7.18 8.10
-cut p25_ah_f2_alif_hamza_a 9.62 10.62
-cut p25_ah_f3_alif_final   12.32 13.30
-cut p25_ah_f4_alif_hamza_b 14.82 16.22
-cut p25_ah_f5_waw_hamza    18.95 19.92
-cut p25_ah_f6_ya_hamza_iso 21.48 22.52
-cut p25_ah_f7_ya_hamza_fin 24.20 25.20
-cut p25_ah_f8_ya_hamza_med 26.55 27.92
-# f9 hamza_alone: no clear audio in source — short silent placeholder
-cut p25_ah_f9_hamza_alone  27.92 28.65
+echo "--- Subtitle/explanation (chig'atoy: 9 ko'rinishda yoziladi) ---"
+cut p25_ah_subtitle 2.30 6.10
 
-echo "--- Row 1 (eski imlo): اَمَرَ اَخَذَ قَرَاَ يَقْرَاُ ---"
-cut p25_ah_p1_w1_amara     31.83 33.10
-cut p25_ah_p1_w2_akhadha   34.30 35.75
-cut p25_ah_p1_w3_qaraa     36.90 38.65
-cut p25_ah_p1_w4_yaqrau    39.85 42.00
+# NOTE: Source audio does NOT contain individual letter pronunciations for
+# the 9 forms (ا أ ـا إ ؤ ئ ـئ ـئـ ء). The 7-28s region — previously
+# (wrongly) labeled as f1-f9 letter cuts — actually contains the practice
+# rows being read twice. Removed; ah_f1..ah_f9 elements have audio=null.
 
-echo "--- Row 2 (yangi imlo): اَمَرَ اَخَذَ قَرَأَ يَقْرَأُ ---"
-cut p25_ah_p2_w1_amara     44.78 46.05
-cut p25_ah_p2_w2_akhadha   47.30 48.85
-cut p25_ah_p2_w3_qaraa     50.10 51.80
-cut p25_ah_p2_w4_yaqrau    53.00 55.10
+echo "--- Row 1 (eski imlo): اَمَرَ اَخَذَ قَرَاَ يَقْرَاُ — source 7-16s ---"
+cut p25_ah_p1_w1_amara     7.20  8.05
+cut p25_ah_p1_w2_akhadha   8.90 10.55
+cut p25_ah_p1_w3_qaraa    12.30 13.25
+cut p25_ah_p1_w4_yaqrau   14.85 16.15
+
+echo "--- Row 2 (yangi imlo): اَمَرَ اَخَذَ قَرَأَ يَقْرَأُ — source 19-28s ---"
+cut p25_ah_p2_w1_amara    18.97 19.87
+cut p25_ah_p2_w2_akhadha  21.51 22.47
+cut p25_ah_p2_w3_qaraa    24.23 25.15
+cut p25_ah_p2_w4_yaqrau   26.56 27.86
+
+# Source 31-55s region contains different words (yaʔmuru/yakhdhu/maʔmur/
+# maʔkhuudh) — these belong to page 26 content, not page 25 practice rows.
+# Page 26 cuts are handled in tools/cut_p26.sh; do not cut here.
 
 echo ""
 echo "=== Copying to public/audio/edit/ ==="

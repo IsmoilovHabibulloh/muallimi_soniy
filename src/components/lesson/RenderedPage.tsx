@@ -1651,12 +1651,12 @@ function Page25({ elements, activeId, hasActive, onElementClick }: PP) {
   const title = el("title");
   const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-0.5" />;
 
-  // Header signs row — visual only (ـٌّ ـٍّ ـًّ above row 1, RTL)
+  // Header signs row — visual only (ـًّ ـٍّ ـٌّ above row 1, RTL: fatha → kasra → damma)
   const SignsHeader = () => (
     <div dir="rtl" className="flex justify-center items-center gap-[clamp(0.85rem,4.5cqi,1.6rem)] -mb-1 pb-0.5 border-b border-text-muted/20 w-[55%]">
-      <span className="arabic-text text-text-muted text-[clamp(0.95rem,5cqi,1.25rem)] leading-none" style={{ fontFamily: "var(--font-arabic)" }}>ـٌّ</span>
-      <span className="arabic-text text-text-muted text-[clamp(0.95rem,5cqi,1.25rem)] leading-none" style={{ fontFamily: "var(--font-arabic)" }}>ـٍّ</span>
       <span className="arabic-text text-text-muted text-[clamp(0.95rem,5cqi,1.25rem)] leading-none" style={{ fontFamily: "var(--font-arabic)" }}>ـًّ</span>
+      <span className="arabic-text text-text-muted text-[clamp(0.95rem,5cqi,1.25rem)] leading-none" style={{ fontFamily: "var(--font-arabic)" }}>ـٍّ</span>
+      <span className="arabic-text text-text-muted text-[clamp(0.95rem,5cqi,1.25rem)] leading-none" style={{ fontFamily: "var(--font-arabic)" }}>ـٌّ</span>
     </div>
   );
 
@@ -1712,11 +1712,11 @@ function Page25({ elements, activeId, hasActive, onElementClick }: PP) {
       {/* ── Header: 3 ta tanvin+tashdid signs (vizual marker) ── */}
       <SignsHeader />
 
-      {/* ── R1: 3 ربب misol (RTL: rabbun, rabbin, rabban) — har biri (رَبَّنْ) bilan ── */}
+      {/* ── R1: 3 ربب misol (RTL: rabban, rabbin, rabbun — fatha → kasra → damma) ── */}
       <div dir="rtl" className="flex w-full justify-around items-center gap-1 mt-0.5">
-        <RabbCell id="r1_w1_un" expand="رَبُّنْ" />
-        <RabbCell id="r1_w2_in" expand="رَبِّنْ" />
         <RabbCell id="r1_w3_an" expand="رَبَّنْ" />
+        <RabbCell id="r1_w2_in" expand="رَبِّنْ" />
+        <RabbCell id="r1_w1_un" expand="رَبُّنْ" />
       </div>
 
       {/* ── R2-R4: tanvin fatha/kasra/damma (har birida 6 so'z) ── */}
@@ -1734,6 +1734,7 @@ function Page25({ elements, activeId, hasActive, onElementClick }: PP) {
       {/* ── Alif va Hamza (yangi bob — vizual intro + audio) ── */}
       <AlifHamzaIntro
         title={el("ah_title")}
+        subtitle={el("ah_subtitle")}
         forms={els(["ah_f1","ah_f2","ah_f3","ah_f4","ah_f5","ah_f6","ah_f7","ah_f8","ah_f9"])}
         row1={els(["ah_p1_w1","ah_p1_w2","ah_p1_w3","ah_p1_w4"])}
         row2={els(["ah_p2_w1","ah_p2_w2","ah_p2_w3","ah_p2_w4"])}
@@ -1751,6 +1752,7 @@ function Page25({ elements, activeId, hasActive, onElementClick }: PP) {
 // 2 numbered practice rows (eski/yangi imlo, so'zlar clickable).
 function AlifHamzaIntro({
   title,
+  subtitle,
   forms,
   row1,
   row2,
@@ -1759,6 +1761,7 @@ function AlifHamzaIntro({
   onClick,
 }: {
   title?: Element;
+  subtitle?: Element;
   forms: Element[];
   row1: Element[];
   row2: Element[];
@@ -1824,10 +1827,26 @@ function AlifHamzaIntro({
           </h3>
         </button>
       )}
-      {/* Chig'atoy izoh (statik) */}
-      <p className="arabic-text text-[10px] text-text-muted text-center leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
-        الف و همزة توقّز (٩) كورينيشده يازيلادى
-      </p>
+      {/* Chig'atoy izoh (clickable narration) */}
+      {subtitle ? (
+        <button
+          onClick={(e) => { e.stopPropagation(); onClick(subtitle); }}
+          className="element-spring rounded-md px-2 py-0"
+          style={{
+            backgroundColor: activeId === subtitle.id ? "var(--color-primary)" : "transparent",
+            color: activeId === subtitle.id ? "#ffffff" : "var(--color-text-muted)",
+            boxShadow: activeId === subtitle.id ? "0 4px 14px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <span className="arabic-text text-[10px] text-center leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
+            {subtitle.arabic}
+          </span>
+        </button>
+      ) : (
+        <p className="arabic-text text-[10px] text-text-muted text-center leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
+          الف و همزة توقّز (٩) كورينيشده يازيلادى
+        </p>
+      )}
       {/* 9 ta shakl bir qatorda, RTL — chap tomonda kichik raqam (١) */}
       <div dir="rtl" className="flex w-full justify-around items-center gap-0.5 mt-0.5">
         <span className="arabic-text text-[10px] text-text-muted shrink-0 w-[16px] text-center" style={{ fontFamily: "var(--font-arabic)" }}>

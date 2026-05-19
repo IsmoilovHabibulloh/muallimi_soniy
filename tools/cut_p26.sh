@@ -37,63 +37,78 @@ cut() {
     echo "  $name.mp3 ($dur s)"
 }
 
-echo "=== Page 26 hamza examples (46 chunks) ==="
+echo "=== Page 26 hamza examples (56 chunks) ==="
+# 2026-05-19 REMAPPED: previous cuts were ~27s off (page 26 starts at ~31.9s,
+# not 59s as previously assumed). All R3-C3 cuts re-aligned via silencedetect.
+# C2/C3 now have individual audio per word (was sharing one "sample" chunk).
 
 echo "--- R3 (eski, 4 words): yaʔmuru yaʔkhudhu maʔmuur maʔkhuudh ---"
-cut p26_r3_w1_yamuru   59.00 60.05
-cut p26_r3_w2_yakhudhu 61.30 62.45
-cut p26_r3_w3_mamuur   63.80 65.20
-cut p26_r3_w4_makhuudh 66.75 68.55
+cut p26_r3_w1_yamuru    31.85 33.05
+cut p26_r3_w2_yakhudhu  34.28 35.73
+cut p26_r3_w3_mamuur    36.91 38.61
+cut p26_r3_w4_makhuudh  39.85 41.95   # includes 'ma' syllable (39.90-40.19) + gap + khuudh
 
 echo "--- R4 (yangi, 4 words): yaʔmuru yaʔkhudhu maʔmuur maʔkhuudh ---"
-cut p26_r4_w1_yamuru   71.75 73.30
-cut p26_r4_w2_yakhudhu 74.45 75.95
-cut p26_r4_w3_mamuur   77.20 78.85
-cut p26_r4_w4_makhuudh 80.20 84.35
+cut p26_r4_w1_yamuru    44.78 46.03
+cut p26_r4_w2_yakhudhu  47.30 48.80   # includes 'ya' syllable (47.38-47.65) + gap + khudhu
+cut p26_r4_w3_mamuur    50.13 51.78
+cut p26_r4_w4_makhuudh  53.00 55.05   # includes 'ma' syllable (53.06-53.34) + gap + khuudh
 
 echo "--- R5 (4 words): qurie qaariʔa mubtadiʔ mustahziʔ ---"
-cut p26_r5_w1_qurie       86.90 89.30
-cut p26_r5_w2_qaariea     90.20 92.55
-cut p26_r5_w3_mubtadie    93.80 96.15
-cut p26_r5_w4_mustahzie   97.30 102.65
+cut p26_r5_w1_qurie     59.08 59.98
+cut p26_r5_w2_qaariea   61.41 62.36
+cut p26_r5_w3_mubtadie  63.88 65.18
+cut p26_r5_w4_mustahzie 66.82 68.57
 
 echo "--- R6 (5 words): yuʔminu muʔmin muʔadhdhin muʔallif luʔluʔ ---"
-cut p26_r6_w1_yuminu     106.10 107.35
-cut p26_r6_w2_mumin      108.40 109.65
-cut p26_r6_w3_muadhdhin  110.55 111.70
-cut p26_r6_w4_muallif    112.75 114.15
-cut p26_r6_w5_luulue     115.15 117.05
+cut p26_r6_w1_yuminu    71.84 73.19
+cut p26_r6_w2_mumin     74.52 75.87
+cut p26_r6_w3_muadhdhin 77.27 78.77
+cut p26_r6_w4_muallif   80.29 81.59
+cut p26_r6_w5_luulue    83.25 84.30
 
 echo "--- R7 (5 words): qaaʔil qaaʔim saaʔil maaʔil raʔiis ---"
-cut p26_r7_w1_qaail   119.20 121.55
-cut p26_r7_w2_qaaim   122.55 124.95
-cut p26_r7_w3_saail   126.00 128.35
-cut p26_r7_w4_maail   129.70 132.00
-cut p26_r7_w5_raiis   133.20 135.70
+cut p26_r7_w1_qaail     87.00  89.30
+cut p26_r7_w2_qaaim     90.25  92.55
+cut p26_r7_w3_saail     93.83  96.13
+cut p26_r7_w4_maail     97.41  99.71
+cut p26_r7_w5_raiis    100.91 102.66
 
 echo "--- R8 (5 words): biʔsa biʔr saʔila yasʔal masʔuul ---"
-cut p26_r8_w1_bisa     138.00 140.05
-cut p26_r8_w2_bir      141.00 143.25
-cut p26_r8_w3_saila    144.30 146.55
-cut p26_r8_w4_yasal    147.75 150.20
-cut p26_r8_w5_masuul   151.40 153.85
+cut p26_r8_w1_bisa     106.20 107.35
+cut p26_r8_w2_bir      108.48 109.63
+cut p26_r8_w3_saala    110.60 111.70
+cut p26_r8_w4_yasal    112.82 114.17
+cut p26_r8_w5_masuul   115.22 117.02
 
 echo "--- R9 (5 words): shaaʔa saaʔa jaaʔa yashaaʔu masaaʔu ---"
-cut p26_r9_w1_shaaa   155.40 156.80
-cut p26_r9_w2_saaa    157.90 159.10
-cut p26_r9_w3_jaaa    160.20 161.55
-cut p26_r9_w4_yashaau 162.70 164.00
-cut p26_r9_w5_masaau  165.10 166.50
+cut p26_r9_w1_shaaa    119.28 121.53
+cut p26_r9_w2_saaa     122.60 124.95
+cut p26_r9_w3_jaaa     126.07 128.37
+cut p26_r9_w4_yashaau  129.75 132.00
+cut p26_r9_w5_masaau   133.26 135.66
 
-echo "--- C1 (5 words): shayʔ jayʔ yajiiʔ yusiiʔ musiiʔ ---"
-cut p26_c1_w1_shay    167.85 170.75
-cut p26_c1_w2_jay     172.50 174.70
-cut p26_c1_w3_yajii   175.80 178.00
-cut p26_c1_w4_yusii   179.25 181.50
-cut p26_c1_w5_musii   182.80 185.10
+echo "--- C1 (5 words, eski ـىْءُ): shayʔ jayʔ yajiiʔ yusiiʔ musiiʔ ---"
+cut p26_c1_w1_shia     138.08 140.03   # passive: "shi'a" (was willed)
+cut p26_c1_w2_jia      141.06 143.26   # passive: "ji'a" (was brought)
+cut p26_c1_w3_yajii    144.38 146.58
+cut p26_c1_w4_yusii    147.80 150.20
+cut p26_c1_w5_musii    151.42 153.87
 
-echo "--- C2/C3 (shared sample audio for 11 visual elements) ---"
-cut p26_c23_sample    186.30 188.80
+echo "--- C2 (6 words, hamza at end after various vowels): shay fay mil bar juz qiraa ---"
+cut p26_c2_w1_shay     155.50 156.75
+cut p26_c2_w2_fay      157.88 159.08
+cut p26_c2_w3_mil      160.25 161.55
+cut p26_c2_w4_bar      162.75 163.95
+cut p26_c2_w5_juz      165.14 166.49
+cut p26_c2_w6_qiraa    167.91 170.71
+
+echo "--- C3 (5 words, hamza after long waw ـوءُ): suu yasuu wadu quru muru ---"
+cut p26_c3_w1_suu      172.57 174.67
+cut p26_c3_w2_yasuu    175.84 177.99
+cut p26_c3_w3_wadu     179.29 181.49
+cut p26_c3_w4_quru     182.84 185.04
+cut p26_c3_w5_muru     186.30 188.85
 
 echo "--- Bottom R1: al-mar'/imra'an/imri'in/imru'un (4 words) ---"
 cut p26_b1_w1_almaru   193.20 194.85

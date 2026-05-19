@@ -1897,10 +1897,11 @@ const p25: ED[] = [
   ["title", "jumla", "تنوينلي تشديد", "Tanvinli tashdid", A.tt("p25_title"), 0, 2.00, 0, 0, 0, 0],
 
   // ── R1: 3 ربب misol — har biri (رَبَّنْ) shaklida yoyilgan ko'rinadi ──
-  // RTL audio order: rabbun (raf', damma) → rabbin (jarr, kasra) → rabban (nasb, fatha)
-  ["r1_w1_un", "soz", "رَبٌّ",  "Rabbun (raf')",  A.tt("p25_r1_w1_rabbun"), 0, 1.15, 0, 0, 0, 0],
+  // Source audio order: rabban (fatha) → rabbin (kasra) → rabbun (damma).
+  // File names match content (the spoken word), not source position.
+  ["r1_w1_un", "soz", "رَبٌّ",  "Rabbun (raf')",  A.tt("p25_r1_w1_rabbun"), 0, 1.20, 0, 0, 0, 0],
   ["r1_w2_in", "soz", "رَبٍّ",  "Rabbin (jarr)",  A.tt("p25_r1_w2_rabbin"), 0, 1.12, 0, 0, 0, 0],
-  ["r1_w3_an", "soz", "رَبًّا", "Rabban (nasb)", A.tt("p25_r1_w3_rabban"), 0, 1.20, 0, 0, 0, 0],
+  ["r1_w3_an", "soz", "رَبًّا", "Rabban (nasb)", A.tt("p25_r1_w3_rabban"), 0, 1.15, 0, 0, 0, 0],
 
   // ── R2: tanvin fatha, 6 so'z (RTL audio order) ──
   ["r2_w1", "soz", "حَبًّا", "Habban", A.tt("p25_r2_w1_habban"), 0, 1.21, 0, 0, 0, 0],
@@ -1928,51 +1929,57 @@ const p25: ED[] = [
 
   // ── R5: form II passive participles (ranglar — colors), 5 so'z ──
   ["r5_w1", "soz", "مُبَيَّضًا", "Mubayyaḍan",  A.tt("p25_r5_w1_mubayyadan"),  0, 1.85, 0, 0, 0, 0],
-  ["r5_w2", "soz", "مُسَوَّدٌ",  "Musawwadun",  A.tt("p25_r5_w2_musawwadun"),  0, 1.82, 0, 0, 0, 0],
+  ["r5_w2", "soz", "مُسَوَّدٍ",  "Musawwadin",  A.tt("p25_r5_w2_musawwadin"),  0, 1.82, 0, 0, 0, 0],
   ["r5_w3", "soz", "مُصَفَّرٌ",  "Musaffarun",  A.tt("p25_r5_w3_musaffarun"),  0, 1.78, 0, 0, 0, 0],
   ["r5_w4", "soz", "مُحَمَّرًا", "Muḥammaran",  A.tt("p25_r5_w4_muhammaran"),  0, 1.87, 0, 0, 0, 0],
-  ["r5_w5", "soz", "مُخَضَّرٌ",  "Mukhaḍḍarun", A.tt("p25_r5_w5_mukhaddarun"), 0, 1.78, 0, 0, 0, 0],
+  ["r5_w5", "soz", "مُخَضَّرٍ",  "Mukhaḍḍarin", A.tt("p25_r5_w5_mukhaddarin"), 0, 1.78, 0, 0, 0, 0],
 
   // ── R6: form VII/VIII participles (mixed tanvins), 5 so'z ──
   ["r6_w1", "soz", "مُهْتَزًّا", "Muhtazzan",  A.tt("p25_r6_w1_muhtazzan"),  0, 1.78, 0, 0, 0, 0],
-  ["r6_w2", "soz", "مُحْتَجٌّ",  "Muḥtajjun",  A.tt("p25_r6_w2_muhtajjun"),  0, 1.81, 0, 0, 0, 0],
+  ["r6_w2", "soz", "مُحْتَجٍّ",  "Muḥtajjin",  A.tt("p25_r6_w2_muhtajjin"),  0, 1.81, 0, 0, 0, 0],
   ["r6_w3", "soz", "مُنْسَدٌّ",  "Munsaddun",  A.tt("p25_r6_w3_munsaddun"),  0, 2.27, 0, 0, 0, 0],
-  ["r6_w4", "soz", "مُضْطَرٌّ",  "Muḍṭarrun",  A.tt("p25_r6_w4_mudtarrun"),  0, 2.09, 0, 0, 0, 0],
+  ["r6_w4", "soz", "مُضْطَرٍّ",  "Muḍṭarrin",  A.tt("p25_r6_w4_mudtarrin"),  0, 2.09, 0, 0, 0, 0],
   ["r6_w5", "soz", "مُخْتَصٌّ",  "Mukhtaṣṣun", A.tt("p25_r6_w5_mukhtassun"), 0, 1.94, 0, 0, 0, 0],
 
   // ── R7: form X participles (mixed tanvins), 5 so'z ──
   ["r7_w1", "soz", "مُسْتَرِدًّا", "Mustariddan",  A.tt("p25_r7_w1_mustariddan"), 0, 1.97, 0, 0, 0, 0],
-  ["r7_w2", "soz", "مُسْتَحِبٌّ",  "Mustaḥibbun",  A.tt("p25_r7_w2_mustahibbun"), 0, 2.00, 0, 0, 0, 0],
+  ["r7_w2", "soz", "مُسْتَحِبٍّ",  "Mustaḥibbin",  A.tt("p25_r7_w2_mustahibbin"), 0, 2.00, 0, 0, 0, 0],
   ["r7_w3", "soz", "مُسْتَحِلٌّ",  "Mustaḥillun",  A.tt("p25_r7_w3_mustahillun"), 0, 2.09, 0, 0, 0, 0],
   ["r7_w4", "soz", "مُسْتَدِلًّا", "Mustadillan",  A.tt("p25_r7_w4_mustadillan"), 0, 2.04, 0, 0, 0, 0],
-  ["r7_w5", "soz", "مُسْتَعِدٌّ",  "Musta'iddun",  A.tt("p25_r7_w5_mustaiddun"),  0, 3.35, 0, 0, 0, 0],
+  ["r7_w5", "soz", "مُسْتَعِدٍّ",  "Musta'iddin",  A.tt("p25_r7_w5_mustaiddin"),  0, 3.35, 0, 0, 0, 0],
 
   // ── Alif va Hamza chapter intro (audio: 37. alif va hamza.mp3 0-55s) ──
   // Title + 9 forms + 2 numbered practice rows (old / new spelling).
   // Timings remapped 2026-05-19: source has uzbek explanations between forms
   // — old cuts were 1 position ahead. New mapping uses sound-region centers.
-  ["ah_title",  "jumla", "الف و همزة", "Alif va Hamza", A.ah("p25_ah_title"), 0, 1.30, 0, 0, 0, 0],
-  // 9 graphic forms (RTL order): alif, alif-hamza-above, alif final, alif-hamza-below,
-  // waw-hamza, ya-hamza isolated, ya-hamza final, ya-hamza medial, hamza alone.
-  ["ah_f1", "harf", "ا",   "Alif",                       A.ah("p25_ah_f1_alif"),         0, 0.92, 0, 0, 0, 0],
-  ["ah_f2", "harf", "أ",   "Alif (hamza ustida)",        A.ah("p25_ah_f2_alif_hamza_a"), 0, 1.00, 0, 0, 0, 0],
-  ["ah_f3", "harf", "ـا",  "Alif (oxiri)",               A.ah("p25_ah_f3_alif_final"),   0, 0.98, 0, 0, 0, 0],
-  ["ah_f4", "harf", "إ",   "Alif (hamza ostida)",        A.ah("p25_ah_f4_alif_hamza_b"), 0, 1.40, 0, 0, 0, 0],
-  ["ah_f5", "harf", "ؤ",   "Vov + hamza",                A.ah("p25_ah_f5_waw_hamza"),    0, 0.97, 0, 0, 0, 0],
-  ["ah_f6", "harf", "ئ",   "Yo + hamza",                 A.ah("p25_ah_f6_ya_hamza_iso"), 0, 1.04, 0, 0, 0, 0],
-  ["ah_f7", "harf", "ـئ",  "Yo + hamza (oxiri)",         A.ah("p25_ah_f7_ya_hamza_fin"), 0, 1.00, 0, 0, 0, 0],
-  ["ah_f8", "harf", "ـئـ", "Yo + hamza (oʻrtasida)",     A.ah("p25_ah_f8_ya_hamza_med"), 0, 1.37, 0, 0, 0, 0],
-  ["ah_f9", "harf", "ء",   "Hamza (yolg'iz)",            A.ah("p25_ah_f9_hamza_alone"),  0, 0.73, 0, 0, 0, 0],
-  // Practice row 1 (older spelling — alif WITHOUT hamza marker):
-  ["ah_p1_w1", "soz", "اَمَرَ",   "Amara",   A.ah("p25_ah_p1_w1_amara"),   0, 1.27, 0, 0, 0, 0],
-  ["ah_p1_w2", "soz", "اَخَذَ",   "Akhadha", A.ah("p25_ah_p1_w2_akhadha"), 0, 1.45, 0, 0, 0, 0],
-  ["ah_p1_w3", "soz", "قَرَاَ",   "Qara'a",  A.ah("p25_ah_p1_w3_qaraa"),   0, 1.75, 0, 0, 0, 0],
-  ["ah_p1_w4", "soz", "يَقْرَاُ", "Yaqra'u", A.ah("p25_ah_p1_w4_yaqrau"),  0, 2.15, 0, 0, 0, 0],
-  // Practice row 2 (modern spelling — alif WITH hamza marker):
-  ["ah_p2_w1", "soz", "اَمَرَ",   "Amara",   A.ah("p25_ah_p2_w1_amara"),   0, 1.27, 0, 0, 0, 0],
-  ["ah_p2_w2", "soz", "اَخَذَ",   "Akhadha", A.ah("p25_ah_p2_w2_akhadha"), 0, 1.55, 0, 0, 0, 0],
-  ["ah_p2_w3", "soz", "قَرَأَ",   "Qara'a",  A.ah("p25_ah_p2_w3_qaraa"),   0, 1.70, 0, 0, 0, 0],
-  ["ah_p2_w4", "soz", "يَقْرَأُ", "Yaqra'u", A.ah("p25_ah_p2_w4_yaqrau"),  0, 2.10, 0, 0, 0, 0],
+  ["ah_title",  "jumla", "الف و همزة", "Alif va Hamza", A.ah("p25_ah_title"), 0, 1.90, 0, 0, 0, 0],
+  ["ah_subtitle", "jumla", "الف و همزة توقّز (٩) كورينيشده يازيلادى",
+    "Alif va hamza 9 ko'rinishda yoziladi", A.ah("p25_ah_subtitle"), 0, 3.80, 0, 0, 0, 0],
+  // 9 graphic forms (RTL order). Audio uchun manba yozuvda alohida harf
+  // talaffuzi yo'q (faqat misol so'zlar bor), shuning uchun audio: null.
+  // Vizual ko'rinish saqlanadi, click bo'lganida hech narsa eshitilmaydi.
+  ["ah_f1", "harf", "ا",   "Alif",                       null, 0, 0, 0, 0, 0, 0],
+  ["ah_f2", "harf", "أ",   "Alif (hamza ustida)",        null, 0, 0, 0, 0, 0, 0],
+  ["ah_f3", "harf", "ـا",  "Alif (oxiri)",               null, 0, 0, 0, 0, 0, 0],
+  ["ah_f4", "harf", "إ",   "Alif (hamza ostida)",        null, 0, 0, 0, 0, 0, 0],
+  ["ah_f5", "harf", "ؤ",   "Vov + hamza",                null, 0, 0, 0, 0, 0, 0],
+  ["ah_f6", "harf", "ئ",   "Yo + hamza",                 null, 0, 0, 0, 0, 0, 0],
+  ["ah_f7", "harf", "ـئ",  "Yo + hamza (oxiri)",         null, 0, 0, 0, 0, 0, 0],
+  ["ah_f8", "harf", "ـئـ", "Yo + hamza (oʻrtasida)",     null, 0, 0, 0, 0, 0, 0],
+  ["ah_f9", "harf", "ء",   "Hamza (yolg'iz)",            null, 0, 0, 0, 0, 0, 0],
+  // Practice row 1 (older spelling — alif WITHOUT hamza marker). Audio
+  // re-cut from 7-16s region of source (was incorrectly mapped to 31-42s,
+  // which contains page 26 content).
+  ["ah_p1_w1", "soz", "اَمَرَ",   "Amara",   A.ah("p25_ah_p1_w1_amara"),   0, 0.85, 0, 0, 0, 0],
+  ["ah_p1_w2", "soz", "اَخَذَ",   "Akhadha", A.ah("p25_ah_p1_w2_akhadha"), 0, 1.65, 0, 0, 0, 0],
+  ["ah_p1_w3", "soz", "قَرَاَ",   "Qara'a",  A.ah("p25_ah_p1_w3_qaraa"),   0, 0.95, 0, 0, 0, 0],
+  ["ah_p1_w4", "soz", "يَقْرَاُ", "Yaqra'u", A.ah("p25_ah_p1_w4_yaqrau"),  0, 1.30, 0, 0, 0, 0],
+  // Practice row 2 (modern spelling — alif WITH hamza marker). Re-cut from
+  // 19-28s region of source.
+  ["ah_p2_w1", "soz", "اَمَرَ",   "Amara",   A.ah("p25_ah_p2_w1_amara"),   0, 0.90, 0, 0, 0, 0],
+  ["ah_p2_w2", "soz", "اَخَذَ",   "Akhadha", A.ah("p25_ah_p2_w2_akhadha"), 0, 0.96, 0, 0, 0, 0],
+  ["ah_p2_w3", "soz", "قَرَأَ",   "Qara'a",  A.ah("p25_ah_p2_w3_qaraa"),   0, 0.92, 0, 0, 0, 0],
+  ["ah_p2_w4", "soz", "يَقْرَأُ", "Yaqra'u", A.ah("p25_ah_p2_w4_yaqrau"),  0, 1.30, 0, 0, 0, 0],
 ];
 
 // ============================================================
@@ -1983,72 +1990,73 @@ const p25: ED[] = [
 // ============================================================
 const p26: ED[] = [
   // ── R3 (eski, no explicit hamza): yaʔmuru yaʔkhudhu maʔmuur maʔkhuudh ──
-  ["r3_w1", "soz", "يَامُرُ",  "Yaʔmuru (buyuradi)",   A.ah("p26_r3_w1_yamuru"),   0, 1.05, 0, 0, 0, 0],
-  ["r3_w2", "soz", "يَاخُذُ",  "Yaʔkhudhu (oladi)",    A.ah("p26_r3_w2_yakhudhu"), 0, 1.15, 0, 0, 0, 0],
-  ["r3_w3", "soz", "مَامُورْ", "Maʔmuur (buyurilgan)", A.ah("p26_r3_w3_mamuur"),   0, 1.40, 0, 0, 0, 0],
-  ["r3_w4", "soz", "مَاخُوذْ", "Maʔkhuudh (olingan)",  A.ah("p26_r3_w4_makhuudh"), 0, 1.80, 0, 0, 0, 0],
+  // 2026-05-19: re-cut from source ~31-42s region (was incorrectly at 59-68s).
+  ["r3_w1", "soz", "يَامُرُ",  "Yaʔmuru (buyuradi)",   A.ah("p26_r3_w1_yamuru"),   0, 1.20, 0, 0, 0, 0],
+  ["r3_w2", "soz", "يَاخُذُ",  "Yaʔkhudhu (oladi)",    A.ah("p26_r3_w2_yakhudhu"), 0, 1.45, 0, 0, 0, 0],
+  ["r3_w3", "soz", "مَامُورْ", "Maʔmuur (buyurilgan)", A.ah("p26_r3_w3_mamuur"),   0, 1.70, 0, 0, 0, 0],
+  ["r3_w4", "soz", "مَاخُوذْ", "Maʔkhuudh (olingan)",  A.ah("p26_r3_w4_makhuudh"), 0, 2.10, 0, 0, 0, 0],
 
   // ── R4 (yangi, hamza belgisi bilan): same 4 words ──
-  ["r4_w1", "soz", "يَأْمُرُ",  "Yaʔmuru (buyuradi)",   A.ah("p26_r4_w1_yamuru"),   0, 1.55, 0, 0, 0, 0],
+  ["r4_w1", "soz", "يَأْمُرُ",  "Yaʔmuru (buyuradi)",   A.ah("p26_r4_w1_yamuru"),   0, 1.25, 0, 0, 0, 0],
   ["r4_w2", "soz", "يَأْخُذُ",  "Yaʔkhudhu (oladi)",    A.ah("p26_r4_w2_yakhudhu"), 0, 1.50, 0, 0, 0, 0],
   ["r4_w3", "soz", "مَأْمُورْ", "Maʔmuur (buyurilgan)", A.ah("p26_r4_w3_mamuur"),   0, 1.65, 0, 0, 0, 0],
-  ["r4_w4", "soz", "مَأْخُوذْ", "Maʔkhuudh (olingan)",  A.ah("p26_r4_w4_makhuudh"), 0, 4.15, 0, 0, 0, 0],
+  ["r4_w4", "soz", "مَأْخُوذْ", "Maʔkhuudh (olingan)",  A.ah("p26_r4_w4_makhuudh"), 0, 2.05, 0, 0, 0, 0],
 
   // ── R5: hamza-on-ya at end (ـئ): quri'a qaari'a mubtadi' mustahzi' ──
-  ["r5_w1", "soz", "قُرِئَ",     "Quriʔa (o'qildi)",     A.ah("p26_r5_w1_qurie"),     0, 2.40, 0, 0, 0, 0],
-  ["r5_w2", "soz", "قَارِئَ",    "Qaariʔa (o'quvchi)",   A.ah("p26_r5_w2_qaariea"),   0, 2.35, 0, 0, 0, 0],
-  ["r5_w3", "soz", "مُبْتَدِئْ", "Mubtadiʔ (boshlovchi)", A.ah("p26_r5_w3_mubtadie"),  0, 2.35, 0, 0, 0, 0],
-  ["r5_w4", "soz", "مُسْتَهْزِئْ", "Mustahziʔ (masxara qiluvchi)", A.ah("p26_r5_w4_mustahzie"), 0, 5.35, 0, 0, 0, 0],
+  ["r5_w1", "soz", "قُرِئَ",     "Quriʔa (o'qildi)",     A.ah("p26_r5_w1_qurie"),     0, 0.90, 0, 0, 0, 0],
+  ["r5_w2", "soz", "قَارِئَ",    "Qaariʔa (o'quvchi)",   A.ah("p26_r5_w2_qaariea"),   0, 0.95, 0, 0, 0, 0],
+  ["r5_w3", "soz", "مُبْتَدِئْ", "Mubtadiʔ (boshlovchi)", A.ah("p26_r5_w3_mubtadie"),  0, 1.30, 0, 0, 0, 0],
+  ["r5_w4", "soz", "مُسْتَهْزِئْ", "Mustahziʔ (masxara qiluvchi)", A.ah("p26_r5_w4_mustahzie"), 0, 1.75, 0, 0, 0, 0],
 
   // ── R6: hamza-on-waw (ؤ): yuʔminu muʔmin muʔadhdhin muʔallif luʔluʔ ──
-  ["r6_w1", "soz", "يُؤْمِنُ",   "Yuʔminu (iymon keltiradi)", A.ah("p26_r6_w1_yuminu"),    0, 1.25, 0, 0, 0, 0],
-  ["r6_w2", "soz", "مُؤْمِنْ",   "Muʔmin (mo'min)",           A.ah("p26_r6_w2_mumin"),     0, 1.25, 0, 0, 0, 0],
-  ["r6_w3", "soz", "مُؤَذِّنْ",  "Muʔadhdhin (azonchi)",      A.ah("p26_r6_w3_muadhdhin"), 0, 1.15, 0, 0, 0, 0],
-  ["r6_w4", "soz", "مُؤَلِّفْ",  "Muʔallif (muallif)",        A.ah("p26_r6_w4_muallif"),   0, 1.40, 0, 0, 0, 0],
-  ["r6_w5", "soz", "لُؤْلُؤْ",   "Luʔluʔ (marvarid)",         A.ah("p26_r6_w5_luulue"),    0, 1.90, 0, 0, 0, 0],
+  ["r6_w1", "soz", "يُؤْمِنُ",   "Yuʔminu (iymon keltiradi)", A.ah("p26_r6_w1_yuminu"),    0, 1.35, 0, 0, 0, 0],
+  ["r6_w2", "soz", "مُؤْمِنْ",   "Muʔmin (mo'min)",           A.ah("p26_r6_w2_mumin"),     0, 1.35, 0, 0, 0, 0],
+  ["r6_w3", "soz", "مُؤَذِّنْ",  "Muʔadhdhin (azonchi)",      A.ah("p26_r6_w3_muadhdhin"), 0, 1.50, 0, 0, 0, 0],
+  ["r6_w4", "soz", "مُؤَلِّفْ",  "Muʔallif (muallif)",        A.ah("p26_r6_w4_muallif"),   0, 1.30, 0, 0, 0, 0],
+  ["r6_w5", "soz", "لُؤْلُؤْ",   "Luʔluʔ (marvarid)",         A.ah("p26_r6_w5_luulue"),    0, 1.05, 0, 0, 0, 0],
 
   // ── R7: hamza-on-ya middle (ـئـ after long alif): qaa'il qaa'im saa'il maa'il ra'iis ──
-  ["r7_w1", "soz", "قَائِلْ",  "Qaaʔil (so'zlovchi)",     A.ah("p26_r7_w1_qaail"), 0, 2.35, 0, 0, 0, 0],
-  ["r7_w2", "soz", "قَائِمْ",  "Qaaʔim (tik turuvchi)",   A.ah("p26_r7_w2_qaaim"), 0, 2.40, 0, 0, 0, 0],
-  ["r7_w3", "soz", "سَائِلْ",  "Saaʔil (so'rovchi)",      A.ah("p26_r7_w3_saail"), 0, 2.35, 0, 0, 0, 0],
+  ["r7_w1", "soz", "قَائِلْ",  "Qaaʔil (so'zlovchi)",     A.ah("p26_r7_w1_qaail"), 0, 2.30, 0, 0, 0, 0],
+  ["r7_w2", "soz", "قَائِمْ",  "Qaaʔim (tik turuvchi)",   A.ah("p26_r7_w2_qaaim"), 0, 2.30, 0, 0, 0, 0],
+  ["r7_w3", "soz", "سَائِلْ",  "Saaʔil (so'rovchi)",      A.ah("p26_r7_w3_saail"), 0, 2.30, 0, 0, 0, 0],
   ["r7_w4", "soz", "مَائِلْ",  "Maaʔil (egiluvchi)",      A.ah("p26_r7_w4_maail"), 0, 2.30, 0, 0, 0, 0],
-  ["r7_w5", "soz", "رَئِيسْ",  "Raʔiis (rais, boshliq)",  A.ah("p26_r7_w5_raiis"), 0, 2.50, 0, 0, 0, 0],
+  ["r7_w5", "soz", "رَئِيسْ",  "Raʔiis (rais, boshliq)",  A.ah("p26_r7_w5_raiis"), 0, 1.75, 0, 0, 0, 0],
 
   // ── R8: hamza middle sukun (ـئْـ): biʔsa biʔr saʔila yasʔal masʔuul ──
-  ["r8_w1", "soz", "بِئْسَ",     "Biʔsa (qanchalik yomon!)", A.ah("p26_r8_w1_bisa"),   0, 2.05, 0, 0, 0, 0],
-  ["r8_w2", "soz", "بِئْرُ",     "Biʔr (quduq)",             A.ah("p26_r8_w2_bir"),    0, 2.25, 0, 0, 0, 0],
-  ["r8_w3", "soz", "سَئِلَ",     "Saʔila (so'radi)",         A.ah("p26_r8_w3_saila"),  0, 2.25, 0, 0, 0, 0],
-  ["r8_w4", "soz", "يَسْئَلْ",   "Yasʔal (so'raydi)",        A.ah("p26_r8_w4_yasal"),  0, 2.45, 0, 0, 0, 0],
-  ["r8_w5", "soz", "مَسْئُولْ",  "Masʔuul (mas'ul)",         A.ah("p26_r8_w5_masuul"), 0, 2.45, 0, 0, 0, 0],
+  ["r8_w1", "soz", "بِئْسَ",     "Biʔsa (qanchalik yomon!)", A.ah("p26_r8_w1_bisa"),   0, 1.15, 0, 0, 0, 0],
+  ["r8_w2", "soz", "بِئْرُ",     "Biʔr (quduq)",             A.ah("p26_r8_w2_bir"),    0, 1.15, 0, 0, 0, 0],
+  ["r8_w3", "soz", "سَأَلَ",     "Saʔala (so'radi)",         A.ah("p26_r8_w3_saala"),  0, 1.10, 0, 0, 0, 0],
+  ["r8_w4", "soz", "يَسْئَلْ",   "Yasʔal (so'raydi)",        A.ah("p26_r8_w4_yasal"),  0, 1.35, 0, 0, 0, 0],
+  ["r8_w5", "soz", "مَسْئُولْ",  "Masʔuul (mas'ul)",         A.ah("p26_r8_w5_masuul"), 0, 1.80, 0, 0, 0, 0],
 
   // ── R9: hamza after long alif (ـاءَ): shaa'a saa'a jaa'a yashaa'u masaa'u ──
-  ["r9_w1", "soz", "شَاءَ",     "Shaaʔa (xohladi)",       A.ah("p26_r9_w1_shaaa"),   0, 1.40, 0, 0, 0, 0],
-  ["r9_w2", "soz", "سَاءَ",     "Saaʔa (yomon bo'ldi)",   A.ah("p26_r9_w2_saaa"),    0, 1.20, 0, 0, 0, 0],
-  ["r9_w3", "soz", "جَاءَ",     "Jaaʔa (keldi)",          A.ah("p26_r9_w3_jaaa"),    0, 1.35, 0, 0, 0, 0],
-  ["r9_w4", "soz", "يَشَاءُ",   "Yashaaʔu (xohlaydi)",    A.ah("p26_r9_w4_yashaau"), 0, 1.30, 0, 0, 0, 0],
-  ["r9_w5", "soz", "مَسَاءُ",   "Masaaʔu (oqshom)",       A.ah("p26_r9_w5_masaau"),  0, 1.40, 0, 0, 0, 0],
+  ["r9_w1", "soz", "شَاءَ",     "Shaaʔa (xohladi)",       A.ah("p26_r9_w1_shaaa"),   0, 2.25, 0, 0, 0, 0],
+  ["r9_w2", "soz", "سَاءَ",     "Saaʔa (yomon bo'ldi)",   A.ah("p26_r9_w2_saaa"),    0, 2.35, 0, 0, 0, 0],
+  ["r9_w3", "soz", "جَاءَ",     "Jaaʔa (keldi)",          A.ah("p26_r9_w3_jaaa"),    0, 2.30, 0, 0, 0, 0],
+  ["r9_w4", "soz", "يَشَاءُ",   "Yashaaʔu (xohlaydi)",    A.ah("p26_r9_w4_yashaau"), 0, 2.25, 0, 0, 0, 0],
+  ["r9_w5", "soz", "مَسَاءُ",   "Masaaʔu (oqshom)",       A.ah("p26_r9_w5_masaau"),  0, 2.40, 0, 0, 0, 0],
 
   // ── C1 (continuation 1, no number): hamza at end after fatha+sukun-ya (ـَىْءُ) ──
-  ["c1_w1", "soz", "شَىْءُ",     "Shayʔu (narsa)",          A.ah("p26_c1_w1_shay"),  0, 2.90, 0, 0, 0, 0],
-  ["c1_w2", "soz", "جَىْءُ",     "Jayʔu (kelish)",          A.ah("p26_c1_w2_jay"),   0, 2.20, 0, 0, 0, 0],
+  ["c1_w1", "soz", "شِىْءَ",     "Shiʔa (irodalandi)",      A.ah("p26_c1_w1_shia"),  0, 1.95, 0, 0, 0, 0],
+  ["c1_w2", "soz", "جِيءَ",     "Jiʔa (keltirildi)",        A.ah("p26_c1_w2_jia"),   0, 2.20, 0, 0, 0, 0],
   ["c1_w3", "soz", "يَجِىْءُ",   "Yajiiʔu (keladi)",         A.ah("p26_c1_w3_yajii"), 0, 2.20, 0, 0, 0, 0],
-  ["c1_w4", "soz", "يُسِىْءُ",   "Yusiiʔu (yomonlik qiladi)", A.ah("p26_c1_w4_yusii"), 0, 2.25, 0, 0, 0, 0],
-  ["c1_w5", "soz", "مُسِىْءُ",   "Musiiʔu (yomon)",         A.ah("p26_c1_w5_musii"), 0, 2.30, 0, 0, 0, 0],
+  ["c1_w4", "soz", "يُسِىْءُ",   "Yusiiʔu (yomonlik qiladi)", A.ah("p26_c1_w4_yusii"), 0, 2.40, 0, 0, 0, 0],
+  ["c1_w5", "soz", "مُسِىْءُ",   "Musiiʔu (yomon)",         A.ah("p26_c1_w5_musii"), 0, 2.45, 0, 0, 0, 0],
 
-  // ── C2: hamza at end (alone — ء), various preceding vowels (vizual misol) ──
-  ["c2_w1", "soz", "شَيْءُ",     "Shayʔu (narsa)",     A.ah("p26_c23_sample"), 0, 2.50, 0, 0, 0, 0],
-  ["c2_w2", "soz", "فَيْءُ",     "Fayʔu (soya)",       A.ah("p26_c23_sample"), 0, 2.50, 0, 0, 0, 0],
-  ["c2_w3", "soz", "مِلْءُ",     "Milʔu (to'liqlik)",  A.ah("p26_c23_sample"), 0, 2.50, 0, 0, 0, 0],
-  ["c2_w4", "soz", "بَرْءُ",     "Barʔu (sog'ayish)",  A.ah("p26_c23_sample"), 0, 2.50, 0, 0, 0, 0],
-  ["c2_w5", "soz", "جُزْءُ",     "Juzʔu (qism)",       A.ah("p26_c23_sample"), 0, 2.50, 0, 0, 0, 0],
-  ["c2_w6", "soz", "قِرَاءَةْ", "Qiraaʔa (o'qish)",    A.ah("p26_c23_sample"), 0, 2.50, 0, 0, 0, 0],
+  // ── C2: hamza at end, various preceding vowels — har biri alohida audio ──
+  ["c2_w1", "soz", "شَيْءُ",     "Shayʔu (narsa)",     A.ah("p26_c2_w1_shay"),  0, 1.25, 0, 0, 0, 0],
+  ["c2_w2", "soz", "فَيْءُ",     "Fayʔu (soya)",       A.ah("p26_c2_w2_fay"),   0, 1.20, 0, 0, 0, 0],
+  ["c2_w3", "soz", "مِلْءُ",     "Milʔu (to'liqlik)",  A.ah("p26_c2_w3_mil"),   0, 1.30, 0, 0, 0, 0],
+  ["c2_w4", "soz", "بَرْءُ",     "Barʔu (sog'ayish)",  A.ah("p26_c2_w4_bar"),   0, 1.20, 0, 0, 0, 0],
+  ["c2_w5", "soz", "جُزْءُ",     "Juzʔu (qism)",       A.ah("p26_c2_w5_juz"),   0, 1.35, 0, 0, 0, 0],
+  ["c2_w6", "soz", "قِرَاءَةٌ", "Qiraaʔatun (o'qish)", A.ah("p26_c2_w6_qiraa"), 0, 2.80, 0, 0, 0, 0],
 
-  // ── C3: hamza after long waw (ـوءُ) (vizual misol, shared audio) ──
-  ["c3_w1", "soz", "سُوءُ",     "Suuʔu (yomonlik)",        A.ah("p26_c23_sample"), 0, 2.50, 0, 0, 0, 0],
-  ["c3_w2", "soz", "يَسُوءُ",   "Yasuuʔu (yomon bo'ladi)", A.ah("p26_c23_sample"), 0, 2.50, 0, 0, 0, 0],
-  ["c3_w3", "soz", "وَضُوءُ",   "Waḍuuʔu (tahorat)",       A.ah("p26_c23_sample"), 0, 2.50, 0, 0, 0, 0],
-  ["c3_w4", "soz", "قُرُوءُ",   "Quruuʔu (hayz davrlari)", A.ah("p26_c23_sample"), 0, 2.50, 0, 0, 0, 0],
-  ["c3_w5", "soz", "مُرُوءَةْ", "Muruuʔa (mardlik)",       A.ah("p26_c23_sample"), 0, 2.50, 0, 0, 0, 0],
+  // ── C3: hamza after long waw (ـوءُ) — har biri alohida audio ──
+  ["c3_w1", "soz", "سُوءُ",     "Suuʔu (yomonlik)",        A.ah("p26_c3_w1_suu"),   0, 2.10, 0, 0, 0, 0],
+  ["c3_w2", "soz", "يَسُوءُ",   "Yasuuʔu (yomon bo'ladi)", A.ah("p26_c3_w2_yasuu"), 0, 2.15, 0, 0, 0, 0],
+  ["c3_w3", "soz", "وَضُوءُ",   "Waḍuuʔu (tahorat)",       A.ah("p26_c3_w3_wadu"),  0, 2.20, 0, 0, 0, 0],
+  ["c3_w4", "soz", "قُرُوءُ",   "Quruuʔu (hayz davrlari)", A.ah("p26_c3_w4_quru"),  0, 2.20, 0, 0, 0, 0],
+  ["c3_w5", "soz", "مُرُوءَةٌ", "Muruuʔatun (mardlik)",    A.ah("p26_c3_w5_muru"),  0, 2.55, 0, 0, 0, 0],
 
   // ── Bottom R1 (after divider): al-mar' declension — nominative/accusative/genitive/nominative-tanvin ──
   ["b1_w1", "soz", "اَلْمَرْءُ", "Al-marʔu (kishi, raf')",         A.ah("p26_b1_w1_almaru"), 0, 1.65, 0, 0, 0, 0],
