@@ -325,7 +325,7 @@ const PAGE_MAP: Record<string, number[]> = {
   ls_harflar_2: [11, 12, 13, 14, 15, 16],
   ls_madlar: [17, 18, 19, 20],
   ls_tashdid: [21, 22, 23],
-  ls_tanvin: [23, 24, 25],
+  ls_tanvin: [24, 25],
   ls_alif: [25, 26, 27, 28, 29, 30],
   ls_vasl: [30, 31, 32, 33],
   ls_kalimalar: [34, 35],

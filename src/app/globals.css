@@ -22,13 +22,15 @@
   --font-arabic: "Noto Naskh Arabic Muallimi", "Noto Naskh Arabic", "Scheherazade New", "Traditional Arabic", serif;
 }
 
-/* Custom Noto Naskh — GSUB ligature uni0651+uni0650 → uni06510650 olib tashlangan,
-   shu sababli shadda+kasra kombinatsiyasi standart mark/mkmk yo'liga tushadi
-   (kasra harf OSTIDA, an'anaviy joyda). Boshqa shadda+mark ligaturlar saqlangan.
-   Build: tools/build_custom_font.py */
+/* Custom Noto Naskh — GSUB ligature uni0651+uni0650 → uni06510650 va
+   uni0651+uni064D → uni0651064D olib tashlangan, shu sababli shadda+kasra
+   va shadda+kasratan kombinatsiyalari standart mark/mkmk yo'liga tushadi
+   (kasra/kasratan harf OSTIDA, an'anaviy joyda). Boshqa shadda+mark
+   ligaturlar saqlangan. Build: tools/build_custom_font.py.
+   `?v=2` cache-buster — yangi build chiqqanidan keyin oshiriladi. */
 @font-face {
   font-family: "Noto Naskh Arabic Muallimi";
-  src: url("/fonts/NotoNaskhArabic-MuallimiSoniy.ttf") format("truetype");
+  src: url("/fonts/NotoNaskhArabic-MuallimiSoniy.ttf?v=2") format("truetype");
   font-weight: 400 700;
   font-display: swap;
 }

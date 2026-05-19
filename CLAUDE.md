@@ -135,33 +135,43 @@ Alif:                     آ      إٖى     أُو   ← آ U+0622, qolgani sta
 
 ---
 
-## 🛑 Tashdid + kasra — kasra DOIM harf OSTIDA (kitob bo'ylab)
+## 🛑 Tashdid + kasra / kasratan — DOIM harf OSTIDA (kitob bo'ylab)
 
-**Qoida**: `harf + ّ + ِ` (shadda + kasra) kombinatsiyasida kasra **harf
-ostida** (an'anaviy joyda) chizilishi shart, **shadda yonida emas**
-(kompakt kombinatsiya emas).
+**Qoida**: `harf + ّ + ِ` (shadda + kasra) yoki `harf + ّ + ٍ` (shadda +
+kasratan / tanvin kasra) kombinatsiyasida kasra/kasratan **harf ostida**
+(an'anaviy joyda) chizilishi shart, **shadda yonida emas** (kompakt
+kombinatsiya emas). Shadda esa o'z joyida — harf ustida — qoladi.
 
 ### Texnik yechim — Custom Noto Naskh (universal)
 
-Foydalanuvchi 2026-04-27 da bu xato'ni qayd etdi. Sabab: Noto Naskh
-Arabic shriftida `GSUB Lookup 5` da `uni0651 + uni0650 -> uni06510650`
-ligature qoidasi bor — bu ligature `رِّ` ni "kompakt" shaklda (kasra
-shadda yonida, harf ustida) chizadi. Foydalanuvchi global Amiri'ni rad
-etdi ("bijr-bijr tushunarsiz"); shartli Amiri (faqat shadda+kasra
-so'zlar uchun) ham rad etildi — bitta toza shrift xohlangan.
+Foydalanuvchi 2026-04-27 da shadda+kasra xato'ni qayd etdi. 2026-05-11
+da shadda+kasratan ham xuddi shu muomalaga muhtojligini aytdi
+(25-sahifa R3 da `سِتٍّ سِرٍّ` va h.k.).
 
-**Yechim**: source Noto Naskh shriftidan shu 2 ta ligature qoidasini
-(to'g'ri va teskari yo'nalish) o'chirgan custom shrift yasaymiz.
-HarfBuzz standart `mark`/`mkmk` yo'liga tushadi — kasra harf ostida
-(an'anaviy joyga) chiziladi.
+Sabab: Noto Naskh Arabic shriftida `GSUB Lookup 5` da quyidagi ligature
+qoidalari bor:
+- `uni0651 + uni0650 -> uni06510650` (shadda + kasra → kompakt)
+- `uni0651 + uni064D -> uni0651064D` (shadda + kasratan → kompakt)
+
+Bu ligature'lar kasra/kasratan'ni shadda yonida, harf ustida chizadi.
+Foydalanuvchi global Amiri'ni rad etdi ("bijr-bijr tushunarsiz"); shartli
+Amiri (faqat shadda+kasra so'zlar uchun) ham rad etildi — bitta toza
+shrift xohlangan.
+
+**Yechim**: source Noto Naskh shriftidan shu 4 ta ligature qoidasini
+(2 ligature × forward + reverse) o'chirgan custom shrift yasaymiz.
+HarfBuzz standart `mark`/`mkmk` yo'liga tushadi — kasra/kasratan harf
+ostida (an'anaviy joyga) chiziladi.
 
 **Build skripti**: `tools/build_custom_font.py`
 - Source: `muallimus-soniy/public/fonts/NotoNaskhArabic-VariableFont_wght.ttf`
 - Output: `muallimus-soniy/public/fonts/NotoNaskhArabic-MuallimiSoniy.ttf`
-- O'chiriladigan ligature: `uni06510650` (2 qoida — to'g'ri + teskari)
-- Saqlanadigan ligature: `uni0651064B`, `uni0651064D`, `uni06510670`
-  (tanvin fatha/kasratan + shadda, superscript-alef + shadda) — ularni
-  kerak qilgan boshqa joylar (Allah ligature, tanvin so'zlari) buzilmaydi
+- O'chiriladigan ligature: `uni06510650`, `uni0651064D` (4 qoida —
+  ikkalasining forward + reverse)
+- Saqlanadigan ligature: `uni0651064B`, `uni06510670` (tanvin fatha +
+  shadda, superscript-alef + shadda) — fathatan tabiatan harf ustida,
+  superscript-alef ham ustida, shu sababli ular bilan kompakt birikma
+  to'g'ri ko'rinadi
 - Family name: "Noto Naskh Arabic Muallimi" (asl Noto Naskh bilan
   kollyziya bo'lmasin)
 
@@ -182,17 +192,50 @@ HarfBuzz standart `mark`/`mkmk` yo'liga tushadi — kasra harf ostida
 `arabic-text` class allaqachon `var(--font-arabic)` ni qo'llaydi —
 custom shrift har joyda avtomatik ishlaydi.
 
-### 🚦 Yangi sahifa qurayotganda — qoida (foydalanuvchi tasdig'i 2026-04-27)
+### 🚦 BARCHA sahifalarda CUSTOM shrift majburiy (foydalanuvchi qarori 2026-05-11)
 
-> "endi shu shriftni ishlatamiz keyingi sahifalar uchun" — foydalanuvchi.
+> **"bundan keyin barcha sahifalarda shu maxsus custom shriftimizni
+> ishlatsin. Sababi: uni ishlatganimizcha boyita olamiz va aynan
+> shu rasmdagi (kitob) bilan 1:1 natija chiqara olamiz."**
+> — foydalanuvchi, 2026-05-11.
+
+**Bu — yagona haqiqat manbai (single source of truth)**. Boshqa
+shriftlar (Amiri, Scheherazade, Kitab, KFGQPC va h.k.) **vaqtinchalik
+yoki shartli ishlatilmaydi**. Bitta toza universal stack:
+`NotoNaskhArabic-MuallimiSoniy.ttf` (Custom Noto Naskh Muallimi).
+
+### Nima uchun
+
+- **1:1 reproduktivlik**: Custom shrift bizning loyihamizning aniq
+  vizual standartiga muvofiq sozlanadi (GSUB ligatures, marks,
+  positioning). Boshqa shriftlar har birining o'z bezakli farqi bor
+  ("bijr-bijr tushunarsiz", kasra yonbosh, dot/no-dot variantlar va h.k.).
+- **Boyitish imkoni**: Yangi muammo chiqsa (masalan: shadda+kasratan
+  2026-05-11 da chiqdi), source TTF dan tegishli GSUB ligature'ini
+  o'chirib qayta build qilamiz. Bu — bizning xizmatimizdagi yagona
+  texnik javob. Conditional shrift, inline `fontFamily`, yoki
+  if/else mantiqi YO'Q.
+- **Texnik avantaj**: HarfBuzz standart mark/mkmk yo'liga tushishiga
+  yo'l qo'yamiz — bu kitobning an'anaviy renderini beradi (kasra
+  ostida, shadda ustida va h.k.).
+
+### Yangi sahifa qurayotganda — checklist
 
 ✅ **Qiling**:
 - Oddiy `<ArabicEl el={...} />` yoki `<Row els={...} />` ishlating —
   custom shrift avtomatik qo'llaniladi.
-- Tashdid+kasra so'zlar (`رَبِّ`, `بُرِّ`, `كُلِّ` va h.k.) **alohida
-  muomalaga muhtoj emas** — kasra harf ostida o'z-o'zidan chiqadi.
+- Hech qanday so'z uchun maxsus muomala kerak emas — har bir tashdid +
+  kasra/kasratan/fatha/damma kombinatsiyasi kitobdagidek to'g'ri chiqadi:
+  - Tashdid+kasra: `رَبِّ`, `بُرِّ`, `كُلِّ` — kasra harf ostida (FIX 2026-04-27).
+  - Tashdid+kasratan: `سِتٍّ`, `بِرٍّ`, `حِلٍّ` — kasratan harf ostida (FIX 2026-05-11).
+  - Tashdid+fathatan: `رَبًّا`, `حَبًّا` — fathatan ustida (tabiiy).
+  - Tashdid+dammatan: `رَبٌّ`, `دُرٌّ` — dammatan ustida (tabiiy).
 
 ❌ **QILMANG**:
+- **Boshqa shriftga o'tmang.** "Bu so'z uchun Amiri yaxshiroq" yoki
+  "bu sahifada KFGQPC kerak" kabi qarorlar — **xato**. Muammoni
+  source shriftda hal qiling (`tools/build_custom_font.py` ni
+  kengaytiring).
 - `fontFamily: "'Amiri', var(--font-arabic)"` kabi inline shrift YOZMANG.
 - `hasShaddaKasra(...)` ga o'xshash tekshiruv funksiya QO'SHMANG —
   bunday funksiya kodda yo'q va kerak ham emas.
@@ -201,16 +244,43 @@ custom shrift har joyda avtomatik ishlaydi.
 - Mad sahifalar (17-21) ga ta'sir qilmang — ular `mad-arabic-text`
   class orqali alohida stack ishlatadi.
 
+### Yangi rendering muammosi chiqsa — algoritm
+
+1. Muammoni aniq ifodala: qaysi harf+harakat kombinatsiyasi xato chiqyapti?
+   Kitobdagi to'g'ri shaklini rasmdan ko'chirib ko'rsat.
+2. Source Noto Naskh shriftida tegishli GSUB Lookup'ni topish:
+   ```bash
+   cd "muallimi soniy" && python3 -c "
+   from fontTools.ttLib import TTFont
+   f = TTFont('muallimus-soniy/public/fonts/NotoNaskhArabic-VariableFont_wght.ttf')
+   gsub = f['GSUB'].table
+   for i, lk in enumerate(gsub.LookupList.Lookup):
+       print(i, lk.LookupType)
+   "
+   ```
+3. `tools/build_custom_font.py` ga muammoli ligature'ni `TARGET_LIGS`
+   set'iga qo'shing va `EXPECTED_REMOVED` ni yangi songa moslang (har
+   ligature forward + reverse = 2 qoida).
+4. Build qiling: `python3 tools/build_custom_font.py`.
+5. CSS cache-buster (`?v=N`) ni oshiring (`globals.css` da). Bu
+   browser keshini majburiy yangilaydi.
+6. Preview da tasdiqlang (hard reload kerak bo'lishi mumkin).
+7. CLAUDE.md "Tashdid + kasra / kasratan" bo'limini va memory
+   `feedback_custom_font_validated.md` ni yangilang.
+
 **Mad sahifa ta'sirsiz**: `.mad-arabic-text` class shrift stack'ida
 `"Noto Naskh Arabic"` (asl, "Muallimi" suffiksisiz) ishlatadi — mad
-logikasi (MadDammaFont + Noto Naskh + Amiri Quran) buzilmagan.
+logikasi (MadDammaFont + Noto Naskh + Amiri Quran) buzilmagan. Mad
+sahifalar uchun custom shrift TUTILMAYDI, sababi mad fatha/kasra
+yangi belgilarga (U+0670/U+0656) almashtiriladi.
 
 **Yangilash**: agar source Noto Naskh shrifti yangilansa, qayta build:
 ```bash
 python3 tools/build_custom_font.py
 ```
-Skript output'ida 6 ta ligature saqlanganini va `uni06510650` o'chirilganini
-tasdiqlaydi.
+Skript output'ida 4 ta ligature saqlanganini (`uni0651064B`,
+`uni06510670` forward + reverse) va `uni06510650`, `uni0651064D`
+o'chirilganini tasdiqlaydi.
 
 ### 5. Mad-only audio struktura (`32. madli 01.mp3`)
 
@@ -477,6 +547,52 @@ Protokol:
 1. Har so'z uchun **silence-detected tugash vaqtini oling** (PDF emas).
 2. Buffer: +100 ms (ayniqsa cho'zilgan oxiri bor so'zlar uchun).
 3. Foydalanuvchi eshitadi: "oxiri kesilgan" desa — silence boundary + 50ms ga qo'shing.
+
+### ⚠️ Audio so'z tartibi: ba'zan KITOB RTL ga TESKARI (LTR vizual tartib)
+
+**Aniqlangan 2026-05-19 da p24 da**: Tanvinli so'zlar bo'limida (R10-R14) audio
+har row ichida **kitobning RTL o'qish tartibiga TESKARI** o'qiydi — ya'ni vizual
+ko'rinish bo'yicha CHAP TOMONDAN o'ng tomonga.
+
+Misol p24 R10:
+- Kitob RTL (o'qish): `fawtu` → `fawtin` → `fawtan` → `tsawbu` → `tsawbin` → `tsawban`
+- Audio order:        `tsawban` → `tsawbin` → `tsawbu` → `fawtan` → `fawtin` → `fawtu`
+
+Yana audio xulosalari:
+- Aynan ALPHABET (p24 R1-R9) tartibi audio bilan to'g'ri keladi — alfa-betik ketma-ketlik
+  ikki yo'naltirishda ham bir xil bo'ladi (alif→ba→ta...).
+- Faqat misol so'zlar (book-specific tartib) da audio teskari o'qishi mumkin.
+
+**Aniqlash usuli — Whisper transcribe**:
+```bash
+# 1. Words bo'limini source dan kesish
+./tools/ffmpeg -y -ss <start> -i <source.mp3> -t <length> -c:a libmp3lame -b:a 192k /tmp/section.mp3
+# 2. Whisper bilan transcribe (Arabic)
+export PATH="$(pwd)/tools:$HOME/Library/Python/3.9/bin:$PATH"
+whisper /tmp/section.mp3 --model small --language Arabic --output_format json --output_dir /tmp/wh
+# 3. JSON dagi so'z tartibini kitob RTL bilan solishtiring.
+#    Mos kelmasa — cut script timings'ini har row ichida REVERSED indexing bilan yozing.
+```
+
+**Cut script da to'g'ri yozish**:
+Agar audio teskari o'qisa, har row ichida book_w01 = audio'ning **OXIRGI** segmenti
+(eng kech vaqt), book_wN = audio'ning **birinchi** segmenti (eng erta vaqt). Mapping:
+
+```bash
+# Misol R10 (audio segments 85-90, kitob w01-w06):
+cut p24_w01_fawtu    138.44 139.85  # segment 90 — audio R10 oxirgi
+cut p24_w02_fawtin   136.48 137.88  # segment 89
+cut p24_w03_fawtan   134.60 136.01  # segment 88
+cut p24_w04_thawbu   132.76 134.10  # segment 87
+cut p24_w05_thawbin  130.97 132.29  # segment 86
+cut p24_w06_thawban  129.20 130.48  # segment 85 — audio R10 birinchi
+```
+
+**Yangi sahifa qurayotganda — qoida**:
+1. Silencedetect bilan segment'larni topish (har row N segment beradi).
+2. Whisper bilan transcribe va tartibni tasdiqlash.
+3. Audio ↔ kitob RTL: ALPHABET BO'LSA — chronological (1→N). MISOL SO'Z BO'LSA —
+   reverse tekshirish shart.
 
 ### ⚠️ Arab matnni rasmdan o'qish protokoli (eng ko'p xato keladigan joy)
 
@@ -916,7 +1032,189 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   PDF `مُتَكَبِّرْ` deydi, rasm `مُتَدَبِّرْ` ko'rinadi — audio'ga ishonib
   `مُتَكَبِّرْ` qoldirildi (foydalanuvchi qayta ko'rib bersa o'zgarishi
   mumkin).
-- Barcha sahifalar tugallangan: 11-21, 23 (22 hali placeholder).
+- **Sahifa 24 tugallangan**: Tanvin alifbo mashqi (84 syllable: 28 harf
+  × 3 shakl) + 30 ta misol so'z = 114 element. Manba: `35. tanvin.mp3`
+  (3:10) ning 20.4-189.7s qismi, chunklar `35_tanvin/p24_*.mp3`.
+  Yuqori bo'lim — 3 blok × 3 qator (9+10+9 = 28 harf):
+  - Block 1 (R1-R3): fatha tanvin -an `اً بًا تًا...يًا`
+    (alifdan keyin `بًا تًا...` shaklda, fathatan'dan keyin alif odat).
+  - Block 2 (R4-R6): kasra tanvin -in `اٍ بٍ تٍ...يٍ` (alif yo'q).
+  - Block 3 (R7-R9): damma tanvin -un `اٌ بٌ تٌ...يٌ` (alif yo'q).
+  Pastki bo'lim — 5 qator × 6 so'z = 30 ta misol:
+  - R10: fawt+thawb juftliklari (raf'/jarr/nasb).
+  - R11-R14: aralash holat (turli `-un/-in/-an` so'zlari).
+  Layout: 9 alfabet qatori + 5 so'z qatori = 14 qator. `gap-0.5`,
+  `size="sm"`, `gap-1` (alifbo) va `gap-1.5` (so'zlar) bilan har qator
+  bitta viewportga sig'adi. 3 ta `<Sep>` divider (blok orasi + so'zlar
+  oldidan). Audio helper: A.tn() (35_tanvin/, 23-sahifadan ulushlanadi).
+  ID format: `r{N}_{NN}` (yuqori bo'lim — qator + 0-asoslangan pozitsiya
+  alifboda) va `wNN` (so'zlar). PDF `audio_qoidalar/` da tanvin uchun
+  PDF yo'q — vaqtlar to'liq silencedetect (-30dB/0.20s) + audio
+  tinglash bilan aniqlangan. Foydalanuvchi audio'larni eshitib
+  tasdiqlashi kerak (xato bo'lsa vaqtlar tuzatilsin).
+- **Sahifa 25 to'liq tugallangan**: Tanvinli tashdid (top, 37 element) +
+  Alif va Hamza chapter intro (bottom, 17 element, audio bilan). Jami 54
+  element. Manbalar:
+  - Top: `36. tanvinli tashdid.mp3` (1:57) — chunklar
+    `36_tanvinli_tashdid/p25_*.mp3`. Audio helper: `A.tt(name)`.
+  - Bottom: `37. alif va hamza.mp3` ning 0-55s qismi — chunklar
+    `37_alif_hamza/p25_ah_*.mp3`. Audio helper: `A.ah(name)`.
+  **Top — Tanvinli tashdid** (7 qator + clickable title + statik signs header):
+  - Title `تنوينلي تشديد` (clickable, `p25_title` 2.0s).
+  - Sub-row: `ـٌّ ـٍّ ـًّ` (statik vizual, click yo'q — chiziq ostida).
+  - R1 (3 ربب misol, RTL audio: rabbun/rabbin/rabban): har biri custom
+    `RabbCell` komponenti — `رَبٌّ - (رَبُّنْ)` formatda, expansion vizual.
+  - R2-R4 (har biri 6 so'z, `size="md"`, `gap-1.5`): tanvin fatha/kasra/damma
+    qisqa so'zlar (`حَبًّا..مَنًّا`, `سِتٍّ..بِرٍّ`, `دُرٌّ..كُلٌّ`).
+  - R5-R7 (har biri 5 so'z, `size="sm"`, `gap-1.5`): uzunroq mu- prefix
+    so'zlar — colors (form II passive: `مُبَيَّضًا..مُخَضَّرٌ`), form VII/VIII
+    (`مُهْتَزًّا..مُخْتَصٌّ`), form X (`مُسْتَرِدًّا..مُسْتَعِدٌّ`). Mixed tanvinlar.
+  - Audio orderingi RTL — kitob ko'rinishida o'ng → chap.
+  **Bottom — Alif va Hamza** (17 element, audio bilan to'liq):
+  Custom `<AlifHamzaIntro>` komponenti: clickable title `الف و همزة`
+  (`p25_ah_title` 2.30s) + statik chig'atoy izoh
+  (`الف و همزة توقّز (٩) كورينيشده يازيلادى`) + 9 clickable forms RTL row
+  (chap tomondan `١` raqami bilan markered) + 2 numbered practice rows
+  (eski/yangi imlo, har bir so'z clickable). 9 forms (har biri o'z chunk):
+  `ا أ ـا إ ؤ ئ ـئ ـئـ ء` (1.0-3.3s). Practice rows:
+  - R1 (eski): `اَمَرَ اَخَذَ قَرَاَ يَقْرَاُ` (1.32-2.20s)
+  - R2 (yangi): `اَمَرَ اَخَذَ قَرَأَ يَقْرَأُ` (1.00-2.15s)
+  Audio chunklar `tools/cut_p25_alifhamza.sh` orqali kesilgan. Vaqtlar
+  silencedetect (-30dB/0.15s) bilan aniqlangan, foydalanuvchi qayta
+  eshitib tasdiqlasa o'zgarishi mumkin.
+- **Sahifa 26 tugallangan**: Hamza misollari — 56 element (10 top row +
+  divider + 2 bottom row). Audio: `37. alif va hamza.mp3` (3:36) ning
+  59-216s qismi, chunklar `37_alif_hamza/p26_*.mp3` (46 chunk).
+  Audio helper `A.ah` davom etadi (25-sahifa bilan ulushlanadi).
+  **Top section** (12 visual qator):
+  - R3 (eski, 4): `يَامُرُ يَاخُذُ مَامُورْ مَاخُوذْ` (hamzasiz).
+  - R4 (yangi, 4): `يَأْمُرُ يَأْخُذُ مَأْمُورْ مَأْخُوذْ` (hamza bilan).
+  - R5 (4): `قُرِئَ قَارِئَ مُبْتَدِئْ مُسْتَهْزِئْ` (hamza on ya at end).
+  - R6 (5): `يُؤْمِنُ مُؤْمِنْ مُؤَذِّنْ مُؤَلِّفْ لُؤْلُؤْ` (hamza on waw).
+  - R7 (5): `قَائِلْ قَائِمْ سَائِلْ مَائِلْ رَئِيسْ` (hamza on ya, middle after alif).
+  - R8 (5): `بِئْسَ بِئْرُ سَئِلَ يَسْئَلْ مَسْئُولْ` (hamza on ya, middle sukun).
+  - R9 (5): `شَاءَ سَاءَ جَاءَ يَشَاءُ مَسَاءُ` (hamza after long alif).
+  - C1 (5, unnumbered): `شَىْءُ جَىْءُ يَجِىْءُ يُسِىْءُ مُسِىْءُ` (hamza ـَىْءُ).
+  - C2 (6, unnumbered): `شَيْءُ فَيْءُ مِلْءُ بَرْءُ جُزْءُ قِرَاءَةْ` (hamza at end).
+  - C3 (5, unnumbered): `سُوءُ يَسُوءُ وَضُوءُ قُرُوءُ مُرُوءَةْ` (hamza after long waw).
+  **Bottom section** (divider'dan keyin, 2 qator):
+  - Rb1 (4): `اَلْمَرْءُ اِمْرَأً اِمْرِئٍ اِمْرُؤٌ` — al-mar' declension.
+  - Rb2 (4): `اَلْجُزْءُ جُزْأَهَا جُزْئِهَا جُزْؤُهَا` — al-juz' possessive forms.
+  Komponent: `P26NumberedRow` (kichik raqam o'ngda + so'zlar markazda).
+  Audio readings: R3-R9 + C1 (37 chunk) + Rb1/Rb2 (8 chunk) + C2/C3 shared
+  sample chunk (1 chunk, 11 vizual elementga biriktirilgan — chunk
+  186.30-188.80s vaqtdan, kitobda C2/C3 audio bilan yo'q, vizual misol).
+  Cut script: `tools/cut_p26.sh`.
+- **Sahifa 28 to'liq tugallangan**: Yaa Alifiyya + Vav Alifiyya + Yozilsada
+  o'qilmaydigan harflar — 3 blok, 39 element (3 clickable block intro + 5
+  statik chig'atoy subtitle + 36 so'z). Audio'lar:
+  - **Block 1 (Yaa Alifiyya, 20 so'z)** + **Block 2 (Vav Alifiyya, 6 so'z)**:
+    `39. yoz-o'qiladigan.mp3` (3:07). Chunklar `39_yoz_oqiladigan/p28_*.mp3`.
+    Element ID: `b1_intro` (12.1s narration), `r1_w1..r1_w6` (Row 1 ila/ala/lada/
+    mata/anna/hatta), `r2_w1..r2_w5` (isa/musa/a'la/ta'ala/shatta), `r3_w1..r3_w4`
+    (yahya/murtada/yatazakka/fatarda), `r4_w1..r4_w5` (sawwayha/dassayha/
+    zakkayha/fasawwayha/uqbayha), `b2_intro` (11.3s), `r5_w1..r5_w6`
+    (salat/zakat/dhakat/hayat/ghadat/riba).
+  - **Block 3 (Yozilsada o'qilmaydigan, 10 so'z)**: `40. yozilsa-o'qilmaydi.mp3`
+    (5:17, faqat 0-55s qismi). Chunklar `40_yozilsa_oqilmaydi/p28_*.mp3`.
+    Element ID: `b3_title` (2.95s), `r6_w1..r6_w5` (ulu/ula/ulati/ulai/ulaika),
+    `r7_w1..r7_w5` (amanu/aminu/qalu/i'lamu/i'malu). 40-audio'ning 55s+
+    qismi 29-sahifa Shamsiya harflar uchun (`p29_s1..s3_*.mp3` chunklar mavjud,
+    elements.ts da hali ulanmagan).
+  - Audio helperlar: `A.yoz()` (39_yoz_oqiladigan/), `A.yo()` (40_yozilsa_oqilmaydi/).
+  - Cut script: `tools/cut_p28.sh`.
+  - Layout: 3 ta `BlockTitle` (clickable, kichik h3) + 5 ta `SubText` (statik
+    chig'atoy turkiy izoh, `text-[9.5px]`) + 7 ta `Row` (gap-1.5/gap-2/gap-1,
+    `size="sm"`). 2 ta `Sep` divider blok orasida. `gap-0` outer container —
+    barcha element bitta viewportga sig'adi.
+  - Audio timings birinchi versiya silencedetect -32dB/0.30s asoslangan,
+    foydalanuvchi tinglab tasdiqlasa/tuzatsa cut_p28.sh yangilanadi.
+- **Sahifa 29 tugallangan**: Shamsiya harflar (o'rta alif/lam o'qilmaydi) — 3 bo'lim,
+  45 element (3 clickable section title + 42 so'z/ibora). Audio manba:
+  `40. yozilsa-o'qilmaydi.mp3` (5:17) ning 76.58-316.55s qismi (28-sahifa
+  pastki 0-58.9s, 29-sahifa keyin). Page boundary big silence gap 73.54-76.58s
+  da. Chunklar `40_yozilsa_oqilmaydi/p29_s{1..3}_*.mp3` (45 chunk).
+  Audio helper `A.yo()` (28-sahifa bilan ulushlanadi).
+  - **Section 1 — O'rta alif o'qilmaydi** (76.58-157.41s, 15 element):
+    - Title narration: `اوشبو سوزلر کبی سوزلرده اورتاده‌گی الفلر هم اوقیلمیدی`.
+    - R1 (5 so'z): `بِالْغَيْبِ وَبِالْاٰخِرَةِ كَالْفَرَاشِ وَالْعَصْرِ وَانْحَرْ`.
+    - R2 (3 ibora): `وَالْمُشْرِكِينَ ، رَبِّ الْعَالَمِينَ ، صِرَاطَ الَّذِينَ`.
+    - R3 (3 ibora): `غَيْرِ الْمَغْضُوبِ ، هُمُ الْمُفْلِحُونَ ، لَيْلَةُ الْقَدْرِ`.
+    - R4 (3 ibora): `حَذَرَ الْمَوْتِ ، وَاِذَا اسْتَسْقَى ، اَنْفُسَكُمُ اسْتَكْبَرْتُمْ`.
+  - **Section 2 — O'rta lam o'qilmaydi** (160.50-216.30s, 15 element):
+    - Title narration: `اوشبو سوزلر کبی سوزلرده اورتاده‌گی لاملر هم اوقیلمیدی`.
+    - R1 (5 so'z): `اَلتَّبَعُ اَلثَّمَرُ اَلدَّخَلُ اَلذَّهَبُ اَلرَّصَدُ`.
+    - R2 (5 so'z): `اَلزَّبَدُ اَلسَّفَرُ اَلشَّجَرُ اَلصَّفَرُ اَلضَّرَرُ`.
+    - R3 (4 so'z): `اَلطَّلَبُ اَلظَّفَرُ اَللَّهَبُ اَلنَّسَبُ`.
+  - **Section 3 — Boshqa so'z qo'shilganda alif+lam ikkalasi ham o'qilmaydi**
+    (216.30-316.55s, 15 element):
+    - Title narration (2-line chig'atoy): `اوشبو سوزلر کبی سوزلرگه باشقه بر سوز قوشیب اوقیغانده الفلری هم لاملری هم اوقیلمیدی`.
+    - R1 (4 phrase): `هُوَ التَّبَعُ ، هُوَ الثَّمَرُ ، هُوَ الدَّخَلُ ، هُوَ الذَّهَبُ`.
+    - R2 (4 phrase): `هُوَ الرَّصَدُ ، هُوَ الزَّبَدُ ، هُوَ السَّفَرُ ، هُوَ الشَّجَرُ`.
+    - R3 (3 phrase): `هُوَ الصَّفَرُ ، هُوَ الضَّرَرُ ، هُوَ الطَّلَبُ`.
+    - R4 (3 phrase): `هُوَ الظَّفَرُ ، هُوَ اللَّهَبُ ، هُوَ النَّسَبُ`.
+  - Cut script: `tools/cut_p29.sh` (silencedetect -30dB/0.30s + buffers).
+  - Layout: 3 ta `SectionTitle` (clickable narration, `text-[clamp(0.6rem,2.9cqi,0.78rem)]`,
+    `leading-tight`, `py-0`) + 11 ta `Row` (`size="sm"`, gap-1/gap-1.5) +
+    2 ta `Sep` divider (`my-0.5`). `gap-0` outer container — barcha element bitta
+    viewportga sig'adi (oxirgi qator pastki fade bilan biroz xira).
+  - Vaqtlar silencedetect avto-kesilgan birinchi versiya — foydalanuvchi
+    audio'larni eshitib tasdiqlasa, mos kelmagan chunks `cut_p29.sh` orqali
+    qayta kesilsin (ayniqsa Section 3 keyingi qatorlari, ba'zi chunklar
+    uzun chiqdi — 5-21s, takror o'qish yoki tushuntirish ham bo'lishi mumkin).
+- **Sahifa 27 tugallangan**: Ta marbuta (`ة ـة = ت`) + Muqaddara (Alif/Yā/Vāv
+  yashirin). Jami 49 element.
+  - Yuqori bo'lim (17 element, `38. t-marbuta.mp3` 82s): head (`ة ـة = ت`)
+    + R1 5 so'z (`عَزِيزَةٌ فَرِيدَةٌ حَمِيدَةٌ سَعِيدَةٌ شَهِيدَةٌ`) +
+    R2 5 so'z (`جَمِيلَةٌ حَلِيمَةٌ سَلِيمَةٌ شَرِيفَةٌ نَعِيمَةٌ`) +
+    R3 6 so'z, 3 juftlik singular/plural (`مَرَّةٌ-مَرَّاتٌ، كَرَّةٌ-كَرَّاتٌ،
+    حُرَّةٌ-حُرَّاتٌ`). Chunklar `38_t_marbuta/p27_*.mp3`.
+  - Pastki bo'lim (32 element, `39. yoz-o'qiladigan.mp3` 188s, ulushli 28-sahifa
+    bilan): subtitle (`يازلماسه‌ده اوقيلاديگان حرفلر`) + 3 ta Muqaddara bo'limi:
+    - **Alif Muqaddara** (14 element): intro narration + R1 4 so'z
+      (`إِلٰهُ(اِلٰاهُ) رَحْمٰنْ قُرْءَانْ هٰذَا`) + R2 5 so'z
+      (`ذٰلِكَ هٰؤُلَاءِ لٰكِنْ ءَامَنَ ءَادَمُ`) + R3 5 so'z
+      (`اٰخَرُ اٰمَنَّا اِبْرٰهِيمْ اِسْمٰعِيلْ اِسْحٰقْ`).
+    - **Yā Muqaddara** (6 element): intro + R1 5 so'z
+      (`بِهٖ(بِهٖی) بِاَمْرِهٖ بِحُكْمِهٖ بِقُدْرَتِهٖ هٰذِهٖ`).
+    - **Vāv Muqaddara** (10 element): intro + R1 5 so'z
+      (`لَهُ(لَهُو) اَمْرُهُ حُكْمُهُ قُدْرَتُهُ مَالُهُ`) + R2 4 so'z
+      (`دَاوُدْ طَاوُسْ رُؤُسْ يَقْرَؤُنْ`).
+    Chunklar `39_yoz_oqiladigan/p27_*.mp3`. Audio helper `A.tm()` va `A.yoz()`.
+  - Cut script: `tools/cut_p27.sh`. Layout: BlockTitle + Row + Row + custom
+    PairRow (3 juftlik tire bilan) + Sep + BlockTitle + 3 Muqaddara bo'lim
+    (har biri BlockTitle + 1-3 ta Row, `size="sm"`, `gap-1/1.5`).
+  - Vaqtlar silencedetect -30dB/d=0.5–0.7 asoslangan (yuqori bo'lim 38.mp3
+    da 34 segment / 17 element = aniq, har element 2 marta o'qilgan). Pastki
+    bo'lim mapping audio strukturasi noaniq bo'lgani sababli taxminiy —
+    foydalanuvchi tinglab tasdiqlasa, mos kelmagan chunks `cut_p27.sh` orqali
+    qayta kesilsin (so'z-chunk biriktirish noto'g'ri bo'lishi mumkin).
+- **Sahifa 30 tugallangan**: Alif-lom vasl davomi (top, 21 ibora 6 qatorda) +
+  Vasl bo'limi intro (bottom, 8 ibora 4 qator × 2 ustun). Jami 29 clickable
+  element + 4 statik matn blok (top chig'atoy qoidasi, vasl title, vasl
+  chig'atoy qoidasi, footnote). Audio manba: `37. alif va hamza.mp3` (3:36)
+  ning 119.31-216.05s qismi, chunklar `37_alif_hamza/p30_*.mp3` (29 chunk).
+  Audio helper `A.ah` (25, 26-sahifa bilan ulushlanadi).
+  **Top section** (6 qator, alif-lom vasl misollar, `size="sm"` `gap-1.5`):
+  - R1 (4): `هٰذَا الْبَلَدُ ، مَا الْقَارِعَةُ ، مَا الْحُطَمَةُ ، هٰذَا الَّذِى`.
+  - R2 (3): `مَنْ ذَا الَّذِى ، تَحْتَهَا الْأَنْهَارُ ، فَقُلْنَا اضْرِبْ`.
+  - R3 (3): `بِئْسَ الِاسْمُ ، اِهْدِنَا الصِّرَاطَ ، يَا أَيُّهَا النَّاسُ`.
+  - R4 (4): `اِلَى النَّاسِ ، عَلَى النَّاسِ ، فِى الْأَرْضِ ، فِى الصُّدُورِ`.
+  - R5 (4): `قَالُوا اتَّخَذَ ، قَالُوا ادْعُ ، لَقُوا الَّذِينَ ، اُوتُوا الْكِتَابَ`.
+  - R6 (3): `وَاَقِيمُوا الصَّلٰوةَ ، وَاٰتُوا الزَّكٰوةَ ، وَعَمِلُوا الصّٰلِحٰت`.
+  **Bottom section** (vasl title + chig'atoy rule + 4 qator 2 ustun, 3-so'zli vasl):
+  - B1: `اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ` | `وَهٰذَا الْبَلَدُ الْأَمِينَ`.
+  - B2: `نَارُ اللهِ الْمُوقَدَةُ` | `كَمَثَلِ الَّذِى اسْتَوْقَدَ`.
+  - B3: `فَاتَّقُوا النَّارَ الَّتِى` | `هُوَ التَّوَّابُ الرَّحِيمُ`.
+  - B4: `ذُو الْفَضْلِ الْعَظِيمِ` | `اَنْتَ الْعَزِيزُ الْحَكِيمُ`.
+  Chig'atoy qoidalar va Vasl title audio'da narrate qilinmagan (faqat 29
+  arab iborani audio'da reader o'qigan: 21 top + 8 bottom). Top section
+  audio: 119.31-188.84s; 4.54s break; bottom section: 193.23-216.15s.
+  Vaqtlar silencedetect -28dB/d=0.35 + buffers asoslangan — foydalanuvchi
+  audio'larni eshitib tasdiqlasa, mos kelmagan chunks `cut_p30.sh` orqali
+  qayta kesilsin. Cut script: `tools/cut_p30.sh`.
+- Barcha sahifalar tugallangan: 11-21, 23, 24, 25, 26, 27, 28, 29, 30 (faqat 22
+  hali placeholder).
 
 ### Tarkibiy ma'lumot
 
@@ -1005,6 +1303,40 @@ Sahifa o'zgarganda: audio to'xtaydi, faol element tozalanadi, progress saqlanadi
 - **Tugma o'lchamlari**: minimal touch target — 36×36 (kichik), 40×40 (asosiy).
 - **Border-radius**: kartalar `rounded-[28px]`, tugmalar `rounded-2xl` yoki
   `rounded-xl`.
+
+## 🛑 Element tanlanganda — boshqalar XIRA QILINMAYDI
+
+**Qoida (foydalanuvchi qarori 2026-05-19)**: Foydalanuvchi sahifadagi qaysidir
+elementga bossanda — **faqat o'sha element belgilanadi** (yashil background,
+border, scale, glow). **Qolgan elementlar opacity'si o'zgarmaydi** — ular
+ham to'liq ko'rinib turaveradi.
+
+### Nima uchun
+
+Avval `hasActive && !isActive ? 0.25 : 1` pattern bilan boshqa elementlar
+xiralashar edi (visual focus). Foydalanuvchi buni rad etdi: kontekst
+yo'qoladi, o'qish jarayonida boshqa so'zlarni ko'rib turish kerak.
+
+### Texnik
+
+`RenderedPage.tsx` va `ElementOverlay.tsx` da:
+- ❌ **YOZMANG**: `opacity: hasActive && !isActive ? 0.25 : 1`
+- ❌ **YOZMANG**: `opacity: dimmed ? 0.35 : 1` (yoki `ruleDimmed`/`signDimmed`/`exDimmed`)
+- ❌ **YOZMANG**: `const dimmed = hasActive && !isActive;` (faqat opacity uchun
+  ishlatilgan)
+- ✅ **TO'G'RI**: active element uchun `backgroundColor`, `border`, `boxShadow`,
+  `transform: scale(...)` — boshqalari uchun **hech narsa** (opacity 1 default).
+
+### Yangi sahifa qurayotganda
+
+Element button'larida `style={...}` ichida shartli opacity **MUTLAQO**
+qo'ymang. Faqat:
+- `backgroundColor: isActive ? "var(--color-primary)" : "transparent"`
+- `color: isActive ? "#ffffff" : "var(--color-text-main)"`
+- `boxShadow`, `transform`, `border` — active uchun, aks holda neutral.
+
+Decorative static opacity (`opacity: 0.7` "=" belgisi uchun va h.k.) — bu
+boshqa narsa, qoidaga ta'sir qilmaydi.
 
 ## Mas'uliyat / o'zgartirish qoidalari
 

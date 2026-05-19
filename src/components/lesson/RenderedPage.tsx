@@ -74,7 +74,6 @@ function ArabicEl({
         border: isActive ? "2px solid var(--color-primary)" : "2px solid transparent",
         boxShadow: isActive ? "0 8px 28px var(--color-primary-glow)" : "none",
         transform: isActive ? "scale(1.18)" : "none",
-        opacity: hasActive && !isActive ? 0.25 : 1,
         textShadow: isActive ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
       }}
     >
@@ -253,7 +252,6 @@ function Page0({ elements, activeId, hasActive, onElementClick }: PP) {
           backgroundColor: isActive ? "var(--color-primary)" : "transparent",
           boxShadow: isActive ? "0 8px 28px var(--color-primary-glow)" : "none",
           transform: isActive ? "scale(1.05)" : "none",
-          opacity: hasActive && !isActive ? 0.3 : 1,
           textShadow: isActive ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
         }}
       >
@@ -290,7 +288,6 @@ function Page0({ elements, activeId, hasActive, onElementClick }: PP) {
             color: activeId === yoki.id ? "#ffffff" : "var(--color-text-main)",
             backgroundColor: activeId === yoki.id ? "var(--color-primary)" : "transparent",
             boxShadow: activeId === yoki.id ? "0 6px 20px var(--color-primary-glow)" : "none",
-            opacity: hasActive && activeId !== yoki.id ? 0.3 : 1,
             textShadow: activeId === yoki.id ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
           }}
         >
@@ -340,7 +337,6 @@ function Page1({ elements, activeId, hasActive, onElementClick }: PP) {
             backgroundColor: activeId === bismillah.id ? `${ELEMENT_COLORS.jumla}18` : "transparent",
             border: activeId === bismillah.id ? `2px solid ${ELEMENT_COLORS.jumla}` : "2px solid transparent",
             boxShadow: activeId === bismillah.id ? `0 4px 20px ${ELEMENT_COLORS.jumla}40` : "none",
-            opacity: hasActive && activeId !== bismillah.id ? 0.5 : 1,
           }}
         >
           {bismillah.arabic}
@@ -382,7 +378,6 @@ function SentenceBtn({
         color: isActive ? "#ffffff" : "var(--color-text-main)",
         backgroundColor: isActive ? "var(--color-primary)" : "transparent",
         boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
-        opacity: hasActive && !isActive ? 0.25 : 1,
         textShadow: isActive ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
       }}
     >
@@ -416,7 +411,6 @@ function RuleBlock({
         color: isActive ? "#ffffff" : "var(--color-text-muted)",
         backgroundColor: isActive ? "var(--color-primary)" : "transparent",
         boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
-        opacity: hasActive && !isActive ? 0.3 : 1,
         textShadow: isActive ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
       }}
     >
@@ -455,7 +449,6 @@ function Page3({ elements, activeId, hasActive, onElementClick }: PP) {
             color: activeId === bismillah.id ? "#ffffff" : "var(--color-text-main)",
             backgroundColor: activeId === bismillah.id ? "var(--color-primary)" : "transparent",
             boxShadow: activeId === bismillah.id ? "0 6px 20px var(--color-primary-glow)" : "none",
-            opacity: hasActive && activeId !== bismillah.id ? 0.25 : 1,
             textShadow: activeId === bismillah.id ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
             fontSize: "clamp(1rem, 5.8vw, 2.25rem)",
             lineHeight: 1.4,
@@ -844,7 +837,6 @@ function MadRule({
   onClick?: (el: Element) => void;
 }) {
   const clickable = !!rule && !!onClick;
-  const dimmed = hasActive && !isActive;
   const content = (
     <>
       <div className="flex items-center justify-between gap-2">
@@ -913,7 +905,7 @@ function MadRule({
           onClick!(rule!);
         }}
         className={baseClass}
-        style={{ ...activeStyle, opacity: dimmed ? 0.35 : 1 }}
+        style={activeStyle}
       >
         {content}
       </button>
@@ -941,7 +933,6 @@ function TashdidRule({
   onClick?: (el: Element) => void;
 }) {
   const clickable = !!rule && !!onClick;
-  const dimmed = hasActive && !isActive;
   const content = (
     <>
       <div className="flex items-center justify-between gap-2">
@@ -1013,7 +1004,7 @@ function TashdidRule({
           onClick!(rule!);
         }}
         className={baseClass}
-        style={{ ...activeStyle, opacity: dimmed ? 0.35 : 1 }}
+        style={activeStyle}
       >
         {content}
       </button>
@@ -1043,7 +1034,6 @@ function TanvinRule({
 }) {
   const ruleClickable = !!rule;
   const ruleActive = !!rule && activeId === rule.id;
-  const ruleDimmed = hasActive && !ruleActive;
 
   return (
     <div className="w-full rounded-xl border border-primary/20 bg-primary/5 px-3 py-1.5">
@@ -1053,7 +1043,6 @@ function TanvinRule({
           onClick={(e) => { e.stopPropagation(); onClick(rule); }}
           className="w-full flex items-center justify-between gap-2 element-spring rounded-md"
           style={{
-            opacity: ruleDimmed ? 0.35 : 1,
             backgroundColor: ruleActive ? "rgba(34,197,94,0.12)" : "transparent",
             boxShadow: ruleActive ? "0 6px 20px var(--color-primary-glow)" : "none",
           }}
@@ -1089,8 +1078,6 @@ function TanvinRule({
           const ex = examples[i];
           const signActive = activeId === sign.id;
           const exActive = ex && activeId === ex.id;
-          const signDimmed = hasActive && !signActive;
-          const exDimmed = hasActive && !exActive;
           const expandMatch = ex?.uzbek.match(/=\s*(.+?)\)/);
           const expand = expandMatch ? expandMatch[1] : "";
           return (
@@ -1100,7 +1087,6 @@ function TanvinRule({
                 onClick={(e) => { e.stopPropagation(); onClick(sign); }}
                 className="element-spring rounded-md px-2 py-0.5"
                 style={{
-                  opacity: signDimmed ? 0.35 : 1,
                   backgroundColor: signActive ? "var(--color-primary)" : "transparent",
                   color: signActive ? "#ffffff" : "var(--color-text-main)",
                   boxShadow: signActive ? "0 6px 20px var(--color-primary-glow)" : "none",
@@ -1127,7 +1113,6 @@ function TanvinRule({
                   style={{
                     backgroundColor: exActive ? "var(--color-primary)" : "transparent",
                     color: exActive ? "#ffffff" : "var(--color-text-main)",
-                    opacity: exDimmed ? 0.25 : 1,
                     boxShadow: exActive ? "0 4px 14px var(--color-primary-glow)" : "none",
                     transform: exActive ? "scale(1.06)" : "none",
                     border: exActive ? "2px solid var(--color-primary)" : "2px solid transparent",
@@ -1228,7 +1213,6 @@ function Page17({ elements, activeId, hasActive, onElementClick }: PP) {
         style={{
           backgroundColor: titleActive ? "rgba(34,197,94,0.12)" : "transparent",
           boxShadow: titleActive ? "0 6px 20px var(--color-primary-glow)" : "none",
-          opacity: hasActive && !titleActive ? 0.35 : 1,
         }}
       >
         <h3 className="mad-arabic-text text-xl text-text-secondary">
@@ -1339,7 +1323,6 @@ function Page18({ elements, activeId, hasActive, onElementClick }: PP) {
           style={{
             backgroundColor: activeId === outro.id ? "rgba(34,197,94,0.12)" : "transparent",
             boxShadow: activeId === outro.id ? "0 6px 20px var(--color-primary-glow)" : "none",
-            opacity: hasActive && activeId !== outro.id ? 0.35 : 1,
           }}
         >
           <p className="text-[11px] leading-snug text-text-muted">
@@ -1506,7 +1489,6 @@ function Page21({ elements, activeId, hasActive, onElementClick }: PP) {
           const elem = el(id);
           if (!elem) return null;
           const isActive = activeId === elem.id;
-          const dimmed = hasActive && !isActive;
           return (
             <button
               key={id}
@@ -1516,7 +1498,6 @@ function Page21({ elements, activeId, hasActive, onElementClick }: PP) {
               style={{
                 backgroundColor: isActive ? "var(--color-primary)" : "transparent",
                 color: isActive ? "#ffffff" : "var(--color-text-main)",
-                opacity: dimmed ? 0.25 : 1,
                 boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
                 transform: isActive ? "scale(1.1)" : "none",
                 border: isActive ? "2px solid var(--color-primary)" : "2px solid transparent",
@@ -1666,89 +1647,548 @@ function Page24({ elements, activeId, hasActive, onElementClick }: PP) {
 }
 
 function Page25({ elements, activeId, hasActive, onElementClick }: PP) {
-  const { els } = usePageElements(elements, 25);
+  const { el, els } = usePageElements(elements, 25);
+  const title = el("title");
+  const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-0.5" />;
+
+  // Header signs row — visual only (ـٌّ ـٍّ ـًّ above row 1, RTL)
+  const SignsHeader = () => (
+    <div dir="rtl" className="flex justify-center items-center gap-[clamp(0.85rem,4.5cqi,1.6rem)] -mb-1 pb-0.5 border-b border-text-muted/20 w-[55%]">
+      <span className="arabic-text text-text-muted text-[clamp(0.95rem,5cqi,1.25rem)] leading-none" style={{ fontFamily: "var(--font-arabic)" }}>ـٌّ</span>
+      <span className="arabic-text text-text-muted text-[clamp(0.95rem,5cqi,1.25rem)] leading-none" style={{ fontFamily: "var(--font-arabic)" }}>ـٍّ</span>
+      <span className="arabic-text text-text-muted text-[clamp(0.95rem,5cqi,1.25rem)] leading-none" style={{ fontFamily: "var(--font-arabic)" }}>ـًّ</span>
+    </div>
+  );
+
+  // R1 misol — har bir element kitobda "رَبٌّ - (رَبُّنْ)" formatda. Click bilan
+  // tanvin+tashdid o'qilishi ijro etiladi; expansion (رَبُّنْ) faqat vizual.
+  const RabbCell = ({ id, expand }: { id: string; expand: string }) => {
+    const e = el(id);
+    if (!e) return null;
+    const isActive = activeId === e.id;
+    return (
+      <button
+        onClick={(ev) => { ev.stopPropagation(); onElementClick(e); }}
+        dir="rtl"
+        className="inline-flex items-baseline gap-0.5 px-1.5 py-0 rounded-md element-spring"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-main)",
+          boxShadow: isActive ? "0 4px 14px var(--color-primary-glow)" : "none",
+          transform: isActive ? "scale(1.06)" : "none",
+          border: isActive ? "2px solid var(--color-primary)" : "2px solid transparent",
+        }}
+      >
+        <span className="arabic-text font-bold text-[clamp(0.85rem,5cqi,1.1rem)]" style={{ fontFamily: "var(--font-arabic)" }}>
+          {e.arabic}
+        </span>
+        <span className="text-[10px] opacity-60">−</span>
+        <span className="arabic-text text-[clamp(0.65rem,3.5cqi,0.85rem)] opacity-60" style={{ fontFamily: "var(--font-arabic)" }}>
+          ({expand})
+        </span>
+      </button>
+    );
+  };
+
   return (
-    <div className="flex flex-col items-center gap-1">
-      <Title text="تنوینلی تشدید" sub="Tanvinli tashdid" />
-      <Row els={els(["01"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
-      <Row els={els(["02","03","04"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["05"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["06","07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
-      <Divider />
-      <Title text="الف و همزه" sub="Alif va Hamza" />
-      <Row els={els(["08"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
-      <Row els={els(["09","10","11","12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-2" />
+    <div className="flex flex-col items-center gap-0">
+      {/* ── Tanvinli tashdid sarlavhasi (clickable) ── */}
+      {title && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onElementClick(title); }}
+          className="element-spring rounded-md px-2 py-0"
+          style={{
+            backgroundColor: activeId === title.id ? "var(--color-primary)" : "transparent",
+            color: activeId === title.id ? "#ffffff" : "var(--color-text-secondary)",
+            boxShadow: activeId === title.id ? "0 6px 20px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <h3 className="arabic-text text-sm font-bold" style={{ fontFamily: "var(--font-arabic)" }}>
+            {title.arabic}
+          </h3>
+        </button>
+      )}
+
+      {/* ── Header: 3 ta tanvin+tashdid signs (vizual marker) ── */}
+      <SignsHeader />
+
+      {/* ── R1: 3 ربب misol (RTL: rabbun, rabbin, rabban) — har biri (رَبَّنْ) bilan ── */}
+      <div dir="rtl" className="flex w-full justify-around items-center gap-1 mt-0.5">
+        <RabbCell id="r1_w1_un" expand="رَبُّنْ" />
+        <RabbCell id="r1_w2_in" expand="رَبِّنْ" />
+        <RabbCell id="r1_w3_an" expand="رَبَّنْ" />
+      </div>
+
+      {/* ── R2-R4: tanvin fatha/kasra/damma (har birida 6 so'z) ── */}
+      <Row els={els(["r2_w1","r2_w2","r2_w3","r2_w4","r2_w5","r2_w6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["r3_w1","r3_w2","r3_w3","r3_w4","r3_w5","r3_w6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["r4_w1","r4_w2","r4_w3","r4_w4","r4_w5","r4_w6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
+      {/* ── R5-R7: prefix mu- bilan uzunroq so'zlar (5 ta har biri) ── */}
+      <Row els={els(["r5_w1","r5_w2","r5_w3","r5_w4","r5_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["r6_w1","r6_w2","r6_w3","r6_w4","r6_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["r7_w1","r7_w2","r7_w3","r7_w4","r7_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+
+      <Sep />
+
+      {/* ── Alif va Hamza (yangi bob — vizual intro + audio) ── */}
+      <AlifHamzaIntro
+        title={el("ah_title")}
+        forms={els(["ah_f1","ah_f2","ah_f3","ah_f4","ah_f5","ah_f6","ah_f7","ah_f8","ah_f9"])}
+        row1={els(["ah_p1_w1","ah_p1_w2","ah_p1_w3","ah_p1_w4"])}
+        row2={els(["ah_p2_w1","ah_p2_w2","ah_p2_w3","ah_p2_w4"])}
+        activeId={activeId}
+        hasActive={hasActive}
+        onClick={onElementClick}
+      />
+    </div>
+  );
+}
+
+// Alif va Hamza chapter intro banner — page 25 pastki yarmida.
+// title (clickable, `37. alif va hamza.mp3` ning birinchi 2.3s) + chig'atoy izoh
+// ("9 ko'rinishda yoziladi") + 9 forms row (RTL, har biri clickable) +
+// 2 numbered practice rows (eski/yangi imlo, so'zlar clickable).
+function AlifHamzaIntro({
+  title,
+  forms,
+  row1,
+  row2,
+  activeId,
+  hasActive,
+  onClick,
+}: {
+  title?: Element;
+  forms: Element[];
+  row1: Element[];
+  row2: Element[];
+  activeId: string | null;
+  hasActive: boolean;
+  onClick: (el: Element) => void;
+}) {
+  const FormCell = ({ el }: { el: Element }) => {
+    const isActive = activeId === el.id;
+    return (
+      <button
+        onClick={(e) => { e.stopPropagation(); onClick(el); }}
+        className="element-spring rounded-md px-1 py-0 inline-flex items-center justify-center"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-main)",
+          boxShadow: isActive ? "0 4px 14px var(--color-primary-glow)" : "none",
+          transform: isActive ? "scale(1.12)" : "none",
+        }}
+      >
+        <span className="arabic-text font-bold text-[clamp(0.85rem,4.8cqi,1.15rem)] leading-none" style={{ fontFamily: "var(--font-arabic)" }}>
+          {el.arabic}
+        </span>
+      </button>
+    );
+  };
+
+  const NumberedRow = ({ num, els: rowEls }: { num: string; els: Element[] }) => (
+    <div dir="rtl" className="flex w-full items-center gap-1">
+      <span className="arabic-text text-[10px] text-text-muted shrink-0 w-[16px] text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+        {num})
+      </span>
+      <div dir="rtl" className="flex flex-1 justify-around items-center gap-0.5">
+        {rowEls.map((e) => (
+          <ArabicEl
+            key={e.id}
+            el={e}
+            isActive={activeId === e.id}
+            hasActive={hasActive}
+            onClick={() => onClick(e)}
+            size="sm"
+          />
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="w-full flex flex-col items-center gap-0">
+      {/* Title (clickable — narration of "الف و همزة") */}
+      {title && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onClick(title); }}
+          className="element-spring rounded-md px-2 py-0"
+          style={{
+            backgroundColor: activeId === title.id ? "var(--color-primary)" : "transparent",
+            color: activeId === title.id ? "#ffffff" : "var(--color-text-secondary)",
+            boxShadow: activeId === title.id ? "0 6px 20px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <h3 className="arabic-text text-sm font-bold" style={{ fontFamily: "var(--font-arabic)" }}>
+            {title.arabic}
+          </h3>
+        </button>
+      )}
+      {/* Chig'atoy izoh (statik) */}
+      <p className="arabic-text text-[10px] text-text-muted text-center leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
+        الف و همزة توقّز (٩) كورينيشده يازيلادى
+      </p>
+      {/* 9 ta shakl bir qatorda, RTL — chap tomonda kichik raqam (١) */}
+      <div dir="rtl" className="flex w-full justify-around items-center gap-0.5 mt-0.5">
+        <span className="arabic-text text-[10px] text-text-muted shrink-0 w-[16px] text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+          ١
+        </span>
+        {forms.map((f) => <FormCell key={f.id} el={f} />)}
+      </div>
+      {/* 2 ta numbered mashq qator: eski va yangi imlo */}
+      <NumberedRow num="١" els={row1} />
+      <NumberedRow num="٢" els={row2} />
     </div>
   );
 }
 
 // ========== PAGES 26-33: ALIF HAMZA, VASL, VAQF, IDG'OM ==========
 
-function Page26({ elements, activeId, hasActive, onElementClick }: PP) {
-  const { els } = usePageElements(elements, 26);
+// Numbered row helper for p26 — shows a small ٣) / ٤) ... marker on the right
+// side of the row (RTL: at the visual right edge, matching kitob layout).
+function P26NumberedRow({
+  num,
+  els,
+  activeId,
+  hasActive,
+  onClick,
+  size = "sm",
+  gap = "gap-1.5",
+}: {
+  num?: string;
+  els: Element[];
+  activeId: string | null;
+  hasActive: boolean;
+  onClick: (el: Element) => void;
+  size?: "sm" | "md" | "lg";
+  gap?: string;
+}) {
+  const gapClass = FLUID_GAP[gap] ?? gap;
   return (
-    <div className="flex flex-col items-center gap-1">
-      <Title text="همزه مثاللر" sub="Hamza misollari" />
-      <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["04","05","06"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Divider />
-      <Row els={els(["07","08"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+    <div dir="rtl" className="flex w-full items-center gap-1">
+      <span className="arabic-text text-[10px] text-text-muted shrink-0 w-[14px] text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+        {num ? `${num})` : ""}
+      </span>
+      <div dir="rtl" className={`flex flex-1 justify-around items-center ${gapClass}`}>
+        {els.map((e) => (
+          <ArabicEl
+            key={e.id}
+            el={e}
+            isActive={activeId === e.id}
+            hasActive={hasActive}
+            onClick={() => onClick(e)}
+            size={size}
+          />
+        ))}
+      </div>
     </div>
   );
 }
 
-function Page27({ elements, activeId, hasActive, onElementClick }: PP) {
-  const { els } = usePageElements(elements, 27);
+function Page26({ elements, activeId, hasActive, onElementClick }: PP) {
+  const { els } = usePageElements(elements, 26);
+  const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-1" />;
   return (
-    <div className="flex flex-col items-center gap-2">
-      <Title text="الف لام" sub="Alif Lom" />
-      <Row els={els(["01","02"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Divider />
-      <Row els={els(["03","04"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Divider />
-      <Row els={els(["05","06"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+    <div className="flex flex-col items-center gap-0.5">
+      {/* ── Top section: 7 numbered rows (R3-R9) + 3 unnumbered continuation rows ── */}
+      <P26NumberedRow num="٣" els={els(["r3_w1","r3_w2","r3_w3","r3_w4"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <P26NumberedRow num="٤" els={els(["r4_w1","r4_w2","r4_w3","r4_w4"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <P26NumberedRow num="٥" els={els(["r5_w1","r5_w2","r5_w3","r5_w4"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <P26NumberedRow num="٦" els={els(["r6_w1","r6_w2","r6_w3","r6_w4","r6_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <P26NumberedRow num="٧" els={els(["r7_w1","r7_w2","r7_w3","r7_w4","r7_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <P26NumberedRow num="٨" els={els(["r8_w1","r8_w2","r8_w3","r8_w4","r8_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <P26NumberedRow num="٩" els={els(["r9_w1","r9_w2","r9_w3","r9_w4","r9_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <P26NumberedRow els={els(["c1_w1","c1_w2","c1_w3","c1_w4","c1_w5"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <P26NumberedRow els={els(["c2_w1","c2_w2","c2_w3","c2_w4","c2_w5","c2_w6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <P26NumberedRow els={els(["c3_w1","c3_w2","c3_w3","c3_w4","c3_w5"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
+      <Sep />
+
+      {/* ── Bottom section: 2 numbered rows (al-mar'/al-juz' declension) ── */}
+      <P26NumberedRow els={els(["b1_w1","b1_w2","b1_w3","b1_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+      <P26NumberedRow els={els(["b2_w1","b2_w2","b2_w3","b2_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
+    </div>
+  );
+}
+
+// Page 27 — Ta-marbuta (ة ـة = ت) + Muqaddara (Alif/Yā/Vāv yashirin)
+// Yuqori bo'lim: header + 5+5+6 = 17 element (`38. t-marbuta.mp3` dan)
+// Pastki bo'lim: 3 ta sub-bo'lim (Alif/Yā/Vāv Muqaddara) — 32 element
+// (`39. yoz-o'qiladigan.mp3` dan, 28-sahifa bilan ulushli).
+function Page27({ elements, activeId, hasActive, onElementClick }: PP) {
+  const { el, els } = usePageElements(elements, 27);
+  const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-0.5" />;
+
+  // Clickable block title — narration audio (kitobning sub-sarlavhasi)
+  const BlockTitle = ({ el: titleEl }: { el?: Element }) => {
+    if (!titleEl) return null;
+    const isActive = activeId === titleEl.id;
+    return (
+      <button
+        onClick={(e) => { e.stopPropagation(); onElementClick(titleEl); }}
+        className="element-spring rounded-md px-3 py-0 mt-0.5"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-secondary)",
+          boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+        }}
+      >
+        <h3 className="arabic-text text-[13px] font-bold leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
+          {titleEl.arabic}
+        </h3>
+      </button>
+    );
+  };
+
+  // R3 — 3 juftlik singular/plural, har juftlik orasida tire (statik visual)
+  const PairRow = ({ pairs }: { pairs: Array<[Element | undefined, Element | undefined]> }) => (
+    <div dir="rtl" className="flex w-full flex-row-reverse flex-wrap justify-center items-center gap-[clamp(0.25rem,2cqi,0.5rem)]">
+      {pairs.map((pair, i) => {
+        const [a, b] = pair;
+        if (!a || !b) return null;
+        return (
+          <div key={i} className="flex flex-row-reverse items-center gap-[clamp(0.125rem,0.9cqi,0.25rem)]">
+            <ArabicEl el={a} isActive={activeId === a.id} hasActive={hasActive} onClick={() => onElementClick(a)} size="sm" />
+            <span className="text-text-muted text-[12px] select-none" style={{ opacity: 0.7 }}>—</span>
+            <ArabicEl el={b} isActive={activeId === b.id} hasActive={hasActive} onClick={() => onElementClick(b)} size="sm" />
+            {i < pairs.length - 1 && (
+              <span className="text-text-muted text-[10px] mx-0.5 select-none" style={{ opacity: 0.6 }}>،</span>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col items-center gap-0">
+      {/* ── Yuqori bo'lim: `ة ـة = ت` qoidasi ── */}
+      <BlockTitle el={el("head")} />
+      <Row els={els(["r1_w1","r1_w2","r1_w3","r1_w4","r1_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["r2_w1","r2_w2","r2_w3","r2_w4","r2_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <PairRow pairs={[
+        [el("r3_w1"), el("r3_w2")],
+        [el("r3_w3"), el("r3_w4")],
+        [el("r3_w5"), el("r3_w6")],
+      ]} />
+
+      <Sep />
+
+      {/* ── Subtitle: yozilmasa-da o'qiladigan harflar ── */}
+      <BlockTitle el={el("subtitle")} />
+
+      {/* ── Alif Muqaddara ── */}
+      <BlockTitle el={el("alif_intro")} />
+      <Row els={els(["alif_r1_w1","alif_r1_w2","alif_r1_w3","alif_r1_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["alif_r2_w1","alif_r2_w2","alif_r2_w3","alif_r2_w4","alif_r2_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["alif_r3_w1","alif_r3_w2","alif_r3_w3","alif_r3_w4","alif_r3_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+
+      {/* ── Yā Muqaddara ── */}
+      <BlockTitle el={el("ya_intro")} />
+      <Row els={els(["ya_r1_w1","ya_r1_w2","ya_r1_w3","ya_r1_w4","ya_r1_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
+      {/* ── Vāv Muqaddara ── */}
+      <BlockTitle el={el("vav_intro")} />
+      <Row els={els(["vav_r1_w1","vav_r1_w2","vav_r1_w3","vav_r1_w4","vav_r1_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["vav_r2_w1","vav_r2_w2","vav_r2_w3","vav_r2_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
     </div>
   );
 }
 
 function Page28({ elements, activeId, hasActive, onElementClick }: PP) {
-  const { els } = usePageElements(elements, 28);
+  const { el, els } = usePageElements(elements, 28);
+  const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-0.5" />;
+
+  // Clickable block title — large arabic text, click ijro etadi (title + narration audio)
+  const BlockTitle = ({ el: titleEl }: { el?: Element }) => {
+    if (!titleEl) return null;
+    const isActive = activeId === titleEl.id;
+    return (
+      <button
+        onClick={(e) => { e.stopPropagation(); onElementClick(titleEl); }}
+        className="element-spring rounded-md px-3 py-0"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-secondary)",
+          boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+        }}
+      >
+        <h3 className="arabic-text text-sm font-bold leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
+          {titleEl.arabic}
+        </h3>
+      </button>
+    );
+  };
+
+  // Statik chig'atoy izoh — click yo'q, kitobdagi subtitle ko'rsatadi
+  const SubText = ({ children }: { children: React.ReactNode }) => (
+    <p className="arabic-text text-[9.5px] text-text-muted text-center leading-tight px-2" style={{ fontFamily: "var(--font-arabic)" }}>
+      {children}
+    </p>
+  );
+
   return (
-    <div className="flex flex-col items-center gap-2">
-      <Title text="الف لام (دوام)" sub="Alif Lom davomi" />
-      <Row els={els(["01","02"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Divider />
-      <Row els={els(["03","04"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
-      <Divider />
-      <Row els={els(["05","06"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+    <div className="flex flex-col items-center gap-0">
+      {/* ============ BLOCK 1 — Yaa Alifiyya ============ */}
+      <BlockTitle el={el("b1_intro")} />
+      <SubText>اوشبو سوزلرنينگ آخرده‌گی یالری الف کبی اوقیلادی</SubText>
+
+      {/* Row 1: 6 so'z */}
+      <Row els={els(["r1_w1","r1_w2","r1_w3","r1_w4","r1_w5","r1_w6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      {/* Row 2: 5 so'z */}
+      <Row els={els(["r2_w1","r2_w2","r2_w3","r2_w4","r2_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      {/* Row 3: 4 so'z */}
+      <Row els={els(["r3_w1","r3_w2","r3_w3","r3_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+
+      <SubText>شونينگدك اوشبو سوزلرده‌گی یال هم الف کبی اوقیلادی</SubText>
+      {/* Row 4: 5 so'z (sawwayha turi — biroz uzunroq) */}
+      <Row els={els(["r4_w1","r4_w2","r4_w3","r4_w4","r4_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+
+      <Sep />
+
+      {/* ============ BLOCK 2 — Vav Alifiyya ============ */}
+      <BlockTitle el={el("b2_intro")} />
+      <SubText>اوشبو سوزلرده‌گی واولر هم الف کبی اوقیلادی</SubText>
+
+      {/* Row 5: 6 so'z */}
+      <Row els={els(["r5_w1","r5_w2","r5_w3","r5_w4","r5_w5","r5_w6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
+      <Sep />
+
+      {/* ============ BLOCK 3 — Yozilsada o'qilmaydigan harflar ============ */}
+      <BlockTitle el={el("b3_title")} />
+      <SubText>اوشبو سوزلر باشيده‌گی الفلر واو بيلان يازيلسه‌لرده عادي ضمّة کبی اوقیلادی</SubText>
+
+      {/* Row 6: 5 so'z */}
+      <Row els={els(["r6_w1","r6_w2","r6_w3","r6_w4","r6_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
+      <SubText>اوشبو سوزلرکبی سوزلرنينگ آخرلريده‌گی جمع (کوپليك علامتى بولگان) واولريدن کيينگى الفلر هم اوقيلميدى</SubText>
+
+      {/* Row 7: 5 so'z */}
+      <Row els={els(["r7_w1","r7_w2","r7_w3","r7_w4","r7_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
     </div>
   );
 }
 
+// Page 29 — Yozilsada o'qilmaydigan harflar (alif/lam o'rta).
+// 3 ta bo'lim, har biri chig'atoy title narration + so'z gridiga ega.
+// Audio: 40. yozilsa-o'qilmaydi.mp3 76.58-316.55s.
+//   S1 (76.58-157.41s): O'rta alif o'qilmaydi — 4 qator (5+3+3+3 = 14 so'z)
+//   S2 (160.50-216.30s): O'rta lam o'qilmaydi — 3 qator (5+5+4 = 14 so'z)
+//   S3 (216.30-316.55s): "huva al-X" — 4 qator (4+4+3+3 = 14 phrase)
 function Page29({ elements, activeId, hasActive, onElementClick }: PP) {
-  const { els } = usePageElements(elements, 29);
+  const { el, els } = usePageElements(elements, 29);
+  const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-0.5" />;
+
+  // Chig'atoy rule narration — clickable title above each section's word grid.
+  // Compact: text-[10px] approx, no vertical padding so 11 rows + 3 titles fit in viewport.
+  const SectionTitle = ({ id }: { id: string }) => {
+    const t = el(id);
+    if (!t) return null;
+    const isActive = activeId === t.id;
+    return (
+      <button
+        onClick={(e) => { e.stopPropagation(); onElementClick(t); }}
+        className="element-spring rounded-md px-2 py-0 w-full"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-muted)",
+          boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+        }}
+      >
+        <p
+          className="arabic-text text-[clamp(0.6rem,2.9cqi,0.78rem)] text-center leading-tight"
+          style={{ fontFamily: "var(--font-arabic)" }}
+        >
+          {t.arabic}
+        </p>
+      </button>
+    );
+  };
+
   return (
-    <div className="flex flex-col items-center gap-2">
-      <Title text="بسملة و جمله‌لر" sub="Bismilla va jumlalar" />
-      <Row els={els(["01"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["02"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Divider />
-      <Row els={els(["04"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+    <div className="flex flex-col items-center gap-0">
+      {/* ── Section 1: O'rta alif o'qilmaydi ── */}
+      <SectionTitle id="s1_title" />
+      <Row els={els(["s1_r1_w1","s1_r1_w2","s1_r1_w3","s1_r1_w4","s1_r1_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["s1_r2_w1","s1_r2_w2","s1_r2_w3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["s1_r3_w1","s1_r3_w2","s1_r3_w3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["s1_r4_w1","s1_r4_w2","s1_r4_w3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
+      <Sep />
+
+      {/* ── Section 2: O'rta lam o'qilmaydi ── */}
+      <SectionTitle id="s2_title" />
+      <Row els={els(["s2_r1_w1","s2_r1_w2","s2_r1_w3","s2_r1_w4","s2_r1_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["s2_r2_w1","s2_r2_w2","s2_r2_w3","s2_r2_w4","s2_r2_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["s2_r3_w1","s2_r3_w2","s2_r3_w3","s2_r3_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
+      <Sep />
+
+      {/* ── Section 3: Boshqa so'z qo'shilganda alif+lam ham o'qilmaydi ── */}
+      <SectionTitle id="s3_title" />
+      <Row els={els(["s3_r1_w1","s3_r1_w2","s3_r1_w3","s3_r1_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["s3_r2_w1","s3_r2_w2","s3_r2_w3","s3_r2_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["s3_r3_w1","s3_r3_w2","s3_r3_w3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["s3_r4_w1","s3_r4_w2","s3_r4_w3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
     </div>
   );
 }
 
+// Page 30 — Alif Lom vasl continuation (top) + Vasl section intro (bottom).
+// Top: 21 phrases (2-word vasl combos) in 6 rows. Bottom: 8 phrases (3-word
+// vasl combos) in 4 rows × 2 cols. Chig'atoy rules + Vasl title = static text
+// (not in audio — narrator skips them). Audio: 37. alif va hamza.mp3 119-217s.
 function Page30({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 30);
   return (
-    <div className="flex flex-col items-center gap-2">
-      <Title text="وصل" sub="Vasl" />
-      <Row els={els(["01"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
+    <div className="flex flex-col items-center gap-1.5 w-full">
+      {/* Top chig'atoy rule — static italic header explaining vasl */}
+      <div className="w-full rounded-lg border border-primary/15 bg-primary/[0.04] px-2.5 py-1.5 text-center">
+        <p className="arabic-text text-[10.5px] leading-snug text-text-main/85" style={{ fontFamily: "var(--font-arabic)" }}>
+          اوشبو سوزلر کبی سوزلر قوشیب اوقیلگانده اورتالریده گی فتحه کسره ضمه و سکون یازیلماگان هر قاندی حرف اوقیلمی توشریب قالدیریلادی
+        </p>
+      </div>
+
+      {/* TOP: 6 rows of alif-lom vasl examples (RTL: right to left) */}
+      <Row els={els(["r1_w1","r1_w2","r1_w3","r1_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["r2_w1","r2_w2","r2_w3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["r3_w1","r3_w2","r3_w3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["r4_w1","r4_w2","r4_w3","r4_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["r5_w1","r5_w2","r5_w3","r5_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["r6_w1","r6_w2","r6_w3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
       <Divider />
-      <Row els={els(["02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
-      <Row els={els(["04","05"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
+
+      {/* Vasl section title — static text */}
+      <div className="text-center">
+        <h3 className="arabic-text text-base font-bold text-text-secondary" style={{ fontFamily: "var(--font-arabic)" }}>
+          وصل - قوشیش
+        </h3>
+        <p className="text-[9px] uppercase tracking-wide text-text-muted mt-0.5">
+          Vasl — qo&apos;shish
+        </p>
+      </div>
+
+      {/* Vasl chig'atoy rule — static */}
+      <div className="w-full rounded-lg border border-primary/15 bg-primary/[0.04] px-2.5 py-1.5">
+        <p className="arabic-text text-[10px] leading-snug text-text-main/85 text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+          وصل ـ ایکّی اوچ یا کی تورت سوزلرنی بر-بریکه قوشیب اوقیش دیمکدر. ایکّی سوز برکه قوشیب اوقیلگانده هر دائم اورتالریده بر ایکی یا کی اوچ حرف اوقیلمی قالادی. قویده دیکی مثاللرده اوچته سوز برکه وصل قیلینهدی:
+        </p>
+      </div>
+
+      {/* BOTTOM: 4 rows × 2 columns of 3-word vasl examples */}
+      <Row els={els(["b1_w1","b1_w2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["b2_w1","b2_w2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["b3_w1","b3_w2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["b4_w1","b4_w2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+
+      {/* Footnote — static text */}
+      <div className="w-full mt-1">
+        <p className="arabic-text text-[10px] leading-snug text-text-muted text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+          (٭) بُو سُوزْ بِئْسَ لِسْمُ دیب اوقیلادی
+        </p>
+      </div>
     </div>
   );
 }

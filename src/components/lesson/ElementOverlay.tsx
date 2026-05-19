@@ -41,7 +41,6 @@ export function ElementOverlay({
           ? `${color}20`
           : `${color}08`,
         borderRadius: "8px",
-        opacity: hasActiveElement && !isActive ? 0.25 : 1,
         zIndex: isActive ? 10 : 1,
         animation: !hasActiveElement ? "element-hint 2.5s ease-in-out infinite" : "none",
         animationDelay: `${Math.random() * 2}s`,
