@@ -42,3 +42,8 @@ next-env.d.ts
 
 # Claude Code local config
 .claude/
+
+# ffmpeg binary — platforma-mahsus (77MB). Mahalliy o'rnatish kerak.
+# Skript ishlatish uchun: brew install ffmpeg (Mac) yoki apt install ffmpeg (Linux)
+# va keyin: ln -s $(which ffmpeg) tools/ffmpeg
+tools/ffmpeg
