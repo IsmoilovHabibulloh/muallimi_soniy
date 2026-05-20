@@ -2080,76 +2080,78 @@ const p26: ED[] = [
 // ============================================================
 const p27: ED[] = [
   // ── Yuqori bo'lim: `ة ـة = ت` qoidasi (head + 5 + 5 + 6 = 17 element) ──
-  ["head",   "harf", "ة ـة = ت",   "Ta marbuta = ta (sukun bilan o'qiladi)", A.tm("p27_head"),             0, 3.92, 0, 0, 0, 0],
+  // 2026-05-19 REMAPPED: source audio order is 16 words (read once) + rule
+  // narration + 16 words (read again). Cuts re-aligned to single-word reads.
+  ["head",   "harf", "ة ـة = ت",   "Ta marbuta = ta (sukun bilan o'qiladi)", A.tm("p27_head"),             0, 1.15, 0, 0, 0, 0],
   // R1 (5 so'z): عَزِيزَةٌ فَرِيدَةٌ حَمِيدَةٌ سَعِيدَةٌ شَهِيدَةٌ
-  ["r1_w1",  "soz",  "عَزِيزَةٌ",   "Azizatun (aziz)",         A.tm("p27_r1_w1_azizatun"),   0, 4.11, 0, 0, 0, 0],
-  ["r1_w2",  "soz",  "فَرِيدَةٌ",   "Faridatun (yagona)",      A.tm("p27_r1_w2_faridatun"),  0, 4.19, 0, 0, 0, 0],
-  ["r1_w3",  "soz",  "حَمِيدَةٌ",   "Hamidatun (maqtangan)",    A.tm("p27_r1_w3_hamidatun"),  0, 4.11, 0, 0, 0, 0],
-  ["r1_w4",  "soz",  "سَعِيدَةٌ",   "Saidatun (baxtli)",        A.tm("p27_r1_w4_saidatun"),   0, 4.30, 0, 0, 0, 0],
-  ["r1_w5",  "soz",  "شَهِيدَةٌ",   "Shahidatun (shohid)",      A.tm("p27_r1_w5_shahidatun"), 0, 3.77, 0, 0, 0, 0],
+  ["r1_w1",  "soz",  "عَزِيزَةٌ",   "Azizatun (aziz)",         A.tm("p27_r1_w1_azizatun"),   0, 1.80, 0, 0, 0, 0],
+  ["r1_w2",  "soz",  "فَرِيدَةٌ",   "Faridatun (yagona)",      A.tm("p27_r1_w2_faridatun"),  0, 1.75, 0, 0, 0, 0],
+  ["r1_w3",  "soz",  "حَمِيدَةٌ",   "Hamidatun (maqtangan)",    A.tm("p27_r1_w3_hamidatun"),  0, 1.85, 0, 0, 0, 0],
+  ["r1_w4",  "soz",  "سَعِيدَةٌ",   "Saidatun (baxtli)",        A.tm("p27_r1_w4_saidatun"),   0, 1.85, 0, 0, 0, 0],
+  ["r1_w5",  "soz",  "شَهِيدَةٌ",   "Shahidatun (shohid)",      A.tm("p27_r1_w5_shahidatun"), 0, 1.85, 0, 0, 0, 0],
   // R2 (5 so'z): جَمِيلَةٌ حَلِيمَةٌ سَلِيمَةٌ شَرِيفَةٌ نَعِيمَةٌ
-  ["r2_w1",  "soz",  "جَمِيلَةٌ",   "Jamilatun (go'zal)",       A.tm("p27_r2_w1_jamilatun"),  0, 3.74, 0, 0, 0, 0],
-  ["r2_w2",  "soz",  "حَلِيمَةٌ",   "Halimatun (yumshoq)",      A.tm("p27_r2_w2_halimatun"),  0, 3.52, 0, 0, 0, 0],
-  ["r2_w3",  "soz",  "سَلِيمَةٌ",   "Salimatun (sog'lom)",       A.tm("p27_r2_w3_salimatun"),  0, 4.33, 0, 0, 0, 0],
-  ["r2_w4",  "soz",  "شَرِيفَةٌ",   "Sharifatun (sharafli)",    A.tm("p27_r2_w4_sharifatun"), 0, 3.61, 0, 0, 0, 0],
-  ["r2_w5",  "soz",  "نَعِيمَةٌ",   "Naimatun (ne'mat)",        A.tm("p27_r2_w5_naimatun"),   0, 3.51, 0, 0, 0, 0],
+  ["r2_w1",  "soz",  "جَمِيلَةٌ",   "Jamilatun (go'zal)",       A.tm("p27_r2_w1_jamilatun"),  0, 1.95, 0, 0, 0, 0],
+  ["r2_w2",  "soz",  "حَلِيمَةٌ",   "Halimatun (yumshoq)",      A.tm("p27_r2_w2_halimatun"),  0, 1.80, 0, 0, 0, 0],
+  ["r2_w3",  "soz",  "سَلِيمَةٌ",   "Salimatun (sog'lom)",       A.tm("p27_r2_w3_salimatun"),  0, 1.80, 0, 0, 0, 0],
+  ["r2_w4",  "soz",  "شَرِيفَةٌ",   "Sharifatun (sharafli)",    A.tm("p27_r2_w4_sharifatun"), 0, 1.85, 0, 0, 0, 0],
+  ["r2_w5",  "soz",  "نَعِيمَةٌ",   "Naimatun (ne'mat)",        A.tm("p27_r2_w5_naimatun"),   0, 1.80, 0, 0, 0, 0],
   // R3 (6 so'z, 3 juftlik): singular / plural — `marratun-marraatun, karratun-karraatun, hurratun-hurraatun`
-  ["r3_w1",  "soz",  "مَرَّةٌ",     "Marratun (bir marta)",     A.tm("p27_r3_w1_marratun"),   0, 3.41, 0, 0, 0, 0],
-  ["r3_w2",  "soz",  "مَرَّاتٌ",    "Marrātun (ko'p marta)",     A.tm("p27_r3_w2_marraatun"),  0, 3.37, 0, 0, 0, 0],
-  ["r3_w3",  "soz",  "كَرَّةٌ",     "Karratun (bir karra)",     A.tm("p27_r3_w3_karratun"),   0, 3.59, 0, 0, 0, 0],
-  ["r3_w4",  "soz",  "كَرَّاتٌ",    "Karrātun (ko'p karra)",     A.tm("p27_r3_w4_karraatun"),  0, 3.23, 0, 0, 0, 0],
-  ["r3_w5",  "soz",  "حُرَّةٌ",     "Hurratun (hur ayol)",      A.tm("p27_r3_w5_hurratun"),   0, 3.12, 0, 0, 0, 0],
-  ["r3_w6",  "soz",  "حُرَّاتٌ",    "Hurrātun (hur ayollar)",    A.tm("p27_r3_w6_hurraatun"),  0, 2.97, 0, 0, 0, 0],
+  ["r3_w1",  "soz",  "مَرَّةٌ",     "Marratun (bir marta)",     A.tm("p27_r3_w1_marratun"),   0, 1.45, 0, 0, 0, 0],
+  ["r3_w2",  "soz",  "مَرَّاتٌ",    "Marrātun (ko'p marta)",     A.tm("p27_r3_w2_marraatun"),  0, 1.85, 0, 0, 0, 0],
+  ["r3_w3",  "soz",  "كَرَّةٌ",     "Karratun (bir karra)",     A.tm("p27_r3_w3_karratun"),   0, 1.40, 0, 0, 0, 0],
+  ["r3_w4",  "soz",  "كَرَّاتٌ",    "Karrātun (ko'p karra)",     A.tm("p27_r3_w4_karraatun"),  0, 1.70, 0, 0, 0, 0],
+  ["r3_w5",  "soz",  "حُرَّةٌ",     "Hurratun (hur ayol)",      A.tm("p27_r3_w5_hurratun"),   0, 1.30, 0, 0, 0, 0],
+  ["r3_w6",  "soz",  "حُرَّاتٌ",    "Hurrātun (hur ayollar)",    A.tm("p27_r3_w6_hurraatun"),  0, 1.60, 0, 0, 0, 0],
 
   // ── Pastki bo'lim: Muqaddara (yashirin) qoidalari ──
   // Section divider + sub-title (clickable narration)
-  ["subtitle", "jumla", "يازلماسه‌ده اوقيلاديگان حرفلر", "Yozilmasa-da o'qiladigan harflar", A.yoz("p27_subtitle"), 0, 7.95, 0, 0, 0, 0],
+  ["subtitle", "jumla", "يازلماسه‌ده اوقيلاديگان حرفلر", "Yozilmasa-da o'qiladigan harflar", A.yoz("p27_subtitle"), 0, 3.00, 0, 0, 0, 0],
 
   // ── Alif Muqaddara (Alif yashirin) ──
   // intro: `اَلِف مُقَدَّرَة` + tushuntirish ("ustiga fatha tikka qilib yozilgan harflar alif kabi cho'zib o'qiladi")
-  ["alif_intro", "jumla", "اَلِف مُقَدَّرَة", "Alif Muqaddara (yashirin alif) — fatha tikka qilib yozilgan harflar alif kabi cho'zib o'qiladi", A.yoz("p27_alif_intro"), 0, 16.11, 0, 0, 0, 0],
+  ["alif_intro", "jumla", "اَلِف مُقَدَّرَة", "Alif Muqaddara (yashirin alif) — fatha tikka qilib yozilgan harflar alif kabi cho'zib o'qiladi", A.yoz("p27_alif_intro"), 0, 1.80, 0, 0, 0, 0],
   // R1: إِلٰهُ (اِلٰاهُ) رَحْمٰنْ قُرْءَانْ هٰذَا — 4 so'z (birinchisi qavs bilan to'liq forma)
-  ["alif_r1_w1", "soz", "إِلٰهُ (اِلٰاهُ)", "Ilāhu (ma'bud)",      A.yoz("p27_alif_r1_w1_ilah"),   0, 3.91, 0, 0, 0, 0],
-  ["alif_r1_w2", "soz", "رَحْمٰنْ",          "Rahmān",              A.yoz("p27_alif_r1_w2_rahman"), 0, 3.73, 0, 0, 0, 0],
-  ["alif_r1_w3", "soz", "قُرْءَانْ",         "Qur'ān",              A.yoz("p27_alif_r1_w3_quran"),  0, 5.20, 0, 0, 0, 0],
-  ["alif_r1_w4", "soz", "هٰذَا",             "Hāzā (bu)",            A.yoz("p27_alif_r1_w4_haza"),   0, 4.65, 0, 0, 0, 0],
+  ["alif_r1_w1", "soz", "إِلٰهٌ (اِلٰاهٌ)", "Ilāhun (ma'bud)",     A.yoz("p27_alif_r1_w1_ilah"),   0, 1.35, 0, 0, 0, 0],
+  ["alif_r1_w2", "soz", "رَحْمٰنْ",          "Rahmān",              A.yoz("p27_alif_r1_w2_rahman"), 0, 1.65, 0, 0, 0, 0],
+  ["alif_r1_w3", "soz", "قُرْءَانْ",         "Qur'ān",              A.yoz("p27_alif_r1_w3_quran"),  0, 1.50, 0, 0, 0, 0],
+  ["alif_r1_w4", "soz", "هٰذَا",             "Hāzā (bu)",            A.yoz("p27_alif_r1_w4_haza"),   0, 1.45, 0, 0, 0, 0],
   // R2: ذٰلِكَ هٰؤُلَاءِ لٰكِنْ ءَامَنَ ءَادَمُ — 5 so'z
-  ["alif_r2_w1", "soz", "ذٰلِكَ",            "Zālika (anavi)",       A.yoz("p27_alif_r1_w5_zalika"),  0, 7.74, 0, 0, 0, 0],
-  ["alif_r2_w2", "soz", "هٰؤُلَاءِ",         "Hā'ulā'i (bular)",      A.yoz("p27_alif_r2_w1_haulai"), 0, 3.43, 0, 0, 0, 0],
-  ["alif_r2_w3", "soz", "لٰكِنْ",            "Lākin (lekin)",         A.yoz("p27_alif_r2_w2_lakin"),   0, 4.64, 0, 0, 0, 0],
-  ["alif_r2_w4", "soz", "ءَامَنَ",          "Āmana (iymon keltirdi)", A.yoz("p27_alif_r2_w3_amana"),   0, 4.11, 0, 0, 0, 0],
-  ["alif_r2_w5", "soz", "ءَادَمُ",          "Ādamu (Odam a.s.)",     A.yoz("p27_alif_r2_w4_adam"),    0, 5.04, 0, 0, 0, 0],
+  ["alif_r2_w1", "soz", "ذٰلِكَ",            "Zālika (anavi)",       A.yoz("p27_alif_r1_w5_zalika"),  0, 1.40, 0, 0, 0, 0],
+  ["alif_r2_w2", "soz", "هٰؤُلَاءِ",         "Hā'ulā'i (bular)",      A.yoz("p27_alif_r2_w1_haulai"), 0, 3.75, 0, 0, 0, 0],
+  ["alif_r2_w3", "soz", "لٰكِنْ",            "Lākin (lekin)",         A.yoz("p27_alif_r2_w2_lakin"),   0, 1.40, 0, 0, 0, 0],
+  ["alif_r2_w4", "soz", "ءَامَنَ",          "Āmana (iymon keltirdi)", A.yoz("p27_alif_r2_w3_amana"),   0, 1.25, 0, 0, 0, 0],
+  ["alif_r2_w5", "soz", "ءَادَمُ",          "Ādamu (Odam a.s.)",     A.yoz("p27_alif_r2_w4_adam"),    0, 1.30, 0, 0, 0, 0],
   // R3: اٰخَرُ اٰمَنَّا اِبْرٰهِيمْ اِسْمٰعِيلْ اِسْحٰقْ — 5 so'z
-  ["alif_r3_w1", "soz", "اٰخَرُ",           "Āxaru (boshqa)",        A.yoz("p27_alif_r2_w5_akhar"),   0, 3.64, 0, 0, 0, 0],
-  ["alif_r3_w2", "soz", "اٰمَنَّا",         "Āmannā (iymon keltirdik)", A.yoz("p27_alif_r3_w1_amanna"), 0, 4.19, 0, 0, 0, 0],
-  ["alif_r3_w3", "soz", "اِبْرٰهِيمْ",       "Ibrāhīm",                A.yoz("p27_alif_r3_w2_ibr"),     0, 4.39, 0, 0, 0, 0],
-  ["alif_r3_w4", "soz", "اِسْمٰعِيلْ",       "Ismā'īl",                A.yoz("p27_alif_r3_w3_ism"),     0, 4.37, 0, 0, 0, 0],
-  ["alif_r3_w5", "soz", "اِسْحٰقْ",         "Ishāq",                  A.yoz("p27_alif_r3_w4_ishaq"),   0, 4.69, 0, 0, 0, 0],
+  ["alif_r3_w1", "soz", "اٰخَرُ",           "Āxaru (boshqa)",        A.yoz("p27_alif_r2_w5_akhar"),   0, 1.35, 0, 0, 0, 0],
+  ["alif_r3_w2", "soz", "اٰمَنَّا",         "Āmannā (iymon keltirdik)", A.yoz("p27_alif_r3_w1_amanna"), 0, 2.05, 0, 0, 0, 0],
+  ["alif_r3_w3", "soz", "اِبْرٰهِيمْ",       "Ibrāhīm",                A.yoz("p27_alif_r3_w2_ibr"),     0, 2.15, 0, 0, 0, 0],
+  ["alif_r3_w4", "soz", "اِسْمٰعِيلْ",       "Ismā'īl",                A.yoz("p27_alif_r3_w3_ism"),     0, 2.20, 0, 0, 0, 0],
+  ["alif_r3_w5", "soz", "اِسْحٰقْ",         "Ishāq",                  A.yoz("p27_alif_r3_w4_ishaq"),   0, 1.60, 0, 0, 0, 0],
 
   // ── Yā Muqaddara (Yā yashirin) ──
   // intro: `يَائ مُقَدَّرَة` + tushuntirish (kasra tikka → ya kabi cho'zib o'qiladi)
-  ["ya_intro", "jumla", "يَائ مُقَدَّرَة", "Yā Muqaddara (yashirin yā) — ostiga kasra tikka qilib yozilgan harflar ya kabi cho'zib o'qiladi", A.yoz("p27_ya_intro"), 0, 5.90, 0, 0, 0, 0],
+  ["ya_intro", "jumla", "يَائ مُقَدَّرَة", "Yā Muqaddara (yashirin yā) — ostiga kasra tikka qilib yozilgan harflar ya kabi cho'zib o'qiladi", A.yoz("p27_ya_intro"), 0, 1.65, 0, 0, 0, 0],
   // R1: بِهٖ (بِهٖی) بِاَمْرِهٖ بِحُكْمِهٖ بِقُدْرَتِهٖ هٰذِهٖ
-  ["ya_r1_w1", "soz", "بِهٖ (بِهٖی)", "Bihī (u bilan)",     A.yoz("p27_ya_r1_w1_bihi"),       0, 5.12, 0, 0, 0, 0],
-  ["ya_r1_w2", "soz", "بِاَمْرِهٖ",   "Bi-amrihī (uning amri bilan)", A.yoz("p27_ya_r1_w2_biamrihi"),  0, 3.02, 0, 0, 0, 0],
-  ["ya_r1_w3", "soz", "بِحُكْمِهٖ",   "Bi-hukmihī (uning hukmi bilan)", A.yoz("p27_ya_r1_w3_bihukmihi"), 0, 3.24, 0, 0, 0, 0],
-  ["ya_r1_w4", "soz", "بِقُدْرَتِهٖ",  "Bi-qudratihī (uning qudrati bilan)", A.yoz("p27_ya_r1_w4_biqudratihi"), 0, 3.90, 0, 0, 0, 0],
-  ["ya_r1_w5", "soz", "هٰذِهٖ",        "Hāzihī (bu)",         A.yoz("p27_ya_r1_w5_hazihi"),     0, 2.39, 0, 0, 0, 0],
+  ["ya_r1_w1", "soz", "بِهٖ (بِهٖی)", "Bihī (u bilan)",     A.yoz("p27_ya_r1_w1_bihi"),       0, 1.05, 0, 0, 0, 0],
+  ["ya_r1_w2", "soz", "بِاَمْرِهٖ",   "Bi-amrihī (uning amri bilan)", A.yoz("p27_ya_r1_w2_biamrihi"),  0, 1.65, 0, 0, 0, 0],
+  ["ya_r1_w3", "soz", "بِحُكْمِهٖ",   "Bi-hukmihī (uning hukmi bilan)", A.yoz("p27_ya_r1_w3_bihukmihi"), 0, 1.70, 0, 0, 0, 0],
+  ["ya_r1_w4", "soz", "بِقُدْرَتِهٖ",  "Bi-qudratihī (uning qudrati bilan)", A.yoz("p27_ya_r1_w4_biqudratihi"), 0, 2.15, 0, 0, 0, 0],
+  ["ya_r1_w5", "soz", "هٰذِهٖ",        "Hāzihī (bu)",         A.yoz("p27_ya_r1_w5_hazihi"),     0, 1.65, 0, 0, 0, 0],
 
   // ── Vāv Muqaddara (Vāv yashirin) ──
   // intro: `وَاو مُقَدَّرَة` + tushuntirish (damma yo'g'on → vav kabi cho'zib o'qiladi)
-  ["vav_intro", "jumla", "وَاو مُقَدَّرَة", "Vāv Muqaddara (yashirin vāv) — damma yo'g'on qilib yozilgan harflar vāv kabi cho'zib o'qiladi", A.yoz("p27_vav_intro"), 0, 6.94, 0, 0, 0, 0],
+  ["vav_intro", "jumla", "وَاو مُقَدَّرَة", "Vāv Muqaddara (yashirin vāv) — damma yo'g'on qilib yozilgan harflar vāv kabi cho'zib o'qiladi", A.yoz("p27_vav_intro"), 0, 1.80, 0, 0, 0, 0],
   // R1: لَهُ (لَهُو) اَمْرُهُ حُكْمُهُ قُدْرَتُهُ مَالُهُ
-  ["vav_r1_w1", "soz", "لَهُ (لَهُو)", "Lahū (uning)",           A.yoz("p27_vav_r1_w1_lahu"),     0, 4.80, 0, 0, 0, 0],
-  ["vav_r1_w2", "soz", "اَمْرُهُ",      "Amruhū (uning amri)",     A.yoz("p27_vav_r1_w2_amruhu"),   0, 4.57, 0, 0, 0, 0],
-  ["vav_r1_w3", "soz", "حُكْمُهُ",      "Hukmuhū (uning hukmi)",   A.yoz("p27_vav_r1_w3_hukmuhu"),  0, 2.98, 0, 0, 0, 0],
-  ["vav_r1_w4", "soz", "قُدْرَتُهُ",    "Qudratuhū (uning qudrati)", A.yoz("p27_vav_r1_w4_qudratuhu"), 0, 7.36, 0, 0, 0, 0],
-  ["vav_r1_w5", "soz", "مَالُهُ",        "Māluhū (uning moli)",     A.yoz("p27_vav_r1_w5_maluhu"),   0, 3.80, 0, 0, 0, 0],
+  ["vav_r1_w1", "soz", "لَهُ (لَهُو)", "Lahū (uning)",           A.yoz("p27_vav_r1_w1_lahu"),     0, 1.05, 0, 0, 0, 0],
+  ["vav_r1_w2", "soz", "اَمْرُهُ",      "Amruhū (uning amri)",     A.yoz("p27_vav_r1_w2_amruhu"),   0, 1.55, 0, 0, 0, 0],
+  ["vav_r1_w3", "soz", "حُكْمُهُ",      "Hukmuhū (uning hukmi)",   A.yoz("p27_vav_r1_w3_hukmuhu"),  0, 1.55, 0, 0, 0, 0],
+  ["vav_r1_w4", "soz", "قُدْرَتُهُ",    "Qudratuhū (uning qudrati)", A.yoz("p27_vav_r1_w4_qudratuhu"), 0, 1.90, 0, 0, 0, 0],
+  ["vav_r1_w5", "soz", "مَالُهُ",        "Māluhū (uning moli)",     A.yoz("p27_vav_r1_w5_maluhu"),   0, 1.70, 0, 0, 0, 0],
   // R2: دَاوُدْ طَاوُسْ رُؤُسْ يَقْرَؤُنْ — 4 so'z
-  ["vav_r2_w1", "soz", "دَاوُدْ",        "Dāvud (a.s.)",            A.yoz("p27_vav_r2_w1_daud"),     0, 2.34, 0, 0, 0, 0],
-  ["vav_r2_w2", "soz", "طَاوُسْ",        "Tāvus (tovus qush)",       A.yoz("p27_vav_r2_w2_taus"),     0, 2.38, 0, 0, 0, 0],
-  ["vav_r2_w3", "soz", "رُؤُسْ",         "Ru'ūs (boshlar)",          A.yoz("p27_vav_r2_w3_ruus"),     0, 0.92, 0, 0, 0, 0],
-  ["vav_r2_w4", "soz", "يَقْرَؤُنْ",     "Yaqra'ūn (o'qiydilar)",     A.yoz("p27_vav_r2_w4_yaqra"),    0, 1.24, 0, 0, 0, 0],
+  ["vav_r2_w1", "soz", "دَاوُدْ",        "Dāvud (a.s.)",            A.yoz("p27_vav_r2_w1_daud"),     0, 1.55, 0, 0, 0, 0],
+  ["vav_r2_w2", "soz", "طَاوُسْ",        "Tāvus (tovus qush)",       A.yoz("p27_vav_r2_w2_taus"),     0, 1.70, 0, 0, 0, 0],
+  ["vav_r2_w3", "soz", "رُؤُسْ",         "Ru'ūs (boshlar)",          A.yoz("p27_vav_r2_w3_ruus"),     0, 1.55, 0, 0, 0, 0],
+  ["vav_r2_w4", "soz", "يَقْرَؤُنُ",     "Yaqra'ūnu (o'qiydilar)",    A.yoz("p27_vav_r2_w4_yaqra"),    0, 1.95, 0, 0, 0, 0],
 ];
 
 // ============================================================
@@ -2159,64 +2161,79 @@ const p27: ED[] = [
 //   - 40. yozilsa-o'qilmaydi.mp3 (0-55s) — Block 3 (Yozilsada o'qilmaydi, 10 word)
 // ============================================================
 const p28: ED[] = [
-  // Block 1 — Yaa Alifiyya (title + narration 1 birga)
-  ["b1_intro", "jumla", "يَاء اَلِفِيَّه", "Yaa Alifiyya — bu so'zlarning oxiridagi ya' alif kabi o'qiladi", A.yoz("p28_b1_intro"), 0, 12.10, 0, 0, 0, 0],
+  // Block 1 — Yaa Alifiyya (b1_intro: arabcha sarlavha; R2 audio kitobga TESKARI o'qiladi)
+  ["b1_intro", "jumla", "يَاء اَلِفِيَّه", "Yaa Alifiyya — bu so'zlarning oxiridagi ya' alif kabi o'qiladi", A.yoz("p28_b1_intro"), 0, 1.80, 0, 0, 0, 0],
+  // Subtitle 1 (chig'atoy narration after b1_intro, before R1)
+  ["b1_sub1", "jumla", "اوشبو سوزلرنينگ آخرده‌گی یالری الف کبی اوقیلادی",
+    "Ushbu so'zlarning oxiridagi 'ya' alif kabi o'qiladi", A.yoz("p28_b1_sub1"), 0, 4.55, 0, 0, 0, 0],
 
   // Row 1: اِلى عَلى لَدى مَتى اَنّى حَتّى
-  ["r1_w1", "soz", "اِلى",   "Ila (gacha)",    A.yoz("p28_r1_w1_ila"),    0, 1.90, 0, 0, 0, 0],
-  ["r1_w2", "soz", "عَلى",   "Ala (ustida)",   A.yoz("p28_r1_w2_ala"),    0, 2.15, 0, 0, 0, 0],
-  ["r1_w3", "soz", "لَدى",   "Lada (yonida)",  A.yoz("p28_r1_w3_lada"),   0, 2.05, 0, 0, 0, 0],
-  ["r1_w4", "soz", "مَتى",   "Mata (qachon)",  A.yoz("p28_r1_w4_mata"),   0, 1.95, 0, 0, 0, 0],
-  ["r1_w5", "soz", "اَنّى",  "Anna (chunki)",  A.yoz("p28_r1_w5_anna"),   0, 1.95, 0, 0, 0, 0],
-  ["r1_w6", "soz", "حَتّى",  "Hatta",          A.yoz("p28_r1_w6_hatta"),  0, 4.25, 0, 0, 0, 0],
+  ["r1_w1", "soz", "اِلى",   "Ila (gacha)",    A.yoz("p28_r1_w1_ila"),    0, 0.90, 0, 0, 0, 0],
+  ["r1_w2", "soz", "عَلى",   "Ala (ustida)",   A.yoz("p28_r1_w2_ala"),    0, 1.00, 0, 0, 0, 0],
+  ["r1_w3", "soz", "لَدى",   "Lada (yonida)",  A.yoz("p28_r1_w3_lada"),   0, 1.05, 0, 0, 0, 0],
+  ["r1_w4", "soz", "مَتى",   "Mata (qachon)",  A.yoz("p28_r1_w4_mata"),   0, 1.05, 0, 0, 0, 0],
+  ["r1_w5", "soz", "اَنّى",  "Anna (chunki)",  A.yoz("p28_r1_w5_anna"),   0, 1.55, 0, 0, 0, 0],
+  ["r1_w6", "soz", "حَتّى",  "Hatta",          A.yoz("p28_r1_w6_hatta"),  0, 1.40, 0, 0, 0, 0],
 
-  // Row 2: عِيسى مُوسى اَعْلى تَعالى شَتّى
-  ["r2_w1", "soz", "عِيسى",   "Iysa",            A.yoz("p28_r2_w1_isa"),    0, 1.95, 0, 0, 0, 0],
-  ["r2_w2", "soz", "مُوسى",   "Musa",            A.yoz("p28_r2_w2_musa"),   0, 1.80, 0, 0, 0, 0],
-  ["r2_w3", "soz", "اَعْلى",  "A'la (yuqori)",   A.yoz("p28_r2_w3_ala2"),   0, 1.85, 0, 0, 0, 0],
-  ["r2_w4", "soz", "تَعالى",  "Ta'ala",          A.yoz("p28_r2_w4_taala"),  0, 1.90, 0, 0, 0, 0],
-  ["r2_w5", "soz", "شَتّى",   "Shatta (turli)",  A.yoz("p28_r2_w5_shatta"), 0, 2.65, 0, 0, 0, 0],
+  // Row 2: عِيسى مُوسى اَعْلى تَعالى شَتّى — audio TESKARI (shatta→taala→ala→musa→isa)
+  ["r2_w1", "soz", "عِيسى",   "Iysa",            A.yoz("p28_r2_w1_isa"),    0, 1.45, 0, 0, 0, 0],
+  ["r2_w2", "soz", "مُوسى",   "Musa",            A.yoz("p28_r2_w2_musa"),   0, 1.45, 0, 0, 0, 0],
+  ["r2_w3", "soz", "اَعْلى",  "A'la (yuqori)",   A.yoz("p28_r2_w3_ala2"),   0, 1.30, 0, 0, 0, 0],
+  ["r2_w4", "soz", "تَعالى",  "Ta'ala",          A.yoz("p28_r2_w4_taala"),  0, 1.50, 0, 0, 0, 0],
+  ["r2_w5", "soz", "شَتّى",   "Shatta (turli)",  A.yoz("p28_r2_w5_shatta"), 0, 1.50, 0, 0, 0, 0],
 
   // Row 3: يَحْيى مُرْتَضى يَتَزَكّى فَتَرْضى
-  ["r3_w1", "soz", "يَحْيى",     "Yahya",          A.yoz("p28_r3_w1_yahya"),     0, 2.65, 0, 0, 0, 0],
-  ["r3_w2", "soz", "مُرْتَضى",   "Murtada",        A.yoz("p28_r3_w2_murtada"),   0, 2.65, 0, 0, 0, 0],
-  ["r3_w3", "soz", "يَتَزَكّى",  "Yatazakka",      A.yoz("p28_r3_w3_yatazakka"), 0, 2.15, 0, 0, 0, 0],
-  ["r3_w4", "soz", "فَتَرْضى",   "Fatarda",        A.yoz("p28_r3_w4_fatarda"),   0, 2.10, 0, 0, 0, 0],
+  ["r3_w1", "soz", "يَحْيى",     "Yahya",          A.yoz("p28_r3_w1_yahya"),     0, 1.40, 0, 0, 0, 0],
+  ["r3_w2", "soz", "مُرْتَضى",   "Murtada",        A.yoz("p28_r3_w2_murtada"),   0, 1.65, 0, 0, 0, 0],
+  ["r3_w3", "soz", "يَتَزَكّى",  "Yatazakka",      A.yoz("p28_r3_w3_yatazakka"), 0, 1.85, 0, 0, 0, 0],
+  ["r3_w4", "soz", "فَتَرْضى",   "Fatarda",        A.yoz("p28_r3_w4_fatarda"),   0, 1.60, 0, 0, 0, 0],
+
+  // Subtitle 2 (between R3 and R4)
+  ["b1_sub2", "jumla", "شونينگدك اوشبو سوزلرده‌گی یال هم الف کبی اوقیلادی",
+    "Shuningdek ushbu so'zlardagi 'ya' ham alif kabi o'qiladi", A.yoz("p28_b1_sub2"), 0, 4.30, 0, 0, 0, 0],
 
   // Row 4: سَوَّيهَا دَسَّيهَا زَكَّيهَا فَسَوَّيهَا عُقْبَيهَا
-  ["r4_w1", "soz", "سَوَّيهَا",    "Sawwayha",     A.yoz("p28_r4_w1_sawwayha"),   0, 1.60, 0, 0, 0, 0],
-  ["r4_w2", "soz", "دَسَّيهَا",    "Dassayha",     A.yoz("p28_r4_w2_dassayha"),   0, 1.40, 0, 0, 0, 0],
-  ["r4_w3", "soz", "زَكَّيهَا",    "Zakkayha",     A.yoz("p28_r4_w3_zakkayha"),   0, 2.05, 0, 0, 0, 0],
-  ["r4_w4", "soz", "فَسَوَّيهَا",  "Fasawwayha",   A.yoz("p28_r4_w4_fasawwayha"), 0, 2.15, 0, 0, 0, 0],
-  ["r4_w5", "soz", "عُقْبَيهَا",   "Uqbayha",      A.yoz("p28_r4_w5_uqbayha"),    0, 2.55, 0, 0, 0, 0],
+  ["r4_w1", "soz", "سَوَّيهَا",    "Sawwayha",     A.yoz("p28_r4_w1_sawwayha"),   0, 2.05, 0, 0, 0, 0],
+  ["r4_w2", "soz", "دَسَّيهَا",    "Dassayha",     A.yoz("p28_r4_w2_dassayha"),   0, 2.15, 0, 0, 0, 0],
+  ["r4_w3", "soz", "زَكَّيهَا",    "Zakkayha",     A.yoz("p28_r4_w3_zakkayha"),   0, 2.25, 0, 0, 0, 0],
+  ["r4_w4", "soz", "فَسَوَّيهَا",  "Fasawwayha",   A.yoz("p28_r4_w4_fasawwayha"), 0, 2.20, 0, 0, 0, 0],
+  ["r4_w5", "soz", "عُقْبَيهَا",   "Uqbayha",      A.yoz("p28_r4_w5_uqbayha"),    0, 2.05, 0, 0, 0, 0],
 
-  // Block 2 — Vav Alifiyya (title + narration birga)
-  ["b2_intro", "jumla", "واو اَلِفِيَّه", "Vav Alifiyya — bu so'zlardagi vovlar alif kabi o'qiladi", A.yoz("p28_b2_intro"), 0, 11.30, 0, 0, 0, 0],
+  // Block 2 — Vav Alifiyya (b2_intro: arabcha sarlavha, b2_sub: chig'atoy izoh)
+  ["b2_intro", "jumla", "واو اَلِفِيَّه", "Vav Alifiyya — bu so'zlardagi vovlar alif kabi o'qiladi", A.yoz("p28_b2_intro"), 0, 1.75, 0, 0, 0, 0],
+  ["b2_sub", "jumla", "اوشبو سوزلرده‌گی واولر هم الف کبی اوقیلادی",
+    "Ushbu so'zlardagi vovlar ham alif kabi o'qiladi", A.yoz("p28_b2_sub"), 0, 4.40, 0, 0, 0, 0],
 
   // Row 5: صَلٰوةٌ زَكٰوةٌ ذَكٰوةٌ حَيٰوةٌ غَدٰوةٌ رِبٰوا
-  ["r5_w1", "soz", "صَلٰوةٌ", "Salat (namoz)",     A.yoz("p28_r5_w1_salat"),  0, 2.75, 0, 0, 0, 0],
-  ["r5_w2", "soz", "زَكٰوةٌ", "Zakat",             A.yoz("p28_r5_w2_zakat"),  0, 2.00, 0, 0, 0, 0],
-  ["r5_w3", "soz", "ذَكٰوةٌ", "Zakat (so'yish)",   A.yoz("p28_r5_w3_dhakat"), 0, 1.70, 0, 0, 0, 0],
-  ["r5_w4", "soz", "حَيٰوةٌ", "Hayot",             A.yoz("p28_r5_w4_hayat"),  0, 2.30, 0, 0, 0, 0],
-  ["r5_w5", "soz", "غَدٰوةٌ", "Ghadat (erta)",     A.yoz("p28_r5_w5_ghadat"), 0, 1.80, 0, 0, 0, 0],
-  ["r5_w6", "soz", "رِبٰوا",  "Ribo (sudxo'rlik)", A.yoz("p28_r5_w6_riba"),   0, 3.40, 0, 0, 0, 0],
+  ["r5_w1", "soz", "صَلٰوةٌ", "Salat (namoz)",     A.yoz("p28_r5_w1_salat"),  0, 1.45, 0, 0, 0, 0],
+  ["r5_w2", "soz", "زَكٰوةٌ", "Zakat",             A.yoz("p28_r5_w2_zakat"),  0, 1.55, 0, 0, 0, 0],
+  ["r5_w3", "soz", "ذَكٰوةٌ", "Zakat (so'yish)",   A.yoz("p28_r5_w3_dhakat"), 0, 1.60, 0, 0, 0, 0],
+  ["r5_w4", "soz", "حَيٰوةٌ", "Hayot",             A.yoz("p28_r5_w4_hayat"),  0, 1.50, 0, 0, 0, 0],
+  ["r5_w5", "soz", "غَدٰوةٌ", "Ghadat (erta)",     A.yoz("p28_r5_w5_ghadat"), 0, 1.50, 0, 0, 0, 0],
+  ["r5_w6", "soz", "رِبٰوا",  "Ribo (sudxo'rlik)", A.yoz("p28_r5_w6_riba"),   0, 1.05, 0, 0, 0, 0],
 
   // Block 3 — Yozilsada o'qilmaydigan harflar
-  ["b3_title", "jumla", "يَازِلْسَه‌ده اُوقِيلْمَيْدِيگَان حَرْفْلَر", "Yozilsada o'qilmaydigan harflar", A.yo("p28_b3_title"), 0, 2.95, 0, 0, 0, 0],
+  ["b3_title", "jumla", "يَازِلْسَه‌ده اُوقِيلْمَيْدِيگَان حَرْفْلَر", "Yozilsada o'qilmaydigan harflar", A.yo("p28_b3_title"), 0, 3.00, 0, 0, 0, 0],
+  ["b3_sub1", "jumla", "اوشبو سوزلر باشيده‌گی الفلر واو بيلان يازيلسه‌لرده عادي ضمّة کبی اوقیلادی",
+    "Ushbu so'zlar boshidagi aliflar vov bilan yozilsalarda oddiy zamma kabi o'qiladi", A.yo("p28_b3_sub1"), 0, 7.10, 0, 0, 0, 0],
 
   // Row 6: اُولُو اُولى اُولاَتِ اُولاَءِ اُولئك
-  ["r6_w1", "soz", "اُولُو",   "Ulu (egalari)", A.yo("p28_r6_w1_ulu"),    0, 1.90, 0, 0, 0, 0],
-  ["r6_w2", "soz", "اُولى",   "Ula",            A.yo("p28_r6_w2_ula"),    0, 2.15, 0, 0, 0, 0],
-  ["r6_w3", "soz", "اُولاَتِ", "Ulati",          A.yo("p28_r6_w3_ulati"),  0, 1.75, 0, 0, 0, 0],
-  ["r6_w4", "soz", "اُولاَءِ", "Ulai",           A.yo("p28_r6_w4_ulai"),   0, 2.50, 0, 0, 0, 0],
-  ["r6_w5", "soz", "اُولئك",  "Ulaika (anavi)", A.yo("p28_r6_w5_ulaika"), 0, 1.50, 0, 0, 0, 0],
+  ["r6_w1", "soz", "اُولُو",   "Ulu (egalari)", A.yo("p28_r6_w1_ulu"),    0, 0.90, 0, 0, 0, 0],
+  ["r6_w2", "soz", "اُولى",   "Ula",            A.yo("p28_r6_w2_ula"),    0, 0.90, 0, 0, 0, 0],
+  ["r6_w3", "soz", "اُولاَتِ", "Ulati",          A.yo("p28_r6_w3_ulati"),  0, 1.00, 0, 0, 0, 0],
+  ["r6_w4", "soz", "اُولاَءِ", "Ulai",           A.yo("p28_r6_w4_ulai"),   0, 1.75, 0, 0, 0, 0],
+  ["r6_w5", "soz", "اُولئك",  "Ulaika (anavi)", A.yo("p28_r6_w5_ulaika"), 0, 2.00, 0, 0, 0, 0],
+
+  // Subtitle 2 (between R6 and R7)
+  ["b3_sub2", "jumla", "اوشبو سوزلرکبی سوزلرنينگ آخرلريده‌گی جمع (کوپليك علامتى بولگان) واولريدن کيينگى الفلر هم اوقيلميدى",
+    "Ushbu so'zlardagi ko'plik vovidan keyingi aliflar ham o'qilmaydi", A.yo("p28_b3_sub2"), 0, 9.80, 0, 0, 0, 0],
 
   // Row 7: اَمَنُوا اَمِنُوا قَالُوا اِعْلَمُوا اِعْمَلُوا
-  ["r7_w1", "soz", "اَمَنُوا",  "Amanu (ishondilar)",      A.yo("p28_r7_w1_amanu"),  0, 1.50, 0, 0, 0, 0],
+  ["r7_w1", "soz", "اَمَنُوا",  "Amanu (ishondilar)",      A.yo("p28_r7_w1_amanu"),  0, 1.35, 0, 0, 0, 0],
   ["r7_w2", "soz", "اَمِنُوا",  "Aminu (xavfsiz bo'ldi)",  A.yo("p28_r7_w2_aminu"),  0, 1.35, 0, 0, 0, 0],
-  ["r7_w3", "soz", "قَالُوا",   "Qalu (dedilar)",          A.yo("p28_r7_w3_qalu"),   0, 1.55, 0, 0, 0, 0],
-  ["r7_w4", "soz", "اِعْلَمُوا", "I'lamu (biling)",         A.yo("p28_r7_w4_ilamu"),  0, 1.65, 0, 0, 0, 0],
-  ["r7_w5", "soz", "اِعْمَلُوا", "I'malu (qiling)",         A.yo("p28_r7_w5_imalu"),  0, 1.80, 0, 0, 0, 0],
+  ["r7_w3", "soz", "قَالُوا",   "Qalu (dedilar)",          A.yo("p28_r7_w3_qalu"),   0, 1.30, 0, 0, 0, 0],
+  ["r7_w4", "soz", "اِعْلَمُوا", "I'lamu (biling)",         A.yo("p28_r7_w4_ilamu"),  0, 1.45, 0, 0, 0, 0],
+  ["r7_w5", "soz", "اِعْمَلُوا", "I'malu (qiling)",         A.yo("p28_r7_w5_imalu"),  0, 1.55, 0, 0, 0, 0],
 ];
 
 // Page 29 — Yozilsada o'qilmaydigan harflar (alif/lam o'rta).
@@ -2230,112 +2247,120 @@ const p28: ED[] = [
 // VAQTLAR: silencedetect -30dB/0.30s avto-kesilgan, foydalanuvchi eshitib
 // tasdiqlashi/tuzatishi kerak.
 const p29: ED[] = [
+  // 2026-05-19 REMAPPED: source 40.yozilsa from 50-214s; durations fixed.
   // ===== Section 1: O'rta alif o'qilmaydi =====
   ["s1_title", "jumla", "اوشبو سوزلر کبی سوزلرده اورتاده‌گی الفلر هم اوقیلمیدی",
-    "Bu so'zlardek so'zlarda o'rtadagi aliflar ham o'qilmaydi", A.yo("p29_s1_title"), 0, 43.02, 0, 0, 0, 0],
+    "Bu so'zlardek so'zlarda o'rtadagi aliflar ham o'qilmaydi", A.yo("p29_s1_title"), 0, 5.30, 0, 0, 0, 0],
   // R1: 5 so'z
-  ["s1_r1_w1", "soz", "بِالْغَيْبِ",      "Bilg'ayb",          A.yo("p29_s1_r1_w1_bilghayb"),    0, 1.55, 0, 0, 0, 0],
-  ["s1_r1_w2", "soz", "وَبِالْاٰخِرَةِ",  "Va bil-aakhirati",  A.yo("p29_s1_r1_w2_wabilakhira"), 0, 1.90, 0, 0, 0, 0],
-  ["s1_r1_w3", "soz", "كَالْفَرَاشِ",     "Kal-faraashi",      A.yo("p29_s1_r1_w3_kalfarash"),   0, 1.95, 0, 0, 0, 0],
-  ["s1_r1_w4", "soz", "وَالْعَصْرِ",      "Val-asri",          A.yo("p29_s1_r1_w4_walasr"),      0, 2.00, 0, 0, 0, 0],
-  ["s1_r1_w5", "soz", "وَانْحَرْ",        "Vanhar",            A.yo("p29_s1_r1_w5_wanhar"),      0, 1.95, 0, 0, 0, 0],
-  // R2: 3 phrase
-  ["s1_r2_w1", "soz", "وَالْمُشْرِكِينَ",  "Val-mushrikiyna",    A.yo("p29_s1_r2_w1_walmushrikin"), 0, 2.00, 0, 0, 0, 0],
-  ["s1_r2_w2", "soz", "رَبِّ الْعَالَمِينَ", "Rabbil-aalamiyna",  A.yo("p29_s1_r2_w2_rabbilalam"),   0, 2.00, 0, 0, 0, 0],
-  ["s1_r2_w3", "soz", "صِرَاطَ الَّذِينَ",  "Sirootal-ladhiyna",  A.yo("p29_s1_r2_w3_siratalladhin"),0, 2.00, 0, 0, 0, 0],
+  ["s1_r1_w1", "soz", "بِالْغَيْبِ",      "Bilg'ayb",          A.yo("p29_s1_r1_w1_bilghayb"),    0, 1.70, 0, 0, 0, 0],
+  ["s1_r1_w2", "soz", "وَبِالْاٰخِرَةِ",  "Va bil-aakhirati",  A.yo("p29_s1_r1_w2_wabilakhira"), 0, 2.10, 0, 0, 0, 0],
+  ["s1_r1_w3", "soz", "كَالْفَرَاشِ",     "Kal-faraashi",      A.yo("p29_s1_r1_w3_kalfarash"),   0, 2.00, 0, 0, 0, 0],
+  ["s1_r1_w4", "soz", "وَالْعَصْرِ",      "Val-asri",          A.yo("p29_s1_r1_w4_walasr"),      0, 1.40, 0, 0, 0, 0],
+  ["s1_r1_w5", "soz", "وَانْحَرْ",        "Vanhar",            A.yo("p29_s1_r1_w5_wanhar"),      0, 1.20, 0, 0, 0, 0],
+  // R2: 3 phrase (+0.4s tail buffer to capture trailing soft consonants)
+  ["s1_r2_w1", "soz", "وَالْمُشْرِكِينَ",  "Val-mushrikiyna",    A.yo("p29_s1_r2_w1_walmushrikin"), 0, 2.95, 0, 0, 0, 0],
+  ["s1_r2_w2", "soz", "رَبِّ الْعَالَمِينَ", "Rabbil-aalamiyna",  A.yo("p29_s1_r2_w2_rabbilalam"),   0, 3.40, 0, 0, 0, 0],
+  ["s1_r2_w3", "soz", "صِرَاطَ الَّذِينَ",  "Sirootal-ladhiyna",  A.yo("p29_s1_r2_w3_siratalladhin"),0, 3.20, 0, 0, 0, 0],
   // R3: 3 phrase
-  ["s1_r3_w1", "soz", "غَيْرِ الْمَغْضُوبِ", "G'oyril-mag'duwbi",  A.yo("p29_s1_r3_w1_ghayrilmaghdub"),0, 2.00, 0, 0, 0, 0],
-  ["s1_r3_w2", "soz", "هُمُ الْمُفْلِحُونَ",  "Humul-muflihuwna",   A.yo("p29_s1_r3_w2_humulmuflihun"), 0, 2.10, 0, 0, 0, 0],
-  ["s1_r3_w3", "soz", "لَيْلَةُ الْقَدْرِ",   "Laylatul-qadri",     A.yo("p29_s1_r3_w3_laylatulqadr"),  0, 1.65, 0, 0, 0, 0],
+  ["s1_r3_w1", "soz", "غَيْرِ الْمَغْضُوبِ", "G'oyril-mag'duwbi",  A.yo("p29_s1_r3_w1_ghayrilmaghdub"),0, 3.30, 0, 0, 0, 0],
+  ["s1_r3_w2", "soz", "هُمُ الْمُفْلِحُونَ",  "Humul-muflihuwna",   A.yo("p29_s1_r3_w2_humulmuflihun"), 0, 3.40, 0, 0, 0, 0],
+  ["s1_r3_w3", "soz", "لَيْلَةُ الْقَدْرِ",   "Laylatul-qadri",     A.yo("p29_s1_r3_w3_laylatulqadr"),  0, 2.80, 0, 0, 0, 0],
   // R4: 3 phrase
-  ["s1_r4_w1", "soz", "حَذَرَ الْمَوْتِ",        "Hadhara-l-mawti",        A.yo("p29_s1_r4_w1_hadharalmawt"),         0, 2.05, 0, 0, 0, 0],
-  ["s1_r4_w2", "soz", "وَاِذَا اسْتَسْقَى",       "Va idhastasqo",          A.yo("p29_s1_r4_w2_waidhastasqa"),          0, 2.00, 0, 0, 0, 0],
-  ["s1_r4_w3", "soz", "اَنْفُسَكُمُ اسْتَكْبَرْتُمْ", "Anfusakumustakbartum",  A.yo("p29_s1_r4_w3_anfusakumistakbartum"),  0, 2.40, 0, 0, 0, 0],
+  ["s1_r4_w1", "soz", "حَذَرَ الْمَوْتِ",        "Hadhara-l-mawti",        A.yo("p29_s1_r4_w1_hadharalmawt"),         0, 2.75, 0, 0, 0, 0],
+  ["s1_r4_w2", "soz", "وَاِذَا اسْتَسْقَى",       "Va idhastasqo",          A.yo("p29_s1_r4_w2_waidhastasqa"),          0, 3.00, 0, 0, 0, 0],
+  ["s1_r4_w3", "soz", "اَنْفُسَكُمُ اسْتَكْبَرْتُمْ", "Anfusakumustakbartum",  A.yo("p29_s1_r4_w3_anfusakumistakbartum"),  0, 4.80, 0, 0, 0, 0],
 
   // ===== Section 2: O'rta lam o'qilmaydi =====
   ["s2_title", "jumla", "اوشبو سوزلر کبی سوزلرده اورتاده‌گی لاملر هم اوقیلمیدی",
-    "Bu so'zlardek so'zlarda o'rtadagi lamlar ham o'qilmaydi", A.yo("p29_s2_title"), 0, 10.00, 0, 0, 0, 0],
+    "Bu so'zlardek so'zlarda o'rtadagi lamlar ham o'qilmaydi", A.yo("p29_s2_title"), 0, 5.60, 0, 0, 0, 0],
   // R1: 5 ta -ar/u ot
-  ["s2_r1_w1", "soz", "اَلتَّبَعُ", "At-tabau",   A.yo("p29_s2_r1_w1_attabau"),   0, 2.10, 0, 0, 0, 0],
-  ["s2_r1_w2", "soz", "اَلثَّمَرُ", "Ath-thamaru", A.yo("p29_s2_r1_w2_aththamaru"), 0, 2.10, 0, 0, 0, 0],
-  ["s2_r1_w3", "soz", "اَلدَّخَلُ", "Ad-daxalu",   A.yo("p29_s2_r1_w3_addakhalu"),  0, 2.10, 0, 0, 0, 0],
-  ["s2_r1_w4", "soz", "اَلذَّهَبُ", "Az-zahabu",   A.yo("p29_s2_r1_w4_adhdhahabu"), 0, 2.05, 0, 0, 0, 0],
-  ["s2_r1_w5", "soz", "اَلرَّصَدُ", "Ar-rasadu",   A.yo("p29_s2_r1_w5_arrasadu"),   0, 2.00, 0, 0, 0, 0],
+  ["s2_r1_w1", "soz", "اَلتَّبَعُ", "At-tabau",   A.yo("p29_s2_r1_w1_attabau"),   0, 2.05, 0, 0, 0, 0],
+  ["s2_r1_w2", "soz", "اَلثَّمَرُ", "Ath-thamaru", A.yo("p29_s2_r1_w2_aththamaru"), 0, 1.35, 0, 0, 0, 0],
+  ["s2_r1_w3", "soz", "اَلدَّخَلُ", "Ad-daxalu",   A.yo("p29_s2_r1_w3_addakhalu"),  0, 1.40, 0, 0, 0, 0],
+  ["s2_r1_w4", "soz", "اَلذَّهَبُ", "Az-zahabu",   A.yo("p29_s2_r1_w4_adhdhahabu"), 0, 1.45, 0, 0, 0, 0],
+  ["s2_r1_w5", "soz", "اَلرَّصَدُ", "Ar-rasadu",   A.yo("p29_s2_r1_w5_arrasadu"),   0, 1.42, 0, 0, 0, 0],
   // R2: 5 ta
-  ["s2_r2_w1", "soz", "اَلزَّبَدُ", "Az-zabadu",   A.yo("p29_s2_r2_w1_azzabadu"),   0, 2.05, 0, 0, 0, 0],
-  ["s2_r2_w2", "soz", "اَلسَّفَرُ", "As-safaru",   A.yo("p29_s2_r2_w2_assafaru"),   0, 1.90, 0, 0, 0, 0],
-  ["s2_r2_w3", "soz", "اَلشَّجَرُ", "Ash-shajaru", A.yo("p29_s2_r2_w3_ashshajaru"), 0, 1.85, 0, 0, 0, 0],
-  ["s2_r2_w4", "soz", "اَلصَّفَرُ", "As-safaru",   A.yo("p29_s2_r2_w4_assofaru"),   0, 1.90, 0, 0, 0, 0],
-  ["s2_r2_w5", "soz", "اَلضَّرَرُ", "Ad-dararu",   A.yo("p29_s2_r2_w5_addhararu"),  0, 1.95, 0, 0, 0, 0],
+  ["s2_r2_w1", "soz", "اَلزَّبَدُ", "Az-zabadu",   A.yo("p29_s2_r2_w1_azzabadu"),   0, 1.42, 0, 0, 0, 0],
+  ["s2_r2_w2", "soz", "اَلسَّفَرُ", "As-safaru",   A.yo("p29_s2_r2_w2_assafaru"),   0, 1.38, 0, 0, 0, 0],
+  ["s2_r2_w3", "soz", "اَلشَّجَرُ", "Ash-shajaru", A.yo("p29_s2_r2_w3_ashshajaru"), 0, 1.38, 0, 0, 0, 0],
+  ["s2_r2_w4", "soz", "اَلصَّفَرُ", "As-safaru",   A.yo("p29_s2_r2_w4_assofaru"),   0, 1.40, 0, 0, 0, 0],
+  ["s2_r2_w5", "soz", "اَلضَّرَرُ", "Ad-dararu",   A.yo("p29_s2_r2_w5_addhararu"),  0, 1.50, 0, 0, 0, 0],
   // R3: 4 ta
-  ["s2_r3_w1", "soz", "اَلطَّلَبُ", "At-talabu",   A.yo("p29_s2_r3_w1_attalabu"),   0, 1.95, 0, 0, 0, 0],
-  ["s2_r3_w2", "soz", "اَلظَّفَرُ", "Az-zafaru",   A.yo("p29_s2_r3_w2_azhzhafaru"), 0, 2.00, 0, 0, 0, 0],
-  ["s2_r3_w3", "soz", "اَللَّهَبُ", "Al-lahabu",   A.yo("p29_s2_r3_w3_allahabu"),   0, 2.00, 0, 0, 0, 0],
-  ["s2_r3_w4", "soz", "اَلنَّسَبُ", "An-nasabu",   A.yo("p29_s2_r3_w4_annasabu"),   0, 2.30, 0, 0, 0, 0],
+  ["s2_r3_w1", "soz", "اَلطَّلَبُ", "At-talabu",   A.yo("p29_s2_r3_w1_attalabu"),   0, 1.40, 0, 0, 0, 0],
+  ["s2_r3_w2", "soz", "اَلظَّفَرُ", "Az-zafaru",   A.yo("p29_s2_r3_w2_azhzhafaru"), 0, 1.41, 0, 0, 0, 0],
+  ["s2_r3_w3", "soz", "اَللَّهَبُ", "Al-lahabu",   A.yo("p29_s2_r3_w3_allahabu"),   0, 1.41, 0, 0, 0, 0],
+  ["s2_r3_w4", "soz", "اَلنَّسَبُ", "An-nasabu",   A.yo("p29_s2_r3_w4_annasabu"),   0, 1.83, 0, 0, 0, 0],
 
   // ===== Section 3: Boshqa so'z qo'shilganda alif+lam ikkalasi ham o'qilmaydi =====
   ["s3_title", "jumla", "اوشبو سوزلر کبی سوزلرگه باشقه بر سوز قوشیب اوقیغانده الفلری هم لاملری هم اوقیلمیدی",
     "Bu so'zlardek so'zlarga boshqa bir so'z qo'shib o'qilganda aliflari ham lamlari ham o'qilmaydi",
-    A.yo("p29_s3_title"), 0, 16.56, 0, 0, 0, 0],
+    A.yo("p29_s3_title"), 0, 10.10, 0, 0, 0, 0],
   // R1: 4 phrase (huva al-X)
-  ["s3_r1_w1", "soz", "هُوَ التَّبَعُ", "Huva-t-tabau",   A.yo("p29_s3_r1_w1_huwattabau"),     0, 2.10, 0, 0, 0, 0],
-  ["s3_r1_w2", "soz", "هُوَ الثَّمَرُ", "Huva-th-thamaru", A.yo("p29_s3_r1_w2_huwaththamaru"),  0, 1.80, 0, 0, 0, 0],
-  ["s3_r1_w3", "soz", "هُوَ الدَّخَلُ", "Huva-d-daxalu",   A.yo("p29_s3_r1_w3_huwaddakhalu"),   0, 2.25, 0, 0, 0, 0],
-  ["s3_r1_w4", "soz", "هُوَ الذَّهَبُ", "Huva-z-zahabu",   A.yo("p29_s3_r1_w4_huwadhdhahabu"),  0, 2.75, 0, 0, 0, 0],
+  ["s3_r1_w1", "soz", "هُوَ التَّبَعُ", "Huva-t-tabau",   A.yo("p29_s3_r1_w1_huwattabau"),     0, 1.62, 0, 0, 0, 0],
+  ["s3_r1_w2", "soz", "هُوَ الثَّمَرُ", "Huva-th-thamaru", A.yo("p29_s3_r1_w2_huwaththamaru"),  0, 1.68, 0, 0, 0, 0],
+  ["s3_r1_w3", "soz", "هُوَ الدَّخَلُ", "Huva-d-daxalu",   A.yo("p29_s3_r1_w3_huwaddakhalu"),   0, 1.69, 0, 0, 0, 0],
+  ["s3_r1_w4", "soz", "هُوَ الذَّهَبُ", "Huva-z-zahabu",   A.yo("p29_s3_r1_w4_huwadhdhahabu"),  0, 1.95, 0, 0, 0, 0],
   // R2: 4 phrase
-  ["s3_r2_w1", "soz", "هُوَ الرَّصَدُ", "Huva-r-rasadu",   A.yo("p29_s3_r2_w1_huwarrasadu"),    0, 2.90, 0, 0, 0, 0],
-  ["s3_r2_w2", "soz", "هُوَ الزَّبَدُ", "Huva-z-zabadu",   A.yo("p29_s3_r2_w2_huwazzabadu"),    0, 2.20, 0, 0, 0, 0],
-  ["s3_r2_w3", "soz", "هُوَ السَّفَرُ", "Huva-s-safaru",   A.yo("p29_s3_r2_w3_huwassafaru"),    0, 1.95, 0, 0, 0, 0],
-  ["s3_r2_w4", "soz", "هُوَ الشَّجَرُ", "Huva-sh-shajaru", A.yo("p29_s3_r2_w4_huwashshajaru"),  0, 2.65, 0, 0, 0, 0],
+  ["s3_r2_w1", "soz", "هُوَ الرَّصَدُ", "Huva-r-rasadu",   A.yo("p29_s3_r2_w1_huwarrasadu"),    0, 1.68, 0, 0, 0, 0],
+  ["s3_r2_w2", "soz", "هُوَ الزَّبَدُ", "Huva-z-zabadu",   A.yo("p29_s3_r2_w2_huwazzabadu"),    0, 1.70, 0, 0, 0, 0],
+  ["s3_r2_w3", "soz", "هُوَ السَّفَرُ", "Huva-s-safaru",   A.yo("p29_s3_r2_w3_huwassafaru"),    0, 1.50, 0, 0, 0, 0],
+  ["s3_r2_w4", "soz", "هُوَ الشَّجَرُ", "Huva-sh-shajaru", A.yo("p29_s3_r2_w4_huwashshajaru"),  0, 1.58, 0, 0, 0, 0],
   // R3: 3 phrase
-  ["s3_r3_w1", "soz", "هُوَ الصَّفَرُ", "Huva-s-safaru",   A.yo("p29_s3_r3_w1_huwassofaru"),    0, 4.85, 0, 0, 0, 0],
-  ["s3_r3_w2", "soz", "هُوَ الضَّرَرُ", "Huva-d-dararu",   A.yo("p29_s3_r3_w2_huwaddhararu"),   0, 2.50, 0, 0, 0, 0],
-  ["s3_r3_w3", "soz", "هُوَ الطَّلَبُ", "Huva-t-talabu",   A.yo("p29_s3_r3_w3_huwattalabu"),    0, 2.40, 0, 0, 0, 0],
+  ["s3_r3_w1", "soz", "هُوَ الصَّفَرُ", "Huva-s-safaru",   A.yo("p29_s3_r3_w1_huwassofaru"),    0, 1.63, 0, 0, 0, 0],
+  ["s3_r3_w2", "soz", "هُوَ الضَّرَرُ", "Huva-d-dararu",   A.yo("p29_s3_r3_w2_huwaddhararu"),   0, 1.78, 0, 0, 0, 0],
+  ["s3_r3_w3", "soz", "هُوَ الطَّلَبُ", "Huva-t-talabu",   A.yo("p29_s3_r3_w3_huwattalabu"),    0, 1.71, 0, 0, 0, 0],
   // R4: 3 phrase
-  ["s3_r4_w1", "soz", "هُوَ الظَّفَرُ", "Huva-z-zafaru",   A.yo("p29_s3_r4_w1_huwazhzhafaru"),  0, 5.20, 0, 0, 0, 0],
-  ["s3_r4_w2", "soz", "هُوَ اللَّهَبُ", "Huva-l-lahabu",   A.yo("p29_s3_r4_w2_huwallahabu"),    0, 5.30, 0, 0, 0, 0],
-  ["s3_r4_w3", "soz", "هُوَ النَّسَبُ", "Huva-n-nasabu",   A.yo("p29_s3_r4_w3_huwannasabu"),    0, 21.15, 0, 0, 0, 0],
+  ["s3_r4_w1", "soz", "هُوَ الظَّفَرُ", "Huva-z-zafaru",   A.yo("p29_s3_r4_w1_huwazhzhafaru"),  0, 1.73, 0, 0, 0, 0],
+  ["s3_r4_w2", "soz", "هُوَ اللَّهَبُ", "Huva-l-lahabu",   A.yo("p29_s3_r4_w2_huwallahabu"),    0, 1.71, 0, 0, 0, 0],
+  ["s3_r4_w3", "soz", "هُوَ النَّسَبُ", "Huva-n-nasabu",   A.yo("p29_s3_r4_w3_huwannasabu"),    0, 1.95, 0, 0, 0, 0],
 ];
 
 const p30: ED[] = [
   // ────────────────────────────────────────────────────────────────
   // TOP: Alif-lom vasl misollar (21 ibora, 6 qator)
-  // Audio: 37. alif va hamza.mp3 ning 119.31-188.84s qismi.
-  // Chig'atoy qoidasi (yuqori header) — static matn (audio'da yo'q).
+  // Audio words: 37. alif va hamza.mp3 ning 119.31-188.84s qismi.
+  // Header narration: 40. yozilsa-o'qilmaydi.mp3 ning 216.25-229.25s qismi (12.95s).
   // ────────────────────────────────────────────────────────────────
 
+  // Top section chig'atoy header (clickable)
+  ["top_header", "jumla", "اوشبو سوزلر کبی سوزلر قوشیب اوقیلگانده اورتالریده گی فتحه کسره ضمه و سکون یازیلماگان هر قاندی حرف اوقیلمی توشریب قالدیریلادی",
+    "Bu so'zlardek so'zlarni qo'shib o'qilganda, o'rtalarida fatha/kasra/damma/sukunsiz yozilmagan harflar o'qilmay tushiriladi",
+    A.yo("p30_top_header"), 0, 13.00, 0, 0, 0, 0],
+
+
+  // 2026-05-19 REMAPPED: TOP 21 phrases now from source 40 (230-316s), not source 37.
   // ── Row 1 (4 ibora) — هٰذَا الْبَلَدُ ، مَا الْقَارِعَةُ ، مَا الْحُطَمَةُ ، هٰذَا الَّذِى ──
-  ["r1_w1", "soz", "هٰذَا الْبَلَدُ",   "Bu shahar",        A.ah("p30_r1_w1_hadhalbaladu"), 0, 2.20, 0, 0, 0, 0],
-  ["r1_w2", "soz", "مَا الْقَارِعَةُ",   "Qiyomat nimadir",  A.ah("p30_r1_w2_malqariatu"),   0, 2.32, 0, 0, 0, 0],
-  ["r1_w3", "soz", "مَا الْحُطَمَةُ",    "Hutama nimadir",   A.ah("p30_r1_w3_malhutamatu"),  0, 2.25, 0, 0, 0, 0],
-  ["r1_w4", "soz", "هٰذَا الَّذِى",      "Bu kishi",         A.ah("p30_r1_w4_hadhalladhi"),  0, 2.23, 0, 0, 0, 0],
+  ["r1_w1", "soz", "هٰذَا الْبَلَدُ",   "Bu shahar",        A.yo("p30_r1_w1_hadhalbaladu"), 0, 2.10, 0, 0, 0, 0],
+  ["r1_w2", "soz", "مَا الْقَارِعَةُ",   "Qiyomat nimadir",  A.yo("p30_r1_w2_malqariatu"),   0, 2.20, 0, 0, 0, 0],
+  ["r1_w3", "soz", "مَا الْحُطَمَةُ",    "Hutama nimadir",   A.yo("p30_r1_w3_malhutamatu"),  0, 1.85, 0, 0, 0, 0],
+  ["r1_w4", "soz", "هٰذَا الَّذِى",      "Bu kishi",         A.yo("p30_r1_w4_hadhalladhi"),  0, 2.30, 0, 0, 0, 0],
 
   // ── Row 2 (3 ibora) — مَنْ ذَا الَّذِى ، تَحْتَهَا الْأَنْهَارُ ، فَقُلْنَا اضْرِبْ ──
-  ["r2_w1", "soz", "مَنْ ذَا الَّذِى",      "Bu kim",                A.ah("p30_r2_w1_mandhalladhi"),  0, 2.37, 0, 0, 0, 0],
-  ["r2_w2", "soz", "تَحْتَهَا الْأَنْهَارُ", "Tagidan daryolar",      A.ah("p30_r2_w2_tahtahalanhar"), 0, 1.88, 0, 0, 0, 0],
-  ["r2_w3", "soz", "فَقُلْنَا اضْرِبْ",      "Aytdik: ur",            A.ah("p30_r2_w3_faqulnadrib"),   0, 2.00, 0, 0, 0, 0],
+  ["r2_w1", "soz", "مَنْ ذَا الَّذِى",      "Bu kim",                A.yo("p30_r2_w1_mandhalladhi"),  0, 2.80, 0, 0, 0, 0],
+  ["r2_w2", "soz", "تَحْتَهَا الْأَنْهَارُ", "Tagidan daryolar",      A.yo("p30_r2_w2_tahtahalanhar"), 0, 2.92, 0, 0, 0, 0],
+  ["r2_w3", "soz", "فَقُلْنَا اضْرِبْ",      "Aytdik: ur",            A.yo("p30_r2_w3_faqulnadrib"),   0, 2.20, 0, 0, 0, 0],
 
   // ── Row 3 (3 ibora) — بِئْسَ الِاسْمُ (٭) ، اِهْدِنَا الصِّرَاطَ ، يَا أَيُّهَا النَّاسُ ──
-  ["r3_w1", "soz", "بِئْسَ الِاسْمُ",       "Yomon nom",             A.ah("p30_r3_w1_bisalismu"),    0, 2.16, 0, 0, 0, 0],
-  ["r3_w2", "soz", "اِهْدِنَا الصِّرَاطَ",   "Yo'lga hidoyat qil",    A.ah("p30_r3_w2_ihdinasirata"), 0, 2.32, 0, 0, 0, 0],
-  ["r3_w3", "soz", "يَا أَيُّهَا النَّاسُ",  "Ey odamlar",            A.ah("p30_r3_w3_yaayyuhannas"), 0, 2.37, 0, 0, 0, 0],
+  ["r3_w1", "soz", "بِئْسَ الِاسْمُ",       "Yomon nom",             A.yo("p30_r3_w1_bisalismu"),    0, 1.95, 0, 0, 0, 0],
+  ["r3_w2", "soz", "اِهْدِنَا الصِّرَاطَ",   "Yo'lga hidoyat qil",    A.yo("p30_r3_w2_ihdinasirata"), 0, 2.65, 0, 0, 0, 0],
+  ["r3_w3", "soz", "يَا أَيُّهَا النَّاسُ",  "Ey odamlar",            A.yo("p30_r3_w3_yaayyuhannas"), 0, 4.95, 0, 0, 0, 0],
 
   // ── Row 4 (4 ibora) — اِلَى النَّاسِ ، عَلَى النَّاسِ ، فِى الْأَرْضِ ، فِى الصُّدُورِ ──
-  ["r4_w1", "soz", "اِلَى النَّاسِ",     "Odamlarga",        A.ah("p30_r4_w1_ilannas"),  0, 1.17, 0, 0, 0, 0],
-  ["r4_w2", "soz", "عَلَى النَّاسِ",     "Odamlar ustida",   A.ah("p30_r4_w2_alannas"),  0, 1.07, 0, 0, 0, 0],
-  ["r4_w3", "soz", "فِى الْأَرْضِ",       "Yerda",            A.ah("p30_r4_w3_filard"),   0, 1.22, 0, 0, 0, 0],
-  ["r4_w4", "soz", "فِى الصُّدُورِ",      "Ko'ksilarda",      A.ah("p30_r4_w4_fissudur"), 0, 1.10, 0, 0, 0, 0],
+  ["r4_w1", "soz", "اِلَى النَّاسِ",     "Odamlarga",        A.yo("p30_r4_w1_ilannas"),  0, 2.50, 0, 0, 0, 0],
+  ["r4_w2", "soz", "عَلَى النَّاسِ",     "Odamlar ustida",   A.yo("p30_r4_w2_alannas"),  0, 2.45, 0, 0, 0, 0],
+  ["r4_w3", "soz", "فِى الْأَرْضِ",       "Yerda",            A.yo("p30_r4_w3_filard"),   0, 1.30, 0, 0, 0, 0],
+  ["r4_w4", "soz", "فِى الصُّدُورِ",      "Ko'ksilarda",      A.yo("p30_r4_w4_fissudur"), 0, 1.78, 0, 0, 0, 0],
 
   // ── Row 5 (4 ibora) — قَالُوا اتَّخَذَ ، قَالُوا ادْعُ ، لَقُوا الَّذِينَ ، اُوتُوا الْكِتَابَ ──
-  ["r5_w1", "soz", "قَالُوا اتَّخَذَ",    "Aytdilar: oldi",        A.ah("p30_r5_w1_qaluttakhadha"), 0, 1.30, 0, 0, 0, 0],
-  ["r5_w2", "soz", "قَالُوا ادْعُ",       "Aytdilar: duo qil",     A.ah("p30_r5_w2_qaludu"),        0, 2.75, 0, 0, 0, 0],
-  ["r5_w3", "soz", "لَقُوا الَّذِينَ",    "Kishilarga uchradilar", A.ah("p30_r5_w3_laqulladhina"),  0, 2.04, 0, 0, 0, 0],
-  ["r5_w4", "soz", "اُوتُوا الْكِتَابَ",   "Kitob berildilar",      A.ah("p30_r5_w4_utulkitab"),     0, 2.10, 0, 0, 0, 0],
+  ["r5_w1", "soz", "قَالُوا اتَّخَذَ",    "Aytdilar: oldi",        A.yo("p30_r5_w1_qaluttakhadha"), 0, 2.25, 0, 0, 0, 0],
+  ["r5_w2", "soz", "قَالُوا ادْعُ",       "Aytdilar: duo qil",     A.yo("p30_r5_w2_qaludu"),        0, 1.48, 0, 0, 0, 0],
+  ["r5_w3", "soz", "لَقُوا الَّذِينَ",    "Kishilarga uchradilar", A.yo("p30_r5_w3_laqulladhina"),  0, 2.35, 0, 0, 0, 0],
+  ["r5_w4", "soz", "اُوتُوا الْكِتَابَ",   "Kitob berildilar",      A.yo("p30_r5_w4_utulkitab"),     0, 2.40, 0, 0, 0, 0],
 
   // ── Row 6 (3 ibora) — وَأَقِيمُوا الصَّلٰوةَ ، وَآتُوا الزَّكٰوةَ ، وَعَمِلُوا الصّٰلِحٰت ──
-  ["r6_w1", "soz", "وَاَقِيمُوا الصَّلٰوةَ", "Namozni qoyim qilinglar", A.ah("p30_r6_w1_waaqimusalat"),   0, 2.15, 0, 0, 0, 0],
-  ["r6_w2", "soz", "وَاٰتُوا الزَّكٰوةَ",    "Zakotni beringlar",       A.ah("p30_r6_w2_waatuzakat"),     0, 2.17, 0, 0, 0, 0],
-  ["r6_w3", "soz", "وَعَمِلُوا الصّٰلِحٰت",  "Va solihlikni qildilar",  A.ah("p30_r6_w3_waamilussalihat"), 0, 2.53, 0, 0, 0, 0],
+  ["r6_w1", "soz", "وَاَقِيمُوا الصَّلٰوةَ", "Namozni qoyim qilinglar", A.yo("p30_r6_w1_waaqimusalat"),   0, 2.85, 0, 0, 0, 0],
+  ["r6_w2", "soz", "وَاٰتُوا الزَّكٰوةَ",    "Zakotni beringlar",       A.yo("p30_r6_w2_waatuzakat"),     0, 2.85, 0, 0, 0, 0],
+  ["r6_w3", "soz", "وَعَمِلُوا الصّٰلِحٰت",  "Va solihlikni qildilar",  A.yo("p30_r6_w3_waamilussalihat"), 0, 3.75, 0, 0, 0, 0],
 
   // ────────────────────────────────────────────────────────────────
   // BOTTOM: Vasl bo'limi — 3 so'zli misollar (8 ibora, 4 qator × 2 ustun)

@@ -31,39 +31,39 @@ c40() { cut "$SRC40" "$OUT40" "$1" "$2" "$3"; }
 
 echo "=== 39. yoz-o'qiladigan (Block 1 Yaa + Block 2 Vav) ==="
 
-echo "--- Block 1 intro (Yaa Alifiyya title + narration 1) ---"
-c39 p28_b1_intro 0.0 12.10
+# 2026-05-19 REMAPPED — old timestamps were 100s+ off (cutting from start
+# instead of post-p27 region at 107s+). R2 audio is read in REVERSE order
+# in source (shatta→taala→ala→musa→isa), so r2_* cuts are reverse-mapped.
+echo "--- Block 1 intro (Yaa Alifiyya — arabcha sarlavha) ---"
+c39 p28_b1_intro 108.50 110.30
 
 echo "--- Row 1: اِلى عَلى لَدى مَتى اَنّى حَتّى ---"
-c39 p28_r1_w1_ila    12.60 14.50
-c39 p28_r1_w2_ala    15.10 17.25
-c39 p28_r1_w3_lada   17.75 19.80
-c39 p28_r1_w4_mata   20.10 22.05
-c39 p28_r1_w5_anna   22.60 24.55
-c39 p28_r1_w6_hatta  25.20 29.45
+c39 p28_r1_w1_ila    116.45 117.35
+c39 p28_r1_w2_ala    117.85 118.85
+c39 p28_r1_w3_lada   119.30 120.35
+c39 p28_r1_w4_mata   120.80 121.85
+c39 p28_r1_w5_anna   122.35 123.90
+c39 p28_r1_w6_hatta  124.35 125.75
 
-echo "--- Row 2: عِيسى مُوسى اَعْلى تَعالى شَتّى ---"
-c39 p28_r2_w1_isa    29.85 31.80
-c39 p28_r2_w2_musa   32.60 34.40
-c39 p28_r2_w3_ala2   35.10 36.95
-c39 p28_r2_w4_taala  37.60 39.50
-c39 p28_r2_w5_shatta 40.10 42.75
+echo "--- Row 2: REVERSED audio (book RTL→audio LTR) ---"
+c39 p28_r2_w1_isa    133.85 135.30   # last in audio = first in book
+c39 p28_r2_w2_musa   132.00 133.45
+c39 p28_r2_w3_ala2   130.20 131.50   # middle stays
+c39 p28_r2_w4_taala  128.20 129.70
+c39 p28_r2_w5_shatta 126.20 127.70   # first in audio = last in book
 
 echo "--- Row 3: يَحْيى مُرْتَضى يَتَزَكّى فَتَرْضى ---"
-c39 p28_r3_w1_yahya     43.30 45.95
-c39 p28_r3_w2_murtada   46.55 49.20
-c39 p28_r3_w3_yatazakka 49.70 51.85
-c39 p28_r3_w4_fatarda   52.60 54.70
-
-echo "--- Block 1 sub-narration (subtitle 2: 'shuningdek...') ---"
-c39 p28_b1_sub 55.30 59.50
+c39 p28_r3_w1_yahya     135.85 137.25
+c39 p28_r3_w2_murtada   137.85 139.50
+c39 p28_r3_w3_yatazakka 140.15 142.00
+c39 p28_r3_w4_fatarda   142.60 144.20
 
 echo "--- Row 4: سَوَّيهَا دَسَّيهَا زَكَّيهَا فَسَوَّيهَا عُقْبَيهَا ---"
-c39 p28_r4_w1_sawwayha   59.40 61.00
-c39 p28_r4_w2_dassayha   61.90 63.30
-c39 p28_r4_w3_zakkayha   63.80 65.85
-c39 p28_r4_w4_fasawwayha 66.50 68.65
-c39 p28_r4_w5_uqbayha    69.30 71.85
+c39 p28_r4_w1_sawwayha   150.15 152.20
+c39 p28_r4_w2_dassayha   152.85 155.00
+c39 p28_r4_w3_zakkayha   155.60 157.85
+c39 p28_r4_w4_fasawwayha 158.55 160.75
+c39 p28_r4_w5_uqbayha    161.40 163.45
 
 echo "--- Block 2 intro (Vav Alifiyya title + narration) ---"
 c39 p28_b2_intro 77.50 88.80

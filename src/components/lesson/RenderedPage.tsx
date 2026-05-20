@@ -2046,11 +2046,32 @@ function Page28({ elements, activeId, hasActive, onElementClick }: PP) {
     </p>
   );
 
+  // Clickable chig'atoy izoh — audio mavjud bo'lsa, bosilganda ijro etadi
+  const ClickableSubText = ({ el: subEl }: { el?: Element }) => {
+    if (!subEl) return null;
+    const isActive = activeId === subEl.id;
+    return (
+      <button
+        onClick={(e) => { e.stopPropagation(); onElementClick(subEl); }}
+        className="element-spring rounded-md px-2 py-0"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-muted)",
+          boxShadow: isActive ? "0 4px 14px var(--color-primary-glow)" : "none",
+        }}
+      >
+        <span className="arabic-text text-[9.5px] text-center leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
+          {subEl.arabic}
+        </span>
+      </button>
+    );
+  };
+
   return (
     <div className="flex flex-col items-center gap-0">
       {/* ============ BLOCK 1 — Yaa Alifiyya ============ */}
       <BlockTitle el={el("b1_intro")} />
-      <SubText>اوشبو سوزلرنينگ آخرده‌گی یالری الف کبی اوقیلادی</SubText>
+      <ClickableSubText el={el("b1_sub1")} />
 
       {/* Row 1: 6 so'z */}
       <Row els={els(["r1_w1","r1_w2","r1_w3","r1_w4","r1_w5","r1_w6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
@@ -2059,7 +2080,7 @@ function Page28({ elements, activeId, hasActive, onElementClick }: PP) {
       {/* Row 3: 4 so'z */}
       <Row els={els(["r3_w1","r3_w2","r3_w3","r3_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
 
-      <SubText>شونينگدك اوشبو سوزلرده‌گی یال هم الف کبی اوقیلادی</SubText>
+      <ClickableSubText el={el("b1_sub2")} />
       {/* Row 4: 5 so'z (sawwayha turi — biroz uzunroq) */}
       <Row els={els(["r4_w1","r4_w2","r4_w3","r4_w4","r4_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
 
@@ -2067,7 +2088,7 @@ function Page28({ elements, activeId, hasActive, onElementClick }: PP) {
 
       {/* ============ BLOCK 2 — Vav Alifiyya ============ */}
       <BlockTitle el={el("b2_intro")} />
-      <SubText>اوشبو سوزلرده‌گی واولر هم الف کبی اوقیلادی</SubText>
+      <ClickableSubText el={el("b2_sub")} />
 
       {/* Row 5: 6 so'z */}
       <Row els={els(["r5_w1","r5_w2","r5_w3","r5_w4","r5_w5","r5_w6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
@@ -2076,12 +2097,12 @@ function Page28({ elements, activeId, hasActive, onElementClick }: PP) {
 
       {/* ============ BLOCK 3 — Yozilsada o'qilmaydigan harflar ============ */}
       <BlockTitle el={el("b3_title")} />
-      <SubText>اوشبو سوزلر باشيده‌گی الفلر واو بيلان يازيلسه‌لرده عادي ضمّة کبی اوقیلادی</SubText>
+      <ClickableSubText el={el("b3_sub1")} />
 
       {/* Row 6: 5 so'z */}
       <Row els={els(["r6_w1","r6_w2","r6_w3","r6_w4","r6_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
 
-      <SubText>اوشبو سوزلرکبی سوزلرنينگ آخرلريده‌گی جمع (کوپليك علامتى بولگان) واولريدن کيينگى الفلر هم اوقيلميدى</SubText>
+      <ClickableSubText el={el("b3_sub2")} />
 
       {/* Row 7: 5 so'z */}
       <Row els={els(["r7_w1","r7_w2","r7_w3","r7_w4","r7_w5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
@@ -2159,15 +2180,26 @@ function Page29({ elements, activeId, hasActive, onElementClick }: PP) {
 // vasl combos) in 4 rows × 2 cols. Chig'atoy rules + Vasl title = static text
 // (not in audio — narrator skips them). Audio: 37. alif va hamza.mp3 119-217s.
 function Page30({ elements, activeId, hasActive, onElementClick }: PP) {
-  const { els } = usePageElements(elements, 30);
+  const { el, els } = usePageElements(elements, 30);
+  const topHeader = el("top_header");
   return (
     <div className="flex flex-col items-center gap-1.5 w-full">
-      {/* Top chig'atoy rule — static italic header explaining vasl */}
-      <div className="w-full rounded-lg border border-primary/15 bg-primary/[0.04] px-2.5 py-1.5 text-center">
-        <p className="arabic-text text-[10.5px] leading-snug text-text-main/85" style={{ fontFamily: "var(--font-arabic)" }}>
-          اوشبو سوزلر کبی سوزلر قوشیب اوقیلگانده اورتالریده گی فتحه کسره ضمه و سکون یازیلماگان هر قاندی حرف اوقیلمی توشریب قالدیریلادی
-        </p>
-      </div>
+      {/* Top chig'atoy rule — clickable narration */}
+      {topHeader && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onElementClick(topHeader); }}
+          className="w-full rounded-lg border border-primary/15 px-2.5 py-1.5 text-center element-spring"
+          style={{
+            backgroundColor: activeId === topHeader.id ? "var(--color-primary)" : "rgba(76,175,80,0.04)",
+            color: activeId === topHeader.id ? "#ffffff" : "var(--color-text-main)",
+            boxShadow: activeId === topHeader.id ? "0 6px 20px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <p className="arabic-text text-[10.5px] leading-snug" style={{ fontFamily: "var(--font-arabic)" }}>
+            {topHeader.arabic}
+          </p>
+        </button>
+      )}
 
       {/* TOP: 6 rows of alif-lom vasl examples (RTL: right to left) */}
       <Row els={els(["r1_w1","r1_w2","r1_w3","r1_w4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
