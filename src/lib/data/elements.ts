@@ -131,6 +131,40 @@ const A = {
   alq: (name: string) => `/audio/edit/63_alaq/${name}.mp3`,
   // Page 40 (bottom) Suratu-l Qadr — source 64. Qadr.mp3 (49.84s, Bismillah + 5 ayat)
   qdr: (name: string) => `/audio/edit/64_qadr/${name}.mp3`,
+  // Page 41 Suratu-l Bayyina — source 65. Bayyina.mp3 (170s, Bismillah + 8 ayat)
+  bayy: (name: string) => `/audio/edit/65_bayyina/${name}.mp3`,
+  // Page 42 (top) Surah Az-Zalzalah — source 66. Zalzala.mp3 (87.51s, Bismillah + 8 ayat)
+  zz: (name: string) => `/audio/edit/66_zalzala/${name}.mp3`,
+  // Page 42 (bottom) Surah Al-'Adiyat — source 67. Adiya.mp3 (91.48s, Bismillah + 11 ayat)
+  ad: (name: string) => `/audio/edit/67_adiya/${name}.mp3`,
+  // Page 43 (top) Surah Al-Qari'ah — source 68. Qoria.mp3 (89.36s, Bismillah + 11 ayat)
+  qr: (name: string) => `/audio/edit/68_qoria/${name}.mp3`,
+  // Page 43 (mid) Surah At-Takathur — source 69. Takasur.mp3 (71.89s, Bismillah + 8 ayat)
+  tk: (name: string) => `/audio/edit/69_takasur/${name}.mp3`,
+  // Page 43 (bottom — Bismillah only, title header section) + Page 44 (body) Surah Al-'Asr — source 70. Asr.mp3 (33.78s, Bismillah + 3 ayat)
+  asr: (name: string) => `/audio/edit/70_asr/${name}.mp3`,
+  // Page 44 (mid) Surah Al-Humazah — source 71. Humaza.mp3 (75.96s, Bismillah + 9 ayat)
+  hu: (name: string) => `/audio/edit/71_humaza/${name}.mp3`,
+  // Page 44 (bottom) Surah Al-Fil — source 72. Fil.mp3 (48.95s, Bismillah + 5 ayat)
+  fi: (name: string) => `/audio/edit/72_fil/${name}.mp3`,
+  // Page 45 (top) Surah Quraysh — source 73. Quraysh.mp3 (48.59s, Bismillah + 4 ayat)
+  qur: (name: string) => `/audio/edit/73_quraysh/${name}.mp3`,
+  // Page 45 (mid) Surah Al-Ma'un — source 74. Mauvn.mp3 (62.20s, Bismillah + 7 ayat)
+  mau: (name: string) => `/audio/edit/74_mauvn/${name}.mp3`,
+  // Page 45 (lower-mid) Surah Al-Kawthar — source 75. Kavsar.mp3 (29.54s, Bismillah + 3 ayat)
+  kau: (name: string) => `/audio/edit/75_kavsar/${name}.mp3`,
+  // Page 45 (bottom — Bismillah only, header section) + p46 body Surah Al-Kafirun — source 76. Kafirun.mp3 (65.36s, Bismillah + 6 ayat)
+  kaf: (name: string) => `/audio/edit/76_kafirun/${name}.mp3`,
+  // Page 46 (mid) Surah An-Nasr — source 77. Nasr.mp3 (44.72s, Bismillah + 3 ayat)
+  nas: (name: string) => `/audio/edit/77_nasr/${name}.mp3`,
+  // Page 46 (lower-mid) Surah Al-Masad — source 78. Masad.mp3 (51.41s, Bismillah + 5 ayat)
+  msd: (name: string) => `/audio/edit/78_masad/${name}.mp3`,
+  // Page 46 (bottom) + p47 body Surah Al-Ikhlas — source 79. Ixlos.mp3 (26.17s, Bismillah + 4 ayat)
+  ixl: (name: string) => `/audio/edit/79_ixlos/${name}.mp3`,
+  // Page 47 (mid) Surah Al-Falaq — source 80. Falaq.mp3 (46.13s, Bismillah + 5 ayat)
+  flq: (name: string) => `/audio/edit/80_falaq/${name}.mp3`,
+  // Page 47 (bottom) Surah An-Nas — source 81. Nos.mp3 (54.96s, Bismillah + 6 ayat)
+  nss: (name: string) => `/audio/edit/81_nos/${name}.mp3`,
   harakat: "/audio/04. harakat.mp3",
   ro: "/audio/05. ro.mp3",
   za: "/audio/06. za.mp3",
@@ -2820,88 +2854,378 @@ const p40: ED[] = [
   ["q05", "jumla", "سَلَامٌ هِىَ حَتّٰى مَطْلَعِ الْفَجْرِ", "Qadr 5-oyat: U tong otguncha (uzra) salomdir", A.qdr("p40_q05"), 0, 5.180, 0, 0, 0, 0],
 ];
 
+// p41 — Surah Al-Bayyina (98) — bismillah + 8 ayat. Source: 65. Bayyina.mp3 (170s)
+// Chunks: /audio/edit/65_bayyina/p41_*.mp3 (9 chunks)
 const p41: ED[] = [
-  ["01", "jumla", "سُورَةُ الْكَوْثَرِ", "Kavsar surasi", null, 0, 0, 50, 5, 30, 5],
-  ["02", "jumla", "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ", "1-oyat", null, 0, 0, 50, 18, 46, 6],
-  ["03", "jumla", "فَصَلِّ لِرَبِّكَ وَانْحَرْ", "2-oyat", null, 0, 0, 50, 34, 42, 6],
-  ["04", "jumla", "إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ", "3-oyat", null, 0, 0, 50, 50, 46, 6],
+  ["bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ", "Bayyina: Bismillah", A.bayy("p41_bismillah"), 0, 4.66, 0, 0, 0, 0],
+  ["a1", "jumla", "لَمْ يَكُنِ الَّذِينَ كَفَرُوا مِنْ أَهْلِ الْكِتَابِ وَالْمُشْرِكِينَ مُنْفَكِّينَ حَتَّىٰ تَأْتِيَهُمُ الْبَيِّنَةُ", "1-oyat: Ahli kitob va mushriklardan kofir bo'lganlar — ularga aniq dalil kelmaguncha o'z (kufri)dan ajralmaganlar", A.bayy("p41_a1"), 0, 14.65, 0, 0, 0, 0],
+  ["a2", "jumla", "رَسُولٌ مِنَ اللَّهِ يَتْلُو صُحُفًا مُطَهَّرَةً", "2-oyat: Alloh tomonidan poklangan sahifalarni tilovat qiluvchi Payg'ambar", A.bayy("p41_a2"), 0, 7.95, 0, 0, 0, 0],
+  ["a3", "jumla", "فِيهَا كُتُبٌ قَيِّمَةٌ", "3-oyat: Ularda haqqoniy yozuvlar bor", A.bayy("p41_a3"), 0, 4.15, 0, 0, 0, 0],
+  ["a4", "jumla", "وَمَا تَفَرَّقَ الَّذِينَ أُوتُوا الْكِتَابَ إِلَّا مِنْ بَعْدِ مَا جَاءَتْهُمُ الْبَيِّنَةُ", "4-oyat: Kitob ahli o'zlariga ravshan dalil kelganidan keyingina ixtilof qilishdi", A.bayy("p41_a4"), 0, 12.40, 0, 0, 0, 0],
+  ["a5", "jumla", "وَمَا أُمِرُوا إِلَّا لِيَعْبُدُوا اللَّهَ مُخْلِصِينَ لَهُ الدِّينَ حُنَفَاءَ وَيُقِيمُوا الصَّلَاةَ وَيُؤْتُوا الزَّكَاةَ ۚ وَذَٰلِكَ دِينُ الْقَيِّمَةِ", "5-oyat: Ular faqat dinda Allohga ixlosli, hanif bo'lib ibodat qilishga, namozni to'kis qilishga va zakot berishga buyurilgan edilar. Mana shu — to'g'ri dindir", A.bayy("p41_a5"), 0, 26.40, 0, 0, 0, 0],
+  ["a6", "jumla", "إِنَّ الَّذِينَ كَفَرُوا مِنْ أَهْلِ الْكِتَابِ وَالْمُشْرِكِينَ فِي نَارِ جَهَنَّمَ خَالِدِينَ فِيهَا ۚ أُولَٰئِكَ هُمْ شَرُّ الْبَرِيَّةِ", "6-oyat: Ahli kitob va mushriklardan kofir bo'lganlar do'zax o'tida mangu qoluvchilardir. Ana o'shalar mavjudotlarning eng yomonlaridir", A.bayy("p41_a6"), 0, 23.45, 0, 0, 0, 0],
+  ["a7", "jumla", "إِنَّ الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ أُولَٰئِكَ هُمْ خَيْرُ الْبَرِيَّةِ", "7-oyat: Iymon keltirib solih amal qilganlar — ana o'shalar mavjudotlarning eng yaxshilaridir", A.bayy("p41_a7"), 0, 12.50, 0, 0, 0, 0],
+  ["a8", "jumla", "جَزَاؤُهُمْ عِنْدَ رَبِّهِمْ جَنَّاتُ عَدْنٍ تَجْرِي مِنْ تَحْتِهَا الْأَنْهَارُ خَالِدِينَ فِيهَا أَبَدًا ۖ رَضِيَ اللَّهُ عَنْهُمْ وَرَضُوا عَنْهُ ۚ ذَٰلِكَ لِمَنْ خَشِيَ رَبَّهُ", "8-oyat: Ularning Rabbi huzuridagi mukofoti — ostidan anhorlar oqib turuvchi adn jannatlaridir. Unda mangu qoladilar. Alloh ulardan rozi bo'lgan, ular ham Undan rozi bo'lganlar. Bu — Rabbidan qo'rqqan kishi uchundir", A.bayy("p41_a8"), 0, 32.00, 0, 0, 0, 0],
 ];
 
+// PAGE 42 — Surah Az-Zalzalah (Bismillah + 8 ayat) + Surah Al-'Adiyat (Bismillah + 11 ayat)
+// Audio sources:
+//   - public/audio/66. Zalzala.mp3 (87.51s) → bismillah + 8 oyat
+//   - public/audio/67. Adiya.mp3   (91.48s) → bismillah + 11 oyat
+// Chunks via tools/cut_p42.sh (silencedetect -32dB/0.50s + ~0.10/0.15s buffers).
 const p42: ED[] = [
-  ["01", "jumla", "سُورَةُ الْعَصْرِ", "Asr surasi", null, 0, 0, 50, 5, 28, 5],
-  ["02", "jumla", "وَالْعَصْرِ", "1-oyat", null, 0, 0, 50, 18, 20, 6],
-  ["03", "jumla", "إِنَّ الْإِنسَانَ لَفِي خُسْرٍ", "2-oyat", null, 0, 0, 50, 30, 46, 6],
-  ["04", "jumla", "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ", "3-oyat (1-qism)", null, 0, 0, 50, 44, 56, 6],
-  ["05", "jumla", "وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ", "3-oyat (2-qism)", null, 0, 0, 50, 56, 56, 6],
+  // --- Surah Az-Zalzalah (Bismillah + 8 ayat) ---
+  ["zz_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",                       "Zalzala surasi: Bismillah",                                A.zz("p42_zz_bism"), 0, 4.80, 0, 0, 0, 0],
+  ["zz_a1",   "jumla", "اِذَا زُلْزِلَتِ الْاَرْضُ زِلْزَالَهَا",                      "Zalzala 1-oyat: Yer o'z silkinishi bilan silkinganida",     A.zz("p42_zz_a1"),   0, 5.66, 0, 0, 0, 0],
+  ["zz_a2",   "jumla", "وَاَخْرَجَتِ الْاَرْضُ اَثْقَالَهَا",                          "Zalzala 2-oyat: Yer o'z yuklarini chiqargan kuni",          A.zz("p42_zz_a2"),   0, 4.96, 0, 0, 0, 0],
+  ["zz_a3",   "jumla", "وَقَالَ الْاِنْسَانُ مَا لَهَا",                                "Zalzala 3-oyat: Inson: nima bo'ldi unga? dedi",             A.zz("p42_zz_a3"),   0, 4.90, 0, 0, 0, 0],
+  ["zz_a4",   "jumla", "يَوْمَئِذٍ تُحَدِّثُ اَخْبَارَهَا",                            "Zalzala 4-oyat: O'sha kuni o'z xabarlarini aytadi",         A.zz("p42_zz_a4"),   0, 5.67, 0, 0, 0, 0],
+  ["zz_a5",   "jumla", "بِاَنَّ رَبَّكَ اَوْحٰى لَهَا",                                "Zalzala 5-oyat: Robbing unga vahy qilgani sababli",         A.zz("p42_zz_a5"),   0, 5.01, 0, 0, 0, 0],
+  ["zz_a6",   "jumla", "يَوْمَئِذٍ يَّصْدُرُ النَّاسُ اَشْتَاتًا لِّيُرَوْا اَعْمَالَهُمْ", "Zalzala 6-oyat: O'sha kuni odamlar amallarini ko'rish uchun guruh-guruh chiqadi", A.zz("p42_zz_a6"), 0, 10.05, 0, 0, 0, 0],
+  ["zz_a7",   "jumla", "فَمَنْ يَّعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَّرَهُ",            "Zalzala 7-oyat: Zarra og'irlik yaxshilik qilgan uni ko'radi", A.zz("p42_zz_a7"), 0, 8.11, 0, 0, 0, 0],
+  ["zz_a8",   "jumla", "وَمَنْ يَّعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَّرَهُ",             "Zalzala 8-oyat: Zarra og'irlik yomonlik qilgan uni ko'radi",  A.zz("p42_zz_a8"), 0, 8.98, 0, 0, 0, 0],
+
+  // --- Surah Al-'Adiyat (Bismillah + 11 ayat) ---
+  ["ad_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",                       "Adiyat surasi: Bismillah",                                  A.ad("p42_ad_bism"), 0, 5.70, 0, 0, 0, 0],
+  ["ad_a1",   "jumla", "وَالْعَادِيَاتِ ضَبْحًا",                                       "Adiyat 1-oyat: Hansiragancha chopuvchilarga qasam",          A.ad("p42_ad_a1"),   0, 3.71, 0, 0, 0, 0],
+  ["ad_a2",   "jumla", "فَالْمُورِيَاتِ قَدْحًا",                                       "Adiyat 2-oyat: Tuyoqdan o't chiqaruvchilarga qasam",         A.ad("p42_ad_a2"),   0, 3.70, 0, 0, 0, 0],
+  ["ad_a3",   "jumla", "فَالْمُغِيرَاتِ صُبْحًا",                                       "Adiyat 3-oyat: Tongda yopirilib boruvchilarga qasam",        A.ad("p42_ad_a3"),   0, 3.71, 0, 0, 0, 0],
+  ["ad_a4",   "jumla", "فَاَثَرْنَ بِهِ نَقْعًا",                                       "Adiyat 4-oyat: U bilan chang ko'targanlarga qasam",          A.ad("p42_ad_a4"),   0, 3.65, 0, 0, 0, 0],
+  ["ad_a5",   "jumla", "فَوَسَطْنَ بِهِ جَمْعًا",                                       "Adiyat 5-oyat: Va u bilan jamoa orasiga kirganlarga qasam",  A.ad("p42_ad_a5"),   0, 3.68, 0, 0, 0, 0],
+  ["ad_a6",   "jumla", "اِنَّ الْاِنْسَانَ لِرَبِّهٖ لَكَنُودٌ",                        "Adiyat 6-oyat: Albatta inson Robbiga noshukurdir",            A.ad("p42_ad_a6"),   0, 7.64, 0, 0, 0, 0],
+  ["ad_a7",   "jumla", "وَاِنَّهُ عَلٰى ذٰلِكَ لَشَهِيدٌ",                              "Adiyat 7-oyat: Va u bunga albatta guvohdir",                  A.ad("p42_ad_a7"),   0, 6.41, 0, 0, 0, 0],
+  ["ad_a8",   "jumla", "وَاِنَّهُ لِحُبِّ الْخَيْرِ لَشَدِيدٌ",                         "Adiyat 8-oyat: Va u boylik sevishda haddan tashqari",         A.ad("p42_ad_a8"),   0, 7.35, 0, 0, 0, 0],
+  ["ad_a9",   "jumla", "اَفَلَا يَعْلَمُ اِذَا بُعْثِرَ مَا فِى الْقُبُورِ",            "Adiyat 9-oyat: Qabrlardagi chiqarib olinganida bilmasmi?",    A.ad("p42_ad_a9"),   0, 7.55, 0, 0, 0, 0],
+  ["ad_a10",  "jumla", "وَحُصِّلَ مَا فِى الصُّدُورِ",                                   "Adiyat 10-oyat: Va ko'kraklardagi yig'ilganida",              A.ad("p42_ad_a10"),  0, 4.40, 0, 0, 0, 0],
+  ["ad_a11",  "jumla", "اِنَّ رَبَّهُمْ بِهِمْ يَوْمَئِذٍ لَخَبِيرٌ",                    "Adiyat 11-oyat: O'sha kuni Robblari ulardan albatta xabardor", A.ad("p42_ad_a11"), 0, 8.09, 0, 0, 0, 0],
 ];
 
+// p43 — Surah Al-Qari'ah (Bismillah + 11 ayat) + Surah At-Takathur (Bismillah + 8 ayat) +
+//       Surah Al-'Asr Bismillah (title-header section; full body on p44).
+// Titles rendered as static <Title> (no audio), matching p41/p42 convention.
 const p43: ED[] = [
-  ["01", "jumla", "سُورَةُ الْفِيلِ", "Fil surasi", null, 0, 0, 50, 5, 26, 5],
-  ["02", "jumla", "أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَابِ الْفِيلِ", "1-oyat", null, 0, 0, 50, 16, 60, 6],
-  ["03", "jumla", "أَلَمْ يَجْعَلْ كَيْدَهُمْ فِي تَضْلِيلٍ", "2-oyat", null, 0, 0, 50, 30, 56, 6],
+  // --- Surah Al-Qari'ah ---
+  ["qr_bism",     "jumla", "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ",                       "Bismillah",                                                                       A.qr("p43_qr_bism"),        0, 5.9,  50,   9,  48, 5],
+  ["qr_a1",       "jumla", "اَلْقَارِعَةُ",                                              "1-oyat: Qori'a (qiyomat falokati)",                                               A.qr("p43_qr_a1"),          0, 2.35, 50,  15,  24, 5],
+  ["qr_a2",       "jumla", "مَا الْقَارِعَةُ",                                           "2-oyat: Qori'a nima?",                                                            A.qr("p43_qr_a2"),          0, 2.6,  50,  21,  28, 5],
+  ["qr_a3",       "jumla", "وَمَا اَدْرٰاكَ مَا الْقَارِعَةُ",                            "3-oyat: Qori'a nima ekanini sen qayerdan bilarding?",                              A.qr("p43_qr_a3"),          0, 5.6,  50,  27,  50, 5],
+  ["qr_a4",       "jumla", "يَوْمَ يَكُونُ النَّاسُ كَالْفَرَاشِ الْمَبْثُوثِ",            "4-oyat: U kunda odamlar sochilgan parvonalar kabi bo'lib qoladi",                  A.qr("p43_qr_a4"),          0, 7.85, 50,  33,  70, 5],
+  ["qr_a5",       "jumla", "وَتَكُونُ الْجِبَالُ كَالْعِهْنِ الْمَنْفُوشِ",                "5-oyat: Tog'lar tit-tit qilingan rang-barang junga o'xshab qoladi",               A.qr("p43_qr_a5"),          0, 7.8,  50,  39,  70, 5],
+  ["qr_a6",       "jumla", "فَاَمَّا مَنْ ثَقُلَتْ مَوَازِينُهُ",                          "6-oyat: Tarozisi og'ir kelgan kishi (yaxshi amallari ko'p bo'lgan)",               A.qr("p43_qr_a6"),          0, 6.25, 50,  45,  54, 5],
+  ["qr_a7",       "jumla", "فَهُوَ فِى عِيشَةٍ رَاضِيَةٍ",                                "7-oyat: U xush yaxshi bir hayotda bo'ladi",                                       A.qr("p43_qr_a7"),          0, 4.65, 50,  51,  46, 5],
+  ["qr_a8",       "jumla", "وَاَمَّا مَنْ خَفَّتْ مَوَازِينُهُ",                           "8-oyat: Tarozisi yengil kelgan kishi-chi",                                        A.qr("p43_qr_a8"),          0, 6.15, 50,  57,  54, 5],
+  ["qr_a9",       "jumla", "فَاُمُّهُ هَاوِيَةٌ",                                         "9-oyat: Uning onasi (joyi) Hoviyadir",                                            A.qr("p43_qr_a9"),          0, 3.95, 50,  63,  38, 5],
+  ["qr_a10",      "jumla", "وَمَا اَدْرٰاكَ مَا هِيَهْ",                                  "10-oyat: U (Hoviya) nima ekanini sen qayerdan bilarding?",                         A.qr("p43_qr_a10"),         0, 4.95, 50,  69,  44, 5],
+  ["qr_a11",      "jumla", "نَارٌ حَامِيَةٌ",                                            "11-oyat: U haroratli olovdir",                                                    A.qr("p43_qr_a11"),         0, 3.25, 50,  75,  30, 5],
+
+  // --- Surah At-Takathur ---
+  ["tk_bism",     "jumla", "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ",                       "Bismillah",                                                                       A.tk("p43_tk_bism"),        0, 5.25, 50,  88,  48, 5],
+  ["tk_a1",       "jumla", "اَلْهٰىكُمُ التَّكَاثُرُ",                                    "1-oyat: Sizlarni ko'pchilik bo'lib maqtanish chalg'itib qo'ydi",                  A.tk("p43_tk_a1"),          0, 3.5,  50,  94,  40, 5],
+  ["tk_a2",       "jumla", "حَتّٰى زُرْتُمُ الْمَقَابِرَ",                                "2-oyat: Hatto qabrlarni ziyorat qilib (sanadingiz)",                              A.tk("p43_tk_a2"),          0, 3.55, 50, 100,  42, 5],
+  ["tk_a3",       "jumla", "كَلَّا سَوْفَ تَعْلَمُونَ",                                  "3-oyat: Yo'q! Yaqinda bilursizlar",                                                A.tk("p43_tk_a3"),          0, 4.75, 50, 106,  40, 5],
+  ["tk_a4",       "jumla", "ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ",                              "4-oyat: So'ngra yana yo'q, bilursizlar",                                          A.tk("p43_tk_a4"),          0, 6.2,  50, 112,  48, 5],
+  ["tk_a5",       "jumla", "كَلَّا لَوْ تَعْلَمُونَ عِلْمَ الْيَقِينِ",                    "5-oyat: Yo'q! Aniq ilm bilan bilganingizda edi",                                  A.tk("p43_tk_a5"),          0, 6.7,  50, 118,  56, 5],
+  ["tk_a6",       "jumla", "لَتَرَوُنَّ الْجَحِيمَ",                                      "6-oyat: Albatta jahannamni ko'rasizlar",                                          A.tk("p43_tk_a6"),          0, 4.95, 50, 124,  40, 5],
+  ["tk_a7",       "jumla", "ثُمَّ لَتَرَوُنَّهَا عَيْنَ الْيَقِينِ",                       "7-oyat: So'ngra uni aniq ko'rish bilan ko'rasizlar",                              A.tk("p43_tk_a7"),          0, 7.6,  50, 130,  60, 5],
+  ["tk_a8",       "jumla", "ثُمَّ لَتُسْـَٔلُنَّ يَوْمَئِذٍ عَنِ النَّعِيمِ",               "8-oyat: So'ngra o'sha kunda ne'matlar haqida albatta so'ralursiz",                A.tk("p43_tk_a8"),          0, 9.0,  50, 136,  68, 5],
+
+  // --- Surah Al-'Asr (faqat Bismillah — title static, to'liq oyatlar p44 da) ---
+  ["as_bism",     "jumla", "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ",                       "Bismillah",                                                                       A.asr("p43_as_bism"),       0, 5.4,  50, 152,  48, 5],
 ];
 
+// p44 — Surah Al-'Asr davomi (3 ayat — title+bismillah p43 ning oxirida) + Surah
+// Al-Humazah (title + Bismillah + 9 ayat) + Surah Al-Fil (title + Bismillah + 5 ayat).
+// Audio: 70. Asr.mp3 (ayat 1-3 only), 71. Humaza.mp3, 72. Fil.mp3.
+// Chunks via tools/cut_p44.sh.
 const p44: ED[] = [
-  ["01", "jumla", "سُورَةُ قُرَيْشٍ", "Quraysh surasi", null, 0, 0, 50, 5, 28, 5],
-  ["02", "jumla", "لِإِيلَافِ قُرَيْشٍ", "1-oyat", null, 0, 0, 50, 18, 34, 6],
-  ["03", "jumla", "إِيلَافِهِمْ رِحْلَةَ الشِّتَاءِ وَالصَّيْفِ", "2-oyat", null, 0, 0, 50, 30, 54, 6],
-  ["04", "jumla", "فَلْيَعْبُدُوا رَبَّ هٰذَا الْبَيْتِ", "3-oyat", null, 0, 0, 50, 44, 50, 6],
-  ["05", "jumla", "الَّذِي أَطْعَمَهُمْ مِنْ جُوعٍ وَآمَنَهُمْ مِنْ خَوْفٍ", "4-oyat", null, 0, 0, 50, 58, 60, 6],
+  // === Surah Al-'Asr davomi — 3 ayat (title va Bismillah p43 da) ===
+  ["as_a1", "jumla", "وَالْعَصْرِ",
+    "Asr 1-oyat: Asrga qasam",
+    A.asr("p44_as_a1"), 0, 1.80, 0, 0, 0, 0],
+  ["as_a2", "jumla", "اِنَّ الْاِنْسَانَ لَفِىْ خُسْرٍ",
+    "Asr 2-oyat: Albatta inson ziyondadir",
+    A.asr("p44_as_a2"), 0, 5.75, 0, 0, 0, 0],
+  ["as_a3", "jumla", "اِلَّا الَّذِيْنَ اٰمَنُوْا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ",
+    "Asr 3-oyat: Iymon keltirgan, solih amal qilgan, haq va sabrga bir-birini chaqirganlardan tashqari",
+    A.asr("p44_as_a3"), 0, 13.45, 0, 0, 0, 0],
+
+  // === Surah Al-Humazah — title (statik) + Bismillah + 9 ayat ===
+  ["hu_title", "jumla", "سُورَةُ الْهُمَزَةِ",
+    "Humazah surasi",
+    null, 0, 0, 0, 0, 0, 0],
+  ["hu_bism",  "jumla", "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ",
+    "Humazah: Bismillah",
+    A.hu("p44_hu_bismillah"), 0, 5.05, 0, 0, 0, 0],
+  ["hu_a1", "jumla", "وَيْلٌ لِّكُلِّ هُمَزَةٍ لُّمَزَةٍ",
+    "Humazah 1-oyat: Har bir g'iybatchi-mazax qiluvchiga halokat",
+    A.hu("p44_hu_a1"), 0, 5.10, 0, 0, 0, 0],
+  ["hu_a2", "jumla", "الَّذِىْ جَمَعَ مَالًا وَّعَدَّدَهٗ",
+    "Humazah 2-oyat: Mol to'plab, uni sanagan kishi",
+    A.hu("p44_hu_a2"), 0, 5.60, 0, 0, 0, 0],
+  ["hu_a3", "jumla", "يَحْسَبُ اَنَّ مَالَهٗۤ اَخْلَدَهٗ",
+    "Humazah 3-oyat: Moli uni boqiy qilaman deb hisoblaydi",
+    A.hu("p44_hu_a3"), 0, 6.65, 0, 0, 0, 0],
+  ["hu_a4", "jumla", "كَلَّا لَيُنْۢبَذَنَّ فِى الْحُطَمَةِ",
+    "Humazah 4-oyat: Yo'q! Albatta u Hutamaga tashlanadi",
+    A.hu("p44_hu_a4"), 0, 6.25, 0, 0, 0, 0],
+  ["hu_a5", "jumla", "وَمَاۤ اَدْرٰىكَ مَا الْحُطَمَةُ",
+    "Humazah 5-oyat: Hutama nima ekanini sen qaerdan bilasan?",
+    A.hu("p44_hu_a5"), 0, 5.55, 0, 0, 0, 0],
+  ["hu_a6", "jumla", "نَارُ اللّٰهِ الْمُوْقَدَةُ",
+    "Humazah 6-oyat: Yondirilgan Alloh olovi",
+    A.hu("p44_hu_a6"), 0, 4.40, 0, 0, 0, 0],
+  ["hu_a7", "jumla", "الَّتِىْ تَطَّلِعُ عَلَى الْاَفْـِٕدَةِ",
+    "Humazah 7-oyat: U yuraklarga chiqib boradi",
+    A.hu("p44_hu_a7"), 0, 5.65, 0, 0, 0, 0],
+  ["hu_a8", "jumla", "اِنَّهَا عَلَيْهِمْ مُّؤْصَدَةٌ",
+    "Humazah 8-oyat: U ularning ustini yopib qo'yiladi",
+    A.hu("p44_hu_a8"), 0, 5.75, 0, 0, 0, 0],
+  ["hu_a9", "jumla", "فِىْ عَمَدٍ مُّمَدَّدَةٍ",
+    "Humazah 9-oyat: Cho'zilgan ustunlarga (bog'lab qo'yilgan holda)",
+    A.hu("p44_hu_a9"), 0, 4.10, 0, 0, 0, 0],
+
+  // === Surah Al-Fil — title (statik) + Bismillah + 5 ayat ===
+  ["fi_title", "jumla", "سُورَةُ الْفِيلِ",
+    "Fil surasi",
+    null, 0, 0, 0, 0, 0, 0],
+  ["fi_bism",  "jumla", "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ",
+    "Fil: Bismillah",
+    A.fi("p44_fi_bismillah"), 0, 4.45, 0, 0, 0, 0],
+  ["fi_a1", "jumla", "اَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِاَصْحَابِ الْفِيْلِ",
+    "Fil 1-oyat: Robbing fil egalariga qanday yo'l tutganini ko'rmadingmi?",
+    A.fi("p44_fi_a1"), 0, 7.45, 0, 0, 0, 0],
+  ["fi_a2", "jumla", "اَلَمْ يَجْعَلْ كَيْدَهُمْ فِىْ تَضْلِيْلٍ",
+    "Fil 2-oyat: Ularning makrini zoye qildi-ku",
+    A.fi("p44_fi_a2"), 0, 6.55, 0, 0, 0, 0],
+  ["fi_a3", "jumla", "وَاَرْسَلَ عَلَيْهِمْ طَيْرًا اَبَابِيْلَ",
+    "Fil 3-oyat: Va ular ustiga to'p-to'p qushlarni yubordi",
+    A.fi("p44_fi_a3"), 0, 6.55, 0, 0, 0, 0],
+  ["fi_a4", "jumla", "تَرْمِيْهِمْ بِحِجَارَةٍ مِّنْ سِجِّيْلٍ",
+    "Fil 4-oyat: Ularga loy tosh otdilar",
+    A.fi("p44_fi_a4"), 0, 8.45, 0, 0, 0, 0],
+  ["fi_a5", "jumla", "فَجَعَلَهُمْ كَعَصْفٍ مَّاْكُوْلٍ",
+    "Fil 5-oyat: Va ularni yeb tashlangan poxol kabi qildi",
+    A.fi("p44_fi_a5"), 0, 6.60, 0, 0, 0, 0],
 ];
 
+// PAGE 45 — Surah Quraysh (Bismillah + 4 ayat) + Surah Al-Ma'un (Bismillah + 7 ayat)
+// + Surah Al-Kawthar (Bismillah + 3 ayat) + Surah Al-Kafirun (header — Bismillah only;
+// ayahs are on p46).
+// Audio sources:
+//   - public/audio/73. Quraysh.mp3 (48.59s) → bismillah + 4 oyat
+//   - public/audio/74. Mauvn.mp3   (62.20s) → bismillah + 7 oyat (a4/a5 split at 38.55s)
+//   - public/audio/75. Kavsar.mp3  (29.54s) → bismillah + 3 oyat
+//   - public/audio/76. Kafirun.mp3 (65.36s) → bismillah only (ayahs on p46)
+// Chunks via tools/cut_p45.sh (silencedetect -32dB/0.30s + ~0.2s buffers).
 const p45: ED[] = [
-  ["01", "jumla", "سُورَةُ الْمَاعُونِ", "Mo'un surasi", null, 0, 0, 50, 5, 30, 5],
-  ["02", "jumla", "أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ", "1-oyat", null, 0, 0, 50, 16, 54, 6],
-  ["03", "jumla", "فَذٰلِكَ الَّذِي يَدُعُّ الْيَتِيمَ", "2-oyat", null, 0, 0, 50, 28, 50, 6],
-  ["04", "jumla", "وَلَا يَحُضُّ عَلٰى طَعَامِ الْمِسْكِينِ", "3-oyat", null, 0, 0, 50, 40, 56, 6],
+  // --- Surah Quraysh (Bismillah + 4 ayat) ---
+  ["qu_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",                        "Quraysh surasi: Bismillah",                                            A.qur("p45_qu_bism"), 0, 5.25, 0, 0, 0, 0],
+  ["qu_a1",   "jumla", "لِاِيلَافِ قُرَيْشٍ",                                          "Quraysh 1-oyat: Qurayshning ulfat qilingani uchun",                    A.qur("p45_qu_a1"),   0, 4.00, 0, 0, 0, 0],
+  ["qu_a2",   "jumla", "اٖيلَافِهِمْ رِحْلَةَ الشِّتَاءِ وَالصَّيْفِ",                    "Quraysh 2-oyat: Qish va yoz safarlarida ulfat qilingani uchun",        A.qur("p45_qu_a2"),   0, 7.55, 0, 0, 0, 0],
+  ["qu_a3",   "jumla", "فَلْيَعْبُدُوا رَبَّ هٰذَا الْبَيْتِ",                          "Quraysh 3-oyat: Bas, ushbu uy (Ka'ba) Robbiga ibodat qilsinlar",        A.qur("p45_qu_a3"),   0, 5.85, 0, 0, 0, 0],
+  ["qu_a4",   "jumla", "الَّذٖى اَطْعَمَهُمْ مِنْ جُوعٍ وَّاٰمَنَهُمْ مِنْ خَوْفٍ",        "Quraysh 4-oyat: U Zot ularni ochlikdan to'ydirdi va xavfdan tinch qildi", A.qur("p45_qu_a4"),   0, 12.70, 0, 0, 0, 0],
+
+  // --- Surah Al-Ma'un (Bismillah + 7 ayat) ---
+  ["ma_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",                        "Mo'un surasi: Bismillah",                                              A.mau("p45_ma_bism"), 0, 4.65, 0, 0, 0, 0],
+  ["ma_a1",   "jumla", "اَرَءَيْتَ الَّذٖى يُكَذِّبُ بِالدّٖينِ",                         "Mo'un 1-oyat: Dinni yolg'on chiqaruvchini ko'rdingmi?",                A.mau("p45_ma_a1"),   0, 6.05, 0, 0, 0, 0],
+  ["ma_a2",   "jumla", "فَذٰلِكَ الَّذٖى يَدُعُّ الْيَتٖيمَ",                            "Mo'un 2-oyat: U yetimni qattiq itarib quvuvchidir",                    A.mau("p45_ma_a2"),   0, 6.05, 0, 0, 0, 0],
+  ["ma_a3",   "jumla", "وَلَا يَحُضُّ عَلٰى طَعَامِ الْمِسْكٖينِ",                      "Mo'un 3-oyat: Va miskinning taomiga (boshqalarni) qiziqtirmaydi",      A.mau("p45_ma_a3"),   0, 6.75, 0, 0, 0, 0],
+  ["ma_a4",   "jumla", "فَوَيْلٌ لِّلْمُصَلّٖينَ",                                       "Mo'un 4-oyat: Bas, namoz o'qiguvchilarga voy bo'lsin",                 A.mau("p45_ma_a4"),   0, 4.30, 0, 0, 0, 0],
+  ["ma_a5",   "jumla", "الَّذٖينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَ",                         "Mo'un 5-oyat: Ular o'z namozlaridan g'ofildirlar",                     A.mau("p45_ma_a5"),   0, 6.75, 0, 0, 0, 0],
+  ["ma_a6",   "jumla", "الَّذٖينَ هُمْ يُرَاءُونَ",                                       "Mo'un 6-oyat: Ular riyokorlik qiluvchilardir",                          A.mau("p45_ma_a6"),   0, 5.90, 0, 0, 0, 0],
+  ["ma_a7",   "jumla", "وَيَمْنَعُونَ الْمَاعُونَ",                                       "Mo'un 7-oyat: Va mo'un (zaruriy buyumlar)dan man qiluvchilardir",      A.mau("p45_ma_a7"),   0, 5.25, 0, 0, 0, 0],
+
+  // --- Surah Al-Kawthar (Bismillah + 3 ayat) ---
+  ["ka_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",                        "Kavsar surasi: Bismillah",                                             A.kau("p45_ka_bism"), 0, 5.10, 0, 0, 0, 0],
+  ["ka_a1",   "jumla", "اِنَّا اَعْطَيْنَاكَ الْكَوْثَرَ",                                 "Kavsar 1-oyat: Albatta, Biz senga Kavsarni berdik",                    A.kau("p45_ka_a1"),   0, 6.80, 0, 0, 0, 0],
+  ["ka_a2",   "jumla", "فَصَلِّ لِرَبِّكَ وَانْحَرْ",                                    "Kavsar 2-oyat: Bas, Robbing uchun namoz o'qi va qurbonlik so'y",        A.kau("p45_ka_a2"),   0, 4.05, 0, 0, 0, 0],
+  ["ka_a3",   "jumla", "اِنَّ شَانِئَكَ هُوَ الْاَبْتَرُ",                                "Kavsar 3-oyat: Albatta, senga adovat qiluvchi — u dumi qirqilgandir",   A.kau("p45_ka_a3"),   0, 4.95, 0, 0, 0, 0],
+
+  // --- Surah Al-Kafirun header (Bismillah only — ayahs are on p46) ---
+  ["kf_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",                        "Kofirun surasi: Bismillah (oyatlar 46-sahifada)",                       A.kaf("p45_kf_bism"), 0, 5.50, 0, 0, 0, 0],
 ];
 
+// PAGE 46 — Surah Al-Kafirun davomi (ayatlar 1-6 — title va Bismillah p45 da) +
+// Surah An-Nasr (Bismillah + 3 ayat) + Surah Al-Masad (Bismillah + 5 ayat) +
+// Surah Al-Ikhlas (Bismillah + ayat 1 + ayat 2 + ayat 3 boshi "لَمْ يَلِدْ").
+// Audio sources:
+//   - public/audio/76. Kafirun.mp3 (65.36s) → ayat 1-6
+//   - public/audio/77. Nasr.mp3    (44.72s) → bismillah + 3 ayat
+//   - public/audio/78. Masad.mp3   (51.41s) → bismillah + 5 ayat
+//   - public/audio/79. Ixlos.mp3   (26.17s) → bismillah + ayat 1 + ayat 2 + ayat 3 boshi
+// Chunks via tools/cut_p46.sh (silencedetect -32dB/0.30s + ~0.15-0.25s buffers).
 const p46: ED[] = [
-  ["01", "jumla", "سُورَةُ النَّصْرِ", "Nasr surasi", null, 0, 0, 50, 5, 28, 5],
-  ["02", "jumla", "إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ", "1-oyat", null, 0, 0, 50, 18, 52, 6],
-  ["03", "jumla", "وَرَأَيْتَ النَّاسَ يَدْخُلُونَ فِي دِينِ اللَّهِ أَفْوَاجًا", "2-oyat", null, 0, 0, 50, 34, 60, 6],
-  ["04", "jumla", "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ", "3-oyat (1-qism)", null, 0, 0, 50, 52, 52, 6],
-  ["05", "jumla", "إِنَّهُ كَانَ تَوَّابًا", "3-oyat (2-qism)", null, 0, 0, 50, 64, 38, 6],
+  // --- Surah Al-Kafirun (ayatlar 1-6 — title+bismillah p45 da) ---
+  ["kf_a1",   "jumla", "قُلْ يَا اَيُّهَا الْكَافِرُونَ",                 "Kofirun 1-oyat: Ayt, ey kofirlar!",                                       A.kaf("p46_kf_a1"),    0, 6.70, 0, 0, 0, 0],
+  ["kf_a2",   "jumla", "لَا اَعْبُدُ مَا تَعْبُدُونَ",                    "Kofirun 2-oyat: Men sizlar ibodat qilayotgan narsaga ibodat qilmayman",   A.kaf("p46_kf_a2"),    0, 6.85, 0, 0, 0, 0],
+  ["kf_a3",   "jumla", "وَلَا اَنْتُمْ عَابِدُونَ مَا اَعْبُدُ",            "Kofirun 3-oyat: Sizlar ham men ibodat qilayotgan Zotga ibodat qiluvchi emassiz", A.kaf("p46_kf_a3"), 0, 8.50, 0, 0, 0, 0],
+  ["kf_a4",   "jumla", "وَلَا اَنَا عَابِدٌ مَا عَبَدْتُمْ",                "Kofirun 4-oyat: Men sizlar ibodat qilgan narsaga ibodat qiluvchi emasman", A.kaf("p46_kf_a4"),    0, 6.60, 0, 0, 0, 0],
+  ["kf_a5",   "jumla", "وَلَا اَنْتُمْ عَابِدُونَ مَا اَعْبُدُ",            "Kofirun 5-oyat: Sizlar ham men ibodat qilayotgan Zotga ibodat qiluvchi emassiz", A.kaf("p46_kf_a5"), 0, 8.80, 0, 0, 0, 0],
+  ["kf_a6",   "jumla", "لَكُمْ دِينُكُمْ وَلِيَ دِينِ",                    "Kofirun 6-oyat: Sizning diningiz sizga, mening dinim menga",              A.kaf("p46_kf_a6"),    0, 5.55, 0, 0, 0, 0],
+
+  // --- Surah An-Nasr (Bismillah + 3 ayat) ---
+  ["ns_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",            "Nasr surasi: Bismillah",                                                  A.nas("p46_ns_bism"),  0, 5.30, 0, 0, 0, 0],
+  ["ns_a1",   "jumla", "اِذَا جَاءَ نَصْرُ اللّٰهِ وَالْفَتْحُ",             "Nasr 1-oyat: Allohning nusrati va fath kelganda",                         A.nas("p46_ns_a1"),    0, 6.30, 0, 0, 0, 0],
+  ["ns_a2",   "jumla", "وَرَاَيْتَ النَّاسَ يَدْخُلُونَ فِى دٖينِ اللّٰهِ اَفْوَاجًا", "Nasr 2-oyat: Va odamlarni Alloh diniga to'p-to'p kirayotganini ko'rsang", A.nas("p46_ns_a2"), 0, 9.55, 0, 0, 0, 0],
+  ["ns_a3",   "jumla", "فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ ۚ اِنَّهُ كَانَ تَوَّابًا", "Nasr 3-oyat: Robbingni hamd bilan ulug'la va Undan mag'firat so'ra; albatta, U tavbalarni qabul qiluvchidir", A.nas("p46_ns_a3"), 0, 13.15, 0, 0, 0, 0],
+
+  // --- Surah Al-Masad (Bismillah + 5 ayat) ---
+  ["ms_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",            "Masad surasi: Bismillah",                                                 A.msd("p46_ms_bism"),  0, 5.40, 0, 0, 0, 0],
+  ["ms_a1",   "jumla", "تَبَّتْ يَدَا اَبٖى لَهَبٍ وَتَبَّ",                "Masad 1-oyat: Abu Lahabning qo'llari batil bo'lsin va o'zi ham batil bo'lsin", A.msd("p46_ms_a1"),  0, 6.55, 0, 0, 0, 0],
+  ["ms_a2",   "jumla", "مَا اَغْنٰى عَنْهُ مَالُهُ وَمَا كَسَبَ",           "Masad 2-oyat: Unga moli va o'zi topganlari foyda bermaydi",               A.msd("p46_ms_a2"),    0, 7.25, 0, 0, 0, 0],
+  ["ms_a3",   "jumla", "سَيَصْلٰى نَارًا ذَاتَ لَهَبٍ",                    "Masad 3-oyat: U lovillagan olovga kirgay",                                A.msd("p46_ms_a3"),    0, 5.35, 0, 0, 0, 0],
+  ["ms_a4",   "jumla", "وَامْرَاَتُهُ حَمَّالَةَ الْحَطَبِ",                "Masad 4-oyat: Xotini ham — o'tin ko'taruvchi",                            A.msd("p46_ms_a4"),    0, 5.65, 0, 0, 0, 0],
+  ["ms_a5",   "jumla", "فٖى جٖيدِهَا حَبْلٌ مِنْ مَسَدٍ",                   "Masad 5-oyat: Bo'ynida tolanlangan arqon — masaddan",                     A.msd("p46_ms_a5"),    0, 6.15, 0, 0, 0, 0],
+
+  // --- Surah Al-Ikhlas (Bismillah + ayat 1 + ayat 2 + ayat 3 boshi "لَمْ يَلِدْ") ---
+  ["ix_bism",     "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",        "Ixlos surasi: Bismillah",                                                 A.ixl("p46_ix_bism"),    0, 5.25, 0, 0, 0, 0],
+  ["ix_a1",       "jumla", "قُلْ هُوَ اللّٰهُ اَحَدٌ",                     "Ixlos 1-oyat: Ayt: U — Alloh, yagonadir",                                 A.ixl("p46_ix_a1"),      0, 3.25, 0, 0, 0, 0],
+  ["ix_a2",       "jumla", "اَللّٰهُ الصَّمَدُ",                          "Ixlos 2-oyat: Alloh — Samad (hech narsaga muhtoj bo'lmagan, hammaning yagona suyangan Zoti)", A.ixl("p46_ix_a2"), 0, 2.75, 0, 0, 0, 0],
+  ["ix_a3_start", "jumla", "لَمْ يَلِدْ",                                  "Ixlos 3-oyat (boshi): Tug'magan... (oyat davomi 47-sahifada)",            A.ixl("p46_ix_a3_start"),0, 4.35, 0, 0, 0, 0],
 ];
 
+// ============================================================
+// PAGE 47 — Al-Ikhlas (v3 + v4, davom p46 dan) + Al-Falaq (Bismillah + 5 ayat)
+//         + An-Nas (Bismillah + 6 ayat)
+//
+// Audio sources:
+//   public/audio/79. Ixlos.mp3 (26.17s) — v3 (lam yalid wa lam yulad) + v4
+//   public/audio/80. Falaq.mp3 (46.13s) — Bismillah + 5 ayat
+//   public/audio/81. Nos.mp3   (54.96s) — Bismillah + 6 ayat
+// Chunks via tools/cut_p47.sh.
+// Vaqtlar silencedetect (-30dB/-20dB) + small buffers asoslangan;
+// foydalanuvchi tinglab tasdiqlasa, mos kelmagan chunks shu yerdan tuzatilsin.
+// ============================================================
 const p47: ED[] = [
-  ["01", "jumla", "سُورَةُ الْكَافِرُونَ", "Kofirun surasi", null, 0, 0, 50, 5, 32, 5],
-  ["02", "jumla", "قُلْ يَا أَيُّهَا الْكَافِرُونَ", "1-oyat", null, 0, 0, 50, 16, 46, 6],
-  ["03", "jumla", "لَا أَعْبُدُ مَا تَعْبُدُونَ", "2-oyat", null, 0, 0, 50, 28, 44, 6],
-  ["04", "jumla", "وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ", "3-oyat", null, 0, 0, 50, 40, 50, 6],
-  ["05", "jumla", "لَكُمْ دِينُكُمْ وَلِيَ دِينِ", "6-oyat", null, 0, 0, 50, 64, 44, 6],
+  // --- Surah Al-Ikhlas davomi (v3 oxiri + v4 — v1, v2 va v3 boshi p46 da) ---
+  // v3 to'liq oyat (لَمْ يَلِدْ وَلَمْ يُولَدْ) o'rtasida tabiiy ~0.5s pause bor;
+  // p46 da v3 boshi ("لَمْ يَلِدْ") chunk'i, p47 da v3 oxiri ("وَلَمْ يُولَدْ") chunk'i.
+  ["ix_v3", "jumla", "وَلَمْ يُولَدْ",                                        "Ixlos 3-oyat (oxiri): Va U tug'ilmagandir (1-qism p46 da)",               A.ixl("p47_ix_v3"),  0, 2.08, 0, 0, 0, 0],
+  ["ix_v4", "jumla", "وَلَمْ يَكُنْ لَهُ كُفُوًا اَحَدٌ",                       "Ixlos 4-oyat: Va Uning hech bir tengi yo'qdir",                            A.ixl("p47_ix_v4"),  0, 3.55, 0, 0, 0, 0],
+
+  // --- Surah Al-Falaq (Bismillah + 5 ayat) ---
+  ["fq_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",                "Falaq surasi: Bismillah",                                                   A.flq("p47_fq_bism"), 0, 5.18, 0, 0, 0, 0],
+  ["fq_a1",   "jumla", "قُلْ اَعُوذُ بِرَبِّ الْفَلَقِ",                         "Falaq 1-oyat: Ayt: tongning Robbiga panoh tilayman",                        A.flq("p47_fq_v1"),   0, 3.96, 0, 0, 0, 0],
+  ["fq_a2",   "jumla", "مِنْ شَرِّ مَا خَلَقَ",                                "Falaq 2-oyat: Yaratgan har bir narsaning yomonligidan",                     A.flq("p47_fq_v2"),   0, 3.54, 0, 0, 0, 0],
+  ["fq_a3",   "jumla", "وَمِنْ شَرِّ غَاسِقٍ اِذَا وَقَبَ",                      "Falaq 3-oyat: Va qorong'i tushgan tunning yomonligidan",                    A.flq("p47_fq_v3"),   0, 5.36, 0, 0, 0, 0],
+  ["fq_a4",   "jumla", "وَمِنْ شَرِّ النَّفَّاثَاتِ فِى الْعُقَدِ",              "Falaq 4-oyat: Tugunlarga puflovchi sehrgarlarning yomonligidan",            A.flq("p47_fq_v4"),   0, 6.82, 0, 0, 0, 0],
+  ["fq_a5",   "jumla", "وَمِنْ شَرِّ حَاسِدٍ اِذَا حَسَدَ",                     "Falaq 5-oyat: Va hasad qiluvchining hasad qilgandagi yomonligidan",         A.flq("p47_fq_v5"),   0, 5.55, 0, 0, 0, 0],
+
+  // --- Surah An-Nas (Bismillah + 6 ayat) ---
+  ["ns_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",                "Nas surasi: Bismillah",                                                     A.nss("p47_ns_bism"), 0, 4.60, 0, 0, 0, 0],
+  ["ns_a1",   "jumla", "قُلْ اَعُوذُ بِرَبِّ النَّاسِ",                          "Nas 1-oyat: Ayt: odamlarning Robbiga panoh tilayman",                       A.nss("p47_ns_v1"),   0, 5.26, 0, 0, 0, 0],
+  ["ns_a2",   "jumla", "مَلِكِ النَّاسِ",                                      "Nas 2-oyat: Odamlarning Podshohi",                                          A.nss("p47_ns_v2"),   0, 3.78, 0, 0, 0, 0],
+  ["ns_a3",   "jumla", "اِلٰهِ النَّاسِ",                                       "Nas 3-oyat: Odamlarning Ma'budi",                                           A.nss("p47_ns_v3"),   0, 4.02, 0, 0, 0, 0],
+  ["ns_a4",   "jumla", "مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ",                  "Nas 4-oyat: Yashirinib turuvchi vasvasachi yomonligidan",                  A.nss("p47_ns_v4"),   0, 7.54, 0, 0, 0, 0],
+  ["ns_a5",   "jumla", "الَّذٖى يُوَسْوِسُ فٖى صُدُورِ النَّاسِ",                 "Nas 5-oyat: Odamlarning ko'kraklariga vasvasa soluvchi",                    A.nss("p47_ns_v5"),   0, 7.87, 0, 0, 0, 0],
+  ["ns_a6",   "jumla", "مِنَ الْجِنَّةِ وَالنَّاسِ",                            "Nas 6-oyat: Jinlardan ham, insonlardan ham",                                A.nss("p47_ns_v6"),   0, 5.99, 0, 0, 0, 0],
 ];
 
 // ============================================================
 // PAGES 48-50 — Duolar (Prayers)
 // ============================================================
+// Page 48 — Sano (الثَّنَاءُ) + Tashahhud (التَّشَهُّدُ).
+// Audio yo'q (ls_duolar.audioUrl = null). Element'lar clickable —
+// active highlight beradi, audio ijro etilmaydi (start=end=0).
 const p48: ED[] = [
-  ["01", "jumla", "الثَّنَاءُ", "Sano", null, 0, 0, 50, 4, 20, 5],
-  ["02", "jumla", "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ", "Sano boshi", null, 0, 0, 50, 12, 54, 6],
-  ["03", "jumla", "وَتَبَارَكَ اسْمُكَ وَتَعَالَى جَدُّكَ", "Sano davomi", null, 0, 0, 50, 20, 54, 6],
-  ["04", "jumla", "وَلَا إِلٰهَ غَيْرُكَ", "Sano oxiri", null, 0, 0, 50, 28, 36, 6],
-  ["05", "jumla", "التَّشَهُّدُ", "Tashahhud", null, 0, 0, 50, 38, 22, 5],
-  ["06", "jumla", "اَلتَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ", "Tashahhud boshi", null, 0, 0, 50, 48, 60, 6],
-  ["07", "jumla", "اَلسَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ", "Salom Payg'ambarga", null, 0, 0, 50, 58, 60, 6],
-  ["08", "jumla", "أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللَّهُ", "Shahodat", null, 0, 0, 50, 76, 50, 6],
+  // --- Sano ---
+  ["s_title", "jumla", "الثَّنَاءُ", "Sano", null, 0, 0, 0, 0, 0, 0],
+  ["s1", "jumla", "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ", "Pokligingni e'tirof etaman, Allohim, va Senga hamd aytaman, isming muborakdir", null, 0, 0, 0, 0, 0, 0],
+  ["s2", "jumla", "وَتَعَالَى جَدُّكَ", "Va ulug'liging baland keldi", null, 0, 0, 0, 0, 0, 0],
+  ["s3", "jumla", "وَلَا إِلٰهَ غَيْرُكَ", "Va Sendan boshqa iloh yo'q", null, 0, 0, 0, 0, 0, 0],
+  // --- Tashahhud ---
+  ["t_title", "jumla", "التَّشَهُّدُ", "Tashahhud", null, 0, 0, 0, 0, 0, 0],
+  ["t1", "jumla", "اَلتَّحِيَّاتُ لِلَّهِ", "Barcha ehtirom Allohga xosdir", null, 0, 0, 0, 0, 0, 0],
+  ["t2", "jumla", "وَالصَّلَوَاتُ", "Va barcha namozlar", null, 0, 0, 0, 0, 0, 0],
+  ["t3", "jumla", "وَالطَّيِّبَاتُ", "Va barcha pok ishlar", null, 0, 0, 0, 0, 0, 0],
+  ["t4", "jumla", "السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ", "Senga salom bo'lsin, ey Nabi, Alloh rahmati va barakotlari bilan", null, 0, 0, 0, 0, 0, 0],
+  ["t5", "jumla", "السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ", "Bizga va Allohning solih bandalariga salom bo'lsin", null, 0, 0, 0, 0, 0, 0],
+  ["t6", "jumla", "أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللَّهُ", "Guvohlik beraman: Allohdan boshqa iloh yo'q", null, 0, 0, 0, 0, 0, 0],
+  ["t7", "jumla", "وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ", "Va guvohlik beraman: Muhammad Uning bandasi va rasulidir", null, 0, 0, 0, 0, 0, 0],
 ];
 
+// Page 49 — As-Salawat (2 ta salavot bloki: Allohumma salli + Allohumma barik)
+// + Ad-Du'a boshlanishi (jahannam/qabr/Dajjol fitnasidan panoh; p50 da davom).
+// Audio yo'q (ls_duolar.audioUrl = null) — element'lar clickable, faqat
+// vizual active highlight beradi; ovoz ijro etilmaydi (start=end=0).
 const p49: ED[] = [
-  ["01", "jumla", "الصَّلَاةُ الْإِبْرَاهِيمِيَّةُ", "Ibrahimiya salavoti", null, 0, 0, 50, 4, 36, 5],
-  ["02", "jumla", "اللَّهُمَّ صَلِّ عَلٰى مُحَمَّدٍ", "Allohim Muhammad(s)ga salavot yubor", null, 0, 0, 50, 14, 50, 6],
-  ["03", "jumla", "وَعَلٰى آلِ مُحَمَّدٍ", "Va Muhammad(s) oilasiga", null, 0, 0, 50, 24, 40, 6],
-  ["04", "jumla", "كَمَا صَلَّيْتَ عَلٰى إِبْرَاهِيمَ", "Ibrohim(a)ga salavot yuborganday", null, 0, 0, 50, 34, 50, 6],
-  ["05", "jumla", "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً", "Rabbano duo (1)", null, 0, 0, 50, 60, 52, 6],
-  ["06", "jumla", "وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", "Rabbano duo (2)", null, 0, 0, 50, 72, 60, 6],
+  // --- Section title: As-Salawat ---
+  ["title_salawat", "jumla", "اَلصَّلَوَاتُ",
+    "Salavotlar (Payg'ambarga salavot)", null, 0, 0, 0, 0, 0, 0],
+
+  // --- Block 1: Allahumma salli ---
+  ["s1_p1", "jumla", "اَللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ",
+    "Allohim, Muhammad(s)ga salavot yubor", null, 0, 0, 0, 0, 0, 0],
+  ["s1_p2", "jumla", "وَعَلَى آلِ مُحَمَّدٍ",
+    "va Muhammad(s) oilasiga", null, 0, 0, 0, 0, 0, 0],
+  ["s1_p3", "jumla", "كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ",
+    "qanday Ibrohim(a)ga salavot yuborgan bo'lsang", null, 0, 0, 0, 0, 0, 0],
+  ["s1_p4", "jumla", "وَعَلَى آلِ إِبْرَاهِيمَ",
+    "va Ibrohim(a) oilasiga", null, 0, 0, 0, 0, 0, 0],
+  ["s1_p5", "jumla", "إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    "Albatta Sen Hamiyd va Majiydsan (maqtovga, ulug'lanmoqqa loyiqsan)", null, 0, 0, 0, 0, 0, 0],
+
+  // --- Block 2: Allahumma barik ---
+  ["s2_p1", "jumla", "اَللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ",
+    "Allohim, Muhammad(s)ni barakatli qil", null, 0, 0, 0, 0, 0, 0],
+  ["s2_p2", "jumla", "وَعَلَى آلِ مُحَمَّدٍ",
+    "va Muhammad(s) oilasini", null, 0, 0, 0, 0, 0, 0],
+  ["s2_p3", "jumla", "كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ",
+    "qanday Ibrohim(a)ni barakatli qilgan bo'lsang", null, 0, 0, 0, 0, 0, 0],
+  ["s2_p4", "jumla", "وَعَلَى آلِ إِبْرَاهِيمَ",
+    "va Ibrohim(a) oilasini", null, 0, 0, 0, 0, 0, 0],
+  ["s2_p5", "jumla", "إِنَّكَ حَمِيدٌ مَجِيدٌ",
+    "Albatta Sen Hamiyd va Majiydsan", null, 0, 0, 0, 0, 0, 0],
+
+  // --- Section title: Ad-Du'a ---
+  ["title_dua", "jumla", "اَلدُّعَاءُ",
+    "Du'a (namozdan keyingi panoh duosi — 50-sahifada davom etadi)", null, 0, 0, 0, 0, 0, 0],
+
+  // --- Du'a block (continues on p50) ---
+  ["d_p1", "jumla", "اَللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ جَهَنَّمَ",
+    "Allohim, jahannam azobidan Senga panoh tilayman", null, 0, 0, 0, 0, 0, 0],
+  ["d_p2", "jumla", "وَمِنْ عَذَابِ الْقَبْرِ",
+    "va qabr azobidan (panoh tilayman)", null, 0, 0, 0, 0, 0, 0],
+  ["d_p3", "jumla", "وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ",
+    "va hayot va o'lim fitnasidan", null, 0, 0, 0, 0, 0, 0],
+  ["d_p4", "jumla", "وَمِنْ شَرِّ الْمَسِيحِ الدَّجَّالِ",
+    "va Masih Dajjol yomonligidan", null, 0, 0, 0, 0, 0, 0],
 ];
 
+// Page 50 — Du'a al-Qunut (دعاء القنوت). Kitobning oxirgi sahifasi.
+// Matn rasmda yagona uzluksiz duo (6 satr), lekin har bir tabiiy gap
+// (.-bilan ajratilgan yoki ma'no jihatdan yopilgan) alohida `jumla`
+// element qilingan (1 title + 7 clause = 8 element).
+// Audio hozircha mavjud emas (Materiallar/sano tashahhud duolar/ papkasida
+// audio yo'q va public/audio/ da Qunut audio'si ham yo'q). audioUrl null —
+// lesson.audioUrl (ls_duolar) ham null bo'lgani uchun click qilinganda
+// audio ijro etilmaydi, faqat element ajralib ko'rinadi. Audio qo'shilsa,
+// audioUrl/start/end maydonlari va A.* helperi yangilanishi kerak.
 const p50: ED[] = [
-  ["01", "jumla", "دُعَاءُ الْقُنُوتِ", "Qunut duosi", null, 0, 0, 50, 4, 28, 5],
-  ["02", "jumla", "اللَّهُمَّ إِنَّا نَسْتَعِينُكَ", "Allohim, Sendan yordam so'raymiz", null, 0, 0, 50, 14, 50, 6],
-  ["03", "jumla", "وَنَسْتَغْفِرُكَ وَنُؤْمِنُ بِكَ", "Mag'firat so'raymiz", null, 0, 0, 50, 24, 50, 6],
-  ["04", "jumla", "وَنَتَوَكَّلُ عَلَيْكَ", "Senga tavakkal qilamiz", null, 0, 0, 50, 36, 40, 6],
-  ["05", "jumla", "وَنُثْنِي عَلَيْكَ الْخَيْرَ", "Senga yaxshilik sanab maqtaymiz", null, 0, 0, 50, 48, 46, 6],
-  ["06", "jumla", "وَنَشْكُرُكَ وَلَا نَكْفُرُكَ", "Shukr qilamiz, inkor qilmaymiz", null, 0, 0, 50, 60, 48, 6],
+  ["01", "jumla", "دُعَاءُ الْقُنُوتِ",
+    "Qunut duosi",
+    null, 0, 0, 0, 0, 0, 0],
+  ["02", "jumla", "اَللَّهُمَّ إِنَّا نَسْتَعِينُكَ وَنَسْتَهْدِيكَ وَنَسْتَغْفِرُكَ وَنَتُوبُ إِلَيْكَ",
+    "Allohim, biz Sendan yordam, hidoyat va mag'firat so'raymiz va Senga tavba qilamiz",
+    null, 0, 0, 0, 0, 0, 0],
+  ["03", "jumla", "وَنُؤْمِنُ بِكَ وَنَتَوَكَّلُ عَلَيْكَ وَنُثْنِي عَلَيْكَ الْخَيْرَ كُلَّهُ",
+    "Senga iymon keltiramiz, Senga tavakkul qilamiz, Seni butun yaxshilik bilan maqtaymiz",
+    null, 0, 0, 0, 0, 0, 0],
+  ["04", "jumla", "نَشْكُرُكَ وَلَا نَكْفُرُكَ",
+    "Senga shukr qilamiz, Seni inkor qilmaymiz",
+    null, 0, 0, 0, 0, 0, 0],
+  ["05", "jumla", "وَنَخْلَعُ وَنَتْرُكُ مَنْ يَفْجُرُكَ",
+    "Senga osiy bo'lganlardan voz kechamiz va uzoqlashamiz",
+    null, 0, 0, 0, 0, 0, 0],
+  ["06", "jumla", "اَللَّهُمَّ إِيَّاكَ نَعْبُدُ وَلَكَ نُصَلِّي وَنَسْجُدُ",
+    "Allohim, faqat Senga ibodat qilamiz, Sen uchun namoz o'qiymiz va sajda qilamiz",
+    null, 0, 0, 0, 0, 0, 0],
+  ["07", "jumla", "وَإِلَيْكَ نَسْعَى وَنَحْفِدُ وَنَرْجُو رَحْمَتَكَ وَنَخْشَى عَذَابَكَ",
+    "Senga shoshilamiz, xizmatingda harakatdamiz, rahmatingdan umidvormiz va azobingdan qo'rqamiz",
+    null, 0, 0, 0, 0, 0, 0],
+  ["08", "jumla", "إِنَّ عَذَابَكَ الْجِدَّ بِالْكُفَّارِ مُلْحِقٌ",
+    "Albatta, Sening jiddiy azobing kofirlarga yetib boruvchidir",
+    null, 0, 0, 0, 0, 0, 0],
 ];
 
 // ============================================================

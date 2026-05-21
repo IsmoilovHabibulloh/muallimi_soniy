@@ -1,6 +1,6 @@
 "use client";
 
-import type { CSSProperties } from "react";
+import React, { type CSSProperties } from "react";
 import type { Element } from "@/lib/data/types";
 import { ELEMENT_COLORS } from "@/lib/data/types";
 
@@ -2848,94 +2848,681 @@ function Page38({ elements, activeId, hasActive, onElementClick }: PP) {
 }
 function Page39({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 39);
+  // Compact title + sep — needed to fit Duho v.11 + Sharh (9) + Tin (9) + Alaq header
+  // = 20 elements + 3 titles + 3 dividers within a single viewport (~620px).
+  const Head = ({ text, sub }: { text: string; sub: string }) => (
+    <div className="text-center mt-0.5 mb-0">
+      <h3 className="arabic-text text-base font-bold text-text-secondary leading-none">{text}</h3>
+      <p className="text-[10px] text-text-muted mt-0 leading-tight">{sub}</p>
+    </div>
+  );
+  const Sep = () => <div className="w-full border-b border-dotted border-white/10 my-1" />;
   return (
-    <div className="flex flex-col items-center gap-0.5">
+    <div className="flex flex-col items-center gap-0">
       {/* Duho v.11 (last verse — v.1-10 on p38) */}
-      <Row els={els(["duho_v11"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-2" />
-      <Divider />
+      <Row els={els(["duho_v11"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Sep />
 
-      {/* Surah Ash-Sharh */}
-      <Title text="سورة الشرح" sub="Sharh surasi" />
-      <Row els={els(["sharh_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["sharh_v1", "sharh_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["sharh_v3", "sharh_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      {/* Surah Ash-Sharh — bismillah + 8 ayat */}
+      <Head text="سورة الشرح" sub="Sharh surasi" />
+      <Row els={els(["sharh_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["sharh_v1", "sharh_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["sharh_v3", "sharh_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <Row els={els(["sharh_v5", "sharh_v6", "sharh_v7"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["sharh_v8"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Divider />
+      <Row els={els(["sharh_v8"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Sep />
 
-      {/* Surah At-Tin */}
-      <Title text="سورة التين" sub="Tin surasi" />
-      <Row els={els(["tin_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["tin_v1", "tin_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["tin_v3", "tin_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["tin_v5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["tin_v6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["tin_v7", "tin_v8"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Divider />
+      {/* Surah At-Tin — bismillah + 8 ayat */}
+      <Head text="سورة التين" sub="Tin surasi" />
+      <Row els={els(["tin_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["tin_v1", "tin_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["tin_v3", "tin_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["tin_v5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["tin_v6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["tin_v7", "tin_v8"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Sep />
 
       {/* Surah Al-Alaq — header only (body on p40) */}
-      <Title text="سورة العلق" sub="Alaq surasi" />
-      <Row els={els(["alaq_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Head text="سورة العلق" sub="Alaq surasi" />
+      <Row els={els(["alaq_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
     </div>
   );
 }
-function Page40(props: PP) { return <SurahPage {...props} pageNum={40} />; }
-function Page41(props: PP) { return <SurahPage {...props} pageNum={41} />; }
-function Page42(props: PP) { return <SurahPage {...props} pageNum={42} />; }
-function Page43(props: PP) { return <SurahPage {...props} pageNum={43} />; }
-function Page44(props: PP) { return <SurahPage {...props} pageNum={44} />; }
-function Page45(props: PP) { return <SurahPage {...props} pageNum={45} />; }
-function Page46(props: PP) { return <SurahPage {...props} pageNum={46} />; }
-function Page47(props: PP) { return <SurahPage {...props} pageNum={47} />; }
+function Page40({ elements, activeId, hasActive, onElementClick }: PP) {
+  const { els } = usePageElements(elements, 40);
+  return (
+    <div className="flex flex-col items-center gap-0.5">
+      {/* Surah Al-Alaq body (title + bismillah on p39) — 19 ayat */}
+      <Row els={els(["a01", "a02"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["a03", "a04"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["a05", "a06"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["a07", "a08", "a09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["a10", "a11", "a12"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["a13", "a14"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["a15"])}               activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["a16", "a17", "a18"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["a19"])}               activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Divider />
+
+      {/* Surah Al-Qadr (Bismillah + 5 ayat) */}
+      <Title text="سورة القدر" sub="Qadr surasi" />
+      <Row els={els(["q_bism"])}     activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["q01"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["q02", "q03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["q04"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["q05"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+    </div>
+  );
+}
+// Page 41 — Surah Al-Bayyina (98): bismillah + 8 ayat. Audio: 65. Bayyina.mp3 (170s).
+// Chunks via tools/cut_p41.sh. Layout follows book (one ayah per row).
+function Page41({ elements, activeId, hasActive, onElementClick }: PP) {
+  const { els } = usePageElements(elements, 41);
+  return (
+    <div className="flex flex-col items-center gap-0.5">
+      <Title text="سورة البينة" sub="Bayyina surasi" />
+      <Row els={els(["bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["a1"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["a2"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["a3"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["a4"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["a5"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["a6"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["a7"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["a8"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+    </div>
+  );
+}
+// Page 42 — Surah Az-Zalzalah (bismillah + 8 ayat) + Surah Al-'Adiyat (bismillah + 11 ayat).
+// Audio: 66. Zalzala.mp3 (87.51s) + 67. Adiya.mp3 (91.48s). Chunks via tools/cut_p42.sh.
+function Page42({ elements, activeId, hasActive, onElementClick }: PP) {
+  const { els } = usePageElements(elements, 42);
+  return (
+    <div className="flex flex-col items-center gap-0.5">
+      {/* === Surah Az-Zalzalah === */}
+      <Title text="سورة الزلزلة" sub="Zalzala surasi" />
+      <Row els={els(["zz_bism"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["zz_a1", "zz_a2"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["zz_a3", "zz_a4"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["zz_a5"])}            activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["zz_a6"])}            activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["zz_a7", "zz_a8"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Divider />
+
+      {/* === Surah Al-'Adiyat === */}
+      <Title text="سورة العاديات" sub="Adiyat surasi" />
+      <Row els={els(["ad_bism"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["ad_a1", "ad_a2", "ad_a3"])}  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["ad_a4", "ad_a5"])}           activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["ad_a6", "ad_a7"])}           activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["ad_a8", "ad_a9"])}           activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["ad_a10", "ad_a11"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+    </div>
+  );
+}
+// Page 43 — Surah Al-Qari'ah (Bismillah + 11 ayat) + Surah At-Takathur (Bismillah + 8 ayat) +
+// Surah Al-'Asr title-header (Bismillah only; full body on p44).
+// Audio: 68. Qoria.mp3 (89.36s), 69. Takasur.mp3 (71.89s), 70. Asr.mp3 (Bismillah segment).
+// Chunks via tools/cut_p43.sh.
+function Page43({ elements, activeId, hasActive, onElementClick }: PP) {
+  const { els } = usePageElements(elements, 43);
+  return (
+    <div className="flex flex-col items-center gap-0.5">
+      {/* === Surah Al-Qari'ah === */}
+      <Title text="سورة القارعة" sub="Qari'ah surasi" />
+      <Row els={els(["qr_bism"])}                 activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["qr_a1", "qr_a2", "qr_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["qr_a4"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["qr_a5"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["qr_a6", "qr_a7"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["qr_a8", "qr_a9"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["qr_a10", "qr_a11"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
+      <Divider />
+
+      {/* === Surah At-Takathur === */}
+      <Title text="سورة التكاثر" sub="Takasur surasi" />
+      <Row els={els(["tk_bism"])}                 activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["tk_a1", "tk_a2", "tk_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["tk_a4", "tk_a5"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["tk_a6", "tk_a7"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["tk_a8"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+
+      <Divider />
+
+      {/* === Surah Al-'Asr — title + Bismillah only (full body on p44) === */}
+      <Title text="سورة العصر" sub="Asr surasi" />
+      <Row els={els(["as_bism"])}                 activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+    </div>
+  );
+}
+// Page 44 — Surah Al-'Asr davomi (3 ayat — title+bismillah p43 da) + Surah Al-Humazah
+// (title + Bismillah + 9 ayat) + Surah Al-Fil (title + Bismillah + 5 ayat).
+// Audio chunks under /audio/edit/{70_asr,71_humaza,72_fil}/.
+function Page44({ elements, activeId, hasActive, onElementClick }: PP) {
+  const { els } = usePageElements(elements, 44);
+  const humazahTitleHeader = (
+    <div className="flex flex-row-reverse items-center justify-center gap-3 w-full">
+      <span className="text-text-muted text-xs">❀</span>
+      {els(["hu_title"]).map((el) => (
+        <ArabicEl
+          key={el.id}
+          el={el}
+          isActive={activeId === el.id}
+          hasActive={hasActive}
+          onClick={() => onElementClick(el)}
+          size="md"
+        />
+      ))}
+      <span className="text-text-muted text-xs">❀</span>
+    </div>
+  );
+  const filTitleHeader = (
+    <div className="flex flex-row-reverse items-center justify-center gap-3 w-full">
+      <span className="text-text-muted text-xs">❀</span>
+      {els(["fi_title"]).map((el) => (
+        <ArabicEl
+          key={el.id}
+          el={el}
+          isActive={activeId === el.id}
+          hasActive={hasActive}
+          onClick={() => onElementClick(el)}
+          size="md"
+        />
+      ))}
+      <span className="text-text-muted text-xs">❀</span>
+    </div>
+  );
+  return (
+    <div className="flex flex-col items-center gap-0.5">
+      {/* === Surah Al-'Asr davomi (3 ayat — title va Bismillah p43 da) === */}
+      <Row els={els(["as_a1", "as_a2"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["as_a3"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+
+      <Divider />
+
+      {/* === Surah Al-Humazah === */}
+      {humazahTitleHeader}
+      <Row els={els(["hu_bism"])}                activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["hu_a1"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["hu_a2", "hu_a3"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["hu_a4", "hu_a5"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["hu_a6", "hu_a7"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["hu_a8", "hu_a9"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+
+      <Divider />
+
+      {/* === Surah Al-Fil === */}
+      {filTitleHeader}
+      <Row els={els(["fi_bism"])}                activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["fi_a1"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["fi_a2", "fi_a3"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <Row els={els(["fi_a4", "fi_a5"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+    </div>
+  );
+}
+
+// Page 45 — Surah Quraysh (Bismillah + 4) + Al-Ma'un (Bismillah + 7) +
+// Al-Kawthar (Bismillah + 3) + Al-Kafirun header (Bismillah only — ayahs on p46).
+// Audio chunks under /audio/edit/{73_quraysh,74_mauvn,75_kavsar,76_kafirun}/.
+function Page45({ elements, activeId, hasActive, onElementClick }: PP) {
+  void hasActive;
+  const { el } = usePageElements(elements, 45);
+
+  const Verse = ({
+    id,
+    num,
+    size = "sm",
+  }: {
+    id: string;
+    num?: string;
+    size?: "sm" | "md" | "lg";
+  }) => {
+    const e = el(id);
+    if (!e) return null;
+    const isActive = activeId === e.id;
+    const txtCls =
+      size === "lg"
+        ? "text-[clamp(0.95rem,4.6cqi,1.2rem)]"
+        : size === "md"
+        ? "text-[clamp(0.82rem,4cqi,1.05rem)]"
+        : "text-[clamp(0.72rem,3.6cqi,0.92rem)]";
+    return (
+      <div className="flex w-full justify-center" dir="rtl">
+        <button
+          onClick={(ev) => {
+            ev.stopPropagation();
+            onElementClick(e);
+          }}
+          className="element-spring rounded-md px-2 py-0.5 inline-flex items-center gap-1 max-w-full"
+          style={{
+            backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+            color: isActive ? "#ffffff" : "var(--color-text-main)",
+            boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <span
+            className={`arabic-text font-bold leading-tight text-center ${txtCls}`}
+            style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
+          >
+            {e.arabic}
+            {num && (
+              <span
+                className="arabic-text mx-1 opacity-70"
+                style={{ fontSize: "0.78em" }}
+              >
+                {" "}
+                ﴿{num}﴾
+              </span>
+            )}
+          </span>
+        </button>
+      </div>
+    );
+  };
+
+  const SurahTitle = ({ text }: { text: string }) => (
+    <div className="flex flex-row-reverse items-center justify-center gap-2 w-full my-0.5">
+      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+      <h3 className="arabic-text text-[clamp(0.78rem,3.6cqi,0.98rem)] font-bold text-text-secondary text-center">
+        {text}
+      </h3>
+      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col items-center gap-0 w-full">
+      <SurahTitle text="سُورَةُ قُرَيْشٍ" />
+      <Verse id="qu_bism" size="sm" />
+      <Verse id="qu_a1" num="١" size="sm" />
+      <Verse id="qu_a2" num="٢" size="sm" />
+      <Verse id="qu_a3" num="٣" size="sm" />
+      <Verse id="qu_a4" num="٤" size="sm" />
+
+      <Divider />
+
+      <SurahTitle text="سُورَةُ الْمَاعُونِ" />
+      <Verse id="ma_bism" size="sm" />
+      <Verse id="ma_a1" num="١" size="sm" />
+      <Verse id="ma_a2" num="٢" size="sm" />
+      <Verse id="ma_a3" num="٣" size="sm" />
+      <Verse id="ma_a4" num="٤" size="sm" />
+      <Verse id="ma_a5" num="٥" size="sm" />
+      <Verse id="ma_a6" num="٦" size="sm" />
+      <Verse id="ma_a7" num="٧" size="sm" />
+
+      <Divider />
+
+      <SurahTitle text="سُورَةُ الْكَوْثَرِ" />
+      <Verse id="ka_bism" size="sm" />
+      <Verse id="ka_a1" num="١" size="sm" />
+      <Verse id="ka_a2" num="٢" size="sm" />
+      <Verse id="ka_a3" num="٣" size="sm" />
+
+      <Divider />
+
+      <SurahTitle text="سُورَةُ الْكَافِرُونَ" />
+      <Verse id="kf_bism" size="sm" />
+    </div>
+  );
+}
+
+// PAGE 46 — Surah Al-Kafirun davomi (ayat 1-6, title+bismillah p45 da) +
+// Surah An-Nasr (bismillah + 3 ayat) + Surah Al-Masad (bismillah + 5 ayat) +
+// Surah Al-Ikhlas (bismillah + ayat 1-2 + ayat 3 boshi).
+function Page46({ elements, activeId, hasActive, onElementClick }: PP) {
+  void hasActive;
+  const { el } = usePageElements(elements, 46);
+
+  const Verse = ({
+    id,
+    num,
+    size = "sm",
+  }: {
+    id: string;
+    num?: string;
+    size?: "sm" | "md" | "lg";
+  }) => {
+    const e = el(id);
+    if (!e) return null;
+    const isActive = activeId === e.id;
+    const txtCls =
+      size === "lg"
+        ? "text-[clamp(0.95rem,4.6cqi,1.2rem)]"
+        : size === "md"
+        ? "text-[clamp(0.82rem,4cqi,1.05rem)]"
+        : "text-[clamp(0.72rem,3.6cqi,0.92rem)]";
+    return (
+      <div className="flex w-full justify-center" dir="rtl">
+        <button
+          onClick={(ev) => {
+            ev.stopPropagation();
+            onElementClick(e);
+          }}
+          className="element-spring rounded-md px-2 py-0.5 inline-flex items-center gap-1 max-w-full"
+          style={{
+            backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+            color: isActive ? "#ffffff" : "var(--color-text-main)",
+            boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <span
+            className={`arabic-text font-bold leading-tight text-center ${txtCls}`}
+            style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
+          >
+            {e.arabic}
+            {num && (
+              <span
+                className="arabic-text mx-1 opacity-70"
+                style={{ fontSize: "0.78em" }}
+              >
+                {" "}
+                ﴿{num}﴾
+              </span>
+            )}
+          </span>
+        </button>
+      </div>
+    );
+  };
+
+  const SurahTitle = ({ text }: { text: string }) => (
+    <div className="flex flex-row-reverse items-center justify-center gap-2 w-full my-0.5">
+      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+      <h3 className="arabic-text text-[clamp(0.78rem,3.6cqi,0.98rem)] font-bold text-text-secondary text-center">
+        {text}
+      </h3>
+      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col items-center gap-0 w-full">
+      {/* Surah Al-Kafirun — ayatlar 1-6 (title va bismillah p45 oxirida) */}
+      <Verse id="kf_a1" num="١" size="sm" />
+      <Verse id="kf_a2" num="٢" size="sm" />
+      <Verse id="kf_a3" num="٣" size="sm" />
+      <Verse id="kf_a4" num="٤" size="sm" />
+      <Verse id="kf_a5" num="٥" size="sm" />
+      <Verse id="kf_a6" num="٦" size="sm" />
+
+      <Divider />
+
+      <SurahTitle text="سُورَةُ النَّصْرِ" />
+      <Verse id="ns_bism" size="sm" />
+      <Verse id="ns_a1" num="١" size="sm" />
+      <Verse id="ns_a2" num="٢" size="sm" />
+      <Verse id="ns_a3" num="٣" size="sm" />
+
+      <Divider />
+
+      <SurahTitle text="سُورَةُ الْمَسَدِ" />
+      <Verse id="ms_bism" size="sm" />
+      <Verse id="ms_a1" num="١" size="sm" />
+      <Verse id="ms_a2" num="٢" size="sm" />
+      <Verse id="ms_a3" num="٣" size="sm" />
+      <Verse id="ms_a4" num="٤" size="sm" />
+      <Verse id="ms_a5" num="٥" size="sm" />
+
+      <Divider />
+
+      <SurahTitle text="سُورَةُ الْإِخْلَاصِ" />
+      <Verse id="ix_bism" size="sm" />
+      <Verse id="ix_a1" num="١" size="sm" />
+      <Verse id="ix_a2" num="٢" size="sm" />
+      <Verse id="ix_a3_start" size="sm" />
+    </div>
+  );
+}
+
+// Page 47 — Al-Ikhlas davomi (v3 oxiri "وَلَمْ يُولَدْ" + v4) +
+// Surah Al-Falaq (Bismillah + 5 ayat) + Surah An-Nas (Bismillah + 6 ayat).
+// Audio chunks: /audio/edit/{79_ixlos,80_falaq,81_nos}/p47_*.mp3
+function Page47({ elements, activeId, hasActive, onElementClick }: PP) {
+  void hasActive;
+  const { el } = usePageElements(elements, 47);
+
+  const Verse = ({
+    id,
+    num,
+    size = "sm",
+  }: {
+    id: string;
+    num?: string;
+    size?: "sm" | "md" | "lg";
+  }) => {
+    const e = el(id);
+    if (!e) return null;
+    const isActive = activeId === e.id;
+    const txtCls =
+      size === "lg"
+        ? "text-[clamp(0.95rem,4.6cqi,1.2rem)]"
+        : size === "md"
+        ? "text-[clamp(0.82rem,4cqi,1.05rem)]"
+        : "text-[clamp(0.72rem,3.6cqi,0.92rem)]";
+    return (
+      <div className="flex w-full justify-center" dir="rtl">
+        <button
+          onClick={(ev) => {
+            ev.stopPropagation();
+            onElementClick(e);
+          }}
+          className="element-spring rounded-md px-2 py-0.5 inline-flex items-center gap-1 max-w-full"
+          style={{
+            backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+            color: isActive ? "#ffffff" : "var(--color-text-main)",
+            boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <span
+            className={`arabic-text font-bold leading-tight text-center ${txtCls}`}
+            style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
+          >
+            {e.arabic}
+            {num && (
+              <span
+                className="arabic-text mx-1 opacity-70"
+                style={{ fontSize: "0.78em" }}
+              >
+                {" "}
+                ﴿{num}﴾
+              </span>
+            )}
+          </span>
+        </button>
+      </div>
+    );
+  };
+
+  const SurahTitle = ({ text }: { text: string }) => (
+    <div className="flex flex-row-reverse items-center justify-center gap-2 w-full my-0.5">
+      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+      <h3 className="arabic-text text-[clamp(0.78rem,3.6cqi,0.98rem)] font-bold text-text-secondary text-center">
+        {text}
+      </h3>
+      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col items-center gap-0 w-full">
+      {/* === Al-Ikhlas davomi (v3 oxiri + v4 — v1, v2 va v3 boshi p46 da) === */}
+      <Verse id="ix_v3" num="٣" size="sm" />
+      <Verse id="ix_v4" num="٤" size="sm" />
+
+      <Divider />
+
+      {/* === Surah Al-Falaq === */}
+      <SurahTitle text="سُورَةُ الْفَلَقِ" />
+      <Verse id="fq_bism" size="sm" />
+      <Verse id="fq_a1" num="١" size="sm" />
+      <Verse id="fq_a2" num="٢" size="sm" />
+      <Verse id="fq_a3" num="٣" size="sm" />
+      <Verse id="fq_a4" num="٤" size="sm" />
+      <Verse id="fq_a5" num="٥" size="sm" />
+
+      <Divider />
+
+      {/* === Surah An-Nas === */}
+      <SurahTitle text="سُورَةُ النَّاسِ" />
+      <Verse id="ns_bism" size="sm" />
+      <Verse id="ns_a1" num="١" size="sm" />
+      <Verse id="ns_a2" num="٢" size="sm" />
+      <Verse id="ns_a3" num="٣" size="sm" />
+      <Verse id="ns_a4" num="٤" size="sm" />
+      <Verse id="ns_a5" num="٥" size="sm" />
+      <Verse id="ns_a6" num="٦" size="sm" />
+    </div>
+  );
+}
 
 // ========== PAGES 48-50: DUOLAR ==========
 
 function Page48(props: PP) {
   const { els } = usePageElements(props.elements, 48);
+  const a = props.activeId;
+  const ha = props.hasActive;
+  const cb = props.onElementClick;
+  const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-1" />;
   return (
-    <div className="flex flex-col items-center gap-1">
-      <Row els={els(["01"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="lg" gap="gap-3" />
-      <Divider />
-      <Row els={els(["02"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
-      <Row els={els(["03"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
-      <Row els={els(["04"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="lg" gap="gap-3" />
-      <Divider />
-      <Row els={els(["05"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="lg" gap="gap-3" />
-      <Divider />
-      <Row els={els(["06"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
-      <Row els={els(["07"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
-      <Row els={els(["08"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
+    <div className="flex flex-col items-center gap-0.5">
+      {/* Sano (الثَّنَاءُ) */}
+      <Row els={els(["s_title"])} activeId={a} hasActive={ha} onClick={cb} size="lg" gap="gap-3" />
+      <Sep />
+      <Row els={els(["s1"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+      <Row els={els(["s2", "s3"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-2" />
+      <Sep />
+      {/* Tashahhud (التَّشَهُّدُ) */}
+      <Row els={els(["t_title"])} activeId={a} hasActive={ha} onClick={cb} size="lg" gap="gap-3" />
+      <Sep />
+      <Row els={els(["t1", "t2", "t3"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+      <Row els={els(["t4"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+      <Row els={els(["t5"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+      <Row els={els(["t6"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+      <Row els={els(["t7"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
     </div>
   );
 }
 
 function Page49(props: PP) {
   const { els } = usePageElements(props.elements, 49);
+  const a = props.activeId;
+  const ha = props.hasActive;
+  const cb = props.onElementClick;
+  const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-1" />;
   return (
-    <div className="flex flex-col items-center gap-1">
-      <Row els={els(["01"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="lg" gap="gap-3" />
-      <Divider />
-      <Row els={els(["02"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
-      <Row els={els(["03"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="lg" gap="gap-3" />
-      <Row els={els(["04"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
-      <Divider />
-      <Row els={els(["05"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
-      <Row els={els(["06"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
+    <div className="flex flex-col items-center gap-0.5">
+      {/* As-Salawat (الصَّلَوَاتُ) */}
+      <Row els={els(["title_salawat"])} activeId={a} hasActive={ha} onClick={cb} size="lg" gap="gap-3" />
+      <Sep />
+
+      {/* Block 1: Allahumma salli */}
+      <Row els={els(["s1_p1", "s1_p2"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+      <Row els={els(["s1_p3", "s1_p4"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+      <Row els={els(["s1_p5"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+
+      <Sep />
+
+      {/* Block 2: Allahumma barik */}
+      <Row els={els(["s2_p1", "s2_p2"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+      <Row els={els(["s2_p3", "s2_p4"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+      <Row els={els(["s2_p5"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+
+      <Sep />
+
+      {/* Ad-Du'a (الدُّعَاءُ) */}
+      <Row els={els(["title_dua"])} activeId={a} hasActive={ha} onClick={cb} size="lg" gap="gap-3" />
+      <Sep />
+
+      {/* Du'a block (continues on p50) */}
+      <Row els={els(["d_p1"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+      <Row els={els(["d_p2", "d_p3"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
+      <Row els={els(["d_p4"])} activeId={a} hasActive={ha} onClick={cb} size="sm" gap="gap-1.5" />
     </div>
   );
 }
 
+// Page 50 — Du'a al-Qunut (kitobning oxirgi sahifasi, user-facing "52 / 52").
+// Layout: katta sarlavha (دُعَاءُ الْقُنُوتِ) + decorative ornaments + flowing
+// RTL paragraph. 7 ta semantik gap (`02`-`08`) inline button sifatida bir
+// paragrafda oqib turadi — kitob rasmiga monand. Har bir gap click qilinsa
+// active highlight beradi (audio yo'q: `audioUrl: null` + `ls_duolar.audioUrl: null`,
+// shu sababli ovoz ijro etilmaydi). Phrase'lar orasidagi bo'sh joy + book-style
+// gap belgisi (·) o'qish qulayligi uchun.
 function Page50(props: PP) {
-  const { els } = usePageElements(props.elements, 50);
+  const { el, els } = usePageElements(props.elements, 50);
+  const titleEl = el("01");
+  const phraseIds = ["02", "03", "04", "05", "06", "07", "08"];
+  const phrases = els(phraseIds);
+
   return (
-    <div className="flex flex-col items-center gap-1">
-      <Row els={els(["01"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="lg" gap="gap-3" />
-      <Divider />
-      <Row els={els(["02"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
-      <Row els={els(["03"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
-      <Row els={els(["04"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="lg" gap="gap-3" />
-      <Row els={els(["05"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
-      <Row els={els(["06"])} activeId={props.activeId} hasActive={props.hasActive} onClick={props.onElementClick} size="md" gap="gap-2" />
+    <div className="flex flex-col items-center gap-3 w-full">
+      {/* Title: دُعَاءُ الْقُنُوتِ + ornaments (matches SurahTitle pattern). */}
+      {titleEl && (
+        <div className="flex flex-row-reverse items-center justify-center gap-3 w-full mt-1">
+          <span className="text-text-muted text-xs opacity-60">❀</span>
+          <button
+            onClick={(ev) => {
+              ev.stopPropagation();
+              props.onElementClick(titleEl);
+            }}
+            className="element-spring rounded-lg px-3 py-1"
+            style={{
+              backgroundColor:
+                props.activeId === titleEl.id ? "var(--color-primary)" : "transparent",
+              color: props.activeId === titleEl.id ? "#ffffff" : "var(--color-text-secondary)",
+              boxShadow:
+                props.activeId === titleEl.id ? "0 6px 20px var(--color-primary-glow)" : "none",
+            }}
+          >
+            <span className="arabic-text font-bold text-[clamp(1rem,4.6cqi,1.35rem)]">
+              {titleEl.arabic}
+            </span>
+          </button>
+          <span className="text-text-muted text-xs opacity-60">❀</span>
+        </div>
+      )}
+
+      {/* Flowing paragraph: each phrase is an inline clickable span. */}
+      <p
+        dir="rtl"
+        className="arabic-text font-bold text-justify leading-[2.1] w-full px-1
+                   text-[clamp(0.82rem,4cqi,1.05rem)]"
+        style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
+      >
+        {phrases.map((e, idx) => {
+          const isActive = props.activeId === e.id;
+          return (
+            <React.Fragment key={e.id}>
+              <button
+                onClick={(ev) => {
+                  ev.stopPropagation();
+                  props.onElementClick(e);
+                }}
+                className="element-spring rounded-md px-1.5 py-0.5"
+                style={{
+                  display: "inline",
+                  backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+                  color: isActive ? "#ffffff" : "var(--color-text-main)",
+                  boxShadow: isActive
+                    ? "0 4px 16px var(--color-primary-glow)"
+                    : "none",
+                  WebkitBoxDecorationBreak: "clone",
+                  boxDecorationBreak: "clone",
+                }}
+              >
+                {e.arabic}
+              </button>
+              {idx < phrases.length - 1 && (
+                <span className="text-text-muted opacity-50 mx-0.5" aria-hidden>
+                  {" "}·{" "}
+                </span>
+              )}
+            </React.Fragment>
+          );
+        })}
+      </p>
     </div>
   );
 }

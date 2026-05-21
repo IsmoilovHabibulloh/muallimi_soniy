@@ -1256,8 +1256,332 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
     body matnida ko'rinmaydi — clickable button orqali kontekst beradi.
   - **Vaqtlar**: silencedetect -32dB/d=0.30 + Whisper transcribe (ar)
     tasdiqlash bilan aniqlangan. Cut script: `tools/cut_p34.sh`.
-- Barcha sahifalar tugallangan: 11-21, 23, 24, 25, 26, 27, 28, 29, 30, 34
-  (faqat 22 hali placeholder).
+- **Sahifa 36 tugallangan**: Ta'awwudh + Surat al-Fatiha (7 oyat) + Awwal Surat
+  al-Baqarah (5 oyat). Jami 14 ta clickable element + 2 ta statik bezakli
+  section title (`❀ سُورَةُ الْفَاتِحَة ❀`, `❀ اَوَّلُ سُورَةِ الْبَقَرَة ❀`).
+  Audio manbalari: `56. Fotiha.mp3` (83.30s) + `57. Baqara.mp3` (94.46s),
+  chunklar `public/audio/edit/56_fotiha_baqara/p36_*.mp3` (14 chunk).
+  Audio helper: `A.sb()`.
+  - **Fotiha mapping** (silencedetect -30dB/d=0.30 + Whisper medium tasdiqlash):
+    `taawwudh` 1.27-8.07s, `fa_bismi` 10.16-16.41s (v1), `fa_v2` 21.12-27.64s
+    (Alhamdu), `fa_v3` 29.83-34.05s (Rahman/Rahim), `fa_v4` 36.91-41.25s
+    (Maliki), `fa_v5` 44.92-51.98s (Iyyaka), `fa_v6` 55.83-61.61s (Ihdina),
+    `fa_v7` 65.48-81.83s (Sirat alladhina ... dallin).
+  - **Baqarah mapping**: `bq_bismi` 1.76-6.98s, `bq_v1` 11.43-18.67s (Alif Lam Mim),
+    `bq_v2` 21.88-33.30s (joint: Dhalikal kitabu ... hudan lil muttaqin —
+    audio'da sub-pause'lar bor lekin verse marker oxirida), `bq_v3` 36.51-50.59s
+    (Alladhina yu'minuna...), `bq_v4` 55.35-77.07s (joint: Walladhina yu'minuna
+    ... yuqinun), `bq_v5` 80.22-90.51s (Ula'ika ala hudan...).
+  - **Layout**: custom `<Verse>` (RTL button + verse marker `﴿N﴾` 0.78em opacity
+    0.7) va `<SurahTitle>` (`❀` ornaments). `gap-0.5` outer container, `size=sm`
+    fluid clamp (`text-[clamp(0.72rem,3.6cqi,0.92rem)]`) uzun oyatlar uchun;
+    `size=md` ta'awwudh/bismillah/v1 uchun. `overflowWrap: anywhere` — uzun
+    v7 (16 so'z) va Baqarah v4 (21s, 14 so'z) lar mobil viewportda nice break.
+    Barcha 14 button + 2 title + 1 divider bitta viewportga (677px) sig'adi.
+  - **Imlo**: Mushaf script (Hafs) — superscript alef (`ٰ`) `الرَّحْمٰنِ`,
+    `الْعٰلَمِينَ`, `مٰلِكِ`, `الصِّرٰطَ`, `الصَّلٰوةَ`, `هٰدُى`, `يُؤْمِنُونَ`
+    kabi joylarda. Hamza qoidalar p25-26 bilan mos (`اِيَّاكَ` initial hamza
+    yo'q, foydalanuvchi xohlasa o'zgartiriladi).
+  - Cut script: `tools/cut_p36.sh`. Transcribe: `tools/transcribe_p36.py`.
+- **Sahifa 37 tugallangan**: Surah Ash-Shams (Bismillah + 15 ayat) + Surah
+  Al-Layl boshi (Bismillah + 7 ayat + 8-oyat fragment "وَأَمَّا"). Jami
+  27 clickable element. Audio manbalari:
+  - Shams (16 chunk): `58. Shams.mp3` (128.78s) — chunklar
+    `58_shams/p37_sh_*.mp3` (bismillah + a1..a15).
+  - Layl (9 chunk): `59. Layl.mp3` (172.43s) ning 0-60s qismi — chunklar
+    `59_layl/p37_ll_*.mp3` (bismillah + a1..a7 + a8_start).
+  - Cut script: `tools/cut_p37.sh`. Vaqtlar silencedetect -32dB/0.30s +
+    ~0.3s buffers asoslangan — foydalanuvchi audio'larni eshitib tasdiqlasa,
+    mos kelmagan chunks `cut_p37.sh` orqali qayta kesilsin.
+  - Audio helperlar: `A.shams()` va `A.layl()` (yangi qo'shildi).
+  - Layout: custom Page37 — Shams title (kichik `❀ سُورَةُ الشَّمْسِ ❀`)
+    + Bismillah + 15 ayat (qator-qator joylashuv 3+2+3+3+2+1+1, `size="sm"`,
+    `gap-2`) + Divider + Layl title (kichik bilan o'sha format) + Bismillah
+    + 7 ayat (3+2+3 qatorda) + `وَأَمَّا` fragmenti (8-oyat boshi, keyingi
+    sahifaga davom). Element ID format: `sh_*` (Shams) va `ll_*` (Layl).
+- **Sahifa 38 tugallangan**: Surah Al-Layl davomi (ayatlar 8-21, p37 dan davom)
+  + Surah Ad-Duho divider (title + bismillah) + Ad-Duho ayatlar 1-10
+  (ayah 11 p39 da). Jami 26 element (14 Layl + 1 statik title + 1 bismillah +
+  10 Duho). Manbalar va chunklar:
+  - **Layl ayatlar 8-21** (14 chunk): `59. Layl.mp3` (172.43s) ning
+    58.85-170.95s qismi. Chunklar `59_layl/p38_ll_a{8..21}.mp3`.
+    Audio helper `A.layl()` (37-sahifa bilan ulushlanadi).
+  - **Duho bismillah + ayatlar 1-10** (11 chunk): `60. Zuho.mp3` (92.81s)
+    ning 1.15-83.80s qismi. Chunklar `60_zuho/p38_zh_bismillah.mp3`,
+    `p38_zh_a{1..10}.mp3`. Audio helper: `A.zuho()` (yangi qo'shildi —
+    39-sahifa Duho v.11 bilan ulushlanadi).
+  - **Title** (`du_title`, statik): `سُورَةُ الضُّحٰى` — clickable button
+    bo'lib ko'rinadi lekin audioUrl=null (audio'da reciter sarlavhani
+    aytmaydi). Bismillah esa o'z chunkiga ega.
+  - **Cut script**: `tools/cut_p38.sh` (silencedetect -32dB/0.70s +
+    ~0.20s buffers). 21 ta toza ovoz oraliq topildi Layl uchun
+    (bismillah + 21 ayat ✓), 12 ta Duho uchun (bismillah + 11 ayat ✓).
+  - **Layout** (`Page38` custom): 7 ta Row (Layl 8-21 ikkitalab joylashgan)
+    + Divider + duhoTitleHeader (`❀ سُورَةُ الضُّحٰى ❀` style) + bismillah
+    row + 5 ta Row (Duho 1-10). Hammasi `size="sm"` `gap-1.5` —
+    bitta viewportga (677px) sig'adi. Element ID format: `ll_a{8..21}`,
+    `du_title`, `du_bism`, `du_a{1..10}`.
+  - **Imlo**: Mushaf script (Hafs/Indo-Pak) — superscript alef (`ٰ`)
+    `وَاسْتَغْنٰى`, `بِالْحُسْنٰى`, `لِلْعُسْرٰى`, `تَرَدّٰى`, `لَلْهُدٰى`,
+    `وَالْاُولٰى`, `تَلَظّٰى`, `الْاَشْقَى`, `وَتَوَلّٰى`, `يَتَزَكّٰى`,
+    `تُجْزٰى`, `الْاَعْلٰى`, `يَرْضٰى`, `وَالضُّحٰى`, `سَجٰى`, `قَلٰى`,
+    `فَتَرْضٰى`, `فَاٰوٰى`, `فَهَدٰى`, `فَاَغْنٰى` kabi joylarda.
+    Alif-hamza qoidalar p25-26 bilan mos (`اَمَّا`, `اِنَّ`, `اَلَمْ`).
+  - Vaqtlar foydalanuvchi tinglovi orqali tasdiqlanmagan — mos kelmagan
+    chunks `cut_p38.sh` orqali qayta kesilsin.
+- **Sahifa 40 tugallangan**: Suratu-l Alaq (19 ayat, top) + Suratu-l Qadr
+  (Bismillah + 5 ayat, bottom). Jami 25 element. Al-Alaq sarlavhasi va
+  bismillah'i p39'da (kitobga mos — sarlavha p39 footer'ida). Manbalar:
+  - `public/audio/63. Alaq.mp3` (147s, Bismillah + 19 ayat). Bismillah
+    chunk (`p39_alaq_bism.mp3`) p39 alaq sarlavhasi uchun ishlatiladi.
+    p40 ayat chunklari: `63_alaq/p40_a01..a19.mp3`.
+  - `public/audio/64. Qadr.mp3` (49.84s, Bismillah + 5 ayat). Chunklar:
+    `64_qadr/p40_q_bism.mp3`, `p40_q01..q05.mp3`.
+  - Audio helperlar: `A.alq()` va `A.qdr()` (yangi qo'shildi).
+  - Layout: custom Page40 — Alaq 19 ayat (qator-qator 2+2+2+3+3+2+1+3+1,
+    `size="sm"`, `gap-1`/`gap-1.5`/`gap-2`) + Divider + Qadr title (kichik
+    `سورة القدر` / "Qadr surasi") + Bismillah + 5 ayat (1+2+1+1 qatorda,
+    v4 uzun va alohida, v5 alohida). Element ID format: `a01..a19` (Alaq),
+    `q_bism` + `q01..q05` (Qadr).
+  - Cut script: `tools/cut_p40.sh`. Vaqtlar silencedetect -32dB/0.30s +
+    ~50/100ms buffers asoslangan — foydalanuvchi audio'larni eshitib
+    tasdiqlasa, mos kelmagan chunks `cut_p40.sh` orqali qayta kesilsin.
+- **Sahifa 41 tugallangan**: Suratu-l Bayyina (98) — Bismillah + 8 ayat,
+  jami 9 clickable element. Manba: `65. Bayyina.mp3` (170.06s) — chunklar
+  `65_bayyina/p41_*.mp3` (9 chunk). Audio helper: `A.bayy()`.
+  Element IDs: `bism`, `a1..a8`. Layout: clickable `سورة البينة` title +
+  bismillah + 8 ayat (har biri `size="sm"`, `gap-2` bilan alohida qatorda).
+  Renderer: dedicated `Page41` (oldin generic `SurahPage` placeholder
+  `Kavsar` matn bilan edi — to'liq almashtirildi).
+  Audio timings (silencedetect -32dB/0.30s + Whisper small Arabic verify):
+  - bismillah: 1.30-5.96 (4.66s)
+  - a1: 9.40-24.05 (14.65s, `لَمْ يَكُنِ...الْبَيِّنَةُ`)
+  - a2: 26.60-34.55 (7.95s, `رَسُولٌ...مُطَهَّرَةً`)
+  - a3: 37.30-41.45 (4.15s, `فِيهَا كُتُبٌ قَيِّمَةٌ`)
+  - a4: 44.50-56.90 (12.40s, `وَمَا تَفَرَّقَ...الْبَيِّنَةُ`)
+  - a5: 62.00-88.40 (26.40s, includes internal pause at 80.94 —
+    waqf at `حُنَفَاءَ` va `الزَّكَاةَ ۚ`)
+  - a6: 92.40-115.85 (23.45s, internal pause at 107.21 — waqf `فِيهَا ۚ`)
+  - a7: 118.95-131.45 (12.50s)
+  - a8: 136.55-168.55 (32.00s, internal pauses at 153.94 va 162.12 —
+    waqf at `أَبَدًا ۖ` va `عَنْهُ ۚ`)
+  Cut script: `tools/cut_p41.sh`.
+- **Sahifa 42 tugallangan**: Surah Az-Zalzalah (Bismillah + 8 oyat) + Surah Al-'Adiyat
+  (Bismillah + 11 oyat) = 21 clickable element. Audio manbalar:
+  - `66. Zalzala.mp3` (87.51s) → chunklar `66_zalzala/p42_zz_{bism,a1..a8}.mp3` (9).
+  - `67. Adiya.mp3` (91.48s)  → chunklar `67_adiya/p42_ad_{bism,a1..a11}.mp3` (12).
+  Audio helperlar: `A.zz()`, `A.ad()` (`elements.ts` da).
+  Layout (RenderedPage.tsx Page42): Title "سورة الزلزلة" → bismillah → 4 ta `Row`
+  (a1+a2, a3+a4, a5, a6, a7+a8) → Divider → Title "سورة العاديات" → bismillah →
+  5 ta `Row` (a1+a2+a3, a4+a5, a6+a7, a8+a9, a10+a11). Barcha so'zlar
+  `size="sm"`. Mazmun viewport balandligidan biroz oshadi — content scroll/fade
+  ishlaydi (alif-lom suralar uchun standart).
+  Vaqtlar silencedetect -32dB/0.50s + 0.10/0.15s buffers. Cut script: `tools/cut_p42.sh`.
+- **Sahifa 39 tugallangan**: Duho 11-oyat (oxirgi) + Sharh (8 ayat) + Tin
+  (8 ayat) + Alaq header (bismillah). Jami 20 audio element + 3 ta surah
+  sarlavhasi (statik). Manbalar va chunklar:
+  - **Duho v.11** (1 element, `duho_v11`): `60. Zuho.mp3` ning 85.98-91.99s
+    qismidan, chunk `60_zuho/p39_duho_v11.mp3` (6.01s). v.1-10 38-sahifada.
+  - **Sharh** (9 element: bismillah + 8 ayat): `61. Sharh.mp3` (62s),
+    chunklar `61_sharh/p39_sharh_{bism,v1..v8}.mp3`. Audio helper: `A.sharh()`.
+  - **Tin** (9 element: bismillah + 8 ayat): `62. Tiyn.mp3` (81s),
+    chunklar `62_tiyn/p39_tin_{bism,v1..v8}.mp3`. Audio helper: `A.tiyn()`.
+  - **Alaq header** (1 element, `alaq_bism`): `63. Alaq.mp3` ning
+    1.49-6.82s qismidan, chunk `63_alaq/p39_alaq_bism.mp3` (5.33s).
+    Alaq surasining ayatlari 40-sahifada davom etadi.
+  - **Layout** (`Page39` custom renderer): kitobning sahifa 39 strukturasi
+    bilan mos. Compact `<Head>` (h3 + sub, `mt-0.5 mb-0`) + custom `<Sep>`
+    (`my-1`) — `<Title>`/`<Divider>` standart komponentlardan ixchamroq.
+    `gap-0` outer container, barcha qatorlar `size="sm" gap="gap-1"`.
+    Tartib: Duho v.11 → Sep → Sharh title + bismillah + 4 qator
+    (v1+v2 / v3+v4 / v5+v6+v7 / v8) → Sep → Tin title + bismillah + 5 qator
+    (v1+v2 / v3+v4 / v5 / v6 / v7+v8) → Sep → Alaq title + bismillah.
+    Card balandligi ~714px (~620px viewport bilan ~94px overflow — pastki
+    fade orqali Alaq header dostur etiladi).
+  - Cut script: `tools/cut_p39.sh` (silencedetect -32dB/0.40s + 0.20s
+    buffer). Vaqtlar foydalanuvchi tinglovi orqali tasdiqlanmagan —
+    audio'larni eshitib mos kelmagan chunks `cut_p39.sh` orqali qayta
+    kesilsin.
+- **Sahifa 43 tugallangan**: Surah Al-Qari'ah (Bismillah + 11 ayat) + Surah
+  At-Takathur (Bismillah + 8 ayat) + Surah Al-'Asr title-header (faqat
+  Bismillah; to'liq oyatlar p44 da). Jami 22 clickable element + 3 static
+  Title. Audio manbalari:
+  - **Qari'ah** (12 chunk): `68. Qoria.mp3` (89.36s). Chunklar
+    `68_qoria/p43_qr_*.mp3` (bism + a1..a11). Audio helper: `A.qr()`.
+  - **Takathur** (9 chunk): `69. Takasur.mp3` (71.89s). Chunklar
+    `69_takasur/p43_tk_*.mp3` (bism + a1..a8). Audio helper: `A.tk()`.
+  - **Asr Bismillah** (1 chunk): `70. Asr.mp3` (33.78s) ning 0.7-6.1s
+    qismi. Chunk `70_asr/p43_as_bism.mp3`. Audio helper: `A.asr()` (p44
+    bilan ulushlanadi — full body p44 da).
+  Layout: 3 ta `<Title text="..." sub="..." />` (statik, kitobdagidek
+  markazlashgan) + Bismillah + ayat'lar `size="sm"` `gap-1`/`gap-1.5`
+  bilan har qatorda 1-3 ayat. 2 ta `<Divider />` 3 surani ajratadi.
+  Cut script: `tools/cut_p43.sh` (silencedetect -32dB/0.30s + ~0.2-0.3s
+  buffers). Vaqtlar foydalanuvchi tinglovi orqali tasdiqlanmagan — mos
+  kelmagan chunks `cut_p43.sh` orqali qayta kesilsin.
+- **Sahifa 44 tugallangan**: Surah Al-'Asr davomi (3 ayat — title+Bismillah
+  p43 da) + Surah Al-Humazah (Bismillah + 9 ayat, statik title) + Surah
+  Al-Fil (Bismillah + 5 ayat, statik title). Jami 19 clickable element +
+  2 static title (Humazah, Fil — `❀ ... ❀` formatda markazda). Audio
+  manbalari:
+  - **Asr** (3 chunk): `70. Asr.mp3` (33.78s) ning 8.45-32.95s qismi.
+    Chunklar `70_asr/p44_as_a*.mp3`. Audio helper `A.asr()` (p43 bilan
+    ulushlanadi).
+  - **Humazah** (10 chunk): `71. Humaza.mp3` (75.96s). Chunklar
+    `71_humaza/p44_hu_*.mp3` (bismillah + a1..a9). Audio helper: `A.hu()`.
+  - **Fil** (6 chunk): `72. Fil.mp3` (48.95s). Chunklar
+    `72_fil/p44_fi_*.mp3` (bismillah + a1..a5). Audio helper: `A.fi()`.
+  Layout: Asr 2 qator (`as_a1+as_a2`, `as_a3`) + Divider + Humazah
+  flower-title + Bismillah + Humazah 5 qator (a1; a2-a3; a4-a5; a6-a7;
+  a8-a9) + Divider + Fil flower-title + Bismillah + Fil 3 qator (a1;
+  a2-a3; a4-a5). Hammasi `size="sm"` `gap-1.5`/`gap-2`. Cut script:
+  `tools/cut_p44.sh` (silencedetect -32dB/0.30s + ~0.3s buffers). Vaqtlar
+  foydalanuvchi tinglovi orqali tasdiqlanmagan — mos kelmagan chunks
+  `cut_p44.sh` orqali qayta kesilsin.
+- **Sahifa 45 tugallangan**: 3 ta to'liq surah + 1 ta sarlavha (Kafirun
+  oyatlari 46-sahifada): Surah Quraysh (Bismillah + 4 ayat) + Surah
+  Al-Ma'un (Bismillah + 7 ayat) + Surah Al-Kawthar (Bismillah + 3 ayat) +
+  Surah Al-Kafirun header (Bismillah only). Jami 18 clickable element +
+  4 ta static flower-title (`❀ ... ❀` formatda markazda). Audio manbalari:
+  - **Quraysh** (5 chunk): `73. Quraysh.mp3` (48.59s). Chunklar
+    `73_quraysh/p45_qu_*.mp3` (bismillah + a1..a4). Audio helper: `A.qur()`.
+  - **Ma'un** (8 chunk): `74. Mauvn.mp3` (62.20s). Chunklar
+    `74_mauvn/p45_ma_*.mp3` (bismillah + a1..a7). Audio helper: `A.mau()`.
+    Audio'da a4 va a5 reciter tomonidan bog'lab o'qilgan (sukunat yo'q) —
+    sun'iy 38.55s da bo'lindi.
+  - **Kawthar** (4 chunk): `75. Kavsar.mp3` (29.54s). Chunklar
+    `75_kavsar/p45_ka_*.mp3` (bismillah + a1..a3). Audio helper: `A.kau()`.
+  - **Kafirun bismillah** (1 chunk): `76. Kafirun.mp3` (65.36s) ning
+    0.95-6.45s qismi. Chunk `76_kafirun/p45_kf_bism.mp3`. Audio helper:
+    `A.kaf()` (oyatlar p46 da ulushlanadi).
+  Layout: Page36 patterndagi `Verse` komponentidan foydalaniladi (custom
+  Page45). Har bismillah/ayat clickable button bilan, ayat raqami `﴿N﴾`
+  formatda matn oxirida (0.78em, 70% opacity). 4 ta flower-title statik
+  (clickable emas, audio'da reciter sarlavhani o'qimaydi). `gap-0` outer
+  container `size="sm"` Verse — barcha 18 element bitta viewportga (677px)
+  sig'adi. Cut script: `tools/cut_p45.sh` (silencedetect -32dB/0.30s +
+  ~0.2s buffers). Vaqtlar foydalanuvchi tinglovi orqali tasdiqlanmagan —
+  mos kelmagan chunks `cut_p45.sh` orqali qayta kesilsin (ayniqsa Ma'un
+  a4/a5 bo'linish 38.55s da to'g'rimi tekshirilsin).
+- **Sahifa 48 tugallangan**: Sano (الثَّنَاءُ) + Tashahhud (التَّشَهُّدُ).
+  Jami 12 clickable element — 2 sarlavha (Sano + Tashahhud) + 3 Sano body
+  segmenti + 7 Tashahhud body segmenti, kitobning vergul (،) bo'linishlariga
+  mos ravishda. Audio yo'q (ls_duolar.audioUrl = null) — clickable elementlar
+  active highlight beradi, audio ijro etilmaydi (start=end=0).
+  - **Sano matni** (3 segment): `s1` سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ ،
+    `s2` وَتَعَالَى جَدُّكَ ، `s3` وَلَا إِلٰهَ غَيْرُكَ. Layout: `s1` alohida
+    qatorda, `s2+s3` bitta qatorda (kitob ko'rinishiga moslash).
+  - **Tashahhud matni** (7 segment): `t1` اَلتَّحِيَّاتُ لِلَّهِ ، `t2` وَالصَّلَوَاتُ ،
+    `t3` وَالطَّيِّبَاتُ ، `t4` السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ ،
+    `t5` السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ ، `t6` أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللَّهُ ،
+    `t7` وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ. Layout: `t1+t2+t3` bitta
+    qisqa qatorda, `t4..t7` har biri alohida qatorda (uzunligi sababli).
+  - Layout: `lg` size sarlavhalar, `sm` size body, dotted `Sep` divider.
+    Card ~415px, viewport (946px) ga to'liq sig'adi, overflow yo'q.
+- **Sahifa 46 tugallangan**: Surah Al-Kafirun davomi (ayat 1-6, title+bismillah
+  p45 oxirida) + Surah An-Nasr (Bismillah + 3 ayat) + Surah Al-Masad
+  (Bismillah + 5 ayat) + Surah Al-Ikhlas (Bismillah + ayat 1 + ayat 2 + ayat 3
+  boshi "لَمْ يَلِدْ"). Jami 20 clickable element. Audio manbalari:
+  - `76. Kafirun.mp3` (65.36s) → kf_a1..a6, chunklar `76_kafirun/p46_kf_*.mp3`
+    (bismillah p45 da `kf_bism` sifatida).
+  - `77. Nasr.mp3` (44.72s) → ns_bism + ns_a1..a3, chunklar `77_nasr/p46_ns_*.mp3`.
+    a3 uzun (13.15s) — kitobda 2 satrga bo'lingan bo'lsa-da bitta ayat sifatida
+    render: `فَسَبِّحْ بِحَمْدِ رَبِّكَ وَاسْتَغْفِرْهُ ۚ اِنَّهُ كَانَ تَوَّابًا`.
+  - `78. Masad.mp3` (51.41s) → ms_bism + ms_a1..a5, chunklar `78_masad/p46_ms_*.mp3`.
+  - `79. Ixlos.mp3` (26.17s) → ix_bism + ix_a1 + ix_a2 + ix_a3_start, chunklar
+    `79_ixlos/p46_ix_*.mp3`. Ayat 3 audio chunk fragment "لَمْ يَلِدْ" uchun
+    silencedetect (-28dB/0.10s) bilan topilgan mikro-pauza (~22.06s) ishlatildi;
+    oyat davomi (`وَلَمْ يُولَدْ`) va ﴿٣﴾ verse marker p47 da bo'ladi (precedent:
+    p37 Layl `وَأَمَّا`).
+  - Audio helperlar: `A.nas()`, `A.msd()`, `A.ixl()` (yangi qo'shildi); `A.kaf()`
+    p45 dan davom.
+  - Layout: `Page46` custom renderer — `<Verse>` (RTL button + verse marker
+    `﴿N﴾`) va `<SurahTitle>` (`❀` ornaments). Al-Kafirun ayatlari title'siz
+    boshlanadi (p45 oxirida title bor); 3 ta `<Divider />` surahlar orasida;
+    Al-Ikhlas a3_start verse marker'siz (oyat to'liq emas). `size="sm"` fluid
+    clamp, `overflowWrap: anywhere` uzun oyatlar uchun nice break beradi.
+    Card balandligi ~662px viewport (677px) ichida sig'adi.
+  - Cut script: `tools/cut_p46.sh` (silencedetect -32dB/0.30s + 0.15-0.25s
+    buffers). Vaqtlar foydalanuvchi tinglovi orqali tasdiqlanmagan — mos
+    kelmagan chunks `cut_p46.sh` orqali qayta kesilsin (ayniqsa Ixlos
+    a3_start 22.15s da to'g'ri tugaganini tekshirish kerak).
+- **Sahifa 47 tugallangan**: Surah Al-Ikhlas davomi (v3 oxiri `وَلَمْ يُولَدْ`
+  + v4 `وَلَمْ يَكُنْ لَهُ كُفُوًا اَحَدٌ`) + Surah Al-Falaq (Bismillah +
+  5 ayat) + Surah An-Nas (Bismillah + 6 ayat). Jami 15 ta clickable element
+  + 2 ta `❀ SurahTitle` ornament. Audio manbalari:
+  - `79. Ixlos.mp3` (26.17s) — `p47_ix_v3` (20.10-22.18s) faqat
+    `وَلَمْ يُولَدْ` qismini ijro etadi (v3 boshi `لَمْ يَلِدْ` p46 da).
+    `p47_ix_v4` (22.10-25.65s) to'liq v4 oyatini ijro etadi.
+  - `80. Falaq.mp3` (46.13s) → fq_bism + fq_a1..a5, chunklar
+    `80_falaq/p47_fq_*.mp3` (6 chunk). v4 audio'da ichki ~0.4s pauza bor
+    (`النَّفَّاثَاتِ` va `فِى الْعُقَدِ` orasida) — bitta chunk'ga birlashtirilgan
+    (silencedetect -30dB/0.30s).
+  - `81. Nos.mp3` (54.96s) → ns_bism + ns_a1..a6, chunklar
+    `81_nos/p47_ns_*.mp3` (7 chunk). v5 (`الَّذٖى يُوَسْوِسُ فٖى صُدُورِ النَّاسِ`)
+    eng uzun (~7.87s).
+  - Audio helperlar: `A.flq()`, `A.nss()` (yangi qo'shildi); `A.ixl()` p46 dan davom.
+  - Layout: `Page47` custom renderer (Page45 / Page46 pattern bilan
+    bir xil) — `<Verse>` (RTL button + `﴿N﴾` marker) + `<SurahTitle>`
+    (`❀` ornaments). Ikhlas v3/v4 title'siz boshlanadi (p46 da title bor);
+    2 ta `<Divider />` surahlar orasida. Faqat `size="sm"` fluid clamp
+    `text-[clamp(0.72rem,3.6cqi,0.92rem)]`, `overflowWrap: anywhere`. Card
+    bitta viewport (677px) ichida sig'adi.
+  - Cut script: `tools/cut_p47.sh` (silencedetect -30dB/0.30s + ~0.10-0.20s
+    buffers). Vaqtlar foydalanuvchi tinglovi orqali tasdiqlanmagan —
+    mos kelmagan chunks `cut_p47.sh` orqali qayta kesilsin.
+  - **Naming**: An-Nas elementlari p47 da `ns_*` (p46 dagi An-**Nasr** ham
+    `ns_*` ishlatadi) — `make()` page-prefiks (`p46_*` / `p47_*`) tufayli
+    global element store'da kollyziya yo'q, lekin renderer kodida har sahifa
+    o'zining usePageElements scope'iga bog'liq.
+- **Sahifa 50 tugallangan** (user-facing "52 / 52" — global indikatorda
+  kitobning eng oxirgi sahifasi): Du'a al-Qunut (دعاء القنوت). 8 element:
+  1 ta clickable sarlavha (`p50_01` دُعَاءُ الْقُنُوتِ) + 7 ta tabiiy clause
+  (`p50_02..p50_08`). Matn — kitob rasmidan 1:1 transkripsiya, hech bir
+  joyi qisqartirilmagan (kitobning 6 satrli oqar matni 7 ta semantik
+  gapga bo'lingan).
+  - **Layout (book-like flowing paragraph)**: Sarlavha (lg) ❀ ornament
+    bilan + bitta `<p dir="rtl">` paragrafi ichida 7 ta inline clickable
+    button. Phrase'lar orasi `·` (middle dot, opacity 50%) ajratgich.
+    `leading-[2.1]` text-justify — kitobning oqar prose ko'rinishini
+    aks ettiradi (oldingi "har gap o'z qatorida" pattern bekor qilindi —
+    foydalanuvchi paragraf-style xohladi 2026-05-21).
+  - **WebkitBoxDecorationBreak: clone** — agar phrase qatordan oshib
+    ketsa, active background har ikkala qator qismida ham ko'rinadi
+    (yoritilgan phrase bir butun bo'lib ajralib turadi).
+  - **Audio yo'q** — Materiallar/sano tashahhud duolar/ papkasida audio
+    yo'q va public/audio/ da Qunut audio'si yo'q. `audioUrl: null`,
+    `start=end=0`. Lesson (`ls_duolar`) `audioUrl` ham null bo'lgani
+    uchun click qilinganda audio ijro etilmaydi, faqat active highlight
+    (yashil background + glow) ko'rinadi.
+  - Audio qo'shilsa, `p50` element'lariga audioUrl/start/end va yangi
+    `A.*` helper biriktirilishi kerak.
+  - Card balandligi ~250px (mobile 375px viewport), bemalol sig'adi
+    — paragrafga aylantirilganidan keyin avvalgi 7 qatordan ancha
+    ixchamroq.
+- **Sahifa 49 tugallangan** (user-facing "51 / 52" — global indikatorda
+  oxirgidan oldingi sahifa; manba: `Materiallar/sano tashahhud duolar/49.jpg`):
+  Salavotlar (اَلصَّلَوَاتُ) — Ibrahimiya
+  salavotining 2 ta varianti (صَلِّ va بَارِكْ) + Du'a (اَلدُّعَاءُ) — namozdan
+  keyingi panoh duosi (qabr azobi, hayot/o'lim fitnasi, Masih Dajjol).
+  Jami 16 clickable element: 2 sarlavha + 5 (Block 1) + 5 (Block 2) + 4
+  (Du'a). Audio yo'q (`ls_duolar.audioUrl = null`) — clickable elementlar
+  active highlight beradi, audio ijro etilmaydi (start=end=0).
+  - **Block 1 — Allohumma sallı** (`s1_p1..s1_p5`): اَللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ ،
+    وَعَلَى آلِ مُحَمَّدٍ ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ ، وَعَلَى آلِ إِبْرَاهِيمَ ،
+    إِنَّكَ حَمِيدٌ مَجِيدٌ.
+  - **Block 2 — Allohumma bārik** (`s2_p1..s2_p5`): اَللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ ،
+    o'xshash struktura (5 segment).
+  - **Du'a** (`d_p1..d_p4`): اَللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ جَهَنَّمَ ، وَمِنْ
+    عَذَابِ الْقَبْرِ ، وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ ، وَمِنْ شَرِّ الْمَسِيحِ الدَّجَّالِ.
+    Kitobda 1 vergul (الْقَبْرِ dan keyin); pedagogik tartibda 4 segmentga
+    bo'lingan.
+  - Layout: 2 ta `title_*` (lg), `sm` body, dotted `Sep` divider 4 joyda
+    (titles atrofida va salavotlar orasida). Block 1/2 layout: 2+2+1
+    (yumshoq pair'lar + alohida `إِنَّكَ حَمِيدٌ مَجِيدٌ` tugatma). Du'a layout:
+    d_p1 alohida + d_p2/d_p3 birga + d_p4 alohida. Card ~500px, viewport
+    (946px) ichida bemalol sig'adi.
+- Barcha sahifalar tugallangan: 11-21, 23, 24, 25, 26, 27, 28, 29, 30, 34, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
+  (faqat 22, 31, 32, 33, 35, 36, 47 hali placeholder yoki yo'q).
 
 ### Tarkibiy ma'lumot
 
