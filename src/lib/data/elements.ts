@@ -101,6 +101,12 @@ const A = {
   yoz: (name: string) => `/audio/edit/39_yoz_oqiladigan/${name}.mp3`,
   // Page 28-29 Yozilsa-o'qilmaydigan aliflar/lamlar chunks (28: Block 3, 29: Shamsiya)
   yo: (name: string) => `/audio/edit/40_yozilsa_oqilmaydi/${name}.mp3`,
+  // Page 30 Vasl bo'limi (title + chig'atoy rule) — source 41. vasl.mp3
+  vasl: (name: string) => `/audio/edit/41_vasl/${name}.mp3`,
+  // Page 31 Vaqf bo'limi — title 42.vaqf.mp3, words from 56. Fotiha.mp3
+  vaqf: (name: string) => `/audio/edit/42_vaqf/${name}.mp3`,
+  // Page 32 Idg'om bo'limi — title 44. idg'om.mp3, words from Layl/Zalzala suras
+  idgom: (name: string) => `/audio/edit/44_idgom/${name}.mp3`,
   harakat: "/audio/04. harakat.mp3",
   ro: "/audio/05. ro.mp3",
   za: "/audio/06. za.mp3",
@@ -2364,44 +2370,66 @@ const p30: ED[] = [
 
   // ────────────────────────────────────────────────────────────────
   // BOTTOM: Vasl bo'limi — 3 so'zli misollar (8 ibora, 4 qator × 2 ustun)
-  // Audio: 193.28-216.05s. Vasl title ("وصل - قوشيش") + chig'atoy
-  // qoidasi static matn (audio'da yo'q).
+  // Audio words: 37. alif va hamza.mp3 193.28-216.05s.
+  // Vasl title + chig'atoy rule audio: 41. vasl.mp3 0-4.1s va 4.4-18.65s.
   // ────────────────────────────────────────────────────────────────
 
+  // Vasl title (clickable, manba 41. vasl.mp3 0-2.30s — faqat "Vasl Qoshish")
+  ["vasl_title", "jumla", "وصل - قوشیش", "Vasl — Qo'shish",
+    A.vasl("p30_vasl_title"), 0, 2.30, 0, 0, 0, 0],
+  // Vasl chig'atoy rule (clickable, manba 41. vasl.mp3 3.00-40.00s — 37s to'liq qoida)
+  ["vasl_rule", "jumla", "وصل ـ ایکّی اوچ یا کی تورت سوزلرنی بر-بریکه قوشیب اوقیش دیمکدر. ایکّی سوز برکه قوشیب اوقیلگانده هر دائم اورتالریده بر ایکی یا کی اوچ حرف اوقیلمی قالادی. قویده دیکی مثاللرده اوچته سوز برکه وصل قیلینهدی:",
+    "Vasl — ikki, uch yoki to'rt so'zni bir-biriga qo'shib o'qish demakdir...",
+    A.vasl("p30_vasl_rule"), 0, 38.00, 0, 0, 0, 0],
+
+  // 2026-05-19 REMAPPED: 8 vasl phrases now from source 41.vasl (42-91s), not source 37.
   // ── Row 1 — اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ (o'ng) | وَهٰذَا الْبَلَدُ الْأَمِينَ (chap) ──
-  ["b1_w1", "soz", "اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ", "To'g'ri yo'lga hidoyat qil", A.ah("p30_b1_w1_ihdinasiratmust"),  0, 1.59, 0, 0, 0, 0],
-  ["b1_w2", "soz", "وَهٰذَا الْبَلَدُ الْأَمِينَ",        "Va bu xavfsiz shahar",       A.ah("p30_b1_w2_wahadhalbaladamn"), 0, 1.42, 0, 0, 0, 0],
+  ["b1_w1", "soz", "اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ", "To'g'ri yo'lga hidoyat qil", A.vasl("p30_b1_w1_ihdinasiratmust"),  0, 5.00, 0, 0, 0, 0],
+  ["b1_w2", "soz", "وَهٰذَا الْبَلَدِ الْأَمِينِ",        "Va bu xavfsiz shahar (At-Tin 95:3)", A.vasl("p30_b1_w2_wahadhalbaladamn"), 0, 4.60, 0, 0, 0, 0],
 
   // ── Row 2 — نَارُ اللهِ الْمُوقَدَةُ (o'ng) | كَمَثَلِ الَّذِى اسْتَوْقَدَ (chap) ──
-  ["b2_w1", "soz", "نَارُ اللهِ الْمُوقَدَةُ",      "Allohning yondirilgan o'ti", A.ah("p30_b2_w1_narullahimuqadah"), 0, 1.56, 0, 0, 0, 0],
-  ["b2_w2", "soz", "كَمَثَلِ الَّذِى اسْتَوْقَدَ",  "Yondirgan kishi misli",      A.ah("p30_b2_w2_kamathalillistwq"), 0, 1.55, 0, 0, 0, 0],
+  ["b2_w1", "soz", "نَارُ اللهِ الْمُوقَدَةُ",      "Allohning yondirilgan o'ti", A.vasl("p30_b2_w1_narullahimuqadah"), 0, 4.40, 0, 0, 0, 0],
+  ["b2_w2", "soz", "كَمَثَلِ الَّذِى اسْتَوْقَدَ",  "Yondirgan kishi misli",      A.vasl("p30_b2_w2_kamathalillistwq"), 0, 3.70, 0, 0, 0, 0],
 
   // ── Row 3 — فَاتَّقُوا النَّارَ الَّتِى (o'ng) | هُوَ التَّوَّابُ الرَّحِيمُ (chap) ──
-  ["b3_w1", "soz", "فَاتَّقُوا النَّارَ الَّتِى", "U do'zaxdan saqlaninglar", A.ah("p30_b3_w1_fattaqunnaarallti"), 0, 1.79, 0, 0, 0, 0],
-  ["b3_w2", "soz", "هُوَ التَّوَّابُ الرَّحِيمُ", "U tavbalar qabuluvchi",   A.ah("p30_b3_w2_huwattawwabrahim"),  0, 1.67, 0, 0, 0, 0],
+  ["b3_w1", "soz", "فَاتَّقُوا النَّارَ الَّتِى", "U do'zaxdan saqlaninglar", A.vasl("p30_b3_w1_fattaqunnaarallti"), 0, 4.20, 0, 0, 0, 0],
+  ["b3_w2", "soz", "هُوَ التَّوَّابُ الرَّحِيمُ", "U tavbalar qabuluvchi",   A.vasl("p30_b3_w2_huwattawwabrahim"),  0, 4.20, 0, 0, 0, 0],
 
   // ── Row 4 — ذُو الْفَضْلِ الْعَظِيمِ (o'ng) | اَنْتَ الْعَزِيزُ الْحَكِيمُ (chap) ──
-  ["b4_w1", "soz", "ذُو الْفَضْلِ الْعَظِيمِ",   "Buyuk fazl egasi",       A.ah("p30_b4_w1_dhulfadlazeem"),    0, 1.67, 0, 0, 0, 0],
-  ["b4_w2", "soz", "اَنْتَ الْعَزِيزُ الْحَكِيمُ", "Sen Aziz va Hakimsan",  A.ah("p30_b4_w2_antalazeezhakeem"), 0, 1.71, 0, 0, 0, 0],
+  ["b4_w1", "soz", "ذُو الْفَضْلِ الْعَظِيمِ",   "Buyuk fazl egasi",       A.vasl("p30_b4_w1_dhulfadlazeem"),    0, 4.00, 0, 0, 0, 0],
+  ["b4_w2", "soz", "اَنْتَ الْعَزِيزُ الْحَكِيمُ", "Sen Aziz va Hakimsan",  A.vasl("p30_b4_w2_antalazeezhakeem"), 0, 5.20, 0, 0, 0, 0],
 ];
 
 // ============================================================
 // PAGES 31-33 — Vasl, Vaqf, Idg'om
 // ============================================================
 const p31: ED[] = [
-  ["01", "jumla", "وقف", "Vaqf (to'xtash)", null, 0, 0, 56, 8, 16, 5],
-  ["02", "soz", "الْعَالَمِينَ", "Olamlar", null, 0, 0, 82, 28, 22, 5],
-  ["03", "soz", "الرَّحِيمِ", "Rahim", null, 0, 0, 44, 28, 20, 5],
-  ["04", "soz", "يَوْمِ الدِّينِ", "Qiyomat kuni", null, 0, 0, 56, 52, 24, 5],
-  ["05", "soz", "الْمُسْتَقِيمَ", "To'g'ri yo'l", null, 0, 0, 56, 72, 24, 5],
+  // 2026-05-19: title 42.vaqf 0-0.85s, definition 3-32s, words 1-9 from 36.5-60s.
+  // Vaqf misollari: 9 oyat oxiri (Quran).
+  ["01", "jumla", "وقف",            "Vaqf (to'xtash)", A.vaqf("p31_title"),       0, 0.85, 56,  8, 16, 5],
+  ["definition", "jumla", "وقف ـ تنفّش (توختاش). قرآنی اوقیغانده توختاش الامتلریده بر آز توختاب نفس آلیب داوام ایتیلادی",
+    "Vaqf — tinish (to'xtash). Qur'on o'qiganda to'xtash alomatlarida bir oz to'xtab, nafas olib davom etiladi",
+    A.vaqf("p31_definition"), 0, 29.00, 0, 0, 0, 0],
+  // 9 ta vaqf misollar (har biri oyat oxiri)
+  ["02", "soz", "نَسْتَعِينُ",  "Nasta'in (yordam so'raymiz)",       A.vaqf("p31_w1_nastain"),   0, 2.20, 0, 0, 0, 0],
+  ["03", "soz", "يُؤْمِنُونَ",  "Yu'minun (iymon keltirurlar)",      A.vaqf("p31_w2_yuminun"),   0, 2.10, 0, 0, 0, 0],
+  ["04", "soz", "يَعْلَمُونَ",  "Ya'lamun (bilurlar)",               A.vaqf("p31_w3_yalamun"),   0, 2.10, 0, 0, 0, 0],
+  ["05", "soz", "يُسْرَى",      "Yusra (yengillik)",                 A.vaqf("p31_w4_yusra"),     0, 1.50, 0, 0, 0, 0],
+  ["06", "soz", "أَبَدًا",      "Abadan (abadiy)",                   A.vaqf("p31_w5_abadan"),    0, 1.30, 0, 0, 0, 0],
+  ["07", "soz", "تَوَّابًا",    "Tawwaba (tavbalarni qabul qiluvchi)", A.vaqf("p31_w6_tawwaba"),  0, 1.95, 0, 0, 0, 0],
+  ["08", "soz", "غِشَاوَةٌ",    "Ghishawa (parda)",                  A.vaqf("p31_w7_ghishawa"),  0, 1.70, 0, 0, 0, 0],
+  ["09", "soz", "حَامِيَةٌ",    "Hamiya (qaynoq)",                   A.vaqf("p31_w8_hamiya"),    0, 1.75, 0, 0, 0, 0],
+  ["10", "soz", "مُمَدَّدَةٌ",   "Mumaddada (uzaytirilgan)",          A.vaqf("p31_w9_mumaddada"), 0, 1.85, 0, 0, 0, 0],
 ];
 
 const p32: ED[] = [
-  ["01", "jumla", "إدغام", "Idg'om", null, 0, 0, 56, 8, 18, 5],
-  ["02", "soz", "مِنْ نِعْمَةٍ", "Ne'matlardan", null, 0, 0, 82, 28, 22, 5],
-  ["03", "soz", "مِنْ رَبِّكَ", "Rabbingdan", null, 0, 0, 44, 28, 20, 5],
-  ["04", "soz", "قَدْ تَبَيَّنَ", "Ayon bo'ldi", null, 0, 0, 56, 52, 22, 5],
-  ["05", "soz", "يَوْمَئِذٍ", "O'sha kuni", null, 0, 0, 56, 72, 20, 5],
+  // 2026-05-19: title 44.idg'om 1.40-2.60s, words from Layl/Zalzala. 2 ta so'z
+  // (min rabbika, qad tabayyana) — mavjud sura audiolarda topilmadi (null).
+  ["01", "jumla", "إدغام",         "Idg'om",       A.idgom("p32_title"),       0, 1.20, 56,  8, 18, 5],
+  ["02", "soz",   "مِنْ نِعْمَةٍ",   "Ne'matlardan", A.idgom("p32_w1_minnimah"), 0, 4.45, 82, 28, 22, 5],
+  ["03", "soz",   "مِنْ رَبِّكَ",    "Rabbingdan",   null, 0, 0, 44, 28, 20, 5],
+  ["04", "soz",   "قَدْ تَبَيَّنَ",  "Ayon bo'ldi",  null, 0, 0, 56, 52, 22, 5],
+  ["05", "soz",   "يَوْمَئِذٍ",      "O'sha kuni",   A.idgom("p32_w4_yawmaidh"), 0, 2.25, 56, 72, 20, 5],
 ];
 
 const p33: ED[] = [

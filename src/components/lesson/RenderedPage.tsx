@@ -2211,22 +2211,52 @@ function Page30({ elements, activeId, hasActive, onElementClick }: PP) {
 
       <Divider />
 
-      {/* Vasl section title — static text */}
-      <div className="text-center">
-        <h3 className="arabic-text text-base font-bold text-text-secondary" style={{ fontFamily: "var(--font-arabic)" }}>
-          وصل - قوشیش
-        </h3>
-        <p className="text-[9px] uppercase tracking-wide text-text-muted mt-0.5">
-          Vasl — qo&apos;shish
-        </p>
-      </div>
+      {/* Vasl section title — clickable */}
+      {(() => {
+        const vt = el("vasl_title");
+        if (!vt) return null;
+        const isActive = activeId === vt.id;
+        return (
+          <button
+            onClick={(e) => { e.stopPropagation(); onElementClick(vt); }}
+            className="text-center element-spring rounded-md px-3 py-0.5"
+            style={{
+              backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+              color: isActive ? "#ffffff" : "var(--color-text-secondary)",
+              boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+            }}
+          >
+            <h3 className="arabic-text text-base font-bold" style={{ fontFamily: "var(--font-arabic)" }}>
+              {vt.arabic}
+            </h3>
+            <p className="text-[9px] uppercase tracking-wide opacity-70 mt-0.5">
+              Vasl — qo&apos;shish
+            </p>
+          </button>
+        );
+      })()}
 
-      {/* Vasl chig'atoy rule — static */}
-      <div className="w-full rounded-lg border border-primary/15 bg-primary/[0.04] px-2.5 py-1.5">
-        <p className="arabic-text text-[10px] leading-snug text-text-main/85 text-center" style={{ fontFamily: "var(--font-arabic)" }}>
-          وصل ـ ایکّی اوچ یا کی تورت سوزلرنی بر-بریکه قوشیب اوقیش دیمکدر. ایکّی سوز برکه قوشیب اوقیلگانده هر دائم اورتالریده بر ایکی یا کی اوچ حرف اوقیلمی قالادی. قویده دیکی مثاللرده اوچته سوز برکه وصل قیلینهدی:
-        </p>
-      </div>
+      {/* Vasl chig'atoy rule — clickable */}
+      {(() => {
+        const vr = el("vasl_rule");
+        if (!vr) return null;
+        const isActive = activeId === vr.id;
+        return (
+          <button
+            onClick={(e) => { e.stopPropagation(); onElementClick(vr); }}
+            className="w-full rounded-lg border border-primary/15 px-2.5 py-1.5 element-spring"
+            style={{
+              backgroundColor: isActive ? "var(--color-primary)" : "rgba(76,175,80,0.04)",
+              color: isActive ? "#ffffff" : "var(--color-text-main)",
+              boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+            }}
+          >
+            <p className="arabic-text text-[10px] leading-snug text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+              {vr.arabic}
+            </p>
+          </button>
+        );
+      })()}
 
       {/* BOTTOM: 4 rows × 2 columns of 3-word vasl examples */}
       <Row els={els(["b1_w1","b1_w2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
@@ -2245,15 +2275,33 @@ function Page30({ elements, activeId, hasActive, onElementClick }: PP) {
 }
 
 function Page31({ elements, activeId, hasActive, onElementClick }: PP) {
-  const { els } = usePageElements(elements, 31);
+  const { el, els } = usePageElements(elements, 31);
+  const def = el("definition");
   return (
     <div className="flex flex-col items-center gap-2">
       <Title text="وقف" sub="Vaqf (to'xtash)" />
       <Row els={els(["01"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
+      {/* Chig'atoy definition (clickable) */}
+      {def && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onElementClick(def); }}
+          className="w-full rounded-lg border border-primary/15 px-2.5 py-1.5 element-spring"
+          style={{
+            backgroundColor: activeId === def.id ? "var(--color-primary)" : "rgba(76,175,80,0.04)",
+            color: activeId === def.id ? "#ffffff" : "var(--color-text-main)",
+            boxShadow: activeId === def.id ? "0 4px 14px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <p className="arabic-text text-[10.5px] leading-snug text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+            {def.arabic}
+          </p>
+        </button>
+      )}
       <Divider />
-      <Row els={els(["02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
-      <Row els={els(["04"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
-      <Row els={els(["05"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
+      {/* 9 vaqf misollari — 3 qator × 3 so'z */}
+      <Row els={els(["02","03","04"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-2" />
+      <Row els={els(["05","06","07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-2" />
+      <Row els={els(["08","09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-2" />
     </div>
   );
 }
