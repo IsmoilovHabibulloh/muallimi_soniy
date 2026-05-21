@@ -27,9 +27,13 @@
 #     ast1:        52 [4.123-6.886]
 #     ast2:        52 [7.772-10.599]
 #     ast3:        52 [11.970-14.300]  (3rd "Astaghfirullaha" extracted from start of seg4)
-#     extension:   52 [14.300-22.936]  (ta'ala min kulli dhanbin..sirran)
+#     extension:   52 [14.300-22.936]  (ta'ala min kulli dhanbin..khata'an — NO sirran, sirran is in seg5)
+#     p2 (alaniya):52 [24.045-26.626]  (sirran aw 'alaniyatan — audio extra: kitobda faqat "sirran")
+#     p3 (tawba):  52 [27.957-38.435]  (wa atubu ilayhi mina dhanbi alladhi a'lamu wa mina dhanbi alladhi la a'lam)
+#     p4 (ghuyub): 52 [39.627-44.416]  (innaka anta 'allamul ghuyub)
 #
 # Boundaries from silencedetect -32dB/0.30s (with finer -28dB/0.10s for Shahada split).
+# Whisper medium model bilan transcribe qilingan: 2026-05-21.
 
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -79,6 +83,9 @@ cut "$SRC4" p34_k5_ast1        4.123  6.886
 cut "$SRC4" p34_k5_ast2        7.772 10.599
 cut "$SRC4" p34_k5_ast3       11.970 14.300
 cut "$SRC4" p34_k5_ext        14.300 22.936
+cut "$SRC4" p34_k5_p2_alaniya 24.045 26.626
+cut "$SRC4" p34_k5_p3_tawba   27.957 38.435
+cut "$SRC4" p34_k5_p4_ghuyub  39.627 44.416
 
 echo ""
 echo "=== Copying to public/audio/edit/ ==="

@@ -843,6 +843,7 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
 | 17-21 | Madlar | — | 17-21.jpg | `32. madli 01.mp3`, `33. madli davomi...` |
 | 22-23 | Tashdid | — | 22-23.jpg | `34. tashdid.mp3` |
 | 24-25 | Tanvin | — | 24-25.jpg | `35. tanvin.mp3`, `36. tanvinli tashdid.mp3` |
+| 34 | Iymon kalimalari (5 ta kalima) | Page34 | kalimalarning asl nusxalari/34.jpg | `49-52. kalimalar 01-04.mp3` |
 | ... | Qolgan boblar | ... | ... | ... |
 | 54 | Duolar (oxirgi) | Page50 | 50.jpg | ? |
 
@@ -1213,8 +1214,50 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   Vaqtlar silencedetect -28dB/d=0.35 + buffers asoslangan — foydalanuvchi
   audio'larni eshitib tasdiqlasa, mos kelmagan chunks `cut_p30.sh` orqali
   qayta kesilsin. Cut script: `tools/cut_p30.sh`.
-- Barcha sahifalar tugallangan: 11-21, 23, 24, 25, 26, 27, 28, 29, 30 (faqat 22
-  hali placeholder).
+- **Sahifa 34 tugallangan**: Iymon kalimalari — 5 ta kalima (Tayyiba, Shahada,
+  Tawhid, Radd-i Kufr, Istighfar). Jami 23 clickable element (1 title + 5
+  kalima heading + 17 body part). Audio manbalari: `49-52. kalimalar 01-04.mp3`
+  (kalimalarning asl nusxalari papkasidan), chunklar
+  `49_kalimalar_01/p34_*.mp3` (23 chunk). Audio helper: `A.kl()`.
+  - **Title** (top center, clickable): `كَلِمَاتُ إِيمَانٍ` — audio 49 [0.998-2.540].
+  - **K1 Tayyiba**: heading `كَلِمَةُ طَيِّبَةٌ` (49 [4.4-6.2]) + 1 body
+    `لَا اِلٰهَ اِلَّا اللّٰهُ مُحَمَّدٌ رَسُولُ اللّٰهِ` (49 [9.1-16.6]).
+  - **K2 Shahada**: heading `كَلِمَةُ الشَّهَادَةِ` (49 [18.0-19.5]) + 2 parts
+    (`اَشْهَدُ اَنْ لَا اِلٰهَ اِلَّا اللّٰهُ` 49 [22.1-27.5];
+     `وَاَشْهَدُ اَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ` 49 [27.7-33.0]).
+  - **K3 Tawhid** (audio 50): heading `كَلِمَةُ التَّوْحِيدِ` + 4 parts
+    (`اَشْهَدُ...لَا شَرِيكَ لَهُ`; `لَهُ الْمُلْكُ...يُمِيتُ`;
+     `وَهُوَ حَىٌّ لَا يَمُوتُ`; `بِيَدِهِ الْخَيْرُ...قَدِيرٌ`).
+  - **K4 Radd-i Kufr** (audio 51): heading `كَلِمَةُ رَدِّ الْكُفْرِ` + 3 parts
+    (`اَللّٰهُمَّ اِنِّى اَعُوذُبِكَ...اَعْلَمُ`;
+     `وَاَسْتَغْفِرُكَ لِمَا لَا اَعْلَمُ`;
+     `اِنَّكَ اَنْتَ عَلَّامُ الْغُيُوبِ`).
+  - **K5 Istighfar** (audio 52): heading `كَلِمَةُ الْاِسْتِغْفَارِ` + 3 ta
+    `اَسْتَغْفِرُ اللّٰهَ` (ast1/ast2/ast3) + ext
+    `تَعَالٰى مِنْ كُلِّ ذَنْبٍ اَذْنَبْتُهُ عَمْدًا اَوْ خَطَأً` (audio'da bu yerda
+    tugaydi — "sirran" so'zi audio 52 ning keyingi segmentida).
+    Ast3 (3-Astaghfirullaha) audio 52 seg4 boshidan (11.97-14.30s, ~2.3s)
+    kesilgan — agar kesim mid-word bo'lsa, qayta sozlash kerak bo'ladi.
+    **Audio kengaytmasi** (kitobda yo'q, lekin audio 52 da reciter qo'shgan
+    qo'shimcha 3 segment — kalima istig'fardan keyingi davom du'osi):
+    - `k5_p2_alaniya` [24.045-26.626]: `سِرًّا اَوْ عَلَانِيَةً`
+      (book's "sirran" + audio extra "aw 'alaniyatan"). Whisper bu segmentni
+      "sirran aw 'alaniyatan" deb transcribe qilgan — silence boundary 23-24s
+      da, demak ext seg "khata'an" da tugaydi va sirran shu segmentda.
+    - `k5_p3_tawba` [27.957-38.435]:
+      `وَاَتُوبُ اِلَيْهِ مِنَ الذَّنْبِ الَّذِى اَعْلَمُ وَمِنَ الذَّنْبِ الَّذِى لَا اَعْلَمُ`.
+    - `k5_p4_ghuyub` [39.627-44.416]: `اِنَّكَ اَنْتَ عَلَّامُ الْغُيُوبِ`
+      (xuddi K4 oxiridagi ibora — istighfar du'osi ham shu bilan yakunlanadi).
+  - **Layout**: custom `<KalimaHead>` (kichik bold button) va `<KalimaBody>`
+    (RTL row, parts orasi `❀` gul ajratgich); title — yuqorida katta bold.
+    `gap-0` outer container, body parts `text-[clamp(0.72rem,3.4cqi,0.92rem)]`
+    — barcha 20 element bitta viewportga (677px) sig'adi. Body parts'da
+    chig'atoy/o'zbek izoh element'larda saqlangan (uzbek field), UIda
+    body matnida ko'rinmaydi — clickable button orqali kontekst beradi.
+  - **Vaqtlar**: silencedetect -32dB/d=0.30 + Whisper transcribe (ar)
+    tasdiqlash bilan aniqlangan. Cut script: `tools/cut_p34.sh`.
+- Barcha sahifalar tugallangan: 11-21, 23, 24, 25, 26, 27, 28, 29, 30, 34
+  (faqat 22 hali placeholder).
 
 ### Tarkibiy ma'lumot
 

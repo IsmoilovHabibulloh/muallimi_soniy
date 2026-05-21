@@ -111,6 +111,26 @@ const A = {
   harflar: (name: string) => `/audio/edit/47_harflar/${name}.mp3`,
   // Page 33 bottom — Muqatta'at Qur'aniya — source 48. ayrim suralar boshi.mp3
   muqatta: (name: string) => `/audio/edit/48_suralar_boshi/${name}.mp3`,
+  // Page 34 Iymon kalimalari — sources 49-52. kalimalar 01-04.mp3
+  kl: (name: string) => `/audio/edit/49_kalimalar_01/${name}.mp3`,
+  // Page 35 — Tamjid + Iman mujmal/mufassal (sources 53-55. kalimalar 05-07.mp3)
+  kl5: (name: string) => `/audio/edit/53_kalimalar_05/${name}.mp3`,
+  // Page 36 Surat al-Fatiha + Surat al-Baqarah (1-5) — sources 56. Fotiha.mp3 + 57. Baqara.mp3
+  sb: (name: string) => `/audio/edit/56_fotiha_baqara/${name}.mp3`,
+  // Page 37 Surah Ash-Shams chunks — source 58. Shams.mp3
+  shams: (name: string) => `/audio/edit/58_shams/${name}.mp3`,
+  // Page 37+38 Surah Al-Layl chunks — source 59. Layl.mp3 (p37: bismillah + ayahs 1-7 + a8 fragment; p38: ayahs 8-21)
+  layl: (name: string) => `/audio/edit/59_layl/${name}.mp3`,
+  // Page 38 Surah Ad-Duha chunks (bismillah + ayahs 1-10; ayah 11 is on p39) — source 60. Zuho.mp3
+  zuho: (name: string) => `/audio/edit/60_zuho/${name}.mp3`,
+  // Page 39 Surah Ash-Sharh chunks — source 61. Sharh.mp3 (62s, Bismillah + 8 ayat)
+  sharh: (name: string) => `/audio/edit/61_sharh/${name}.mp3`,
+  // Page 39 Surah At-Tin chunks — source 62. Tiyn.mp3 (81s, Bismillah + 8 ayat)
+  tiyn: (name: string) => `/audio/edit/62_tiyn/${name}.mp3`,
+  // Page 39 (header) + 40 (top) Suratu-l Alaq — source 63. Alaq.mp3 (147s, Bismillah + 19 ayat)
+  alq: (name: string) => `/audio/edit/63_alaq/${name}.mp3`,
+  // Page 40 (bottom) Suratu-l Qadr — source 64. Qadr.mp3 (49.84s, Bismillah + 5 ayat)
+  qdr: (name: string) => `/audio/edit/64_qadr/${name}.mp3`,
   harakat: "/audio/04. harakat.mp3",
   ro: "/audio/05. ro.mp3",
   za: "/audio/06. za.mp3",
@@ -2500,72 +2520,304 @@ const p33: ED[] = [
 // PAGES 34-35 — Kalimalar (Islamic declarations)
 // ============================================================
 const p34: ED[] = [
-  ["01", "jumla", "كَلِمَاتُ إِيمَانِ", "Iymon kalimalari", null, 0, 0, 50, 3, 30, 5],
-  ["02", "jumla", "لَا إِلٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ", "Kalima Tayyiba", null, 0, 0, 50, 10, 60, 6],
-  ["03", "jumla", "أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللَّهُ", "Kalima Shahoda (1-qism)", null, 0, 0, 50, 20, 60, 6],
-  ["04", "jumla", "وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ", "Kalima Shahoda (2-qism)", null, 0, 0, 50, 26, 60, 6],
-  ["05", "jumla", "كَلِمَةُ التَّوْحِيدِ", "Kalima Tavhid", null, 0, 0, 50, 34, 28, 5],
-  ["06", "jumla", "أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ", "Tavhid kalimasining boshi", null, 0, 0, 50, 40, 60, 6],
-  ["07", "jumla", "كَلِمَةُ رَدِّ الْكُفْرِ", "Kufr rad kalimasi", null, 0, 0, 50, 60, 30, 5],
-  ["08", "jumla", "كَلِمَةُ الِاسْتِغْفَارِ", "Istig'for kalimasi", null, 0, 0, 50, 78, 30, 5],
-  ["09", "jumla", "اسْتَغْفِرُ اللَّهَ", "Astaghfirulloh", null, 0, 0, 50, 84, 30, 6],
+  // Title (top center)
+  ["title",   "jumla", "كَلِمَاتُ إِيمَانٍ", "Iymon kalimalari", A.kl("p34_title"), 0, 1.542, 0, 0, 0, 0],
+
+  // Kalima 1 — Tayyiba
+  ["k1_head", "jumla", "كَلِمَةُ طَيِّبَةٌ", "Kalimai tayyiba (pok kalima)", A.kl("p34_k1_head"), 0, 1.758, 0, 0, 0, 0],
+  ["k1_body", "jumla", "لَا اِلٰهَ اِلَّا اللّٰهُ مُحَمَّدٌ رَسُولُ اللّٰهِ",
+    "La ilaha illallah, Muhammadur Rasululloh", A.kl("p34_k1_body"), 0, 7.497, 0, 0, 0, 0],
+
+  // Kalima 2 — Shahada
+  ["k2_head", "jumla", "كَلِمَةُ الشَّهَادَةِ", "Kalimai shahodat (guvohlik kalimasi)", A.kl("p34_k2_head"), 0, 1.438, 0, 0, 0, 0],
+  ["k2_p1",   "jumla", "اَشْهَدُ اَنْ لَا اِلٰهَ اِلَّا اللّٰهُ",
+    "Guvohlik beraman: Allohdan boshqa iloh yo'q", A.kl("p34_k2_p1"), 0, 5.438, 0, 0, 0, 0],
+  ["k2_p2",   "jumla", "وَاَشْهَدُ اَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+    "Va Muhammad Uning bandasi va rasulidir", A.kl("p34_k2_p2"), 0, 5.281, 0, 0, 0, 0],
+
+  // Kalima 3 — Tawhid
+  ["k3_head", "jumla", "كَلِمَةُ التَّوْحِيدِ", "Kalimai tavhid (yakkalik kalimasi)", A.kl("p34_k3_head"), 0, 1.510, 0, 0, 0, 0],
+  ["k3_p1",   "jumla", "اَشْهَدُ اَنْ لَا اِلٰهَ اِلَّا اللّٰهُ وَحْدَهُ لَا شَرِيكَ لَهُ",
+    "Guvohlik beraman: Yakka, sherigi yo'q Allohdan boshqa iloh yo'q", A.kl("p34_k3_p1"), 0, 7.643, 0, 0, 0, 0],
+  ["k3_p2",   "jumla", "لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ يُحْيِى وَيُمِيتُ",
+    "Mulk Uniki, hamd Uniki, tiriltiradi va o'ldiradi", A.kl("p34_k3_p2"), 0, 5.219, 0, 0, 0, 0],
+  ["k3_p3",   "jumla", "وَهُوَ حَىٌّ لَا يَمُوتُ",
+    "U tirik, o'lmaydi", A.kl("p34_k3_p3"), 0, 3.074, 0, 0, 0, 0],
+  ["k3_p4",   "jumla", "بِيَدِهِ الْخَيْرُ وَهُوَ عَلٰى كُلِّ شَىْءٍ قَدِيرٌ",
+    "Yaxshilik Uning qo'lida, U har narsaga qodir", A.kl("p34_k3_p4"), 0, 6.558, 0, 0, 0, 0],
+
+  // Kalima 4 — Radd-i Kufr
+  ["k4_head", "jumla", "كَلِمَةُ رَدِّ الْكُفْرِ", "Kalimai raddi kufr (kufrni rad kalimasi)", A.kl("p34_k4_head"), 0, 1.695, 0, 0, 0, 0],
+  ["k4_p1",   "jumla", "اَللّٰهُمَّ اِنِّى اَعُوذُبِكَ مِنْ اَنْ اُشْرِكَ بِكَ شَيْأً وَاَنَا اَعْلَمُ",
+    "Ey Alloh, men bilgan holda Senga biror shirk keltirib qo'yishdan Senga panoh tilayman",
+    A.kl("p34_k4_p1"), 0, 10.341, 0, 0, 0, 0],
+  ["k4_p2",   "jumla", "وَاَسْتَغْفِرُكَ لِمَا لَا اَعْلَمُ",
+    "Va bilmagan narsalarim uchun mag'firat so'rayman", A.kl("p34_k4_p2"), 0, 4.833, 0, 0, 0, 0],
+  ["k4_p3",   "jumla", "اِنَّكَ اَنْتَ عَلَّامُ الْغُيُوبِ",
+    "Shubhasiz Sen g'oyiblarni juda yaxshi bilguvchisan", A.kl("p34_k4_p3"), 0, 5.210, 0, 0, 0, 0],
+
+  // Kalima 5 — Istighfar
+  ["k5_head", "jumla", "كَلِمَةُ الْاِسْتِغْفَارِ", "Kalimai istig'for (mag'firat so'rash kalimasi)", A.kl("p34_k5_head"), 0, 1.846, 0, 0, 0, 0],
+  ["k5_ast1", "jumla", "اَسْتَغْفِرُ اللّٰهَ", "Allohdan mag'firat so'rayman", A.kl("p34_k5_ast1"), 0, 2.763, 0, 0, 0, 0],
+  ["k5_ast2", "jumla", "اَسْتَغْفِرُ اللّٰهَ", "Allohdan mag'firat so'rayman", A.kl("p34_k5_ast2"), 0, 2.827, 0, 0, 0, 0],
+  ["k5_ast3", "jumla", "اَسْتَغْفِرُ اللّٰهَ", "Allohdan mag'firat so'rayman", A.kl("p34_k5_ast3"), 0, 2.330, 0, 0, 0, 0],
+  ["k5_ext",  "jumla", "تَعَالٰى مِنْ كُلِّ ذَنْبٍ اَذْنَبْتُهُ عَمْدًا اَوْ خَطَأً",
+    "Yuksalgan Allohdan har bir qasdan yoki xato qilgan gunohimdan",
+    A.kl("p34_k5_ext"), 0, 8.636, 0, 0, 0, 0],
+  // Audio kengaytmasi (kitobning sirran'idan keyin) — 3 segment, audio 52 da reciter qo'shgan:
+  ["k5_p2_alaniya", "jumla", "سِرًّا اَوْ عَلَانِيَةً",
+    "Yashirin yoki oshkora", A.kl("p34_k5_p2_alaniya"), 0, 2.581, 0, 0, 0, 0],
+  ["k5_p3_tawba",   "jumla", "وَاَتُوبُ اِلَيْهِ مِنَ الذَّنْبِ الَّذِى اَعْلَمُ وَمِنَ الذَّنْبِ الَّذِى لَا اَعْلَمُ",
+    "Va Unga tavba qilaman bilgan gunohimdan ham, bilmagan gunohimdan ham",
+    A.kl("p34_k5_p3_tawba"), 0, 10.478, 0, 0, 0, 0],
+  ["k5_p4_ghuyub",  "jumla", "اِنَّكَ اَنْتَ عَلَّامُ الْغُيُوبِ",
+    "Shubhasiz Sen g'oyiblarni juda yaxshi bilguvchisan",
+    A.kl("p34_k5_p4_ghuyub"), 0, 4.789, 0, 0, 0, 0],
 ];
 
 const p35: ED[] = [
-  ["01", "jumla", "كَلِمَةُ التَّمْجِيدِ", "Tamjid kalimasi", null, 0, 0, 50, 4, 28, 5],
-  ["02", "jumla", "لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ", "Havqala", null, 0, 0, 50, 12, 50, 6],
-  ["03", "jumla", "إِيمَانُ مُجْمَلْ", "Imon mujmal", null, 0, 0, 50, 28, 26, 5],
-  ["04", "jumla", "آمَنْتُ بِاللَّهِ", "Allohga ishondim", null, 0, 0, 50, 36, 30, 6],
-  ["05", "jumla", "إِيمَانُ مُفَصَّلْ", "Imon mufassal", null, 0, 0, 50, 56, 26, 5],
-  ["06", "jumla", "آمَنْتُ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ", "Alloh, farishtalari, kitoblari", null, 0, 0, 50, 64, 60, 6],
+  // 2026-05-21 — sources 53-55. kalimalar 05-07.mp3
+  // Kalima 6 — Tamjid (head + 4 qism + bonus)
+  ["tamjid_head", "jumla", "كَلِمَةُ التَّمْجِيدِ", "Kalimai tamjid",
+    A.kl5("p35_tamjid_head"), 0, 1.80, 0, 0, 0, 0],
+  ["tamjid_p1",   "jumla", "سُبْحَانَ اللّٰهِ", "Subhanallah",
+    A.kl5("p35_tamjid_p1"), 0, 2.70, 0, 0, 0, 0],
+  ["tamjid_p2",   "jumla", "وَالْحَمْدُ لِلّٰهِ", "Walhamdu lillah",
+    A.kl5("p35_tamjid_p2"), 0, 2.85, 0, 0, 0, 0],
+  ["tamjid_p3",   "jumla", "وَلَا اِلٰهَ اِلَّا اللّٰهُ وَاللّٰهُ اَكْبَرُ",
+    "Wa la ilaha illallah wallahu akbar",
+    A.kl5("p35_tamjid_p3"), 0, 6.85, 0, 0, 0, 0],
+  ["tamjid_p4",   "jumla", "وَلَا حَوْلَ وَلَا قُوَّةَ اِلَّا بِاللّٰهِ الْعَلِيِّ الْعَظِيمِ",
+    "La hawla wa la quwwata illa billahil-aliyyil-azim (Havqala)",
+    A.kl5("p35_tamjid_p4"), 0, 8.50, 0, 0, 0, 0],
+  ["mashallah",   "jumla", "مَا شَاءَ اللّٰهُ كَانَ وَمَا لَمْ يَشَأْ لَمْ يَكُنْ",
+    "Ma sha'allahu kana wa ma lam yasha' lam yakun",
+    A.kl5("p35_mashallah"), 0, 8.20, 0, 0, 0, 0],
+
+  // Iman ta'rifi (kalimalardan oldin)
+  ["iman_def",    "jumla", "اَلْاِيمَانُ اِقْرَارٌ بِاللِّسَانِ وَتَصْدِيقٌ بِالْقَلْبِ بِمَا جَاءَ بِهِ مِنْ عِنْدِ اللّٰهِ مُحَمَّدٌ رَسُولُ اللّٰهِ",
+    "Iymon — til bilan iqror, qalb bilan tasdiq qilishdir",
+    A.kl5("p35_iman_def"), 0, 20.65, 0, 0, 0, 0],
+  ["salawat",     "jumla", "صَلَّى اللّٰهُ عَلَيْهِ وَسَلَّمَ",
+    "Sollallohu alayhi wa sallam", A.kl5("p35_salawat"), 0, 4.70, 0, 0, 0, 0],
+
+  // Kalima 7 — Iman mujmal
+  ["mujmal_head", "jumla", "اِيمَانِ مُجْمَلْ", "Iymoni mujmal (qisqacha iymon)",
+    A.kl5("p35_mujmal_head"), 0, 4.30, 0, 0, 0, 0],
+  ["mujmal_body", "jumla", "اٰمَنْتُ بِاللّٰهِ كَمَا هُوَ بِاَسْمَائِهِ وَصِفَاتِهِ وَقَبِلْتُ جَمِيعَ اَحْكَامِهِ",
+    "Allohga, Uning ism va sifatlari bilan iymon keltirdim",
+    A.kl5("p35_mujmal_body"), 0, 13.00, 0, 0, 0, 0],
+
+  // Kalima 8 — Iman mufassal
+  ["mufassal_head", "jumla", "اِيمَانِ مُفَصَّلْ", "Iymoni mufassal (batafsil iymon)",
+    A.kl5("p35_mufassal_head"), 0, 4.30, 0, 0, 0, 0],
+  ["mufassal_body", "jumla", "اٰمَنْتُ بِاللّٰهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ وَالْيَوْمِ الْاٰخِرِ وَالْقَدَرِ خَيْرِهِ وَشَرِّهِ مِنَ اللّٰهِ تَعَالٰى وَالْبَعْثِ بَعْدَ الْمَوْتِ",
+    "Allohga, farishta, kitob, rasul, oxirat, taqdir va qaytadan tirilishga iymon",
+    A.kl5("p35_mufassal_body"), 0, 22.65, 0, 0, 0, 0],
 ];
 
 // ============================================================
 // PAGES 36-47 — Suralar (Qur'an surahs)
 // ============================================================
+// PAGE 36 — Ta'awwudh + Surat al-Fatiha (7 verses) + Surat al-Baqarah (1-5)
+// Sources: 56. Fotiha.mp3 (83.30s) + 57. Baqara.mp3 (94.46s)
+// Chunks: /audio/edit/56_fotiha_baqara/p36_*.mp3 (14 chunks)
+// Audio mapping (silencedetect -30dB/0.30s + Whisper medium transcribe, 2026-05-21):
+//   Fotiha: 1.27-8.07 ta'awwudh; 10.16-16.41 bismillah (v1); 21.12-27.64 v2;
+//           29.83-34.05 v3; 36.91-41.25 v4; 44.92-51.98 v5; 55.83-61.61 v6;
+//           65.48-81.83 v7.
+//   Baqara: 1.76-6.98 bismillah; 11.43-18.67 v1 (alif lam mim); 21.88-33.30 v2
+//           (joint with sub-pauses); 36.51-50.59 v3; 55.35-77.07 v4 (joint);
+//           80.22-90.51 v5.
 const p36: ED[] = [
-  ["01", "jumla", "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ", "A'uzubillah", null, 0, 0, 50, 3, 60, 5],
-  ["02", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ", "Bismillah", null, 0, 0, 50, 10, 50, 5],
-  ["03", "jumla", "اَلْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ", "Fotiha: 1-oyat", null, 0, 0, 50, 18, 50, 6],
-  ["04", "jumla", "الرَّحْمٰنِ الرَّحِيمِ", "Fotiha: 2-oyat", null, 0, 0, 50, 24, 36, 6],
-  ["05", "jumla", "مَالِكِ يَوْمِ الدِّينِ", "Fotiha: 3-oyat", null, 0, 0, 50, 30, 36, 6],
-  ["06", "jumla", "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ", "Fotiha: 4-oyat", null, 0, 0, 50, 36, 50, 6],
-  ["07", "jumla", "اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ", "Fotiha: 5-oyat", null, 0, 0, 50, 42, 50, 6],
-  ["08", "jumla", "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ", "Fotiha: 6-oyat", null, 0, 0, 50, 48, 54, 6],
-  ["09", "jumla", "غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ", "Fotiha: 7-oyat", null, 0, 0, 50, 54, 56, 6],
+  // Ta'awwudh — top of page
+  ["taawwudh", "jumla", "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+    "A'uzubillahi minash-shaytonir-rojiym", A.sb("p36_taawwudh"), 0, 7.10, 0, 0, 0, 0],
+
+  // ── Surat al-Fatiha (سُورَةُ الْفَاتِحَة) ──
+  ["fa_bismi", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",
+    "Fotiha 1-oyat: Bismillahir-rohmanir-rohim", A.sb("p36_fa_bismi"), 0, 6.40, 0, 0, 0, 0],
+  ["fa_v2", "jumla", "اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِينَ",
+    "Fotiha 2-oyat: Olamlar Robbi Allohga hamdlar bo'lsin",
+    A.sb("p36_fa_v2"), 0, 6.80, 0, 0, 0, 0],
+  ["fa_v3", "jumla", "الرَّحْمٰنِ الرَّحِيمِ",
+    "Fotiha 3-oyat: U Rohman va Rohimdir",
+    A.sb("p36_fa_v3"), 0, 4.40, 0, 0, 0, 0],
+  ["fa_v4", "jumla", "مٰلِكِ يَوْمِ الدِّينِ",
+    "Fotiha 4-oyat: Din kunining egasi",
+    A.sb("p36_fa_v4"), 0, 4.60, 0, 0, 0, 0],
+  ["fa_v5", "jumla", "اِيَّاكَ نَعْبُدُ وَاِيَّاكَ نَسْتَعِينُ",
+    "Fotiha 5-oyat: Faqat Senga ibodat qilamiz va faqat Sendan yordam so'raymiz",
+    A.sb("p36_fa_v5"), 0, 7.25, 0, 0, 0, 0],
+  ["fa_v6", "jumla", "اِهْدِنَا الصِّرٰطَ الْمُسْتَقِيمَ",
+    "Fotiha 6-oyat: Bizni to'g'ri yo'lga boshla",
+    A.sb("p36_fa_v6"), 0, 6.00, 0, 0, 0, 0],
+  ["fa_v7", "jumla", "صِرٰطَ الَّذِينَ اَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+    "Fotiha 7-oyat: O'zing in'om etgan zotlar yo'liga — g'azabga uchraganlar va adashganlarning emas",
+    A.sb("p36_fa_v7"), 0, 16.55, 0, 0, 0, 0],
+
+  // ── Awwal Surat al-Baqarah (اَوَّلُ سُورَةِ الْبَقَرَة) ──
+  ["bq_bismi", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",
+    "Bismillahir-rohmanir-rohim", A.sb("p36_bq_bismi"), 0, 5.40, 0, 0, 0, 0],
+  ["bq_v1", "jumla", "الٓمٓ",
+    "Baqara 1-oyat: Alif Lom Mim",
+    A.sb("p36_bq_v1"), 0, 7.45, 0, 0, 0, 0],
+  ["bq_v2", "jumla", "ذٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ هُدًى لِلْمُتَّقِينَ",
+    "Baqara 2-oyat: Bu kitobda shubha yo'q — taqvodorlar uchun hidoyatdir",
+    A.sb("p36_bq_v2"), 0, 11.65, 0, 0, 0, 0],
+  ["bq_v3", "jumla", "الَّذِينَ يُؤْمِنُونَ بِالْغَيْبِ وَيُقِيمُونَ الصَّلٰوةَ وَمِمَّا رَزَقْنٰهُمْ يُنْفِقُونَ",
+    "Baqara 3-oyat: G'aybga iymon keltirib, namozni to'kis ado qilib, biz bergan rizqdan infoq qiluvchilar",
+    A.sb("p36_bq_v3"), 0, 14.25, 0, 0, 0, 0],
+  ["bq_v4", "jumla", "وَالَّذِينَ يُؤْمِنُونَ بِمَا اُنْزِلَ اِلَيْكَ وَمَا اُنْزِلَ مِنْ قَبْلِكَ وَبِالْاٰخِرَةِ هُمْ يُوقِنُونَ",
+    "Baqara 4-oyat: Va senga nozil qilingan va sendan oldin nozil qilinganga iymon keltirib, oxiratga aniq ishonurlar",
+    A.sb("p36_bq_v4"), 0, 21.90, 0, 0, 0, 0],
+  ["bq_v5", "jumla", "اُولٰئِكَ عَلٰى هُدًى مِنْ رَبِّهِمْ وَاُولٰئِكَ هُمُ الْمُفْلِحُونَ",
+    "Baqara 5-oyat: Ana o'shalar Robbilaridan hidoyatdadirlar va ana o'shalar najot topguvchilardir",
+    A.sb("p36_bq_v5"), 0, 10.50, 0, 0, 0, 0],
 ];
 
+// p37 — Surah Ash-Shams (1-15) + Surah Al-Layl boshi (Bismillah + ayahs 1-7 + ayah 8 fragment)
+// Audio source: 58. Shams.mp3 (Materiallar/suralarning asl nusxalari/audio).
+// Chunks: public/audio/edit/58_shams/ and 59_layl/.
 const p37: ED[] = [
-  ["01", "jumla", "سُورَةُ الْبَقَرَة", "Baqara surasi", null, 0, 0, 50, 5, 30, 5],
-  ["02", "jumla", "ذٰلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ", "Bu kitobda shubha yo'q", null, 0, 0, 50, 16, 50, 6],
-  ["03", "jumla", "هُدًى لِلْمُتَّقِينَ", "Taqvodorlar uchun hidoyat", null, 0, 0, 50, 28, 36, 6],
+  // --- Surah Ash-Shams ---
+  ["sh_title", "jumla", "سُورَةُ الشَّمْسِ", "Shams surasi", null, 0, 0, 50, 3, 32, 5],
+  ["sh_bismillah", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ", "Bismillah", A.shams("p37_sh_bismillah"), 0, 5.8, 50, 9, 48, 5],
+  ["sh_a1", "jumla", "وَالشَّمْسِ وَضُحَاهَا", "1-oyat: Quyosh va uning yorug'ligiga qasam", A.shams("p37_sh_a1"), 0, 3.85, 50, 15, 38, 5],
+  ["sh_a2", "jumla", "وَالْقَمَرِ إِذَا تَلَاهَا", "2-oyat: Quyoshga ergashgan oyga qasam", A.shams("p37_sh_a2"), 0, 4.35, 50, 21, 42, 5],
+  ["sh_a3", "jumla", "وَالنَّهَارِ إِذَا جَلَّاهَا", "3-oyat: Quyoshni yoritgan kunduzga qasam", A.shams("p37_sh_a3"), 0, 5.4, 50, 27, 44, 5],
+  ["sh_a4", "jumla", "وَاللَّيْلِ إِذَا يَغْشَاهَا", "4-oyat: Quyoshni qoplagan kechaga qasam", A.shams("p37_sh_a4"), 0, 5.0, 50, 33, 44, 5],
+  ["sh_a5", "jumla", "وَالسَّمَاءِ وَمَا بَنَاهَا", "5-oyat: Osmon va uni qurganga qasam", A.shams("p37_sh_a5"), 0, 5.8, 50, 39, 44, 5],
+  ["sh_a6", "jumla", "وَالْأَرْضِ وَمَا طَحَاهَا", "6-oyat: Yer va uni yoyganga qasam", A.shams("p37_sh_a6"), 0, 4.55, 50, 45, 42, 5],
+  ["sh_a7", "jumla", "وَنَفْسٍ وَمَا سَوَّاهَا", "7-oyat: Jon va uni tartiblaganga qasam", A.shams("p37_sh_a7"), 0, 5.3, 50, 51, 42, 5],
+  ["sh_a8", "jumla", "فَأَلْهَمَهَا فُجُورَهَا وَتَقْوَاهَا", "8-oyat: Unga fojirlik va taqvolikni ilhom qilgan", A.shams("p37_sh_a8"), 0, 6.55, 50, 57, 54, 5],
+  ["sh_a9", "jumla", "قَدْ أَفْلَحَ مَن زَكَّاهَا", "9-oyat: Uni pokligan kishi rastgor bo'ldi", A.shams("p37_sh_a9"), 0, 5.25, 50, 63, 46, 5],
+  ["sh_a10", "jumla", "وَقَدْ خَابَ مَن دَسَّاهَا", "10-oyat: Uni gunohga botirgan kishi noumid bo'ldi", A.shams("p37_sh_a10"), 0, 5.1, 50, 69, 48, 5],
+  ["sh_a11", "jumla", "كَذَّبَتْ ثَمُودُ بِطَغْوَاهَا", "11-oyat: Samud (qavmi) tug'yoni bilan yolg'on chiqardi", A.shams("p37_sh_a11"), 0, 5.0, 50, 75, 50, 5],
+  ["sh_a12", "jumla", "إِذِ انْبَعَثَ أَشْقَاهَا", "12-oyat: Eng baxtsizlari otilib chiqqanida", A.shams("p37_sh_a12"), 0, 4.55, 50, 81, 44, 5],
+  ["sh_a13", "jumla", "فَقَالَ لَهُمْ رَسُولُ اللَّهِ نَاقَةَ اللَّهِ وَسُقْيَاهَا", "13-oyat: Alloh rasuli ularga: Bu Allohning tuyasi va uni sug'orish (haqi)dir, dedi", A.shams("p37_sh_a13"), 0, 9.0, 50, 87, 70, 5],
+  ["sh_a14", "jumla", "فَكَذَّبُوهُ فَعَقَرُوهَا فَدَمْدَمَ عَلَيْهِمْ رَبُّهُمْ بِذَنْبِهِمْ فَسَوَّاهَا", "14-oyat: Lekin uni yolg'onchi qildilar, (tuyani) so'ydilar; gunohlari sabab Robblari ularni halok etib, tekisladi", A.shams("p37_sh_a14"), 0, 12.85, 50, 93, 80, 5],
+  ["sh_a15", "jumla", "وَلَا يَخَافُ عُقْبَاهَا", "15-oyat: Va (Alloh) uning oqibatidan qo'rqmaydi", A.shams("p37_sh_a15"), 0, 4.3, 50, 99, 40, 5],
+  // --- Surah Al-Layl boshi ---
+  ["ll_title", "jumla", "سُورَةُ اللَّيْلِ", "Layl surasi", null, 0, 0, 50, 110, 30, 5],
+  ["ll_bismillah", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ", "Bismillah", A.layl("p37_ll_bismillah"), 0, 5.4, 50, 116, 48, 5],
+  ["ll_a1", "jumla", "وَاللَّيْلِ إِذَا يَغْشَى", "1-oyat: Kecha qoplaganida unga qasam", A.layl("p37_ll_a1"), 0, 4.2, 50, 122, 42, 5],
+  ["ll_a2", "jumla", "وَالنَّهَارِ إِذَا تَجَلَّى", "2-oyat: Kunduz yorishganida unga qasam", A.layl("p37_ll_a2"), 0, 4.6, 50, 128, 44, 5],
+  ["ll_a3", "jumla", "وَمَا خَلَقَ الذَّكَرَ وَالْأُنْثَى", "3-oyat: Erkak va ayolni yaratganga qasam", A.layl("p37_ll_a3"), 0, 5.7, 50, 134, 52, 5],
+  ["ll_a4", "jumla", "إِنَّ سَعْيَكُمْ لَشَتَّى", "4-oyat: Sa'y-harakatlaringiz turli-tumandir", A.layl("p37_ll_a4"), 0, 4.9, 50, 140, 42, 5],
+  ["ll_a5", "jumla", "فَأَمَّا مَنْ أَعْطَى وَاتَّقَى", "5-oyat: Bergan va taqvodor bo'lgan kishi", A.layl("p37_ll_a5"), 0, 5.4, 50, 146, 50, 5],
+  ["ll_a6", "jumla", "وَصَدَّقَ بِالْحُسْنَى", "6-oyat: Eng yaxshini tasdiqlagan", A.layl("p37_ll_a6"), 0, 3.7, 50, 152, 40, 5],
+  ["ll_a7", "jumla", "فَسَنُيَسِّرُهُ لِلْيُسْرَى", "7-oyat: Unga osonlikni muyassar qilamiz", A.layl("p37_ll_a7"), 0, 5.0, 50, 158, 44, 5],
+  ["ll_a8_start", "jumla", "وَأَمَّا", "8-oyat boshi (keyingi sahifaga davom)", A.layl("p37_ll_a8_start"), 0, 1.5, 50, 164, 20, 5],
 ];
 
+// p38 — Surah Al-Layl (ayahs 8-21, davom p37 dan)
+//        + Surah Ad-Duho divider (title + bismillah)
+//        + Surah Ad-Duho (ayahs 1-10; v.11 keyingi sahifaga davom).
+// Sources: 59. Layl.mp3 (a8-a21), 60. Zuho.mp3 (bismillah + a1-a10).
+// Chunks via tools/cut_p38.sh (silencedetect -32dB/0.70s + ~0.20s buffers).
 const p38: ED[] = [
-  ["01", "jumla", "سُورَةُ الْإِخْلَاصِ", "Ixlos surasi", null, 0, 0, 50, 5, 30, 5],
-  ["02", "jumla", "قُلْ هُوَ اللَّهُ أَحَدٌ", "1-oyat", null, 0, 0, 50, 16, 40, 6],
-  ["03", "jumla", "اللَّهُ الصَّمَدُ", "2-oyat", null, 0, 0, 50, 28, 30, 6],
-  ["04", "jumla", "لَمْ يَلِدْ وَلَمْ يُولَدْ", "3-oyat", null, 0, 0, 50, 40, 40, 6],
-  ["05", "jumla", "وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ", "4-oyat", null, 0, 0, 50, 52, 46, 6],
+  // --- Al-Layl ayahs 8-21 (continuation from p37) ---
+  ["ll_a8",  "jumla", "وَاَمَّا مَنْ بَخِلَ وَاسْتَغْنٰى",                "Layl 8-oyat: Baxillik qilib boylikni ko'rsa-chi",          A.layl("p38_ll_a8"),  0, 5.8,  0, 0, 0, 0],
+  ["ll_a9",  "jumla", "وَكَذَّبَ بِالْحُسْنٰى",                          "Layl 9-oyat: Va eng yaxshini yolg'on desa",                A.layl("p38_ll_a9"),  0, 3.45, 0, 0, 0, 0],
+  ["ll_a10", "jumla", "فَسَنُيَسِّرُهُ لِلْعُسْرٰى",                      "Layl 10-oyat: Biz uni qiyinlikka osonlashtiramiz",          A.layl("p38_ll_a10"), 0, 4.65, 0, 0, 0, 0],
+  ["ll_a11", "jumla", "وَمَا يُغْنِى عَنْهُ مَالُهُ اِذَا تَرَدّٰى",       "Layl 11-oyat: Halok bo'lganda moli unga foyda bermaydi",    A.layl("p38_ll_a11"), 0, 7.85, 0, 0, 0, 0],
+  ["ll_a12", "jumla", "اِنَّ عَلَيْنَا لَلْهُدٰى",                        "Layl 12-oyat: Albatta hidoyat berish Bizning zimmamizda",   A.layl("p38_ll_a12"), 0, 4.4,  0, 0, 0, 0],
+  ["ll_a13", "jumla", "وَاِنَّ لَنَا لَلْاٰخِرَةَ وَالْاُولٰى",            "Layl 13-oyat: Oxirat ham, dunyo ham Bizniki",               A.layl("p38_ll_a13"), 0, 6.3,  0, 0, 0, 0],
+  ["ll_a14", "jumla", "فَاَنْذَرْتُكُمْ نَارًا تَلَظّٰى",                  "Layl 14-oyat: Sizlarni alangali olovdan ogohlantirdim",      A.layl("p38_ll_a14"), 0, 6.1,  0, 0, 0, 0],
+  ["ll_a15", "jumla", "لَا يَصْلٰىهَآ اِلَّا الْاَشْقَى",                 "Layl 15-oyat: Unga faqat eng baxtsiz kishi kiradi",         A.layl("p38_ll_a15"), 0, 6.45, 0, 0, 0, 0],
+  ["ll_a16", "jumla", "الَّذِىْ كَذَّبَ وَتَوَلّٰى",                      "Layl 16-oyat: U yolg'on chiqarib, yuz o'girgan kishi",       A.layl("p38_ll_a16"), 0, 4.35, 0, 0, 0, 0],
+  ["ll_a17", "jumla", "وَسَيُجَنَّبُهَا الْاَتْقَى",                      "Layl 17-oyat: Eng taqvodor kishi undan uzoq qilinadi",       A.layl("p38_ll_a17"), 0, 4.5,  0, 0, 0, 0],
+  ["ll_a18", "jumla", "الَّذِىْ يُؤْتِىْ مَالَهُ يَتَزَكّٰى",              "Layl 18-oyat: Mol-mulkini berib (gunohlardan) tozalanuvchi", A.layl("p38_ll_a18"), 0, 6.0,  0, 0, 0, 0],
+  ["ll_a19", "jumla", "وَمَا لِاَحَدٍ عِنْدَهُ مِنْ نِعْمَةٍ تُجْزٰى",      "Layl 19-oyat: Birovning unga muqobil ne'mati yo'q",          A.layl("p38_ll_a19"), 0, 9.0,  0, 0, 0, 0],
+  ["ll_a20", "jumla", "اِلَّا ابْتِغَآءَ وَجْهِ رَبِّهِ الْاَعْلٰى",       "Layl 20-oyat: Faqat eng yuksak Robbining yuzini istab",      A.layl("p38_ll_a20"), 0, 7.35, 0, 0, 0, 0],
+  ["ll_a21", "jumla", "وَلَسَوْفَ يَرْضٰى",                              "Layl 21-oyat: Va albatta u rozi bo'ladi",                    A.layl("p38_ll_a21"), 0, 3.15, 0, 0, 0, 0],
+
+  // --- Surah Ad-Duho divider: title (no audio) + bismillah ---
+  ["du_title", "jumla", "سُورَةُ الضُّحٰى",                              "Duho surasi", null, 0, 0, 0, 0, 0, 0],
+  ["du_bism",  "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",         "Bismillah",   A.zuho("p38_zh_bismillah"), 0, 4.95, 0, 0, 0, 0],
+
+  // --- Ad-Duho ayahs 1-10 (ayah 11 is on p39) ---
+  ["du_a1",  "jumla", "وَالضُّحٰى",                                      "Duho 1-oyat: Tushki yorug'likka qasam",                       A.zuho("p38_zh_a1"),  0, 1.9,  0, 0, 0, 0],
+  ["du_a2",  "jumla", "وَالَّيْلِ اِذَا سَجٰى",                          "Duho 2-oyat: Kech sukunatga botganida unga qasam",            A.zuho("p38_zh_a2"),  0, 3.45, 0, 0, 0, 0],
+  ["du_a3",  "jumla", "مَا وَدَّعَكَ رَبُّكَ وَمَا قَلٰى",               "Duho 3-oyat: Robbing seni tark etmadi va g'azab qilmadi",      A.zuho("p38_zh_a3"),  0, 4.9,  0, 0, 0, 0],
+  ["du_a4",  "jumla", "وَلَلْاٰخِرَةُ خَيْرٌ لَكَ مِنَ الْاُولٰى",       "Duho 4-oyat: Oxirat sen uchun dunyodan ko'ra yaxshiroq",       A.zuho("p38_zh_a4"),  0, 6.25, 0, 0, 0, 0],
+  ["du_a5",  "jumla", "وَلَسَوْفَ يُعْطِيْكَ رَبُّكَ فَتَرْضٰى",          "Duho 5-oyat: Robbing senga shunday beradiki, rozi bo'lasan",   A.zuho("p38_zh_a5"),  0, 5.85, 0, 0, 0, 0],
+  ["du_a6",  "jumla", "اَلَمْ يَجِدْكَ يَتِيْمًا فَاٰوٰى",                "Duho 6-oyat: Seni yetim topib, panoh bermadimi?",              A.zuho("p38_zh_a6"),  0, 5.45, 0, 0, 0, 0],
+  ["du_a7",  "jumla", "وَوَجَدَكَ ضَآلًّا فَهَدٰى",                       "Duho 7-oyat: Seni yo'lsiz topib, hidoyat qildi",                A.zuho("p38_zh_a7"),  0, 7.15, 0, 0, 0, 0],
+  ["du_a8",  "jumla", "وَوَجَدَكَ عَآئِلًا فَاَغْنٰى",                    "Duho 8-oyat: Seni kambag'al topib, boy qildi",                  A.zuho("p38_zh_a8"),  0, 6.4,  0, 0, 0, 0],
+  ["du_a9",  "jumla", "فَاَمَّا الْيَتِيْمَ فَلَا تَقْهَرْ",              "Duho 9-oyat: Bas, yetimga zulm qilma",                          A.zuho("p38_zh_a9"),  0, 5.15, 0, 0, 0, 0],
+  ["du_a10", "jumla", "وَاَمَّا السَّآئِلَ فَلَا تَنْهَرْ",                "Duho 10-oyat: Va tilamchini quvib yuborma",                     A.zuho("p38_zh_a10"), 0, 6.3,  0, 0, 0, 0],
 ];
 
+// p39 — End of Surah Ad-Duho (v.11) + Surah Ash-Sharh (8) + Surah At-Tin (8) + Surah Al-Alaq header
+// Sources: 60. Zuho.mp3 (Duho v.11) + 61. Sharh.mp3 + 62. Tiyn.mp3 + 63. Alaq.mp3 (bismillah only).
+// Chunks: 60_zuho/, 61_sharh/, 62_tiyn/, 63_alaq/ (cut via tools/cut_p39.sh).
 const p39: ED[] = [
-  ["01", "jumla", "سُورَةُ الْفَلَقِ", "Falaq surasi", null, 0, 0, 50, 5, 28, 5],
-  ["02", "jumla", "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ", "1-oyat", null, 0, 0, 50, 16, 44, 6],
-  ["03", "jumla", "مِنْ شَرِّ مَا خَلَقَ", "2-oyat", null, 0, 0, 50, 28, 36, 6],
-  ["04", "jumla", "وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ", "3-oyat", null, 0, 0, 50, 40, 48, 6],
-  ["05", "jumla", "وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ", "4-oyat", null, 0, 0, 50, 52, 52, 6],
-  ["06", "jumla", "وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ", "5-oyat", null, 0, 0, 50, 64, 50, 6],
+  // --- Surah Ad-Duho — verse 11 (last verse; v.1-10 on p38) ---
+  ["duho_v11", "jumla", "وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ", "Duho 11-oyat: Rabbing ne'matini hikoya qilgin", A.zuho("p39_duho_v11"), 0, 6.01, 0, 0, 0, 0],
+
+  // --- Surah Ash-Sharh — bismillah + 8 ayat ---
+  ["sharh_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ", "Sharh surasi: Bismillah", A.sharh("p39_sharh_bism"), 0, 5.58, 0, 0, 0, 0],
+  ["sharh_v1", "jumla", "أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ", "Sharh 1-oyat: Sening qalbingni keng qilmadikmi?", A.sharh("p39_sharh_v1"), 0, 3.76, 0, 0, 0, 0],
+  ["sharh_v2", "jumla", "وَوَضَعْنَا عَنْكَ وِزْرَكَ", "Sharh 2-oyat: Va sendan og'ir yukingni olib tashladik", A.sharh("p39_sharh_v2"), 0, 4.42, 0, 0, 0, 0],
+  ["sharh_v3", "jumla", "الَّذِي أَنْقَضَ ظَهْرَكَ", "Sharh 3-oyat: U sening belingni sindirgan edi", A.sharh("p39_sharh_v3"), 0, 5.68, 0, 0, 0, 0],
+  ["sharh_v4", "jumla", "وَرَفَعْنَا لَكَ ذِكْرَكَ", "Sharh 4-oyat: Va senga zikringni ko'tardik", A.sharh("p39_sharh_v4"), 0, 3.77, 0, 0, 0, 0],
+  ["sharh_v5", "jumla", "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا", "Sharh 5-oyat: Qiyinchilik bilan birga osonlik bor", A.sharh("p39_sharh_v5"), 0, 4.88, 0, 0, 0, 0],
+  ["sharh_v6", "jumla", "إِنَّ مَعَ الْعُسْرِ يُسْرًا", "Sharh 6-oyat: Qiyinchilik bilan birga osonlik bor", A.sharh("p39_sharh_v6"), 0, 4.45, 0, 0, 0, 0],
+  ["sharh_v7", "jumla", "فَإِذَا فَرَغْتَ فَانْصَبْ", "Sharh 7-oyat: Bo'shashganingda mehnat qil", A.sharh("p39_sharh_v7"), 0, 4.22, 0, 0, 0, 0],
+  ["sharh_v8", "jumla", "وَإِلَىٰ رَبِّكَ فَارْغَبْ", "Sharh 8-oyat: Va faqat Rabbingga raghbat qil", A.sharh("p39_sharh_v8"), 0, 3.69, 0, 0, 0, 0],
+
+  // --- Surah At-Tin — bismillah + 8 ayat ---
+  ["tin_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ", "Tin surasi: Bismillah", A.tiyn("p39_tin_bism"), 0, 4.93, 0, 0, 0, 0],
+  ["tin_v1", "jumla", "وَالتِّينِ وَالزَّيْتُونِ", "Tin 1-oyat: Tin va zaytunga qasam", A.tiyn("p39_tin_v1"), 0, 4.14, 0, 0, 0, 0],
+  ["tin_v2", "jumla", "وَطُورِ سِينِينَ", "Tin 2-oyat: Sinin tog'iga qasam", A.tiyn("p39_tin_v2"), 0, 3.46, 0, 0, 0, 0],
+  ["tin_v3", "jumla", "وَهٰذَا الْبَلَدِ الْأَمِينِ", "Tin 3-oyat: Va bu xavfsiz shaharga qasam", A.tiyn("p39_tin_v3"), 0, 4.73, 0, 0, 0, 0],
+  ["tin_v4", "jumla", "لَقَدْ خَلَقْنَا الْإِنْسَانَ فِي أَحْسَنِ تَقْوِيمٍ", "Tin 4-oyat: Insonni eng go'zal qiyofada yaratdik", A.tiyn("p39_tin_v4"), 0, 9.08, 0, 0, 0, 0],
+  ["tin_v5", "jumla", "ثُمَّ رَدَدْنَاهُ أَسْفَلَ سَافِلِينَ", "Tin 5-oyat: Keyin uni eng past darajaga qaytardik", A.tiyn("p39_tin_v5"), 0, 6.78, 0, 0, 0, 0],
+  ["tin_v6", "jumla", "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ فَلَهُمْ أَجْرٌ غَيْرُ مَمْنُونٍ", "Tin 6-oyat: Iymon keltirib solih amal qilganlar bundan mustasno — ularga to'xtovsiz ajr bor", A.tiyn("p39_tin_v6"), 0, 12.36, 0, 0, 0, 0],
+  ["tin_v7", "jumla", "فَمَا يُكَذِّبُكَ بَعْدُ بِالدِّينِ", "Tin 7-oyat: Bundan keyin nima sening jazo kunini inkor ettiradi?", A.tiyn("p39_tin_v7"), 0, 6.07, 0, 0, 0, 0],
+  ["tin_v8", "jumla", "أَلَيْسَ اللَّهُ بِأَحْكَمِ الْحَاكِمِينَ", "Tin 8-oyat: Alloh hokimlarning eng hokimi emasmi?", A.tiyn("p39_tin_v8"), 0, 6.93, 0, 0, 0, 0],
+
+  // --- Surah Al-Alaq — header only (bismillah); body on p40 ---
+  ["alaq_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ", "Alaq surasi: Bismillah", A.alq("p39_alaq_bism"), 0, 5.33, 0, 0, 0, 0],
 ];
 
+// PAGE 40 — Suratu-l Alaq (19 ayat) + Suratu-l Qadr (Bismillah + 5 ayat)
+// Audio sources:
+//   - public/audio/63. Alaq.mp3  (147s)  → Bismillah + 19 oyat
+//   - public/audio/64. Qadr.mp3  (49.84s) → Bismillah + 5 oyat
+// Layout: Al-Alaq title is at end of p39 (book). Page 40 begins directly with
+// verse 1. Al-Qadr title + bismillah + 5 verses occupy the bottom of p40.
 const p40: ED[] = [
-  ["01", "jumla", "سُورَةُ النَّاسِ", "Nos surasi", null, 0, 0, 50, 5, 28, 5],
-  ["02", "jumla", "قُلْ أَعُوذُ بِرَبِّ النَّاسِ", "1-oyat", null, 0, 0, 50, 16, 44, 6],
-  ["03", "jumla", "مَلِكِ النَّاسِ", "2-oyat", null, 0, 0, 50, 28, 28, 6],
-  ["04", "jumla", "إِلٰهِ النَّاسِ", "3-oyat", null, 0, 0, 50, 40, 28, 6],
-  ["05", "jumla", "مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ", "4-oyat", null, 0, 0, 50, 52, 50, 6],
-  ["06", "jumla", "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ", "5-oyat", null, 0, 0, 50, 64, 54, 6],
-  ["07", "jumla", "مِنَ الْجِنَّةِ وَالنَّاسِ", "6-oyat", null, 0, 0, 50, 76, 42, 6],
+  // --- Suratu-l Alaq (19 ayat) ---
+  ["a01", "jumla", "اِقْرَأْ بِاسْمِ رَبِّكَ الَّذِى خَلَقَ", "Alaq 1-oyat: O'qi! Yaratgan Rabbing nomi bilan", A.alq("p40_a01"), 0, 4.830, 0, 0, 0, 0],
+  ["a02", "jumla", "خَلَقَ الْاِنْسَانَ مِنْ عَلَقٍ", "Alaq 2-oyat: U insonni laxta qondan yaratdi", A.alq("p40_a02"), 0, 4.670, 0, 0, 0, 0],
+  ["a03", "jumla", "اِقْرَأْ وَرَبُّكَ الْاَكْرَمُ", "Alaq 3-oyat: O'qi! Rabbing eng karim", A.alq("p40_a03"), 0, 3.790, 0, 0, 0, 0],
+  ["a04", "jumla", "الَّذِى عَلَّمَ بِالْقَلَمِ", "Alaq 4-oyat: U qalam bilan o'rgatdi", A.alq("p40_a04"), 0, 3.670, 0, 0, 0, 0],
+  ["a05", "jumla", "عَلَّمَ الْاِنْسَانَ مَا لَمْ يَعْلَمْ", "Alaq 5-oyat: Insonga bilmagan narsasini o'rgatdi", A.alq("p40_a05"), 0, 5.560, 0, 0, 0, 0],
+  ["a06", "jumla", "كَلَّا اِنَّ الْاِنْسَانَ لَيَطْغٰى", "Alaq 6-oyat: Yo'q! Albatta inson tajovuz qiladi", A.alq("p40_a06"), 0, 7.510, 0, 0, 0, 0],
+  ["a07", "jumla", "اَنْ رَّاٰهُ اسْتَغْنٰى", "Alaq 7-oyat: O'zini boy ko'rgani uchun", A.alq("p40_a07"), 0, 3.260, 0, 0, 0, 0],
+  ["a08", "jumla", "اِنَّ اِلٰى رَبِّكَ الرُّجْعٰى", "Alaq 8-oyat: Albatta qaytish Rabbingadir", A.alq("p40_a08"), 0, 4.530, 0, 0, 0, 0],
+  ["a09", "jumla", "اَرَاَيْتَ الَّذِى يَنْهٰى", "Alaq 9-oyat: Qaytaruvchini ko'rdingmi?", A.alq("p40_a09"), 0, 3.780, 0, 0, 0, 0],
+  ["a10", "jumla", "عَبْدًا اِذَا صَلّٰى", "Alaq 10-oyat: Namoz o'qigan bandani", A.alq("p40_a10"), 0, 3.220, 0, 0, 0, 0],
+  ["a11", "jumla", "اَرَاَيْتَ اِنْ كَانَ عَلَى الْهُدٰى", "Alaq 11-oyat: Aytchi, agar u hidoyatda bo'lsa", A.alq("p40_a11"), 0, 4.880, 0, 0, 0, 0],
+  ["a12", "jumla", "اَوْ اَمَرَ بِالتَّقْوٰى", "Alaq 12-oyat: Yoki taqvoga buyursa", A.alq("p40_a12"), 0, 3.050, 0, 0, 0, 0],
+  ["a13", "jumla", "اَرَاَيْتَ اِنْ كَذَّبَ وَتَوَلّٰى", "Alaq 13-oyat: Yolg'on aytib yuz o'girsa-chi?", A.alq("p40_a13"), 0, 5.070, 0, 0, 0, 0],
+  ["a14", "jumla", "اَلَمْ يَعْلَمْ بِاَنَّ اللّٰهَ يَرٰى", "Alaq 14-oyat: Bilmasmi, Alloh albatta ko'radi", A.alq("p40_a14"), 0, 6.000, 0, 0, 0, 0],
+  ["a15", "jumla", "كَلَّا لَئِنْ لَّمْ يَنْتَهِ لَنَسْفَعًا بِالنَّاصِيَةِ", "Alaq 15-oyat: Yo'q, agar to'xtamasa, peshonasidan sudraymiz", A.alq("p40_a15"), 0, 8.560, 0, 0, 0, 0],
+  ["a16", "jumla", "نَاصِيَةٍ كَاذِبَةٍ خَاطِئَةٍ", "Alaq 16-oyat: Yolg'onchi, gunohkor peshona", A.alq("p40_a16"), 0, 5.510, 0, 0, 0, 0],
+  ["a17", "jumla", "فَلْيَدْعُ نَادِيَهُ", "Alaq 17-oyat: U majlisini chaqirsin", A.alq("p40_a17"), 0, 2.860, 0, 0, 0, 0],
+  ["a18", "jumla", "سَنَدْعُ الزَّبَانِيَةَ", "Alaq 18-oyat: Biz ham zabaniylarni chaqiramiz", A.alq("p40_a18"), 0, 3.260, 0, 0, 0, 0],
+  ["a19", "jumla", "كَلَّا لَا تُطِعْهُ وَاسْجُدْ وَاقْتَرِبْ", "Alaq 19-oyat: Yo'q, unga itoat etma, sajda qil va yaqinlash", A.alq("p40_a19"), 0, 5.700, 0, 0, 0, 0],
+
+  // --- Suratu-l Qadr (Bismillah + 5 ayat) ---
+  ["q_bism", "jumla", "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ", "Bismillah", A.qdr("p40_q_bism"), 0, 4.070, 0, 0, 0, 0],
+  ["q01", "jumla", "اِنَّا اَنْزَلْنَاهُ فِى لَيْلَةِ الْقَدْرِ", "Qadr 1-oyat: Biz uni Qadr kechasida nozil qildik", A.qdr("p40_q01"), 0, 8.070, 0, 0, 0, 0],
+  ["q02", "jumla", "وَمَا اَدْرَاكَ مَا لَيْلَةُ الْقَدْرِ", "Qadr 2-oyat: Qadr kechasi nima ekanini sen qayerdan bilarding?", A.qdr("p40_q02"), 0, 5.780, 0, 0, 0, 0],
+  ["q03", "jumla", "لَيْلَةُ الْقَدْرِ خَيْرٌ مِنْ اَلْفِ شَهْرٍ", "Qadr 3-oyat: Qadr kechasi ming oydan yaxshiroqdir", A.qdr("p40_q03"), 0, 6.180, 0, 0, 0, 0],
+  ["q04", "jumla", "تَنَزَّلُ الْمَلٰئِكَةُ وَالرُّوحُ فِيهَا بِاِذْنِ رَبِّهِمْ مِنْ كُلِّ اَمْرٍ", "Qadr 4-oyat: Unda farishtalar va Ruh Rabbi izni bilan har bir ish uchun tushadi", A.qdr("p40_q04"), 0, 11.300, 0, 0, 0, 0],
+  ["q05", "jumla", "سَلَامٌ هِىَ حَتّٰى مَطْلَعِ الْفَجْرِ", "Qadr 5-oyat: U tong otguncha (uzra) salomdir", A.qdr("p40_q05"), 0, 5.180, 0, 0, 0, 0],
 ];
 
 const p41: ED[] = [
