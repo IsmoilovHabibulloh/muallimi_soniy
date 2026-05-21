@@ -107,6 +107,10 @@ const A = {
   vaqf: (name: string) => `/audio/edit/42_vaqf/${name}.mp3`,
   // Page 32 Idg'om bo'limi — title 44. idg'om.mp3, words from Layl/Zalzala suras
   idgom: (name: string) => `/audio/edit/44_idgom/${name}.mp3`,
+  // Page 33 top — Arab harflari ismi (29 letter names) — source 47. harflar nomi.mp3
+  harflar: (name: string) => `/audio/edit/47_harflar/${name}.mp3`,
+  // Page 33 bottom — Muqatta'at Qur'aniya — source 48. ayrim suralar boshi.mp3
+  muqatta: (name: string) => `/audio/edit/48_suralar_boshi/${name}.mp3`,
   harakat: "/audio/04. harakat.mp3",
   ro: "/audio/05. ro.mp3",
   za: "/audio/06. za.mp3",
@@ -2432,11 +2436,64 @@ const p32: ED[] = [
   ["05", "soz",   "يَوْمَئِذٍ",      "O'sha kuni",   A.idgom("p32_w4_yawmaidh"), 0, 2.25, 56, 72, 20, 5],
 ];
 
+// ============================================================
+// PAGE 33 — Arab harflari ismi (29) + Muqatta'at Qur'aniya (14)
+// Top audio:    47. harflar nomi.mp3 (38.77s — 29 letter names)
+// Bottom audio: 48. ayrim suralar boshi.mp3 (122s — title + subtitle + 14 muqatta)
+// ============================================================
 const p33: ED[] = [
-  ["01", "soz", "إِخْفَاء", "Ixfo (yashirish)", null, 0, 0, 56, 12, 18, 5],
-  ["02", "soz", "إِقْلَاب", "Iqlab (almashtirish)", null, 0, 0, 56, 32, 18, 5],
-  ["03", "soz", "إِظْهَار", "Izhhor (ochiq aytish)", null, 0, 0, 56, 52, 18, 5],
-  ["04", "soz", "غُنَّة", "G'unna (burun ovozi)", null, 0, 0, 56, 72, 16, 5],
+  // ── TOP: Arab harflari ismi (29 ta) ──
+  ["top_title", "jumla", "عرب حرفلرینینگ اسملری", "Arab harflarining ismlari", null, 0, 0, 0, 0, 0, 0],
+  ["h01", "harf", "ا",  "Alif",     A.harflar("p33_h01_alif"),     0, 2.30, 0, 0, 0, 0],
+  ["h02", "harf", "ب",  "Ba",       A.harflar("p33_h02_ba"),       0, 1.20, 0, 0, 0, 0],
+  ["h03", "harf", "ت",  "Ta",       A.harflar("p33_h03_ta"),       0, 0.95, 0, 0, 0, 0],
+  ["h04", "harf", "ث",  "Tsa",      A.harflar("p33_h04_tsa"),      0, 1.30, 0, 0, 0, 0],
+  ["h05", "harf", "ج",  "Jim",      A.harflar("p33_h05_jim"),      0, 1.55, 0, 0, 0, 0],
+  ["h06", "harf", "ح",  "Ha",       A.harflar("p33_h06_ha"),       0, 0.85, 0, 0, 0, 0],
+  ["h07", "harf", "خ",  "Kho",      A.harflar("p33_h07_kha"),      0, 1.45, 0, 0, 0, 0],
+  ["h08", "harf", "د",  "Dol",      A.harflar("p33_h08_dal"),      0, 1.30, 0, 0, 0, 0],
+  ["h09", "harf", "ذ",  "Zol",      A.harflar("p33_h09_zal"),      0, 1.20, 0, 0, 0, 0],
+  ["h10", "harf", "ر",  "Ro",       A.harflar("p33_h10_ra"),       0, 1.00, 0, 0, 0, 0],
+  ["h11", "harf", "ز",  "Zo",       A.harflar("p33_h11_za"),       0, 1.35, 0, 0, 0, 0],
+  ["h12", "harf", "س",  "Sin",      A.harflar("p33_h12_sin"),      0, 1.70, 0, 0, 0, 0],
+  ["h13", "harf", "ش",  "Shin",     A.harflar("p33_h13_shin"),     0, 1.35, 0, 0, 0, 0],
+  ["h14", "harf", "ص",  "Sod",      A.harflar("p33_h14_sod"),      0, 1.35, 0, 0, 0, 0],
+  ["h15", "harf", "ض",  "Dod",      A.harflar("p33_h15_dod"),      0, 1.40, 0, 0, 0, 0],
+  ["h16", "harf", "ط",  "To",       A.harflar("p33_h16_to"),       0, 0.80, 0, 0, 0, 0],
+  ["h17", "harf", "ظ",  "Zo",       A.harflar("p33_h17_zo"),       0, 1.70, 0, 0, 0, 0],
+  ["h18", "harf", "ع",  "Ayn",      A.harflar("p33_h18_ayn"),      0, 1.50, 0, 0, 0, 0],
+  ["h19", "harf", "غ",  "G'ayn",    A.harflar("p33_h19_ghayn"),    0, 1.60, 0, 0, 0, 0],
+  ["h20", "harf", "ف",  "Fa",       A.harflar("p33_h20_fa"),       0, 1.10, 0, 0, 0, 0],
+  ["h21", "harf", "ق",  "Qof",      A.harflar("p33_h21_qof"),      0, 2.00, 0, 0, 0, 0],
+  ["h22", "harf", "ك",  "Kof",      A.harflar("p33_h22_kof"),      0, 1.05, 0, 0, 0, 0],
+  ["h23", "harf", "ل",  "Lom",      A.harflar("p33_h23_lam"),      0, 1.90, 0, 0, 0, 0],
+  ["h24", "harf", "م",  "Mim",      A.harflar("p33_h24_mim"),      0, 1.20, 0, 0, 0, 0],
+  ["h25", "harf", "ن",  "Nun",      A.harflar("p33_h25_nun"),      0, 1.40, 0, 0, 0, 0],
+  ["h26", "harf", "و",  "Vov",      A.harflar("p33_h26_waw"),      0, 1.50, 0, 0, 0, 0],
+  ["h27", "harf", "ه",  "Ha",       A.harflar("p33_h27_haa"),      0, 1.60, 0, 0, 0, 0],
+  ["h28", "harf", "لا", "Lom-alif", A.harflar("p33_h28_lamalif"),  0, 1.55, 0, 0, 0, 0],
+  ["h29", "harf", "ي",  "Ya",       A.harflar("p33_h29_ya"),       0, 0.95, 0, 0, 0, 0],
+
+  // ── BOTTOM: Muqatta'at Qur'aniya (14 ta) ──
+  ["m_title",    "jumla", "مُقَطَّعَاتُ قُرْآنِيَّه", "Muqatta'at Qur'aniya",
+    A.muqatta("p33_m_title"), 0, 3.20, 0, 0, 0, 0],
+  ["m_subtitle", "jumla", "قرآندگى بعض سورهلرنينگ باشلريده گى حرفلرنينگ ناملرى بيلان اوقىلادى",
+    "Qur'ondagi ba'zi suralar boshlaridagi harflar nomlari bilan o'qiladi",
+    A.muqatta("p33_m_subtitle"), 0, 6.00, 0, 0, 0, 0],
+  ["m01", "harf", "الٓم",       "Alif-Lom-Mim",          A.muqatta("p33_m01_alm"),         0, 6.90, 0, 0, 0, 0],
+  ["m02", "harf", "الٓمٓصٓ",     "Alif-Lom-Mim-Sod",      A.muqatta("p33_m02_almsod"),      0, 8.65, 0, 0, 0, 0],
+  ["m03", "harf", "الٓر",       "Alif-Lom-Ro",           A.muqatta("p33_m03_alr"),         0, 3.95, 0, 0, 0, 0],
+  ["m04", "harf", "الٓمٓر",     "Alif-Lom-Mim-Ro",       A.muqatta("p33_m04_almr"),        0, 6.35, 0, 0, 0, 0],
+  ["m05", "harf", "كٓهٓيٓعٓصٓ",   "Kof-Ha-Ya-Ayn-Sod",     A.muqatta("p33_m05_khsad"),       0, 8.85, 0, 0, 0, 0],
+  ["m06", "harf", "طه",        "To-Ha",                 A.muqatta("p33_m06_taha"),        0, 1.35, 0, 0, 0, 0],
+  ["m07", "harf", "طٓسٓم",      "To-Sin-Mim",            A.muqatta("p33_m07_tasm"),        0, 6.10, 0, 0, 0, 0],
+  ["m08", "harf", "طٓسٓ",       "To-Sin",                A.muqatta("p33_m08_tas"),         0, 2.90, 0, 0, 0, 0],
+  ["m09", "harf", "يٓسٓ",       "Ya-Sin",                A.muqatta("p33_m09_yasin"),       0, 3.15, 0, 0, 0, 0],
+  ["m10", "harf", "صٓ",         "Sod",                   A.muqatta("p33_m10_sad"),         0, 2.50, 0, 0, 0, 0],
+  ["m11", "harf", "حٓمٓ",       "Ha-Mim",                A.muqatta("p33_m11_hamim"),       0, 3.20, 0, 0, 0, 0],
+  ["m12", "harf", "حٓمٓ عٓسٓقٓ", "Ha-Mim Ayn-Sin-Qof",     A.muqatta("p33_m12_hamim_aynsq"), 0,11.00, 0, 0, 0, 0],
+  ["m13", "harf", "قٓ",         "Qof",                   A.muqatta("p33_m13_qaf"),         0, 2.50, 0, 0, 0, 0],
+  ["m14", "harf", "نٓ",         "Nun",                   A.muqatta("p33_m14_nun"),         0, 3.00, 0, 0, 0, 0],
 ];
 
 // ============================================================

@@ -2321,14 +2321,92 @@ function Page32({ elements, activeId, hasActive, onElementClick }: PP) {
 }
 
 function Page33({ elements, activeId, hasActive, onElementClick }: PP) {
-  const { els } = usePageElements(elements, 33);
+  const { el, els } = usePageElements(elements, 33);
+  const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-1" />;
+
+  const ClickableMuq = ({ id }: { id: string }) => {
+    const e = el(id);
+    if (!e) return null;
+    const isActive = activeId === e.id;
+    return (
+      <button
+        onClick={(ev) => { ev.stopPropagation(); onElementClick(e); }}
+        className="element-spring rounded-md px-1.5 py-0"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-main)",
+          boxShadow: isActive ? "0 4px 14px var(--color-primary-glow)" : "none",
+        }}
+      >
+        <span className="arabic-text font-bold text-[clamp(0.95rem,4.5cqi,1.2rem)]" style={{ fontFamily: "var(--font-arabic)" }}>
+          {e.arabic}
+        </span>
+      </button>
+    );
+  };
+
+  const sub = el("m_subtitle");
+
   return (
-    <div className="flex flex-col items-center gap-3">
-      <Title text="تجوید قاعدالر" sub="Tajvid qoidalari" />
-      <Row els={els(["01"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["02"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
-      <Row els={els(["04"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="xl" gap="gap-3" />
+    <div className="flex flex-col items-center gap-0.5">
+      {/* TOP: Arab harflari ismi — 4 qator (7+7+7+8) */}
+      <p className="arabic-text text-[10px] text-text-secondary text-center mb-0.5" style={{ fontFamily: "var(--font-arabic)" }}>
+        عرب حرفلرینینگ اسملری
+      </p>
+      <Row els={els(["h01","h02","h03","h04","h05","h06","h07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["h08","h09","h10","h11","h12","h13","h14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["h15","h16","h17","h18","h19","h20","h21"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <Row els={els(["h22","h23","h24","h25","h26","h27","h28","h29"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+
+      <Sep />
+
+      {/* BOTTOM: Muqatta'at Qur'aniya */}
+      {(() => {
+        const t = el("m_title");
+        if (!t) return null;
+        const isActive = activeId === t.id;
+        return (
+          <button
+            onClick={(e) => { e.stopPropagation(); onElementClick(t); }}
+            className="element-spring rounded-md px-2 py-0"
+            style={{
+              backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+              color: isActive ? "#ffffff" : "var(--color-text-secondary)",
+              boxShadow: isActive ? "0 4px 14px var(--color-primary-glow)" : "none",
+            }}
+          >
+            <h3 className="arabic-text text-sm font-bold" style={{ fontFamily: "var(--font-arabic)" }}>
+              {t.arabic}
+            </h3>
+          </button>
+        );
+      })()}
+      {/* Subtitle (clickable chig'atoy izoh) */}
+      {sub && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onElementClick(sub); }}
+          className="element-spring rounded-md px-2 py-0"
+          style={{
+            backgroundColor: activeId === sub.id ? "var(--color-primary)" : "transparent",
+            color: activeId === sub.id ? "#ffffff" : "var(--color-text-muted)",
+            boxShadow: activeId === sub.id ? "0 4px 14px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <span className="arabic-text text-[9.5px] leading-tight text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+            {sub.arabic}
+          </span>
+        </button>
+      )}
+      {/* 3 qator muqatta'at (4 + 4 + 6) */}
+      <div dir="rtl" className="flex w-full justify-around items-center gap-1 mt-1">
+        {["m01","m02","m03","m04"].map(id => <ClickableMuq key={id} id={id} />)}
+      </div>
+      <div dir="rtl" className="flex w-full justify-around items-center gap-1">
+        {["m05","m06","m07","m08"].map(id => <ClickableMuq key={id} id={id} />)}
+      </div>
+      <div dir="rtl" className="flex w-full justify-around items-center gap-1">
+        {["m09","m10","m11","m12","m13","m14"].map(id => <ClickableMuq key={id} id={id} />)}
+      </div>
     </div>
   );
 }
