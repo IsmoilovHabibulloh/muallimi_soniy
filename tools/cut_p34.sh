@@ -63,6 +63,7 @@ cut "$SRC1" p34_k1_body        9.097 16.594
 cut "$SRC1" p34_k2_head       18.040 19.478
 cut "$SRC1" p34_k2_p1         22.099 27.537
 cut "$SRC1" p34_k2_p2         27.686 32.967
+cut "$SRC1" p34_k2_full       22.099 32.967    # to'liq Shahada (ikki qism qo'shilgan)
 
 echo "--- Kalima 3 (Tawhid) — audio 50 ---"
 cut "$SRC2" p34_k3_head        0.694  2.204
@@ -74,7 +75,7 @@ cut "$SRC2" p34_k3_p4         24.734 31.292
 echo "--- Kalima 4 (Radd-i Kufr) — audio 51 ---"
 cut "$SRC3" p34_k4_head        1.190  2.885
 cut "$SRC3" p34_k4_p1          5.727 16.068
-cut "$SRC3" p34_k4_p2         17.195 22.028
+cut "$SRC3" p34_k4_p2         16.950 22.028    # 0.25s extra buffer at start — "wa" tovushi clip bo'lmasin
 cut "$SRC3" p34_k4_p3         23.086 28.296
 
 echo "--- Kalima 5 (Istighfar) — audio 52 ---"
@@ -83,8 +84,9 @@ cut "$SRC4" p34_k5_ast1        4.123  6.886
 cut "$SRC4" p34_k5_ast2        7.772 10.599
 cut "$SRC4" p34_k5_ast3       11.970 14.300
 cut "$SRC4" p34_k5_ext        14.300 22.936
+cut "$SRC4" p34_k5_ast3_ext   11.970 22.936    # 3-Astaghfirullaha + ta'ala min kulli... uzluksiz oqim
 cut "$SRC4" p34_k5_p2_alaniya 24.045 26.626
-cut "$SRC4" p34_k5_p3_tawba   27.957 38.435
+cut "$SRC4" p34_k5_p3_tawba   27.700 38.435    # 0.25s extra start buffer — "wa atubu" VA tovushi clip bo'lmasin
 cut "$SRC4" p34_k5_p4_ghuyub  39.627 44.416
 
 echo ""

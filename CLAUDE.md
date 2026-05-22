@@ -1214,6 +1214,37 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   Vaqtlar silencedetect -28dB/d=0.35 + buffers asoslangan — foydalanuvchi
   audio'larni eshitib tasdiqlasa, mos kelmagan chunks `cut_p30.sh` orqali
   qayta kesilsin. Cut script: `tools/cut_p30.sh`.
+- **Sahifa 32 idg'om sektsiyasi qayta yozildi (2026-05-22)**: eski versiyada
+  faqat 4 misol (`min ni'matin`, `min rabbika`, `qad tabayyana`, `yawma'idhin`)
+  bor edi — Layl/Zalzaladan olingan, kitobdagi matn bilan **mos kelmas edi**.
+  Foydalanuvchi to'g'irlash so'radi. Yangi versiya kitobning 32.jpg
+  (`Materiallar/vasl vaqf idg'om va boshqalar/32.jpg`) ga 1:1 mos: 1 title
+  + 12 idg'om misoli (6 qator × 2 ustun).
+  - **Audio manba**: `44. idg'om.mp3` (49.19s) — to'liq qismi ishlatildi.
+    Reciter har misolni faqat **asl shaklda** o'qidi (idg'om transformatsiya
+    audio'da yo'q, statik vizual).
+  - **12 misol mapping** (Whisper medium tasdiq + silencedetect -32dB/0.30s):
+    R1 `مِنْ مَسَدٍ` (4.0-5.8) / `لَنْ نُؤْمِنَ` (6.9-8.9) — nun+mim → mim-shadda; nun+nun → nun-shadda
+    R2 `مِنْ وَلِيٍّ` (10.2-12.1) / `وَمَنْ يَعْمَلْ` (13.7-15.9) — nun+waw/ya → shadda
+    R3 `وَمَنْ لَمْ` (17.7-19.1) / `مِنْ رَبِّهِمْ` (20.3-22.3) — nun+lam/ra → shadda
+    R4 `هُدًى مِنْ` (23.8-25.8) / `شَيْئًا نُكْرًا` (27.1-30.0) — tanvin+mim/nun
+    R5 `اِلٰهٌ وَاحِدٌ` (32.1-35.1) / `خَيْرًا يَرَهُ` (36.6-39.1) — tanvin+waw/ya
+    R6 `هُدًى لِلْمُتَّقِينَ` (40.8-44.0) / `غَفُورٌ رَحِيمٌ` (45.4-48.3) — tanvin+lam/ra
+  - **Idg'om transformatsiya** (statik vizual, P32_IDGOM_TRANSFORM map):
+    `مِمْ مَسَدٍ`, `لَنُّؤْمِنَ`, `مِوَّلِيٍّ`, `وَمَيَّعْمَلْ`, `وَمَلَّمْ`, `مِرَّبِّهِمْ`,
+    `هُدَمْ مِنْ`, `شَيْئَنُّكْرًا`, `اِلٰهُوَّاحِدٌ`, `خَيْرَيَّرَهُ`,
+    `هُدَلِّلْمُتَّقِينَ`, `غَفُورُرَّحِيمٌ`.
+  - **Layout** (`Page32` custom): `<IdgomCell>` komponenti — clickable asl
+    shakl `(...)` + `−` + statik transformatsiya `(...)` (opacity 0.65,
+    kichikroq). 6 ta `<RowPair>` — har qatorda 2 cell RTL `justify-around`.
+    Title — yuqorida katta bold clickable.
+  - **Cut script**: `tools/cut_p32_idgom.sh` (apostrof path muammosi sababli
+    asl audio nomi `44. idg'om.mp3` ga `cp` orqali temp copy `44. idgom.mp3`
+    yaratiladi va build oxirida o'chiriladi).
+  - **Eslatma**: 32-sahifaning **iqlob** (1 qator × 2 misol) va **Alloh lafzi**
+    (10+ misol) bo'limlari hozircha qo'shilmadi — kitobning hammasini
+    ko'rsatish uchun keyingi versiyada (audio `45. iqlob.mp3`, `46. Alloh
+    lafzi.mp3`) qo'shish kerak.
 - **Sahifa 34 tugallangan**: Iymon kalimalari — 5 ta kalima (Tayyiba, Shahada,
   Tawhid, Radd-i Kufr, Istighfar). Jami 23 clickable element (1 title + 5
   kalima heading + 17 body part). Audio manbalari: `49-52. kalimalar 01-04.mp3`

@@ -14,7 +14,7 @@ CUTS = [
     (SRC53, "p35_tamjid_p1",     5.15,  2.70),  # subhanallah
     (SRC53, "p35_tamjid_p2",     9.10,  2.85),  # walhamdu lillah
     (SRC53, "p35_tamjid_p3",    12.95,  6.85),  # wala ilaha illallah wallahu akbar
-    (SRC53, "p35_tamjid_p4",    21.60,  8.50),  # la hawla wala quwwata illa billah (Havqala)
+    (SRC53, "p35_tamjid_p4",    21.35,  8.85),  # WA la hawla wala quwwata illa billah (Havqala) — 0.25s start buffer for "wa"
     (SRC53, "p35_mashallah",    33.20,  8.20),  # ma sha'allah kana wama lam yasha lam yakun
     (SRC53, "p35_iman_def",     44.50, 20.65),  # iman definition (iqror billisan...)
     (SRC53, "p35_salawat",      67.00,  4.70),  # salla allah alayhi wasallam

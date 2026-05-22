@@ -2481,14 +2481,59 @@ const p31: ED[] = [
 ];
 
 const p32: ED[] = [
-  // 2026-05-19: title 44.idg'om 1.40-2.60s, words from Layl/Zalzala. 2 ta so'z
-  // (min rabbika, qad tabayyana) — mavjud sura audiolarda topilmadi (null).
-  ["01", "jumla", "إدغام",         "Idg'om",       A.idgom("p32_title"),       0, 1.20, 56,  8, 18, 5],
-  ["02", "soz",   "مِنْ نِعْمَةٍ",   "Ne'matlardan", A.idgom("p32_w1_minnimah"), 0, 4.45, 82, 28, 22, 5],
-  ["03", "soz",   "مِنْ رَبِّكَ",    "Rabbingdan",   null, 0, 0, 44, 28, 20, 5],
-  ["04", "soz",   "قَدْ تَبَيَّنَ",  "Ayon bo'ldi",  null, 0, 0, 56, 52, 22, 5],
-  ["05", "soz",   "يَوْمَئِذٍ",      "O'sha kuni",   A.idgom("p32_w4_yawmaidh"), 0, 2.25, 56, 72, 20, 5],
+  // 2026-05-22: 32-sahifa to'liq qayta yozildi. Eski (min ni'matin, min rabbika,
+  // qad tabayyana, yawma'idhin) — Layl/Zalzaladan olingan misollar — kitobdagi
+  // matn bilan mos kelmas edi. Yangi 12 misol kitobdan to'g'ridan-to'g'ri olingan,
+  // audio: 44. idg'om.mp3 (49.19s) ning to'liq qismi. Har misolda 2 ko'rinish:
+  // "asl shakl" (RTL o'qish, audio'da o'qiladi) va "(idg'om transformatsiya)"
+  // (mim/lam/ra/waw/ya/nun ga aylantirilgan kompakt shakl, statik vizual).
+  //
+  // Audio chunks silencedetect -32dB/0.30s + Whisper medium tasdiq bilan kesilgan.
+  ["title", "jumla", "اِدْغَام", "Idg'om (qo'shish)", A.idgom("p32_title"), 0, 0.70, 0, 0, 0, 0],
+
+  // Row 1: nun-sukun + mim → mim-shadda  |  nun-sukun + nun → nun-shadda
+  ["e01_minmasad",  "soz", "مِنْ مَسَدٍ",        "Min masadin (ipdan)",         A.idgom("p32_e01_minmasad"),  0, 1.75, 0, 0, 0, 0],
+  ["e02_lannumin",  "soz", "لَنْ نُؤْمِنَ",       "Lan nu'mina (iymon keltirmaymiz)", A.idgom("p32_e02_lannumin"), 0, 2.00, 0, 0, 0, 0],
+
+  // Row 2: nun-sukun + waw → waw-shadda  |  nun-sukun + ya → ya-shadda
+  ["e03_minwali",   "soz", "مِنْ وَلِيٍّ",        "Min waliyyin (do'stdan)",     A.idgom("p32_e03_minwali"),   0, 1.90, 0, 0, 0, 0],
+  ["e04_wamanya",   "soz", "وَمَنْ يَعْمَلْ",     "Wa man ya'mal (kim qilsa)",   A.idgom("p32_e04_wamanya"),   0, 2.15, 0, 0, 0, 0],
+
+  // Row 3: nun-sukun + lam → lam-shadda  |  nun-sukun + ra → ra-shadda
+  ["e05_wamanlam",  "soz", "وَمَنْ لَمْ",         "Wa man lam (kim emas)",        A.idgom("p32_e05_wamanlam"),  0, 1.40, 0, 0, 0, 0],
+  ["e06_minrabb",   "soz", "مِنْ رَبِّهِمْ",      "Min rabbihim (Rablaridan)",   A.idgom("p32_e06_minrabb"),   0, 2.00, 0, 0, 0, 0],
+
+  // Row 4: tanvin + mim → idg'om mim  |  tanvin + nun → idg'om nun
+  ["e07_hudamin",   "soz", "هُدًى مِنْ",          "Hudan min (hidoyat...dan)",   A.idgom("p32_e07_hudamin"),   0, 2.00, 0, 0, 0, 0],
+  ["e08_shaynkr",   "soz", "شَيْئًا نُكْرًا",     "Shay'an nukran (yomon ish)",  A.idgom("p32_e08_shaynkr"),   0, 2.85, 0, 0, 0, 0],
+
+  // Row 5: tanvin + waw → idg'om waw  |  tanvin + ya → idg'om ya
+  ["e09_ilahwah",   "soz", "اِلٰهٌ وَاحِدٌ",      "Ilahun wahidun (yagona iloh)", A.idgom("p32_e09_ilahwah"),  0, 3.00, 0, 0, 0, 0],
+  ["e10_khayyar",   "soz", "خَيْرًا يَرَهُ",      "Khayran yarahu (yaxshilikni ko'radi)", A.idgom("p32_e10_khayyar"), 0, 2.50, 0, 0, 0, 0],
+
+  // Row 6: tanvin + lam → idg'om lam  |  tanvin + ra → idg'om ra
+  ["e11_hudalmu",   "soz", "هُدًى لِلْمُتَّقِينَ", "Hudan lil-muttaqin (taqvodorlar uchun hidoyat)", A.idgom("p32_e11_hudalmu"), 0, 3.20, 0, 0, 0, 0],
+  ["e12_ghafrah",   "soz", "غَفُورٌ رَحِيمٌ",    "Ghafurun rahim (ko'p kechiruvchi, mehribon)", A.idgom("p32_e12_ghafrah"), 0, 2.95, 0, 0, 0, 0],
 ];
+
+// Idg'om misollar uchun "transformatsiya" matni (UI da statik vizual sifatida
+// ko'rsatiladi: "asl - (transformatsiya)"). Audio'da reciter faqat asl shaklni
+// o'qigan. Idg'om qoidalari: nun-sukun/tanvin + (mim/lam/ra/waw/ya/nun) →
+// keyingi harf shadda bilan.
+export const P32_IDGOM_TRANSFORM: Record<string, string> = {
+  e01_minmasad: "مِمْ مَسَدٍ",            // nun→mim (assimilation)
+  e02_lannumin: "لَنُّؤْمِنَ",            // nun + nun → nun-shadda
+  e03_minwali:  "مِوَّلِيٍّ",              // nun + waw → waw-shadda
+  e04_wamanya:  "وَمَيَّعْمَلْ",          // nun + ya → ya-shadda
+  e05_wamanlam: "وَمَلَّمْ",              // nun + lam → lam-shadda
+  e06_minrabb:  "مِرَّبِّهِمْ",            // nun + ra → ra-shadda
+  e07_hudamin:  "هُدَمْ مِنْ",            // tanvin n + mim → mim (assimilation)
+  e08_shaynkr:  "شَيْئَنُّكْرًا",         // tanvin n + nun → nun-shadda
+  e09_ilahwah:  "اِلٰهُوَّاحِدٌ",          // tanvin n + waw → waw-shadda
+  e10_khayyar:  "خَيْرَيَّرَهُ",          // tanvin n + ya → ya-shadda
+  e11_hudalmu:  "هُدَلِّلْمُتَّقِينَ",     // tanvin n + lam → lam-shadda
+  e12_ghafrah:  "غَفُورُرَّحِيمٌ",        // tanvin n + ra → ra-shadda
+};
 
 // ============================================================
 // PAGE 33 — Arab harflari ismi (29) + Muqatta'at Qur'aniya (14)
@@ -2497,36 +2542,43 @@ const p32: ED[] = [
 // ============================================================
 const p33: ED[] = [
   // ── TOP: Arab harflari ismi (29 ta) ──
-  ["top_title", "jumla", "عرب حرفلرینینگ اسملری", "Arab harflarining ismlari", null, 0, 0, 0, 0, 0, 0],
-  ["h01", "harf", "ا",  "Alif",     A.harflar("p33_h01_alif"),     0, 2.30, 0, 0, 0, 0],
-  ["h02", "harf", "ب",  "Ba",       A.harflar("p33_h02_ba"),       0, 1.20, 0, 0, 0, 0],
-  ["h03", "harf", "ت",  "Ta",       A.harflar("p33_h03_ta"),       0, 0.95, 0, 0, 0, 0],
-  ["h04", "harf", "ث",  "Tsa",      A.harflar("p33_h04_tsa"),      0, 1.30, 0, 0, 0, 0],
-  ["h05", "harf", "ج",  "Jim",      A.harflar("p33_h05_jim"),      0, 1.55, 0, 0, 0, 0],
-  ["h06", "harf", "ح",  "Ha",       A.harflar("p33_h06_ha"),       0, 0.85, 0, 0, 0, 0],
-  ["h07", "harf", "خ",  "Kho",      A.harflar("p33_h07_kha"),      0, 1.45, 0, 0, 0, 0],
-  ["h08", "harf", "د",  "Dol",      A.harflar("p33_h08_dal"),      0, 1.30, 0, 0, 0, 0],
-  ["h09", "harf", "ذ",  "Zol",      A.harflar("p33_h09_zal"),      0, 1.20, 0, 0, 0, 0],
-  ["h10", "harf", "ر",  "Ro",       A.harflar("p33_h10_ra"),       0, 1.00, 0, 0, 0, 0],
-  ["h11", "harf", "ز",  "Zo",       A.harflar("p33_h11_za"),       0, 1.35, 0, 0, 0, 0],
-  ["h12", "harf", "س",  "Sin",      A.harflar("p33_h12_sin"),      0, 1.70, 0, 0, 0, 0],
-  ["h13", "harf", "ش",  "Shin",     A.harflar("p33_h13_shin"),     0, 1.35, 0, 0, 0, 0],
-  ["h14", "harf", "ص",  "Sod",      A.harflar("p33_h14_sod"),      0, 1.35, 0, 0, 0, 0],
-  ["h15", "harf", "ض",  "Dod",      A.harflar("p33_h15_dod"),      0, 1.40, 0, 0, 0, 0],
-  ["h16", "harf", "ط",  "To",       A.harflar("p33_h16_to"),       0, 0.80, 0, 0, 0, 0],
-  ["h17", "harf", "ظ",  "Zo",       A.harflar("p33_h17_zo"),       0, 1.70, 0, 0, 0, 0],
-  ["h18", "harf", "ع",  "Ayn",      A.harflar("p33_h18_ayn"),      0, 1.50, 0, 0, 0, 0],
-  ["h19", "harf", "غ",  "G'ayn",    A.harflar("p33_h19_ghayn"),    0, 1.60, 0, 0, 0, 0],
-  ["h20", "harf", "ف",  "Fa",       A.harflar("p33_h20_fa"),       0, 1.10, 0, 0, 0, 0],
-  ["h21", "harf", "ق",  "Qof",      A.harflar("p33_h21_qof"),      0, 2.00, 0, 0, 0, 0],
-  ["h22", "harf", "ك",  "Kof",      A.harflar("p33_h22_kof"),      0, 1.05, 0, 0, 0, 0],
-  ["h23", "harf", "ل",  "Lom",      A.harflar("p33_h23_lam"),      0, 1.90, 0, 0, 0, 0],
-  ["h24", "harf", "م",  "Mim",      A.harflar("p33_h24_mim"),      0, 1.20, 0, 0, 0, 0],
-  ["h25", "harf", "ن",  "Nun",      A.harflar("p33_h25_nun"),      0, 1.40, 0, 0, 0, 0],
-  ["h26", "harf", "و",  "Vov",      A.harflar("p33_h26_waw"),      0, 1.50, 0, 0, 0, 0],
-  ["h27", "harf", "ه",  "Ha",       A.harflar("p33_h27_haa"),      0, 1.60, 0, 0, 0, 0],
-  ["h28", "harf", "لا", "Lom-alif", A.harflar("p33_h28_lamalif"),  0, 1.55, 0, 0, 0, 0],
-  ["h29", "harf", "ي",  "Ya",       A.harflar("p33_h29_ya"),       0, 0.95, 0, 0, 0, 0],
+  // 2026-05-22: top_title ga audio biriktirildi (avval null edi). Chunklar
+  // qayta kesilgan (`tools/cut_p33_harflar.sh`) — eski p33_h01_alif aslida
+  // TITLE'ni o'z ichiga olardi, endi to'g'ri pozitsiyalar:
+  //   top_title: 0.20-2.00s — "Arab harflarining ismlari"
+  //   h01_alif:  3.75-4.40s — "Alif"
+  //   ...har bir harf 0.65-1.15s, silencedetect boundary'lardan kesilgan.
+  ["top_title", "jumla", "عرب حرفلرینینگ اسملری", "Arab harflarining ismlari",
+    A.harflar("p33_top_title"), 0, 1.80, 0, 0, 0, 0],
+  ["h01", "harf", "ا",  "Alif",     A.harflar("p33_h01_alif"),     0, 0.65, 0, 0, 0, 0],
+  ["h02", "harf", "ب",  "Ba",       A.harflar("p33_h02_ba"),       0, 0.80, 0, 0, 0, 0],
+  ["h03", "harf", "ت",  "Ta",       A.harflar("p33_h03_ta"),       0, 0.85, 0, 0, 0, 0],
+  ["h04", "harf", "ث",  "Tsa",      A.harflar("p33_h04_tsa"),      0, 0.85, 0, 0, 0, 0],
+  ["h05", "harf", "ج",  "Jim",      A.harflar("p33_h05_jim"),      0, 0.90, 0, 0, 0, 0],
+  ["h06", "harf", "ح",  "Ha",       A.harflar("p33_h06_ha"),       0, 0.80, 0, 0, 0, 0],
+  ["h07", "harf", "خ",  "Kho",      A.harflar("p33_h07_kha"),      0, 0.90, 0, 0, 0, 0],
+  ["h08", "harf", "د",  "Dol",      A.harflar("p33_h08_dal"),      0, 0.90, 0, 0, 0, 0],
+  ["h09", "harf", "ذ",  "Zol",      A.harflar("p33_h09_zal"),      0, 1.05, 0, 0, 0, 0],
+  ["h10", "harf", "ر",  "Ro",       A.harflar("p33_h10_ra"),       0, 0.80, 0, 0, 0, 0],
+  ["h11", "harf", "ز",  "Zo",       A.harflar("p33_h11_za"),       0, 0.90, 0, 0, 0, 0],
+  ["h12", "harf", "س",  "Sin",      A.harflar("p33_h12_sin"),      0, 0.95, 0, 0, 0, 0],
+  ["h13", "harf", "ش",  "Shin",     A.harflar("p33_h13_shin"),     0, 1.00, 0, 0, 0, 0],
+  ["h14", "harf", "ص",  "Sod",      A.harflar("p33_h14_sod"),      0, 0.90, 0, 0, 0, 0],
+  ["h15", "harf", "ض",  "Dod",      A.harflar("p33_h15_dod"),      0, 1.00, 0, 0, 0, 0],
+  ["h16", "harf", "ط",  "To",       A.harflar("p33_h16_to"),       0, 0.85, 0, 0, 0, 0],
+  ["h17", "harf", "ظ",  "Zo",       A.harflar("p33_h17_zo"),       0, 0.90, 0, 0, 0, 0],
+  ["h18", "harf", "ع",  "Ayn",      A.harflar("p33_h18_ayn"),      0, 1.00, 0, 0, 0, 0],
+  ["h19", "harf", "غ",  "G'ayn",    A.harflar("p33_h19_ghayn"),    0, 1.15, 0, 0, 0, 0],
+  ["h20", "harf", "ف",  "Fa",       A.harflar("p33_h20_fa"),       0, 0.75, 0, 0, 0, 0],
+  ["h21", "harf", "ق",  "Qof",      A.harflar("p33_h21_qof"),      0, 0.78, 0, 0, 0, 0],
+  ["h22", "harf", "ك",  "Kof",      A.harflar("p33_h22_kof"),      0, 0.75, 0, 0, 0, 0],
+  ["h23", "harf", "ل",  "Lom",      A.harflar("p33_h23_lam"),      0, 0.90, 0, 0, 0, 0],
+  ["h24", "harf", "م",  "Mim",      A.harflar("p33_h24_mim"),      0, 0.90, 0, 0, 0, 0],
+  ["h25", "harf", "ن",  "Nun",      A.harflar("p33_h25_nun"),      0, 0.95, 0, 0, 0, 0],
+  ["h26", "harf", "و",  "Vov",      A.harflar("p33_h26_waw"),      0, 0.90, 0, 0, 0, 0],
+  ["h27", "harf", "ه",  "Ha",       A.harflar("p33_h27_haa"),      0, 0.80, 0, 0, 0, 0],
+  ["h28", "harf", "لا", "Lom-alif", A.harflar("p33_h28_lamalif"),  0, 1.10, 0, 0, 0, 0],
+  ["h29", "harf", "ي",  "Ya",       A.harflar("p33_h29_ya"),       0, 0.65, 0, 0, 0, 0],
 
   // ── BOTTOM: Muqatta'at Qur'aniya (14 ta) ──
   ["m_title",    "jumla", "مُقَطَّعَاتُ قُرْآنِيَّه", "Muqatta'at Qur'aniya",
@@ -2564,10 +2616,12 @@ const p34: ED[] = [
 
   // Kalima 2 — Shahada
   ["k2_head", "jumla", "كَلِمَةُ الشَّهَادَةِ", "Kalimai shahodat (guvohlik kalimasi)", A.kl("p34_k2_head"), 0, 1.438, 0, 0, 0, 0],
-  ["k2_p1",   "jumla", "اَشْهَدُ اَنْ لَا اِلٰهَ اِلَّا اللّٰهُ",
-    "Guvohlik beraman: Allohdan boshqa iloh yo'q", A.kl("p34_k2_p1"), 0, 5.438, 0, 0, 0, 0],
-  ["k2_p2",   "jumla", "وَاَشْهَدُ اَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
-    "Va Muhammad Uning bandasi va rasulidir", A.kl("p34_k2_p2"), 0, 5.281, 0, 0, 0, 0],
+  // Shahada — yagona button (foydalanuvchi qarori 2026-05-22): gul olib
+  // tashlandi, ikkala qism bitta matn ichida birlashtirildi. Audio to'liq
+  // chunk (10.87s) uzluksiz oqimda o'qiladi.
+  ["k2_body", "jumla", "اَشْهَدُ اَنْ لَا اِلٰهَ اِلَّا اللّٰهُ وَاَشْهَدُ اَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+    "Guvohlik beraman: Allohdan boshqa iloh yo'q va Muhammad Uning bandasi va rasulidir",
+    A.kl("p34_k2_full"), 0, 10.868, 0, 0, 0, 0],
 
   // Kalima 3 — Tawhid
   ["k3_head", "jumla", "كَلِمَةُ التَّوْحِيدِ", "Kalimai tavhid (yakkalik kalimasi)", A.kl("p34_k3_head"), 0, 1.510, 0, 0, 0, 0],
@@ -2581,12 +2635,12 @@ const p34: ED[] = [
     "Yaxshilik Uning qo'lida, U har narsaga qodir", A.kl("p34_k3_p4"), 0, 6.558, 0, 0, 0, 0],
 
   // Kalima 4 — Radd-i Kufr
-  ["k4_head", "jumla", "كَلِمَةُ رَدِّ الْكُفْرِ", "Kalimai raddi kufr (kufrni rad kalimasi)", A.kl("p34_k4_head"), 0, 1.695, 0, 0, 0, 0],
+  ["k4_head", "jumla", "كَلِمَةُ رَدِّ الْكُفْرُ", "Kalimai raddi kufru (kufrni rad kalimasi)", A.kl("p34_k4_head"), 0, 1.695, 0, 0, 0, 0],
   ["k4_p1",   "jumla", "اَللّٰهُمَّ اِنِّى اَعُوذُبِكَ مِنْ اَنْ اُشْرِكَ بِكَ شَيْأً وَاَنَا اَعْلَمُ",
     "Ey Alloh, men bilgan holda Senga biror shirk keltirib qo'yishdan Senga panoh tilayman",
     A.kl("p34_k4_p1"), 0, 10.341, 0, 0, 0, 0],
   ["k4_p2",   "jumla", "وَاَسْتَغْفِرُكَ لِمَا لَا اَعْلَمُ",
-    "Va bilmagan narsalarim uchun mag'firat so'rayman", A.kl("p34_k4_p2"), 0, 4.833, 0, 0, 0, 0],
+    "Va bilmagan narsalarim uchun mag'firat so'rayman", A.kl("p34_k4_p2"), 0, 5.078, 0, 0, 0, 0],
   ["k4_p3",   "jumla", "اِنَّكَ اَنْتَ عَلَّامُ الْغُيُوبِ",
     "Shubhasiz Sen g'oyiblarni juda yaxshi bilguvchisan", A.kl("p34_k4_p3"), 0, 5.210, 0, 0, 0, 0],
 
@@ -2594,16 +2648,17 @@ const p34: ED[] = [
   ["k5_head", "jumla", "كَلِمَةُ الْاِسْتِغْفَارِ", "Kalimai istig'for (mag'firat so'rash kalimasi)", A.kl("p34_k5_head"), 0, 1.846, 0, 0, 0, 0],
   ["k5_ast1", "jumla", "اَسْتَغْفِرُ اللّٰهَ", "Allohdan mag'firat so'rayman", A.kl("p34_k5_ast1"), 0, 2.763, 0, 0, 0, 0],
   ["k5_ast2", "jumla", "اَسْتَغْفِرُ اللّٰهَ", "Allohdan mag'firat so'rayman", A.kl("p34_k5_ast2"), 0, 2.827, 0, 0, 0, 0],
-  ["k5_ast3", "jumla", "اَسْتَغْفِرُ اللّٰهَ", "Allohdan mag'firat so'rayman", A.kl("p34_k5_ast3"), 0, 2.330, 0, 0, 0, 0],
-  ["k5_ext",  "jumla", "تَعَالٰى مِنْ كُلِّ ذَنْبٍ اَذْنَبْتُهُ عَمْدًا اَوْ خَطَأً",
-    "Yuksalgan Allohdan har bir qasdan yoki xato qilgan gunohimdan",
-    A.kl("p34_k5_ext"), 0, 8.636, 0, 0, 0, 0],
+  // 3-Astaghfirullaha va davom ("ta'ala min kulli dhanbin...") birlashtirilgan —
+  // foydalanuvchi qarori 2026-05-22: audio uzluksiz, matn birga ko'rinadi.
+  ["k5_ast3_ext", "jumla", "اَسْتَغْفِرُ اللّٰهَ تَعَالٰى مِنْ كُلِّ ذَنْبٍ اَذْنَبْتُهُ عَمْدًا اَوْ خَطَأً",
+    "Yuksalgan Allohdan mag'firat so'rayman har bir qasdan yoki xato qilgan gunohimdan",
+    A.kl("p34_k5_ast3_ext"), 0, 10.966, 0, 0, 0, 0],
   // Audio kengaytmasi (kitobning sirran'idan keyin) — 3 segment, audio 52 da reciter qo'shgan:
   ["k5_p2_alaniya", "jumla", "سِرًّا اَوْ عَلَانِيَةً",
     "Yashirin yoki oshkora", A.kl("p34_k5_p2_alaniya"), 0, 2.581, 0, 0, 0, 0],
   ["k5_p3_tawba",   "jumla", "وَاَتُوبُ اِلَيْهِ مِنَ الذَّنْبِ الَّذِى اَعْلَمُ وَمِنَ الذَّنْبِ الَّذِى لَا اَعْلَمُ",
     "Va Unga tavba qilaman bilgan gunohimdan ham, bilmagan gunohimdan ham",
-    A.kl("p34_k5_p3_tawba"), 0, 10.478, 0, 0, 0, 0],
+    A.kl("p34_k5_p3_tawba"), 0, 10.735, 0, 0, 0, 0],
   ["k5_p4_ghuyub",  "jumla", "اِنَّكَ اَنْتَ عَلَّامُ الْغُيُوبِ",
     "Shubhasiz Sen g'oyiblarni juda yaxshi bilguvchisan",
     A.kl("p34_k5_p4_ghuyub"), 0, 4.789, 0, 0, 0, 0],
@@ -2621,9 +2676,12 @@ const p35: ED[] = [
   ["tamjid_p3",   "jumla", "وَلَا اِلٰهَ اِلَّا اللّٰهُ وَاللّٰهُ اَكْبَرُ",
     "Wa la ilaha illallah wallahu akbar",
     A.kl5("p35_tamjid_p3"), 0, 6.85, 0, 0, 0, 0],
-  ["tamjid_p4",   "jumla", "وَلَا حَوْلَ وَلَا قُوَّةَ اِلَّا بِاللّٰهِ الْعَلِيِّ الْعَظِيمِ",
+  // Asl audio'da boshidagi "wa" yo'q — reciter "La hawla wa la quwwata..." deb
+  // boshlaydi (tamjid_p3 dan keyin 1.9s pauza). Matn audioga moslangan
+  // (foydalanuvchi qarori 2026-05-22).
+  ["tamjid_p4",   "jumla", "لَا حَوْلَ وَلَا قُوَّةَ اِلَّا بِاللّٰهِ الْعَلِيِّ الْعَظِيمِ",
     "La hawla wa la quwwata illa billahil-aliyyil-azim (Havqala)",
-    A.kl5("p35_tamjid_p4"), 0, 8.50, 0, 0, 0, 0],
+    A.kl5("p35_tamjid_p4"), 0, 8.85, 0, 0, 0, 0],
   ["mashallah",   "jumla", "مَا شَاءَ اللّٰهُ كَانَ وَمَا لَمْ يَشَأْ لَمْ يَكُنْ",
     "Ma sha'allahu kana wa ma lam yasha' lam yakun",
     A.kl5("p35_mashallah"), 0, 8.20, 0, 0, 0, 0],
@@ -2707,7 +2765,7 @@ const p36: ED[] = [
     A.sb("p36_bq_v4"), 0, 21.90, 0, 0, 0, 0],
   ["bq_v5", "jumla", "اُولٰئِكَ عَلٰى هُدًى مِنْ رَبِّهِمْ وَاُولٰئِكَ هُمُ الْمُفْلِحُونَ",
     "Baqara 5-oyat: Ana o'shalar Robbilaridan hidoyatdadirlar va ana o'shalar najot topguvchilardir",
-    A.sb("p36_bq_v5"), 0, 10.50, 0, 0, 0, 0],
+    A.sb("p36_bq_v5"), 0, 12.80, 0, 0, 0, 0],
 ];
 
 // p37 — Surah Ash-Shams (1-15) + Surah Al-Layl boshi (Bismillah + ayahs 1-7 + ayah 8 fragment)
@@ -2742,7 +2800,8 @@ const p37: ED[] = [
   ["ll_a5", "jumla", "فَأَمَّا مَنْ أَعْطَى وَاتَّقَى", "5-oyat: Bergan va taqvodor bo'lgan kishi", A.layl("p37_ll_a5"), 0, 5.4, 50, 146, 50, 5],
   ["ll_a6", "jumla", "وَصَدَّقَ بِالْحُسْنَى", "6-oyat: Eng yaxshini tasdiqlagan", A.layl("p37_ll_a6"), 0, 3.7, 50, 152, 40, 5],
   ["ll_a7", "jumla", "فَسَنُيَسِّرُهُ لِلْيُسْرَى", "7-oyat: Unga osonlikni muyassar qilamiz", A.layl("p37_ll_a7"), 0, 5.0, 50, 158, 44, 5],
-  ["ll_a8_start", "jumla", "وَأَمَّا", "8-oyat boshi (keyingi sahifaga davom)", A.layl("p37_ll_a8_start"), 0, 1.5, 50, 164, 20, 5],
+  // 2026-05-22: "وَأَمَّا" 8-oyat fragment olib tashlandi (foydalanuvchi qarori) —
+  // p37 endi Layl 1-7 da to'xtaydi, p38 to'liq 8-oyat bilan boshlanadi.
 ];
 
 // p38 — Surah Al-Layl (ayahs 8-21, davom p37 dan)
@@ -2921,7 +2980,7 @@ const p43: ED[] = [
   // --- Surah At-Takathur ---
   ["tk_bism",     "jumla", "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ",                       "Bismillah",                                                                       A.tk("p43_tk_bism"),        0, 5.25, 50,  88,  48, 5],
   ["tk_a1",       "jumla", "اَلْهٰىكُمُ التَّكَاثُرُ",                                    "1-oyat: Sizlarni ko'pchilik bo'lib maqtanish chalg'itib qo'ydi",                  A.tk("p43_tk_a1"),          0, 3.5,  50,  94,  40, 5],
-  ["tk_a2",       "jumla", "حَتّٰى زُرْتُمُ الْمَقَابِرَ",                                "2-oyat: Hatto qabrlarni ziyorat qilib (sanadingiz)",                              A.tk("p43_tk_a2"),          0, 3.55, 50, 100,  42, 5],
+  ["tk_a2",       "jumla", "حَتّٰى زُرْتُمُ الْمَقَابِرَ",                                "2-oyat: Hatto qabrlarni ziyorat qilib (sanadingiz)",                              A.tk("p43_tk_a2"),          0, 4.00, 50, 100,  42, 5],
   ["tk_a3",       "jumla", "كَلَّا سَوْفَ تَعْلَمُونَ",                                  "3-oyat: Yo'q! Yaqinda bilursizlar",                                                A.tk("p43_tk_a3"),          0, 4.75, 50, 106,  40, 5],
   ["tk_a4",       "jumla", "ثُمَّ كَلَّا سَوْفَ تَعْلَمُونَ",                              "4-oyat: So'ngra yana yo'q, bilursizlar",                                          A.tk("p43_tk_a4"),          0, 6.2,  50, 112,  48, 5],
   ["tk_a5",       "jumla", "كَلَّا لَوْ تَعْلَمُونَ عِلْمَ الْيَقِينِ",                    "5-oyat: Yo'q! Aniq ilm bilan bilganingizda edi",                                  A.tk("p43_tk_a5"),          0, 6.7,  50, 118,  56, 5],
@@ -3030,8 +3089,11 @@ const p45: ED[] = [
   ["ma_a1",   "jumla", "اَرَءَيْتَ الَّذٖى يُكَذِّبُ بِالدّٖينِ",                         "Mo'un 1-oyat: Dinni yolg'on chiqaruvchini ko'rdingmi?",                A.mau("p45_ma_a1"),   0, 6.05, 0, 0, 0, 0],
   ["ma_a2",   "jumla", "فَذٰلِكَ الَّذٖى يَدُعُّ الْيَتٖيمَ",                            "Mo'un 2-oyat: U yetimni qattiq itarib quvuvchidir",                    A.mau("p45_ma_a2"),   0, 6.05, 0, 0, 0, 0],
   ["ma_a3",   "jumla", "وَلَا يَحُضُّ عَلٰى طَعَامِ الْمِسْكٖينِ",                      "Mo'un 3-oyat: Va miskinning taomiga (boshqalarni) qiziqtirmaydi",      A.mau("p45_ma_a3"),   0, 6.75, 0, 0, 0, 0],
-  ["ma_a4",   "jumla", "فَوَيْلٌ لِّلْمُصَلّٖينَ",                                       "Mo'un 4-oyat: Bas, namoz o'qiguvchilarga voy bo'lsin",                 A.mau("p45_ma_a4"),   0, 4.30, 0, 0, 0, 0],
-  ["ma_a5",   "jumla", "الَّذٖينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَ",                         "Mo'un 5-oyat: Ular o'z namozlaridan g'ofildirlar",                     A.mau("p45_ma_a5"),   0, 6.75, 0, 0, 0, 0],
+  // Mo'un 4 + 5 — reciter uzluksiz o'qigan (sukunat yo'q). Ikkala element bitta
+  // birlashgan chunkni ijro etadi (a4 + a5 = 11.05s). Vizual jihatdan ham bir
+  // qatorda joylashtirilgan (foydalanuvchi qarori 2026-05-22).
+  ["ma_a4",   "jumla", "فَوَيْلٌ لِّلْمُصَلّٖينَ",                                       "Mo'un 4-oyat: Bas, namoz o'qiguvchilarga voy bo'lsin",                 A.mau("p45_ma_a4_a5"), 0, 11.05, 0, 0, 0, 0],
+  ["ma_a5",   "jumla", "الَّذٖينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَ",                         "Mo'un 5-oyat: Ular o'z namozlaridan g'ofildirlar",                     A.mau("p45_ma_a4_a5"), 0, 11.05, 0, 0, 0, 0],
   ["ma_a6",   "jumla", "الَّذٖينَ هُمْ يُرَاءُونَ",                                       "Mo'un 6-oyat: Ular riyokorlik qiluvchilardir",                          A.mau("p45_ma_a6"),   0, 5.90, 0, 0, 0, 0],
   ["ma_a7",   "jumla", "وَيَمْنَعُونَ الْمَاعُونَ",                                       "Mo'un 7-oyat: Va mo'un (zaruriy buyumlar)dan man qiluvchilardir",      A.mau("p45_ma_a7"),   0, 5.25, 0, 0, 0, 0],
 
@@ -3081,7 +3143,14 @@ const p46: ED[] = [
   ["ix_bism",     "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",        "Ixlos surasi: Bismillah",                                                 A.ixl("p46_ix_bism"),    0, 5.25, 0, 0, 0, 0],
   ["ix_a1",       "jumla", "قُلْ هُوَ اللّٰهُ اَحَدٌ",                     "Ixlos 1-oyat: Ayt: U — Alloh, yagonadir",                                 A.ixl("p46_ix_a1"),      0, 3.25, 0, 0, 0, 0],
   ["ix_a2",       "jumla", "اَللّٰهُ الصَّمَدُ",                          "Ixlos 2-oyat: Alloh — Samad (hech narsaga muhtoj bo'lmagan, hammaning yagona suyangan Zoti)", A.ixl("p46_ix_a2"), 0, 2.75, 0, 0, 0, 0],
-  ["ix_a3_start", "jumla", "لَمْ يَلِدْ",                                  "Ixlos 3-oyat (boshi): Tug'magan... (oyat davomi 47-sahifada)",            A.ixl("p46_ix_a3_start"),0, 4.35, 0, 0, 0, 0],
+  // Ixlos v3 + v4 — birlashgan audio guruh (foydalanuvchi qarori 2026-05-22:
+  // reciter uzilmasdan o'qigan). Ikkala oyat bir qatorda render qilinadi va
+  // qaysi birini bossangiz ham ikkalasi birga active highlight oladi. v4 endi
+  // p47 dan p46 ga ko'chirildi — Surah Al-Ikhlas butunlay p46 da.
+  ["ix_a3", "jumla", "لَمْ يَلِدْ وَلَمْ يُولَدْ", "Ixlos 3-oyat: U tug'magan va tug'ilmagandir",
+    A.ixl("p46_ix_a3_a4"), 0, 9.00, 0, 0, 0, 0],
+  ["ix_a4", "jumla", "وَلَمْ يَكُنْ لَهُ كُفُوًا اَحَدٌ", "Ixlos 4-oyat: Va Uning hech bir tengi yo'qdir",
+    A.ixl("p46_ix_a3_a4"), 0, 9.00, 0, 0, 0, 0],
 ];
 
 // ============================================================
@@ -3097,11 +3166,8 @@ const p46: ED[] = [
 // foydalanuvchi tinglab tasdiqlasa, mos kelmagan chunks shu yerdan tuzatilsin.
 // ============================================================
 const p47: ED[] = [
-  // --- Surah Al-Ikhlas davomi (v3 oxiri + v4 — v1, v2 va v3 boshi p46 da) ---
-  // v3 to'liq oyat (لَمْ يَلِدْ وَلَمْ يُولَدْ) o'rtasida tabiiy ~0.5s pause bor;
-  // p46 da v3 boshi ("لَمْ يَلِدْ") chunk'i, p47 da v3 oxiri ("وَلَمْ يُولَدْ") chunk'i.
-  ["ix_v3", "jumla", "وَلَمْ يُولَدْ",                                        "Ixlos 3-oyat (oxiri): Va U tug'ilmagandir (1-qism p46 da)",               A.ixl("p47_ix_v3"),  0, 2.08, 0, 0, 0, 0],
-  ["ix_v4", "jumla", "وَلَمْ يَكُنْ لَهُ كُفُوًا اَحَدٌ",                       "Ixlos 4-oyat: Va Uning hech bir tengi yo'qdir",                            A.ixl("p47_ix_v4"),  0, 3.55, 0, 0, 0, 0],
+  // --- Al-Ikhlas (p46 da to'liq) — p47 endi to'g'ridan-to'g'ri Falaq bilan boshlanadi ---
+  // 2026-05-22: ix_v3 va ix_v4 ikkalasi p46 ga ko'chirildi (foydalanuvchi qarori).
 
   // --- Surah Al-Falaq (Bismillah + 5 ayat) ---
   ["fq_bism", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ",                "Falaq surasi: Bismillah",                                                   A.flq("p47_fq_bism"), 0, 5.18, 0, 0, 0, 0],

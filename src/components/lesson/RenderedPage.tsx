@@ -2306,23 +2306,151 @@ function Page31({ elements, activeId, hasActive, onElementClick }: PP) {
   );
 }
 
+// Page 32 — Idg'om: 12 misol (6 qator × 2 ustun), kitobning idg'om sahifasiga
+// mos. Har misol: asl shakl (clickable, audio ijro etadi) — (idg'om
+// transformatsiya, statik). Audio: 44. idg'om.mp3.
 function Page32({ elements, activeId, hasActive, onElementClick }: PP) {
-  const { els } = usePageElements(elements, 32);
+  const { el } = usePageElements(elements, 32);
+  const title = el("title");
+
+  // IdgomCell: kitobdek "(asl) - (transformed)" yoki "(asl)" only.
+  // Asl shakl clickable (audio bilan), transformed statik (faqat vizual).
+  const IdgomCell = ({ id, transform }: { id: string; transform: string }) => {
+    const e = el(id);
+    if (!e) return null;
+    const isActive = activeId === e.id;
+    return (
+      <div dir="rtl" className="inline-flex items-baseline gap-1">
+        <button
+          onClick={(ev) => { ev.stopPropagation(); onElementClick(e); }}
+          className="element-spring rounded-md px-1.5 py-0"
+          style={{
+            backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+            color: isActive ? "#ffffff" : "var(--color-text-main)",
+            boxShadow: isActive ? "0 4px 14px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <span
+            dir="rtl"
+            className="arabic-text text-[clamp(0.78rem,3.6cqi,0.95rem)] leading-tight"
+            style={{ fontFamily: "var(--font-arabic)" }}
+          >
+            ({e.arabic})
+          </span>
+        </button>
+        <span className="text-[10px] opacity-60">−</span>
+        <span
+          dir="rtl"
+          className="arabic-text text-[clamp(0.62rem,3.0cqi,0.78rem)] opacity-65 leading-tight"
+          style={{ fontFamily: "var(--font-arabic)" }}
+        >
+          ({transform})
+        </span>
+      </div>
+    );
+  };
+
+  // 6 qator × 2 ustun layout (kitobga mos). Har qatordagi 2 misol RTL'da
+  // tabiiy o'qiladi: chap ustun keyin keladi, o'ng ustun avval.
+  const RowPair = ({ ids, transforms }: { ids: [string, string]; transforms: [string, string] }) => (
+    <div dir="rtl" className="flex w-full flex-row-reverse justify-around items-baseline gap-3 py-0.5">
+      <IdgomCell id={ids[1]} transform={transforms[1]} />
+      <IdgomCell id={ids[0]} transform={transforms[0]} />
+    </div>
+  );
+
   return (
-    <div className="flex flex-col items-center gap-2">
-      <Title text="إدغام" sub="Idg'om" />
-      <Row els={els(["01"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
-      <Divider />
-      <Row els={els(["02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
-      <Row els={els(["04"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
-      <Row els={els(["05"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
+    <div className="flex flex-col items-center gap-0 w-full">
+      {/* Title — اِدْغَام (clickable) */}
+      {title && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onElementClick(title); }}
+          className="element-spring rounded-lg px-3 py-1 mb-1"
+          style={{
+            backgroundColor: activeId === title.id ? "var(--color-primary)" : "transparent",
+            color: activeId === title.id ? "#ffffff" : "var(--color-text-secondary)",
+            boxShadow: activeId === title.id ? "0 8px 24px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <h3 className="arabic-text text-[clamp(0.95rem,4.5cqi,1.2rem)] font-bold leading-tight">
+            {title.arabic}
+          </h3>
+        </button>
+      )}
+
+      {/* 6 qator × 2 misol (har misolda asl + idg'om transformatsiya) */}
+      <RowPair ids={["e01_minmasad","e02_lannumin"]} transforms={["مِمْ مَسَدٍ","لَنُّؤْمِنَ"]} />
+      <RowPair ids={["e03_minwali", "e04_wamanya"]}  transforms={["مِوَّلِيٍّ","وَمَيَّعْمَلْ"]} />
+      <RowPair ids={["e05_wamanlam","e06_minrabb"]}  transforms={["وَمَلَّمْ","مِرَّبِّهِمْ"]} />
+      <RowPair ids={["e07_hudamin","e08_shaynkr"]}   transforms={["هُدَمْ مِنْ","شَيْئَنُّكْرًا"]} />
+      <RowPair ids={["e09_ilahwah","e10_khayyar"]}   transforms={["اِلٰهُوَّاحِدٌ","خَيْرَيَّرَهُ"]} />
+      <RowPair ids={["e11_hudalmu","e12_ghafrah"]}   transforms={["هُدَلِّلْمُتَّقِينَ","غَفُورُرَّحِيمٌ"]} />
     </div>
   );
 }
 
+// Harf nomlari Arabcha shaklda (kitobning audio o'qish uslubiga mos):
+// "ا" o'qiladi "الف" deb, "ب" → "با", "ت" → "تا" va h.k.
+const P33_HARFLAR_NAMES: Record<string, string> = {
+  h01: "اَلِف",   h02: "بَا",     h03: "تَا",     h04: "ثَا",
+  h05: "جِيم",    h06: "حَا",     h07: "خَا",     h08: "دَال",
+  h09: "ذَال",    h10: "رَا",     h11: "زَا",     h12: "سِين",
+  h13: "شِين",    h14: "صَاد",    h15: "ضَاد",    h16: "طَا",
+  h17: "ظَا",     h18: "عَين",    h19: "غَين",    h20: "فَا",
+  h21: "قَاف",    h22: "كَاف",    h23: "لَام",    h24: "مِيم",
+  h25: "نُون",    h26: "وَاو",    h27: "هَا",     h28: "لَامَالِف",
+  h29: "يَا",
+};
+
 function Page33({ elements, activeId, hasActive, onElementClick }: PP) {
   const { el, els } = usePageElements(elements, 33);
   const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-1" />;
+
+  // Letter + name (vertikal): harf katta yuqorida + ism kichik pastida.
+  // Clickable bitta button — har ikkalasi birga active highlight oladi.
+  const LetterWithName = ({ id }: { id: string }) => {
+    const e = el(id);
+    if (!e) return null;
+    const name = P33_HARFLAR_NAMES[id];
+    const isActive = activeId === e.id;
+    return (
+      <button
+        onClick={(ev) => { ev.stopPropagation(); onElementClick(e); }}
+        className="element-spring rounded-md px-1 py-0.5 flex flex-col items-center"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-main)",
+          boxShadow: isActive ? "0 4px 14px var(--color-primary-glow)" : "none",
+          transform: isActive ? "scale(1.06)" : "none",
+        }}
+      >
+        <span
+          className="arabic-text font-bold text-[clamp(0.85rem,4cqi,1.05rem)] leading-none"
+          style={{ fontFamily: "var(--font-arabic)" }}
+        >
+          {e.arabic}
+        </span>
+        {name && (
+          <span
+            className="arabic-text text-[clamp(0.5rem,2.4cqi,0.65rem)] leading-tight opacity-80 mt-0.5"
+            style={{ fontFamily: "var(--font-arabic)" }}
+          >
+            {name}
+          </span>
+        )}
+      </button>
+    );
+  };
+
+  // Row of LetterWithName cells — RTL natural reading order: h01 (Alif) on the RIGHT,
+  // last id on the LEFT. dir="rtl" sets the main axis right-to-left, so DOM order
+  // [h01, h02, ...] visually maps to [right, ..., left]. NO flex-row-reverse here —
+  // that would cancel the RTL direction and put h01 on the left (wrong for Arabic).
+  const HarfRow = ({ ids }: { ids: string[] }) => (
+    <div dir="rtl" className="flex w-full justify-center items-baseline gap-[clamp(0.125rem,1.2cqi,0.4rem)]">
+      {ids.map(id => <LetterWithName key={id} id={id} />)}
+    </div>
+  );
 
   const ClickableMuq = ({ id }: { id: string }) => {
     const e = el(id);
@@ -2347,16 +2475,34 @@ function Page33({ elements, activeId, hasActive, onElementClick }: PP) {
 
   const sub = el("m_subtitle");
 
+  const topTitle = el("top_title");
+
   return (
     <div className="flex flex-col items-center gap-0.5">
-      {/* TOP: Arab harflari ismi — 4 qator (7+7+7+8) */}
-      <p className="arabic-text text-[10px] text-text-secondary text-center mb-0.5" style={{ fontFamily: "var(--font-arabic)" }}>
-        عرب حرفلرینینگ اسملری
-      </p>
-      <Row els={els(["h01","h02","h03","h04","h05","h06","h07"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["h08","h09","h10","h11","h12","h13","h14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["h15","h16","h17","h18","h19","h20","h21"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["h22","h23","h24","h25","h26","h27","h28","h29"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      {/* TOP: Arab harflari ismi — title (clickable) + 4 qator (7+7+7+8) */}
+      {topTitle && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onElementClick(topTitle); }}
+          className="element-spring rounded-md px-2 py-0 mb-0.5"
+          style={{
+            backgroundColor: activeId === topTitle.id ? "var(--color-primary)" : "transparent",
+            color: activeId === topTitle.id ? "#ffffff" : "var(--color-text-secondary)",
+            boxShadow: activeId === topTitle.id ? "0 4px 14px var(--color-primary-glow)" : "none",
+          }}
+        >
+          <span
+            className="arabic-text text-[10px] text-center leading-tight"
+            style={{ fontFamily: "var(--font-arabic)" }}
+          >
+            {topTitle.arabic}
+          </span>
+        </button>
+      )}
+      {/* 4 qator harflar — har cell harf + uning ismi (Arabcha shaklda, pastda) */}
+      <HarfRow ids={["h01","h02","h03","h04","h05","h06","h07"]} />
+      <HarfRow ids={["h08","h09","h10","h11","h12","h13","h14"]} />
+      <HarfRow ids={["h15","h16","h17","h18","h19","h20","h21"]} />
+      <HarfRow ids={["h22","h23","h24","h25","h26","h27","h28","h29"]} />
 
       <Sep />
 
@@ -2454,15 +2600,19 @@ function Page34({ elements, activeId, hasActive, onElementClick }: PP) {
     );
   };
 
-  // Kalima body — parts'ni RTL qator qilib chiqaradi, orasiga Gul qo'yadi.
+  // Kalima body — parts'ni RTL tabiiy qator qilib chiqaradi, orasiga Gul qo'yadi.
   // Har part o'z clickable button — bosilganda mos audio chunk ijro etiladi.
+  // ⚠️ dir="rtl" o'zi yetarli — flex-row-reverse QO'SHMANG, aks holda RTL bekor
+  // qilinadi va birinchi DOM child chapda ko'rinadi. Tartib: ids[0] o'ngda
+  // (Arab o'qish), ids[N-1] chapda. Misol: K2 Shahada da k2_p1 (Ashhadu...)
+  // o'ngda, k2_p2 (wa Ashhadu...) chapda (kitobdek o'qish tartibi).
   const KalimaBody = ({ ids }: { ids: string[] }) => {
     const parts = ids.map((id) => el(id)).filter(Boolean) as Element[];
     if (!parts.length) return null;
     return (
       <div
         dir="rtl"
-        className="flex flex-row-reverse flex-wrap justify-center items-center gap-x-0 gap-y-0.5 w-full"
+        className="flex flex-wrap justify-center items-center gap-x-0 gap-y-0.5 w-full"
       >
         {parts.map((p, i) => {
           const isActive = activeId === p.id;
@@ -2517,9 +2667,9 @@ function Page34({ elements, activeId, hasActive, onElementClick }: PP) {
       <KalimaHead id="k1_head" />
       <KalimaBody ids={["k1_body"]} />
 
-      {/* Kalima 2 — Shahada */}
+      {/* Kalima 2 — Shahada (yagona button, gul yo'q — to'liq audio uzluksiz) */}
       <KalimaHead id="k2_head" />
-      <KalimaBody ids={["k2_p1", "k2_p2"]} />
+      <KalimaBody ids={["k2_body"]} />
 
       {/* Kalima 3 — Tawhid */}
       <KalimaHead id="k3_head" />
@@ -2529,10 +2679,14 @@ function Page34({ elements, activeId, hasActive, onElementClick }: PP) {
       <KalimaHead id="k4_head" />
       <KalimaBody ids={["k4_p1", "k4_p2", "k4_p3"]} />
 
-      {/* Kalima 5 — Istighfar (3x Astaghfirullah + book ext + 3 audio extensions) */}
+      {/* Kalima 5 — Istighfar:
+          R1: 2 ta Astaghfirullah (har biri alohida audio)
+          R2: 3-Astaghfirullah + ta'ala min kulli... (BIRLASHGAN — uzluksiz audio)
+          R3-R5: audio kengaytmasi (sirran/tawba/ghuyub) */}
       <KalimaHead id="k5_head" />
-      <KalimaBody ids={["k5_ast1", "k5_ast2", "k5_ast3"]} />
-      <KalimaBody ids={["k5_ext", "k5_p2_alaniya"]} />
+      <KalimaBody ids={["k5_ast1", "k5_ast2"]} />
+      <KalimaBody ids={["k5_ast3_ext"]} />
+      <KalimaBody ids={["k5_p2_alaniya"]} />
       <KalimaBody ids={["k5_p3_tawba"]} />
       <KalimaBody ids={["k5_p4_ghuyub"]} />
     </div>
@@ -2800,7 +2954,7 @@ function Page37({ elements, activeId, hasActive, onElementClick }: PP) {
       <Row els={els(["ll_bismillah"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-2" />
       <Row els={els(["ll_a1", "ll_a2", "ll_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <Row els={els(["ll_a4", "ll_a5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["ll_a6", "ll_a7", "ll_a8_start"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <Row els={els(["ll_a6", "ll_a7"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
     </div>
   );
 }
@@ -2901,7 +3055,20 @@ function Page40({ elements, activeId, hasActive, onElementClick }: PP) {
       <Row els={els(["a13", "a14"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
       <Row els={els(["a15"])}               activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <Row els={els(["a16", "a17", "a18"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["a19"])}               activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      {/* Alaq 19-oyat — sajda oyati ekanligini bildiruvchi belgi (۩) bilan */}
+      <div className="flex flex-row-reverse items-center justify-center gap-1.5 w-full">
+        <Row els={els(["a19"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+        <span
+          className="arabic-text text-[clamp(0.9rem,4.5cqi,1.2rem)] leading-none select-none"
+          title="Sajda oyati"
+          style={{ color: "var(--color-primary)", opacity: 0.85, fontFamily: "var(--font-arabic)" }}
+        >
+          ۩
+        </span>
+      </div>
+      <p className="text-[9px] uppercase tracking-widest text-text-muted mt-0.5">
+        Sajda oyati
+      </p>
       <Divider />
 
       {/* Surah Al-Qadr (Bismillah + 5 ayat) */}
@@ -3073,50 +3240,64 @@ function Page45({ elements, activeId, hasActive, onElementClick }: PP) {
     id,
     num,
     size = "sm",
+    inRow = false,
+    linkedIds,
   }: {
     id: string;
     num?: string;
     size?: "sm" | "md" | "lg";
+    /** Agar `true` bo'lsa, Verse w-full wrapper'siz inline render qilinadi —
+     * boshqa flex parent ichida yonma-yon joylash uchun. */
+    inRow?: boolean;
+    /** Bog'langan element ID lari — birlashgan audio guruhida ishlatiladi.
+     * Agar guruhdagi element active bo'lsa, bu Verse ham active highlight oladi
+     * (audio butun guruhga tegishli ekanini ko'rsatish uchun). */
+    linkedIds?: string[];
   }) => {
     const e = el(id);
     if (!e) return null;
-    const isActive = activeId === e.id;
+    const groupIds = [e.id, ...(linkedIds ?? []).map((i) => el(i)?.id).filter((x): x is string => !!x)];
+    const isActive = activeId !== null && groupIds.includes(activeId);
     const txtCls =
       size === "lg"
         ? "text-[clamp(0.95rem,4.6cqi,1.2rem)]"
         : size === "md"
         ? "text-[clamp(0.82rem,4cqi,1.05rem)]"
         : "text-[clamp(0.72rem,3.6cqi,0.92rem)]";
+    const button = (
+      <button
+        onClick={(ev) => {
+          ev.stopPropagation();
+          onElementClick(e);
+        }}
+        className="element-spring rounded-md px-2 py-0.5 inline-flex items-center gap-1 max-w-full"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-main)",
+          boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+        }}
+      >
+        <span
+          className={`arabic-text font-bold leading-tight text-center ${txtCls}`}
+          style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
+        >
+          {e.arabic}
+          {num && (
+            <span
+              className="arabic-text mx-1 opacity-70"
+              style={{ fontSize: "0.78em" }}
+            >
+              {" "}
+              ﴿{num}﴾
+            </span>
+          )}
+        </span>
+      </button>
+    );
+    if (inRow) return button;
     return (
       <div className="flex w-full justify-center" dir="rtl">
-        <button
-          onClick={(ev) => {
-            ev.stopPropagation();
-            onElementClick(e);
-          }}
-          className="element-spring rounded-md px-2 py-0.5 inline-flex items-center gap-1 max-w-full"
-          style={{
-            backgroundColor: isActive ? "var(--color-primary)" : "transparent",
-            color: isActive ? "#ffffff" : "var(--color-text-main)",
-            boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
-          }}
-        >
-          <span
-            className={`arabic-text font-bold leading-tight text-center ${txtCls}`}
-            style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
-          >
-            {e.arabic}
-            {num && (
-              <span
-                className="arabic-text mx-1 opacity-70"
-                style={{ fontSize: "0.78em" }}
-              >
-                {" "}
-                ﴿{num}﴾
-              </span>
-            )}
-          </span>
-        </button>
+        {button}
       </div>
     );
   };
@@ -3147,8 +3328,12 @@ function Page45({ elements, activeId, hasActive, onElementClick }: PP) {
       <Verse id="ma_a1" num="١" size="sm" />
       <Verse id="ma_a2" num="٢" size="sm" />
       <Verse id="ma_a3" num="٣" size="sm" />
-      <Verse id="ma_a4" num="٤" size="sm" />
-      <Verse id="ma_a5" num="٥" size="sm" />
+      {/* a4 + a5 — bir qatorda, birlashgan audio guruh. Click qilinganda
+          ikkala oyat ham yashil bo'ladi (audio butun guruhga tegishli). */}
+      <div dir="rtl" className="flex w-full justify-center items-baseline gap-2 flex-wrap">
+        <Verse id="ma_a4" num="٤" size="sm" inRow linkedIds={["ma_a5"]} />
+        <Verse id="ma_a5" num="٥" size="sm" inRow linkedIds={["ma_a4"]} />
+      </div>
       <Verse id="ma_a6" num="٦" size="sm" />
       <Verse id="ma_a7" num="٧" size="sm" />
 
@@ -3179,50 +3364,59 @@ function Page46({ elements, activeId, hasActive, onElementClick }: PP) {
     id,
     num,
     size = "sm",
+    inRow = false,
+    linkedIds,
   }: {
     id: string;
     num?: string;
     size?: "sm" | "md" | "lg";
+    inRow?: boolean;
+    linkedIds?: string[];
   }) => {
     const e = el(id);
     if (!e) return null;
-    const isActive = activeId === e.id;
+    const groupIds = [e.id, ...(linkedIds ?? []).map((i) => el(i)?.id).filter((x): x is string => !!x)];
+    const isActive = activeId !== null && groupIds.includes(activeId);
     const txtCls =
       size === "lg"
         ? "text-[clamp(0.95rem,4.6cqi,1.2rem)]"
         : size === "md"
         ? "text-[clamp(0.82rem,4cqi,1.05rem)]"
         : "text-[clamp(0.72rem,3.6cqi,0.92rem)]";
+    const button = (
+      <button
+        onClick={(ev) => {
+          ev.stopPropagation();
+          onElementClick(e);
+        }}
+        className="element-spring rounded-md px-2 py-0.5 inline-flex items-center gap-1 max-w-full"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-main)",
+          boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+        }}
+      >
+        <span
+          className={`arabic-text font-bold leading-tight text-center ${txtCls}`}
+          style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
+        >
+          {e.arabic}
+          {num && (
+            <span
+              className="arabic-text mx-1 opacity-70"
+              style={{ fontSize: "0.78em" }}
+            >
+              {" "}
+              ﴿{num}﴾
+            </span>
+          )}
+        </span>
+      </button>
+    );
+    if (inRow) return button;
     return (
       <div className="flex w-full justify-center" dir="rtl">
-        <button
-          onClick={(ev) => {
-            ev.stopPropagation();
-            onElementClick(e);
-          }}
-          className="element-spring rounded-md px-2 py-0.5 inline-flex items-center gap-1 max-w-full"
-          style={{
-            backgroundColor: isActive ? "var(--color-primary)" : "transparent",
-            color: isActive ? "#ffffff" : "var(--color-text-main)",
-            boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
-          }}
-        >
-          <span
-            className={`arabic-text font-bold leading-tight text-center ${txtCls}`}
-            style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
-          >
-            {e.arabic}
-            {num && (
-              <span
-                className="arabic-text mx-1 opacity-70"
-                style={{ fontSize: "0.78em" }}
-              >
-                {" "}
-                ﴿{num}﴾
-              </span>
-            )}
-          </span>
-        </button>
+        {button}
       </div>
     );
   };
@@ -3271,7 +3465,12 @@ function Page46({ elements, activeId, hasActive, onElementClick }: PP) {
       <Verse id="ix_bism" size="sm" />
       <Verse id="ix_a1" num="١" size="sm" />
       <Verse id="ix_a2" num="٢" size="sm" />
-      <Verse id="ix_a3_start" size="sm" />
+      {/* v3 + v4 — bir qatorda, birlashgan audio. Click qilinsa ikkalasi
+          yashil bo'ladi (linkedIds), reciter uzilmasdan o'qigan. */}
+      <div dir="rtl" className="flex w-full justify-center items-baseline gap-2 flex-wrap">
+        <Verse id="ix_a3" num="٣" size="sm" inRow linkedIds={["ix_a4"]} />
+        <Verse id="ix_a4" num="٤" size="sm" inRow linkedIds={["ix_a3"]} />
+      </div>
     </div>
   );
 }
@@ -3347,13 +3546,7 @@ function Page47({ elements, activeId, hasActive, onElementClick }: PP) {
 
   return (
     <div className="flex flex-col items-center gap-0 w-full">
-      {/* === Al-Ikhlas davomi (v3 oxiri + v4 — v1, v2 va v3 boshi p46 da) === */}
-      <Verse id="ix_v3" num="٣" size="sm" />
-      <Verse id="ix_v4" num="٤" size="sm" />
-
-      <Divider />
-
-      {/* === Surah Al-Falaq === */}
+      {/* === Surah Al-Falaq (p47 to'g'ridan-to'g'ri Falaq bilan boshlanadi — Al-Ikhlas to'liq p46 da) === */}
       <SurahTitle text="سُورَةُ الْفَلَقِ" />
       <Verse id="fq_bism" size="sm" />
       <Verse id="fq_a1" num="١" size="sm" />

@@ -52,6 +52,7 @@ cut "$SRC_MA" "$OUT_MA" p45_ma_a2   16.50  22.55
 cut "$SRC_MA" "$OUT_MA" p45_ma_a3   24.65  31.40
 cut "$SRC_MA" "$OUT_MA" p45_ma_a4   34.25  38.55
 cut "$SRC_MA" "$OUT_MA" p45_ma_a5   38.55  45.30
+cut "$SRC_MA" "$OUT_MA" p45_ma_a4_a5 34.25 45.30    # a4+a5 birlashtirilgan — reciter uzluksiz o'qigan
 cut "$SRC_MA" "$OUT_MA" p45_ma_a6   48.40  54.30
 cut "$SRC_MA" "$OUT_MA" p45_ma_a7   56.30  61.55
 

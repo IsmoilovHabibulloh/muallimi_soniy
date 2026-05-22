@@ -68,6 +68,8 @@ cut "$SRC_IX" "$OUT_IX" p46_ix_bism      0.30   5.55
 cut "$SRC_IX" "$OUT_IX" p46_ix_a1        7.95  11.20
 cut "$SRC_IX" "$OUT_IX" p46_ix_a2       12.80  15.55
 cut "$SRC_IX" "$OUT_IX" p46_ix_a3_start 17.80  22.15
+cut "$SRC_IX" "$OUT_IX" p46_ix_a3_full  16.85  21.30    # v3 to'liq: "lam yalid wa lam yulad" (foydalanuvchi qarori 2026-05-22)
+cut "$SRC_IX" "$OUT_IX" p46_ix_a3_a4    16.85  25.85    # v3 + v4 birlashgan: reciter uzilmasdan o'qigan (2026-05-22)
 
 echo ""
 echo "=== Copying to public/audio/edit/ ==="

@@ -50,7 +50,7 @@ echo ""
 echo "=== Surah At-Takathur — Bismillah + 8 ayat ==="
 cut "$SRC_TK" "$OUT_TK" p43_tk_bism  1.100   6.350
 cut "$SRC_TK" "$OUT_TK" p43_tk_a1    8.850  12.350
-cut "$SRC_TK" "$OUT_TK" p43_tk_a2   14.400  17.950
+cut "$SRC_TK" "$OUT_TK" p43_tk_a2   13.950  17.950    # 0.45s start buffer — "Hatta" so'zining "Ha" (ح) tovushi clip bo'lmasin
 cut "$SRC_TK" "$OUT_TK" p43_tk_a3   19.650  24.400
 cut "$SRC_TK" "$OUT_TK" p43_tk_a4   26.500  32.700
 cut "$SRC_TK" "$OUT_TK" p43_tk_a5   35.100  41.800

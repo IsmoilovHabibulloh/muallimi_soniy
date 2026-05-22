@@ -59,7 +59,7 @@ cut "$SRC2" p36_bq_v1        11.35 18.80
 cut "$SRC2" p36_bq_v2        21.80 33.45
 cut "$SRC2" p36_bq_v3        36.45 50.70
 cut "$SRC2" p36_bq_v4        55.30 77.20
-cut "$SRC2" p36_bq_v5        80.15 90.65
+cut "$SRC2" p36_bq_v5        80.15 92.95    # 2.3s extra end — oxirgi so'z (المفلحون) tail clip bo'lmasin
 
 echo ""
 echo "=== Copying to public/audio/edit/ ==="
