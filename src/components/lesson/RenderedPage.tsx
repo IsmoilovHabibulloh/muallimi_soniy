@@ -176,8 +176,11 @@ function AyahRow({
   const gapClass = FLUID_GAP[gap] ?? gap;
   return (
     <div className={`flex w-full flex-row-reverse flex-wrap items-center justify-center ${gapClass}`}>
-      {els.map((el, i) => (
-        <React.Fragment key={el.id}>
+      {els.map((el) => (
+        <span
+          key={el.id}
+          className="inline-flex flex-row-reverse items-center gap-[clamp(0.125rem,0.8cqi,0.25rem)]"
+        >
           <ArabicEl
             el={el}
             isActive={activeId === el.id}
@@ -185,8 +188,8 @@ function AyahRow({
             onClick={() => onClick(el)}
             size={size}
           />
-          {i < els.length - 1 && <AyahSeparator />}
-        </React.Fragment>
+          <AyahSeparator />
+        </span>
       ))}
     </div>
   );
@@ -2876,36 +2879,42 @@ function Page36({ elements, activeId, hasActive, onElementClick }: PP) {
         : size === "md"
         ? "text-[clamp(0.82rem,4cqi,1.05rem)]"
         : "text-[clamp(0.72rem,3.6cqi,0.92rem)]";
+    const button = (
+      <button
+        onClick={(ev) => {
+          ev.stopPropagation();
+          onElementClick(e);
+        }}
+        className="element-spring rounded-md px-2 py-0.5 inline-flex items-center gap-1 max-w-full"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-main)",
+          boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+        }}
+      >
+        <span
+          className={`arabic-text font-bold leading-tight text-center ${txtCls}`}
+          style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
+        >
+          {e.arabic}
+          {num && (
+            <span
+              className="arabic-text mx-1 opacity-70"
+              style={{ fontSize: "0.78em" }}
+            >
+              {" "}
+              ﴿{num}﴾
+            </span>
+          )}
+        </span>
+      </button>
+    );
     return (
       <div className="flex w-full justify-center" dir="rtl">
-        <button
-          onClick={(ev) => {
-            ev.stopPropagation();
-            onElementClick(e);
-          }}
-          className="element-spring rounded-md px-2 py-0.5 inline-flex items-center gap-1 max-w-full"
-          style={{
-            backgroundColor: isActive ? "var(--color-primary)" : "transparent",
-            color: isActive ? "#ffffff" : "var(--color-text-main)",
-            boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
-          }}
-        >
-          <span
-            className={`arabic-text font-bold leading-tight text-center ${txtCls}`}
-            style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
-          >
-            {e.arabic}
-            {num && (
-              <span
-                className="arabic-text mx-1 opacity-70"
-                style={{ fontSize: "0.78em" }}
-              >
-                {" "}
-                ﴿{num}﴾
-              </span>
-            )}
-          </span>
-        </button>
+        <span className="inline-flex flex-row-reverse items-center gap-[clamp(0.125rem,0.8cqi,0.25rem)] max-w-full">
+          {button}
+          {num && <AyahSeparator />}
+        </span>
       </div>
     );
   };
@@ -3340,10 +3349,16 @@ function Page45({ elements, activeId, hasActive, onElementClick }: PP) {
         </span>
       </button>
     );
-    if (inRow) return button;
+    const verse = (
+      <span className="inline-flex flex-row-reverse items-center gap-[clamp(0.125rem,0.8cqi,0.25rem)] max-w-full">
+        {button}
+        {num && <AyahSeparator />}
+      </span>
+    );
+    if (inRow) return verse;
     return (
       <div className="flex w-full justify-center" dir="rtl">
-        {button}
+        {verse}
       </div>
     );
   };
@@ -3378,7 +3393,6 @@ function Page45({ elements, activeId, hasActive, onElementClick }: PP) {
           ikkala oyat ham yashil bo'ladi (audio butun guruhga tegishli). */}
       <div dir="rtl" className="flex w-full justify-center items-baseline gap-2 flex-wrap">
         <Verse id="ma_a4" num="٤" size="sm" inRow linkedIds={["ma_a5"]} />
-        <AyahSeparator />
         <Verse id="ma_a5" num="٥" size="sm" inRow linkedIds={["ma_a4"]} />
       </div>
       <Verse id="ma_a6" num="٦" size="sm" />
@@ -3460,10 +3474,16 @@ function Page46({ elements, activeId, hasActive, onElementClick }: PP) {
         </span>
       </button>
     );
-    if (inRow) return button;
+    const verse = (
+      <span className="inline-flex flex-row-reverse items-center gap-[clamp(0.125rem,0.8cqi,0.25rem)] max-w-full">
+        {button}
+        {num && <AyahSeparator />}
+      </span>
+    );
+    if (inRow) return verse;
     return (
       <div className="flex w-full justify-center" dir="rtl">
-        {button}
+        {verse}
       </div>
     );
   };
@@ -3516,7 +3536,6 @@ function Page46({ elements, activeId, hasActive, onElementClick }: PP) {
           yashil bo'ladi (linkedIds), reciter uzilmasdan o'qigan. */}
       <div dir="rtl" className="flex w-full justify-center items-baseline gap-2 flex-wrap">
         <Verse id="ix_a3" num="٣" size="sm" inRow linkedIds={["ix_a4"]} />
-        <AyahSeparator />
         <Verse id="ix_a4" num="٤" size="sm" inRow linkedIds={["ix_a3"]} />
       </div>
     </div>
@@ -3548,36 +3567,42 @@ function Page47({ elements, activeId, hasActive, onElementClick }: PP) {
         : size === "md"
         ? "text-[clamp(0.82rem,4cqi,1.05rem)]"
         : "text-[clamp(0.72rem,3.6cqi,0.92rem)]";
+    const button = (
+      <button
+        onClick={(ev) => {
+          ev.stopPropagation();
+          onElementClick(e);
+        }}
+        className="element-spring rounded-md px-2 py-0.5 inline-flex items-center gap-1 max-w-full"
+        style={{
+          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+          color: isActive ? "#ffffff" : "var(--color-text-main)",
+          boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+        }}
+      >
+        <span
+          className={`arabic-text font-bold leading-tight text-center ${txtCls}`}
+          style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
+        >
+          {e.arabic}
+          {num && (
+            <span
+              className="arabic-text mx-1 opacity-70"
+              style={{ fontSize: "0.78em" }}
+            >
+              {" "}
+              ﴿{num}﴾
+            </span>
+          )}
+        </span>
+      </button>
+    );
     return (
       <div className="flex w-full justify-center" dir="rtl">
-        <button
-          onClick={(ev) => {
-            ev.stopPropagation();
-            onElementClick(e);
-          }}
-          className="element-spring rounded-md px-2 py-0.5 inline-flex items-center gap-1 max-w-full"
-          style={{
-            backgroundColor: isActive ? "var(--color-primary)" : "transparent",
-            color: isActive ? "#ffffff" : "var(--color-text-main)",
-            boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
-          }}
-        >
-          <span
-            className={`arabic-text font-bold leading-tight text-center ${txtCls}`}
-            style={{ wordBreak: "normal", overflowWrap: "anywhere" }}
-          >
-            {e.arabic}
-            {num && (
-              <span
-                className="arabic-text mx-1 opacity-70"
-                style={{ fontSize: "0.78em" }}
-              >
-                {" "}
-                ﴿{num}﴾
-              </span>
-            )}
-          </span>
-        </button>
+        <span className="inline-flex flex-row-reverse items-center gap-[clamp(0.125rem,0.8cqi,0.25rem)] max-w-full">
+          {button}
+          {num && <AyahSeparator />}
+        </span>
       </div>
     );
   };
