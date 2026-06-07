@@ -146,6 +146,52 @@ function Row({
   );
 }
 
+function AyahSeparator({ className = "" }: { className?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={`arabic-text inline-flex shrink-0 items-center justify-center select-none text-[clamp(0.72rem,3.2cqi,0.95rem)] leading-none opacity-75 ${className}`}
+      style={{ color: "var(--color-text-secondary)" }}
+    >
+      ❀
+    </span>
+  );
+}
+
+function AyahRow({
+  els,
+  activeId,
+  hasActive,
+  onClick,
+  size = "sm",
+  gap = "gap-2",
+}: {
+  els: Element[];
+  activeId: string | null;
+  hasActive: boolean;
+  onClick: (el: Element) => void;
+  size?: "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+  gap?: string;
+}) {
+  const gapClass = FLUID_GAP[gap] ?? gap;
+  return (
+    <div className={`flex w-full flex-row-reverse flex-wrap items-center justify-center ${gapClass}`}>
+      {els.map((el, i) => (
+        <React.Fragment key={el.id}>
+          <ArabicEl
+            el={el}
+            isActive={activeId === el.id}
+            hasActive={hasActive}
+            onClick={() => onClick(el)}
+            size={size}
+          />
+          {i < els.length - 1 && <AyahSeparator />}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+}
+
 // Position-labelled row — shows labels (Boshida / O'rtasida / Oxirida) above
 // each element. els order maps to labels order; both render RTL visually.
 function PositionRow({
@@ -2941,20 +2987,20 @@ function Page37({ elements, activeId, hasActive, onElementClick }: PP) {
       {/* === Surah Ash-Shams === */}
       {shamsTitleHeader}
       <Row els={els(["sh_bismillah"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-2" />
-      <Row els={els(["sh_a1", "sh_a2", "sh_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["sh_a4", "sh_a5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["sh_a6", "sh_a7", "sh_a8"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["sh_a9", "sh_a10", "sh_a11"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["sh_a12", "sh_a13"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["sh_a14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["sh_a15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["sh_a1", "sh_a2", "sh_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["sh_a4", "sh_a5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["sh_a6", "sh_a7", "sh_a8"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["sh_a9", "sh_a10", "sh_a11"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["sh_a12", "sh_a13"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["sh_a14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["sh_a15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <Divider />
       {/* === Surah Al-Layl boshi === */}
       {laylTitleHeader}
       <Row els={els(["ll_bismillah"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-2" />
-      <Row els={els(["ll_a1", "ll_a2", "ll_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["ll_a4", "ll_a5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["ll_a6", "ll_a7"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["ll_a1", "ll_a2", "ll_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["ll_a4", "ll_a5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["ll_a6", "ll_a7"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
     </div>
   );
 }
@@ -2980,23 +3026,23 @@ function Page38({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-0.5">
       {/* === Al-Layl ayahs 8-21 (continuation from p37) === */}
-      <Row els={els(["ll_a8", "ll_a9"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["ll_a10", "ll_a11"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["ll_a12", "ll_a13"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["ll_a14", "ll_a15"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["ll_a16", "ll_a17"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["ll_a18", "ll_a19"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["ll_a20", "ll_a21"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["ll_a8", "ll_a9"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["ll_a10", "ll_a11"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["ll_a12", "ll_a13"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["ll_a14", "ll_a15"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["ll_a16", "ll_a17"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["ll_a18", "ll_a19"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["ll_a20", "ll_a21"])}      activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
       <Divider />
       {/* === Ad-Duho header (title + bismillah) === */}
       {duhoTitleHeader}
       <Row els={els(["du_bism"])}                activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-2" />
       {/* === Ad-Duho ayahs 1-10 (v.11 on p39) === */}
-      <Row els={els(["du_a1", "du_a2", "du_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["du_a4", "du_a5"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["du_a6", "du_a7"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["du_a8"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["du_a9", "du_a10"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["du_a1", "du_a2", "du_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["du_a4", "du_a5"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["du_a6", "du_a7"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["du_a8"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["du_a9", "du_a10"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
     </div>
   );
 }
@@ -3014,26 +3060,26 @@ function Page39({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-0">
       {/* Duho v.11 (last verse — v.1-10 on p38) */}
-      <Row els={els(["duho_v11"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["duho_v11"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <Sep />
 
       {/* Surah Ash-Sharh — bismillah + 8 ayat */}
       <Head text="سورة الشرح" sub="Sharh surasi" />
       <Row els={els(["sharh_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["sharh_v1", "sharh_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["sharh_v3", "sharh_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["sharh_v5", "sharh_v6", "sharh_v7"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["sharh_v8"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["sharh_v1", "sharh_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["sharh_v3", "sharh_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["sharh_v5", "sharh_v6", "sharh_v7"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["sharh_v8"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <Sep />
 
       {/* Surah At-Tin — bismillah + 8 ayat */}
       <Head text="سورة التين" sub="Tin surasi" />
       <Row els={els(["tin_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["tin_v1", "tin_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["tin_v3", "tin_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["tin_v5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["tin_v6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["tin_v7", "tin_v8"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["tin_v1", "tin_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["tin_v3", "tin_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["tin_v5"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["tin_v6"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["tin_v7", "tin_v8"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <Sep />
 
       {/* Surah Al-Alaq — header only (body on p40) */}
@@ -3047,17 +3093,17 @@ function Page40({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-0.5">
       {/* Surah Al-Alaq body (title + bismillah on p39) — 19 ayat */}
-      <Row els={els(["a01", "a02"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["a03", "a04"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["a05", "a06"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["a07", "a08", "a09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["a10", "a11", "a12"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["a13", "a14"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["a15"])}               activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["a16", "a17", "a18"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["a01", "a02"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["a03", "a04"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["a05", "a06"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["a07", "a08", "a09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["a10", "a11", "a12"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["a13", "a14"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["a15"])}               activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["a16", "a17", "a18"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       {/* Alaq 19-oyat — sajda oyati ekanligini bildiruvchi belgi (۩) bilan */}
       <div className="flex flex-row-reverse items-center justify-center gap-1.5 w-full">
-        <Row els={els(["a19"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+        <AyahRow els={els(["a19"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
         <span
           className="arabic-text text-[clamp(0.9rem,4.5cqi,1.2rem)] leading-none select-none"
           title="Sajda oyati"
@@ -3074,10 +3120,10 @@ function Page40({ elements, activeId, hasActive, onElementClick }: PP) {
       {/* Surah Al-Qadr (Bismillah + 5 ayat) */}
       <Title text="سورة القدر" sub="Qadr surasi" />
       <Row els={els(["q_bism"])}     activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["q01"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["q02", "q03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["q04"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["q05"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["q01"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["q02", "q03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["q04"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["q05"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
     </div>
   );
 }
@@ -3089,14 +3135,14 @@ function Page41({ elements, activeId, hasActive, onElementClick }: PP) {
     <div className="flex flex-col items-center gap-0.5">
       <Title text="سورة البينة" sub="Bayyina surasi" />
       <Row els={els(["bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["a1"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["a2"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["a3"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["a4"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["a5"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["a6"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["a7"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["a8"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["a1"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["a2"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["a3"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["a4"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["a5"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["a6"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["a7"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["a8"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
     </div>
   );
 }
@@ -3109,21 +3155,21 @@ function Page42({ elements, activeId, hasActive, onElementClick }: PP) {
       {/* === Surah Az-Zalzalah === */}
       <Title text="سورة الزلزلة" sub="Zalzala surasi" />
       <Row els={els(["zz_bism"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["zz_a1", "zz_a2"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["zz_a3", "zz_a4"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["zz_a5"])}            activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["zz_a6"])}            activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["zz_a7", "zz_a8"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["zz_a1", "zz_a2"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["zz_a3", "zz_a4"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["zz_a5"])}            activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["zz_a6"])}            activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["zz_a7", "zz_a8"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
       <Divider />
 
       {/* === Surah Al-'Adiyat === */}
       <Title text="سورة العاديات" sub="Adiyat surasi" />
       <Row els={els(["ad_bism"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["ad_a1", "ad_a2", "ad_a3"])}  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["ad_a4", "ad_a5"])}           activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["ad_a6", "ad_a7"])}           activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["ad_a8", "ad_a9"])}           activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["ad_a10", "ad_a11"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["ad_a1", "ad_a2", "ad_a3"])}  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["ad_a4", "ad_a5"])}           activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["ad_a6", "ad_a7"])}           activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["ad_a8", "ad_a9"])}           activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["ad_a10", "ad_a11"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
     </div>
   );
 }
@@ -3138,22 +3184,22 @@ function Page43({ elements, activeId, hasActive, onElementClick }: PP) {
       {/* === Surah Al-Qari'ah === */}
       <Title text="سورة القارعة" sub="Qari'ah surasi" />
       <Row els={els(["qr_bism"])}                 activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["qr_a1", "qr_a2", "qr_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["qr_a4"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["qr_a5"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["qr_a6", "qr_a7"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["qr_a8", "qr_a9"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["qr_a10", "qr_a11"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["qr_a1", "qr_a2", "qr_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["qr_a4"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["qr_a5"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["qr_a6", "qr_a7"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["qr_a8", "qr_a9"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["qr_a10", "qr_a11"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
 
       <Divider />
 
       {/* === Surah At-Takathur === */}
       <Title text="سورة التكاثر" sub="Takasur surasi" />
       <Row els={els(["tk_bism"])}                 activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["tk_a1", "tk_a2", "tk_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
-      <Row els={els(["tk_a4", "tk_a5"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["tk_a6", "tk_a7"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["tk_a8"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["tk_a1", "tk_a2", "tk_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
+      <AyahRow els={els(["tk_a4", "tk_a5"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["tk_a6", "tk_a7"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["tk_a8"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
 
       <Divider />
 
@@ -3203,28 +3249,28 @@ function Page44({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-0.5">
       {/* === Surah Al-'Asr davomi (3 ayat — title va Bismillah p43 da) === */}
-      <Row els={els(["as_a1", "as_a2"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["as_a3"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["as_a1", "as_a2"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["as_a3"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
 
       <Divider />
 
       {/* === Surah Al-Humazah === */}
       {humazahTitleHeader}
       <Row els={els(["hu_bism"])}                activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["hu_a1"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["hu_a2", "hu_a3"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["hu_a4", "hu_a5"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["hu_a6", "hu_a7"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["hu_a8", "hu_a9"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["hu_a1"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["hu_a2", "hu_a3"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["hu_a4", "hu_a5"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["hu_a6", "hu_a7"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["hu_a8", "hu_a9"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
 
       <Divider />
 
       {/* === Surah Al-Fil === */}
       {filTitleHeader}
       <Row els={els(["fi_bism"])}                activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["fi_a1"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
-      <Row els={els(["fi_a2", "fi_a3"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
-      <Row els={els(["fi_a4", "fi_a5"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["fi_a1"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
+      <AyahRow els={els(["fi_a2", "fi_a3"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
+      <AyahRow els={els(["fi_a4", "fi_a5"])}         activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
     </div>
   );
 }
@@ -3332,6 +3378,7 @@ function Page45({ elements, activeId, hasActive, onElementClick }: PP) {
           ikkala oyat ham yashil bo'ladi (audio butun guruhga tegishli). */}
       <div dir="rtl" className="flex w-full justify-center items-baseline gap-2 flex-wrap">
         <Verse id="ma_a4" num="٤" size="sm" inRow linkedIds={["ma_a5"]} />
+        <AyahSeparator />
         <Verse id="ma_a5" num="٥" size="sm" inRow linkedIds={["ma_a4"]} />
       </div>
       <Verse id="ma_a6" num="٦" size="sm" />
@@ -3469,6 +3516,7 @@ function Page46({ elements, activeId, hasActive, onElementClick }: PP) {
           yashil bo'ladi (linkedIds), reciter uzilmasdan o'qigan. */}
       <div dir="rtl" className="flex w-full justify-center items-baseline gap-2 flex-wrap">
         <Verse id="ix_a3" num="٣" size="sm" inRow linkedIds={["ix_a4"]} />
+        <AyahSeparator />
         <Verse id="ix_a4" num="٤" size="sm" inRow linkedIds={["ix_a3"]} />
       </div>
     </div>
