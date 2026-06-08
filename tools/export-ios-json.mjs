@@ -179,5 +179,5 @@ console.log(
 );
 console.log("\n   Endi shu fayllarni git'ga push qiling. iOS manba URL'i:");
 console.log(
-  "   https://raw.githubusercontent.com/IsmoilovHabibulloh/muallimi_soniy/main/muallimus-soniy/public/ios/"
+  "   https://raw.githubusercontent.com/IsmoilovHabibulloh/muallimi_soniy/main/public/ios/"
 );
