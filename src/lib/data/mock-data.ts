@@ -1,4 +1,4 @@
-import { Chapter, Lesson, Page } from "./types";
+import type { Chapter, Lesson, Page } from "./types";
 import { PAGE_ELEMENTS } from "./elements";
 
 export const chapters: Chapter[] = [
@@ -317,7 +317,8 @@ export const lessons: Record<string, Lesson[]> = {
 };
 
 // Mapping: chapterId+lessonId → page image numbers
-const PAGE_MAP: Record<string, number[]> = {
+// Exported for the iOS JSON export (tools/export-ios-json.mjs); used locally by getPages().
+export const PAGE_MAP: Record<string, number[]> = {
   ls_muqova: [0],
   ls_muqaddima: [1], // Pages 1 & 2 merged into single page 1 (continuous text)
   ls_alifbo: [3, 4],
