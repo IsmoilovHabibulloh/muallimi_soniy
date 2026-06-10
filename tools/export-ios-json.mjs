@@ -25,7 +25,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 // --- Sozlama -----------------------------------------------------------------
-const VERSION = "1.0.0"; // kontent yangilanganda oshiring (iOS manifest bilan solishtiradi)
+const VERSION = "1.0.1"; // kontent yangilanganda oshiring (iOS manifest bilan solishtiradi)
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = join(__dirname, "..");

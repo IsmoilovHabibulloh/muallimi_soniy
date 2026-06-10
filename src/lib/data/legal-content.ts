@@ -14,7 +14,7 @@ Kuchga kirgan: 2026-yil, 16-fevral
 
 1. KIRISH
 
-Ushbu Maxfiylik siyosati "MYSTAR" MChJ tomonidan ishlab chiqilgan "Muallimi Soniy" ilovasi foydalanuvchilarining shaxsiy ma'lumotlarini to'plash, saqlash, qayta ishlash va himoya qilish tartibini belgilaydi.
+Ushbu Maxfiylik siyosati "VIPADS" LLC tomonidan ishlab chiqilgan "Muallimi Soniy" ilovasi foydalanuvchilarining shaxsiy ma'lumotlarini to'plash, saqlash, qayta ishlash va himoya qilish tartibini belgilaydi.
 
 Ilovadan foydalanishni boshlash orqali Siz ushbu Maxfiylik siyosati shartlariga rozilik bildirasiz.
 
@@ -73,7 +73,7 @@ Siz quyidagi huquqlarga egasiz:
   • Ma'lumotlarni tuzatish huquqi
   • Rozilikni bekor qilish huquqi
 
-Murojaatlar uchun: shohruxbekaralov@gmail.com
+Murojaatlar uchun: support@vipads.uz
 Javob muddati: 30 kun
 
 7. BOLALAR MAXFIYLIGI
@@ -94,8 +94,8 @@ Ushbu Maxfiylik siyosati quyidagi qonun hujjatlariga muvofiq ishlab chiqilgan:
 
 10. BOG'LANISH
 
-Kompaniya: MYSTAR MChJ
-Email: shohruxbekaralov@gmail.com
+Kompaniya: VIPADS LLC
+Email: support@vipads.uz
 Ilova: Muallimi Soniy`,
 
     termsOfUse: `FOYDALANISH SHARTLARI
@@ -104,7 +104,7 @@ Kuchga kirgan: 2026-yil, 16-fevral
 
 1. UMUMIY QOIDALAR
 
-Ushbu Shartlar "MYSTAR" MChJ tomonidan ishlab chiqilgan "Muallimi Soniy" ilovasidan foydalanish tartib va qoidalarini belgilaydi.
+Ushbu Shartlar "VIPADS" LLC tomonidan ishlab chiqilgan "Muallimi Soniy" ilovasidan foydalanish tartib va qoidalarini belgilaydi.
 
 Ilovani o'rnatish yoki foydalanish orqali Siz ushbu Shartlarga rozilik bildirasiz.
 
@@ -151,8 +151,8 @@ Barcha nizolar avval muzokaralar yo'li bilan, muzokaralar natija bermaganida O'z
 
 9. BOG'LANISH
 
-Kompaniya: MYSTAR MChJ
-Email: shohruxbekaralov@gmail.com
+Kompaniya: VIPADS LLC
+Email: support@vipads.uz
 Ilova: Muallimi Soniy`,
 
     aboutApp: `DASTUR HAQIDA
@@ -161,7 +161,7 @@ Muallimi Soniy — Ikkinchi Muallim
 
 Ilova nomi: Muallimi Soniy
 Versiya: 1.0.0
-Ishlab chiqaruvchi: MYSTAR MChJ (CodingTech.uz)
+Ishlab chiqaruvchi: VIPADS LLC
 Kategoriya: Ta'lim (Education)
 Narx: Bepul
 Kod: Ochiq (Open Source)
@@ -199,7 +199,7 @@ GitHub: github.com/IsmoilovHabibulloh/muallimi-soniy
 Asl muallif: Ahmad Xodiy Maqsudiy
 Huquqiy asos: VazMahkama, 3438-son, 2014
 Audio: Jahongir qori Nematov
-Raqamlashtirish: MYSTAR MChJ
+Raqamlashtirish: VIPADS LLC
 Nashr yili: 2026
 
 7. TASHAKKUR
@@ -211,8 +211,8 @@ Nashr yili: 2026
 
 8. BOG'LANISH
 
-Kompaniya: MYSTAR MChJ
-Email: shohruxbekaralov@gmail.com`,
+Kompaniya: VIPADS LLC
+Email: support@vipads.uz`,
   },
 
   "uz-cyrl": {
@@ -222,7 +222,7 @@ Email: shohruxbekaralov@gmail.com`,
 
 1. КИРИШ
 
-Ушбу Махфийлик сиёсати "MYSTAR" МЧЖ томонидан ишлаб чиқилган "Муаллими Соний" иловаси фойдаланувчиларининг шахсий маълумотларини тўплаш, сақлаш, қайта ишлаш ва ҳимоя қилиш тартибини белгилайди.
+Ушбу Махфийлик сиёсати "VIPADS" LLC томонидан ишлаб чиқилган "Муаллими Соний" иловаси фойдаланувчиларининг шахсий маълумотларини тўплаш, сақлаш, қайта ишлаш ва ҳимоя қилиш тартибини белгилайди.
 
 Иловадан фойдаланишни бошлаш орқали Сиз ушбу Махфийлик сиёсати шартларига розилик билдирасиз.
 
@@ -241,7 +241,7 @@ Email: shohruxbekaralov@gmail.com`,
 
 3-9. Ўзбекча (лотин) версияси билан бир хил.
 
-Мурожаатлар учун: shohruxbekaralov@gmail.com`,
+Мурожаатлар учун: support@vipads.uz`,
 
     termsOfUse: `ФОЙДАЛАНИШ ШАРТЛАРИ
 
@@ -259,14 +259,14 @@ GitHub: github.com/IsmoilovHabibulloh/muallimi-soniy
 
 3-8. Ўзбекча (лотин) версияси билан бир хил.
 
-Мурожаатлар учун: shohruxbekaralov@gmail.com`,
+Мурожаатлар учун: support@vipads.uz`,
 
     aboutApp: `ДАСТУР ҲАҚИДА
 
 Муаллими Соний — Иккинчи Муаллим
 
 Версия: 1.0.0
-Ишлаб чиқарувчи: MYSTAR МЧЖ (CodingTech.uz)
+Ишлаб чиқарувчи: VIPADS LLC
 Категория: Таълим
 Нарх: Бепул
 Код: Очиқ (Open Source)
@@ -274,10 +274,10 @@ GitHub: github.com/IsmoilovHabibulloh/muallimi-soniy
 Масҳҳур ислом олими Аҳмад Ходий Мақсудий (1868–1941) томонидан ёзилган араб алифбосини ўргатишга бағишланган классик дарсликнинг замонавий рақамли версияси.
 
 Аудио: Жаҳонгир қори Нематов
-Рақамлаштириш: MYSTAR МЧЖ
+Рақамлаштириш: VIPADS LLC
 GitHub: github.com/IsmoilovHabibulloh/muallimi-soniy
 
-Мурожаатлар: shohruxbekaralov@gmail.com`,
+Мурожаатлар: support@vipads.uz`,
   },
 
   ru: {
@@ -287,7 +287,7 @@ GitHub: github.com/IsmoilovHabibulloh/muallimi-soniy
 
 1. ВВЕДЕНИЕ
 
-Настоящая Политика конфиденциальности определяет порядок сбора, хранения, обработки и защиты персональных данных пользователей приложения «Муаллими Соний», разработанного ООО «MYSTAR».
+Настоящая Политика конфиденциальности определяет порядок сбора, хранения, обработки и защиты персональных данных пользователей приложения «Муаллими Соний», разработанного «VIPADS» LLC.
 
 2. СОБИРАЕМЫЕ ДАННЫЕ
 
@@ -321,7 +321,7 @@ HTTPS шифрование, защищённый сервер, удаление 
 6. ПРАВА ПОЛЬЗОВАТЕЛЯ
 
 Запрос, удаление, исправление данных, отзыв согласия.
-Email: shohruxbekaralov@gmail.com (ответ: 30 дней)
+Email: support@vipads.uz (ответ: 30 дней)
 
 7. ДЕТИ
 
@@ -367,14 +367,14 @@ GitHub: github.com/IsmoilovHabibulloh/muallimi-soniy
 
 6. КОНТАКТЫ
 
-ООО «MYSTAR», shohruxbekaralov@gmail.com`,
+«VIPADS» LLC, support@vipads.uz`,
 
     aboutApp: `О ПРОГРАММЕ
 
 Муаллими Соний — Второй Учитель
 
 Версия: 1.0.0
-Разработчик: ООО «MYSTAR» (CodingTech.uz)
+Разработчик: «VIPADS» LLC
 Категория: Образование
 Цена: Бесплатно
 Код: Открытый (Open Source)
@@ -382,10 +382,10 @@ GitHub: github.com/IsmoilovHabibulloh/muallimi-soniy
 Современная цифровая версия классического учебника арабского алфавита Ахмада Ходия Максуди (1868–1941).
 
 Аудио: Джахангир кори Нематов
-Разработка: ООО «MYSTAR»
+Разработка: «VIPADS» LLC
 GitHub: github.com/IsmoilovHabibulloh/muallimi-soniy
 
-Контакт: shohruxbekaralov@gmail.com`,
+Контакт: support@vipads.uz`,
   },
 
   en: {
@@ -395,7 +395,7 @@ Effective Date: February 16, 2026
 
 1. INTRODUCTION
 
-This Privacy Policy defines the procedures for collecting, storing, processing, and protecting personal data of users of the "Muallimi Soniy" application developed by MYSTAR LLC.
+This Privacy Policy defines the procedures for collecting, storing, processing, and protecting personal data of users of the "Muallimi Soniy" application developed by VIPADS LLC.
 
 2. DATA WE COLLECT
 
@@ -429,7 +429,7 @@ HTTPS encryption, secure server, data deleted within 90 days.
 6. USER RIGHTS
 
 Request, delete, correct data, withdraw consent.
-Email: shohruxbekaralov@gmail.com (response: 30 days)
+Email: support@vipads.uz (response: 30 days)
 
 7. CHILDREN
 
@@ -475,14 +475,14 @@ Works offline. Internet only for initial download and updates.
 
 6. CONTACT
 
-MYSTAR LLC, shohruxbekaralov@gmail.com`,
+VIPADS LLC, support@vipads.uz`,
 
     aboutApp: `ABOUT THE APPLICATION
 
 Muallimi Soniy — The Second Teacher
 
 Version: 1.0.0
-Developer: MYSTAR LLC (CodingTech.uz)
+Developer: VIPADS LLC
 Category: Education
 Price: Free
 Code: Open Source
@@ -490,9 +490,9 @@ Code: Open Source
 A modern digital version of the classic Arabic alphabet textbook by Ahmad Khodiy Maqsudiy (1868–1941).
 
 Audio: Jahongir qori Nematov
-Development: MYSTAR LLC
+Development: VIPADS LLC
 GitHub: github.com/IsmoilovHabibulloh/muallimi-soniy
 
-Contact: shohruxbekaralov@gmail.com`,
+Contact: support@vipads.uz`,
   },
 };

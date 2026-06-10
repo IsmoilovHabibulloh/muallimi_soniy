@@ -1767,6 +1767,46 @@ bitta glass kartada `<BookToc variant="page" />`.
 `useBookToc()` dan oladi (resumeHref/resumeGlobalPage/totalPages) — eski
 pageCount-yig'indi hisobi (52/54 nomuvofiqlik bergan) taqiqlangan.
 
+## Sozlamalar sahifasi (/sozlamalar) — 2026-06-10 redesign
+
+Sahifa to'liq qayta qurilgan (`src/app/(tabs)/sozlamalar/page.tsx`).
+Eski versiyaga QAYTARMANG: emoji ikonkalar (🌙☀️📱/📖🔒ℹ️), range-slider,
+sahifa ichidagi `ABOUT_LABELS` lokalizatsiya konstanti — bekor qilingan.
+
+- **Har bo'lim = GlassCard + `SectionHeader`** (lokal komponent): 36×36
+  `bg-primary/20` ikonka chipi (lucide) + sarlavha + 1 qatorli tavsif.
+  Tavsiflar i18n'da: `repeat_desc`, `language_desc`, `theme_desc`,
+  `font_size_desc`. Tavsifsiz sozlama qo'shmang — "tushunarsiz" UX
+  foydalanuvchi tomonidan rad etilgan.
+- **Takrorlash soni — stepper** (−/+, 44×44, disabled holatlar bilan),
+  markazda katta `N×` qiymat. Slider EMAS. Ostida hint:
+  `repeat_reset_hint` ("Ilova qayta ochilganda 1× ga qaytadi") — reset
+  xatti-harakati endi UI'da oshkor.
+- **Til — vertikal ro'yxat** (radio uslubi): har til o'z qatorida, tanlangani
+  `bg-primary/20` + to'liq yashil doira ichida `Check`; tanlanmaganlar bo'sh
+  doira. Ikki o'zbek yozuvi sub-label bilan ("Lotin yozuvi"/"Кирилл ёзуви").
+- **Ko'rinish (tema)** — 3 segment tugma lucide ikonkalar bilan: `Sun`/
+  `Moon`/`MonitorSmartphone`. Emoji TAQIQLANGAN. i18n: uz'da "theme" =
+  **"Koʻrinish"** ("Mavzu" xato — "topic" ma'nosi).
+- **Shrift o'lchami** — 3 tugma, "A" harfi rem o'lchamlarda (0.8125/1/1.25),
+  pastki yorliqlar `t("small"/"medium"/"large")` orqali (qattiq o'zbekcha
+  matn bug'i tuzatilgan).
+- **Ilova haqida** — header'da `app_name · vX.Y.Z`, ostida 3 qator (lucide:
+  `ShieldCheck`/`FileText`/`Info` + ChevronRight) → `LEGAL_CONTENT` modal.
+  Yorliqlar i18n: `privacy_policy`/`terms_of_use`/`about_app`. Versiya
+  konstanti: `APP_VERSION` (page.tsx).
+- **Footer** — markazda `app_name · vVERSION` + `footer_company`
+  (barcha lokallarda "VIPADS LLC" — 2026-06-10 rebrand, eski MYSTAR
+  nomini QAYTARMANG). Murojaat email: support@vipads.uz
+  (legal-content.ts).
+- **Modal** — `createPortal(document.body)` MAJBURIY: `(tabs)/layout.tsx`
+  dagi `main` maskImage stacking context yaratadi — portal'siz modal pastki
+  fade'ga tushadi va tab bar (z-50) ostida qoladi. Overlay `z-[60]`.
+  Bottom-sheet uslubi (mobilda pastdan, `sm:` markazda), drag-handle,
+  Escape yopadi, ochiq payt `body.overflow=hidden`, kontent scrollTop
+  ochilishda 0 ga reset (`modalScrollRef`), safe-area pastki padding,
+  `role="dialog" aria-modal`.
+
 ## Sozlamalar defaultlari (foydalanuvchi qarorlari)
 
 - **Tema: DOIM light default** (2026-06-10). DEFAULT_SETTINGS.theme="light",
