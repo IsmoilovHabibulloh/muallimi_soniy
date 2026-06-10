@@ -9,6 +9,7 @@
 | OS | Ubuntu 24.04.2 LTS |
 | Domen | `muallimisoniy.uz` |
 | Node.js | v20.20.2 |
+| npm | v11.16.0 (2026-06-10 da yangilangan — lockfile npm 11 bilan generatsiya qilinadi, eski npm 10 `npm ci` da yiqilardi) |
 | PM2 | v6.0.14 |
 | Nginx | v1.24.0 |
 
