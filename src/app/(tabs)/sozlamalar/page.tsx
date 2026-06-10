@@ -22,6 +22,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { useSettings } from "@/providers/SettingsProvider";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { OfflineCard } from "@/components/sozlamalar/OfflineCard";
 import { LEGAL_CONTENT } from "@/lib/data/legal-content";
 import type { Locale, FontSize, Theme } from "@/lib/data/types";
 
@@ -259,6 +260,9 @@ export default function SozlamalarPage() {
             })}
           </div>
         </GlassCard>
+
+        {/* ── Oflayn rejim ── */}
+        <OfflineCard />
 
         {/* ── Ilova haqida ── */}
         <GlassCard className="!p-0 overflow-hidden">

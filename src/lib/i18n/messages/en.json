@@ -50,5 +50,21 @@
   "app_name": "Muallimi Soniy",
   "app_subtitle": "Arabic Language Learning Platform",
   "contents": "Contents",
-  "chapters_unit": "chapters"
+  "chapters_unit": "chapters",
+  "offline_title": "Offline mode",
+  "offline_desc": "Lessons, audio and images are saved to your device — the app works fully without internet",
+  "offline_idle": "Preparing…",
+  "offline_scanning": "Checking…",
+  "offline_running": "Downloading in background…",
+  "offline_paused": "Paused",
+  "offline_audio_wait": "Audio playing — download waiting",
+  "offline_offline": "No internet — will resume when connected",
+  "offline_done": "All content saved to your device",
+  "offline_done_partial": "Some files failed — will retry next time",
+  "offline_unsupported": "Your browser does not support offline storage",
+  "offline_files": "files",
+  "offline_pause": "Pause",
+  "offline_resume": "Resume",
+  "update_ready": "New version available",
+  "update_now": "Update"
 }

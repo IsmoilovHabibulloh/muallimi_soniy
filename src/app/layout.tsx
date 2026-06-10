@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
+import { SerwistProvider } from "@serwist/turbopack/react";
 import "./globals.css";
 import { SettingsProvider } from "@/providers/SettingsProvider";
 import { ProgressProvider } from "@/providers/ProgressProvider";
-import { ServiceWorkerRegister } from "@/components/layout/ServiceWorkerRegister";
+import { PwaManager } from "@/components/layout/PwaManager";
 
 export const metadata: Metadata = {
   title: "Muallimi Soniy",
@@ -38,10 +39,19 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className="min-h-dvh flex flex-col">
-        <SettingsProvider>
-          <ProgressProvider>{children}</ProgressProvider>
-        </SettingsProvider>
-        <ServiceWorkerRegister />
+        {/* reloadOnOnline o'chirilgan: dars o'qish payti internet qaytsa
+            sahifa yangilanib foydalanuvchi joyini yo'qotmasin */}
+        <SerwistProvider
+          swUrl="/serwist/sw.js"
+          disable={process.env.NODE_ENV !== "production"}
+          reloadOnOnline={false}
+          options={{ updateViaCache: "none" }}
+        >
+          <SettingsProvider>
+            <ProgressProvider>{children}</ProgressProvider>
+            <PwaManager />
+          </SettingsProvider>
+        </SerwistProvider>
       </body>
     </html>
   );

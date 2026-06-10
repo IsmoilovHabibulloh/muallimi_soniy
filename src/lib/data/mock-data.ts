@@ -317,7 +317,7 @@ export const lessons: Record<string, Lesson[]> = {
 };
 
 // Mapping: chapterId+lessonId → page image numbers
-// Exported for the iOS JSON export (tools/export-ios-json.mjs); used locally by getPages().
+// Exported for the content package generator (tools/build-content.mjs); used locally by getPages().
 export const PAGE_MAP: Record<string, number[]> = {
   ls_muqova: [0],
   ls_muqaddima: [1], // Pages 1 & 2 merged into single page 1 (continuous text)

@@ -4,13 +4,18 @@
 
 > Bu — foydalanuvchi tomonidan o'rnatilgan ish tartibi qoidalari. Doimo amal qiling.
 
-## Git push va deploy
+## Git push va deploy — Claude O'ZI bajaradi (2026-06-10 yangilandi)
 
-**Faqat foydalanuvchi aniq "git push qil" / "deploy qil" deb aytgandagina**
-push va serverga deploy qiling. Bundan oldin mustaqil ravishda push qilmang —
-o'zgarishni faqat lokalda saqlab, foydalanuvchi tasdig'ini kuting.
+Foydalanuvchi dasturchi EMAS va terminal buyruqlarini bajarmaydi. Ish
+yakunlanib, lokal tekshiruvlar (build, verify) o'tgach — **Claude o'zi
+commit + push + serverga deploy qiladi va natijani jonli tekshirib beradi**.
+Foydalanuvchiga "o'zingiz push qiling" deb qadam qoldirish — XATO.
 
-Sabab: foydalanuvchi nazoratni o'zida saqlashni xohlaydi.
+Faqat quyidagilarda oldin so'rang: destruktiv amallar (ma'lumot o'chirish,
+force-push, server konfiguratsiyasini buzishi mumkin bo'lgan o'zgarish).
+
+Sabab: foydalanuvchi 2026-06-10 da aniq aytdi — "men dasturchi bo'lmasam,
+buni bilmasam, qanday qilaman; senga ishonib loyiha qilyapman".
 
 ## UI arxitekturasini yangilab borish
 
@@ -1888,3 +1893,93 @@ boshqa narsa, qoidaga ta'sir qilmaydi.
   rang) amal qiling.
 - Foydalanuvchi yangi UI qarori bersa — shu yerga **darhol** yozib qo'ying,
   toki keyingi suhbatda u esda qolsin.
+
+---
+
+## 🌐 Offline (PWA) arxitekturasi — 2026-06-10
+
+Sayt **to'liq offline** ishlaydi. Yondashuv jahon tajribasi tadqiqotidan
+keyin tanlangan (Serwist = Workbox'ning faol davomchisi; next-pwa 2022 dan
+beri tashlab qo'yilgan; quran.com'ning 206-xatosi va Safari Range talabi
+hisobga olingan).
+
+### Komponentlar
+
+| Fayl | Vazifa |
+|------|--------|
+| `src/app/sw.ts` | Service worker manbasi (Serwist). esbuild bilan alohida bundle — `@/` alias ISHLATMANG |
+| `src/app/serwist/[path]/route.ts` | SW'ni `/serwist/sw.js` da xizmat qiluvchi route handler; precache manifest + 18 sahifa HTML |
+| `src/lib/offline/media-manifest.ts` | Ilova ishlatadigan BARCHA media URL'lar (elements.ts + mock-data'dan). Yangi dars qo'shilsa avtomatik tushadi |
+| `src/lib/offline/downloader.ts` | Fon yuklovchi: IndexedDB ledger (`ms-offline` DB), parallellik 4, sessiyalararo davom, audio ijroda pauza |
+| `src/lib/offline/useOfflineDownload.ts` | React hook (useSyncExternalStore) |
+| `src/components/layout/PwaManager.tsx` | Yuklovchini start qiladi (+4s), SW yangilanish toasti |
+| `src/components/sozlamalar/OfflineCard.tsx` | Sozlamalar'dagi progress kartasi |
+
+### Kesh bucketlari
+
+- **`serwist-precache-*`** (versiyalangan, har deploy yangilanadi):
+  `/_next/static` JS/CSS + 18 route HTML + ikonkalar (~1.4 MB).
+- **`ms-media-v1`** (BARQAROR — deploy'da O'CHMAYDI): shriftlar + barcha
+  audio (~122 MB, 1762 fayl). Fon yuklovchi to'ldiradi, SW o'qiydi.
+
+### Qat'iy qoidalar
+
+1. **Media'ni precache'ga QO'SHMANG** — `route.ts` dagi `globPatterns`
+   override'i ataylab `public/**/*` ni chiqarib tashlagan. Aks holda SW
+   o'rnatilishi 100+ MB yuklashga bloklanadi.
+2. **206 javob hech qachon keshlanmaydi** (`CacheableResponsePlugin
+   statuses: [200]`), Range so'rovlarga `RangeRequestsPlugin` keshdagi
+   to'liq fayldan 206 sintez qiladi — busiz Safari'da offline audio
+   ishlamaydi.
+3. **`skipWaiting: false`** — yangilanish foydalanuvchi tasdig'i bilan
+   (PwaManager toast). O'zgartirmang: avtomatik skipWaiting sessiya
+   o'rtasida eski HTML/yangi chunk ziddiyatini keltiradi.
+4. **`ms-media-v1` nomini o'zgartirmang** — o'zgartirilsa foydalanuvchilar
+   122 MB ni qayta yuklaydi.
+5. Yangi audio/sahifa qo'shilsa hech narsa qilish shart emas:
+   media-manifest elements.ts/mock-data'dan o'zi oladi, manifest signature
+   o'zgaradi, yuklovchi yangi fayllarni olib, eskirganlarini tozalaydi.
+6. `/images/N.jpg` manifestda YO'Q — barcha sahifalar RenderedPage bilan
+   chiziladi (rasm fallback o'lik kod). Renderer'siz sahifa qo'shilsa
+   media-manifest.ts ga rasmini qo'shing.
+7. Dev rejimda SW o'chiq (`SerwistProvider disable`), yuklovchi ham
+   ishlamaydi — PWA testlari faqat `next build && next start` da.
+
+### Sinash (production)
+
+```bash
+npx next build && npx next start
+# Brauzerda: DevTools → Application → Service Workers (/serwist/sw.js)
+# Sozlamalar sahifasida progress 1762/1762 bo'lguncha kutish
+# DevTools → Network → Offline → sahifalar va audio ishlashi kerak
+```
+
+---
+
+## 📦 Yagona kontent paketi (3 qism) — 2026-06-10
+
+Barcha platformalar (Web/iOS/Android) uchun kontent `public/content/` paketi
+orqali tarqatiladi. To'liq spetsifikatsiya: **README.md** (asosiy hujjat).
+
+- Generator: `tools/build-content.mjs` (`npm run content`) — elements.ts,
+  mock-data.ts, types.ts, muqaddima.ts, legal-content.ts, i18n, globals.css,
+  public/audio, public/fonts dan quradi.
+- Tekshiruv: `tools/verify-content.mjs` (`npm run content:verify`) — sha256
+  yaxlitlik + **web fon yuklovchisi bilan 1:1 audio paritet** + i18n paritet.
+- 3 qism: `sahifalar/book.json`, `audiolar/audio-manifest.json` (13 pack,
+  1757 fayl, har faylga sha256), `sozlamalar/{i18n,legal,settings}.json`.
+- Master: `manifest.json` — `contentVersion` (platformalar shuni solishtiradi),
+  `schemaVersion`, `contentHash`.
+
+**Qoidalar:**
+1. Kontent o'zgarsa (yangi sahifa/audio/i18n kalit): `CONTENT_VERSION` ni
+   build-content.mjs da oshiring → `npm run content && npm run content:verify`
+   → bitta commit bilan push. Bu QILINMASA mobil ilovalar yangilanishni ko'rmaydi.
+2. MUQADDIMA_PARAGRAPHS endi `src/lib/data/muqaddima.ts` da (data modul) —
+   RenderedPage.tsx undan import qiladi. JSX ichiga qaytarib YOZMANG.
+3. Eski `tools/export-ios-json.mjs`, `tools/export-ios.ts`, `public/ios/`
+   O'CHIRILGAN — qaytarmang. iOS/Android plan hujjatlari (`iso prmt/`,
+   `android prmt/`) yangi `public/content/` URL'lariga yangilangan.
+4. book.json sxemasi Swift/Kotlin Codable modellariga mos — sxemani o'zgartirsangiz
+   `schemaVersion` oshiring va plan hujjatlarini yangilang.
+5. i18n'ga yangi kalit qo'shsangiz — 4 til faylida ham qo'shing (verify yiqiladi aks holda).

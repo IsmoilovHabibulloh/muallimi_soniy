@@ -50,5 +50,21 @@
   "app_name": "Muallimi Soniy",
   "app_subtitle": "Arab tili oʻrganish platformasi",
   "contents": "Mundarija",
-  "chapters_unit": "bob"
+  "chapters_unit": "bob",
+  "offline_title": "Oflayn rejim",
+  "offline_desc": "Darslar, audio va rasmlar qurilmaga saqlanadi — ilova internetsiz ham toʻliq ishlaydi",
+  "offline_idle": "Tayyorlanmoqda…",
+  "offline_scanning": "Tekshirilmoqda…",
+  "offline_running": "Fonda yuklanmoqda…",
+  "offline_paused": "Toʻxtatilgan",
+  "offline_audio_wait": "Audio tinglanmoqda — kutib turibdi",
+  "offline_offline": "Internet yoʻq — ulanishi bilan davom etadi",
+  "offline_done": "Barcha kontent qurilmaga saqlandi",
+  "offline_done_partial": "Ayrim fayllar yuklanmadi — keyingi safar qayta uriniladi",
+  "offline_unsupported": "Brauzeringiz oflayn saqlashni qoʻllab-quvvatlamaydi",
+  "offline_files": "fayl",
+  "offline_pause": "Toʻxtatish",
+  "offline_resume": "Davom ettirish",
+  "update_ready": "Yangi versiya tayyor",
+  "update_now": "Yangilash"
 }

@@ -50,5 +50,21 @@
   "app_name": "Муаллими Соний",
   "app_subtitle": "Араб тили ўрганиш платформаси",
   "contents": "Мундарижа",
-  "chapters_unit": "боб"
+  "chapters_unit": "боб",
+  "offline_title": "Офлайн режим",
+  "offline_desc": "Дарслар, аудио ва расмлар қурилмага сақланади — илова интернетсиз ҳам тўлиқ ишлайди",
+  "offline_idle": "Тайёрланмоқда…",
+  "offline_scanning": "Текширилмоқда…",
+  "offline_running": "Фонда юкланмоқда…",
+  "offline_paused": "Тўхтатилган",
+  "offline_audio_wait": "Аудио тингланмоқда — кутиб турибди",
+  "offline_offline": "Интернет йўқ — уланиши билан давом этади",
+  "offline_done": "Барча контент қурилмага сақланди",
+  "offline_done_partial": "Айрим файллар юкланмади — кейинги сафар қайта уринилади",
+  "offline_unsupported": "Браузерингиз офлайн сақлашни қўллаб-қувватламайди",
+  "offline_files": "файл",
+  "offline_pause": "Тўхтатиш",
+  "offline_resume": "Давом эттириш",
+  "update_ready": "Янги версия тайёр",
+  "update_now": "Янгилаш"
 }

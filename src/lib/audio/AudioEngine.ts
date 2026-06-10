@@ -1,5 +1,12 @@
 export type AudioCallback = () => void;
 
+// Fon yuklovchi (offline/downloader.ts) audio ijro paytida bandwidth
+// talashmasligi uchun ijro holatini global hodisa bilan e'lon qilamiz.
+function dispatchAudioActive(active: boolean) {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new CustomEvent("ms:audio-active", { detail: active }));
+}
+
 export class AudioEngine {
   private audio: HTMLAudioElement;
   private timerId: ReturnType<typeof setInterval> | null = null;
@@ -30,14 +37,17 @@ export class AudioEngine {
       }
     });
 
-    this.audio.addEventListener("play", () =>
-      this.onPlayStateChange?.(true)
-    );
-    this.audio.addEventListener("pause", () =>
-      this.onPlayStateChange?.(false)
-    );
+    this.audio.addEventListener("play", () => {
+      this.onPlayStateChange?.(true);
+      dispatchAudioActive(true);
+    });
+    this.audio.addEventListener("pause", () => {
+      this.onPlayStateChange?.(false);
+      dispatchAudioActive(false);
+    });
     this.audio.addEventListener("ended", () => {
       this.onPlayStateChange?.(false);
+      dispatchAudioActive(false);
     });
   }
 

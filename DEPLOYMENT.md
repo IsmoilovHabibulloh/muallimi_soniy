@@ -121,3 +121,14 @@ server {
     }
 }
 ```
+
+## Offline (PWA) — deploy eslatmalari
+
+- Service worker endi `/serwist/sw.js` da (eski `public/sw.js` o'chirilgan,
+  alohida nginx sozlamasi kerak emas — Next orqali proxy bo'ladi).
+- Har deploy'dan keyin foydalanuvchilarga "Yangi versiya tayyor" toasti
+  chiqadi — "Yangilash" bosilgach yangi versiya qo'llanadi.
+- Audio kesh (`ms-media-v1`, ~122 MB) deploy'da o'chmaydi — foydalanuvchi
+  qayta yuklamaydi.
+- nginx'da `proxy_cache` YOQILMASIN (hozir yo'q) — aks holda `/serwist/sw.js`
+  eskirib, foydalanuvchilar eski versiyada qolib ketadi.
