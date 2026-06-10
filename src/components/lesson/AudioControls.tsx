@@ -2,7 +2,6 @@
 
 import { Play, Pause, SkipBack, SkipForward, Repeat } from "lucide-react";
 import { useSettings } from "@/providers/SettingsProvider";
-import type { PlaybackSpeed } from "@/lib/data/types";
 
 interface Props {
   isPlaying: boolean;
@@ -15,8 +14,54 @@ interface Props {
   onSeek: (time: number) => void;
 }
 
-const SPEEDS: PlaybackSpeed[] = [0.5, 1.0, 1.5];
+function formatTime(s: number) {
+  const min = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${min}:${sec.toString().padStart(2, "0")}`;
+}
 
+/* Progress chizig'i — vizual ingichka, lekin bosish maydoni katta (py-2). */
+function ProgressBar({
+  progress,
+  bufferProgress,
+  duration,
+  onSeek,
+}: {
+  progress: number;
+  bufferProgress: number;
+  duration: number;
+  onSeek: (time: number) => void;
+}) {
+  return (
+    <div
+      className="relative py-2 cursor-pointer flex-1 min-w-0"
+      onClick={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const pct = (e.clientX - rect.left) / rect.width;
+        onSeek(Math.max(0, Math.min(1, pct)) * duration);
+      }}
+    >
+      <div className="relative h-1 rounded-full bg-white/10">
+        <div
+          className="absolute inset-y-0 left-0 rounded-full bg-white/10"
+          style={{ width: `${bufferProgress}%` }}
+        />
+        <div
+          className="absolute inset-y-0 left-0 rounded-full bg-primary"
+          style={{ width: `${progress}%` }}
+        />
+        <div
+          className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/50"
+          style={{ left: `${progress}%`, marginLeft: -6 }}
+        />
+      </div>
+    </div>
+  );
+}
+
+/* Bitta qatorli ixcham player: prev/play/next + vaqt + progress + vaqt +
+   loop. Tezlik tugmalari yo'q (foydalanuvchi qarori 2026-06-10). `short`
+   (telefon yonbosh) rejimida o'lchamlar kichrayadi. */
 export function AudioControls({
   isPlaying,
   currentTime,
@@ -27,111 +72,63 @@ export function AudioControls({
   onNext,
   onSeek,
 }: Props) {
-  const { settings, setSpeed, setLoopMode, setSequentialMode, t } =
-    useSettings();
-
-  const formatTime = (s: number) => {
-    const min = Math.floor(s / 60);
-    const sec = Math.floor(s % 60);
-    return `${min}:${sec.toString().padStart(2, "0")}`;
-  };
+  const { settings, setLoopMode, t } = useSettings();
 
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="glass rounded-2xl p-4 mx-4 mb-3">
-      {/* Progress bar */}
-      <div className="relative mb-3">
-        <div
-          className="h-1 rounded-full bg-white/10 cursor-pointer"
-          onClick={(e) => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const pct = (e.clientX - rect.left) / rect.width;
-            onSeek(pct * duration);
-          }}
-        >
-          {/* Buffer */}
-          <div
-            className="absolute h-1 rounded-full bg-white/10"
-            style={{ width: `${bufferProgress}%` }}
-          />
-          {/* Playback */}
-          <div
-            className="absolute h-1 rounded-full bg-primary"
-            style={{ width: `${progress}%` }}
-          />
-          {/* Thumb */}
-          <div
-            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/50"
-            style={{ left: `${progress}%`, marginLeft: -6 }}
-          />
-        </div>
-        <div className="flex justify-between text-[10px] text-text-muted mt-1.5">
-          <span>{formatTime(currentTime)}</span>
-          <span>{formatTime(duration)}</span>
-        </div>
-      </div>
+    <div className="glass rounded-2xl short:rounded-xl px-3 py-1.5 short:py-1 mx-4 short:mx-3 mb-3 short:mb-1.5 flex items-center gap-2">
+      <button
+        onClick={onPrev}
+        aria-label="Oldingi element"
+        className="p-1.5 text-text-muted hover:text-text-main transition-colors shrink-0"
+      >
+        <SkipBack size={18} />
+      </button>
+      <button
+        onClick={onPlayPause}
+        aria-label={isPlaying ? "Pauza" : "Ijro"}
+        className="w-10 h-10 short:w-8 short:h-8 rounded-full bg-primary flex items-center justify-center hover:bg-primary-dark transition-colors active:scale-95 shrink-0"
+      >
+        {isPlaying ? (
+          <Pause size={18} className="text-bg-dark" />
+        ) : (
+          <Play size={18} className="text-bg-dark ml-0.5" />
+        )}
+      </button>
+      <button
+        onClick={onNext}
+        aria-label="Keyingi element"
+        className="p-1.5 text-text-muted hover:text-text-main transition-colors shrink-0"
+      >
+        <SkipForward size={18} />
+      </button>
 
-      {/* Main controls */}
-      <div className="flex items-center justify-center gap-6">
-        <button
-          onClick={onPrev}
-          className="text-text-muted hover:text-text-main transition-colors"
-        >
-          <SkipBack size={20} />
-        </button>
-        <button
-          onClick={onPlayPause}
-          className="w-12 h-12 rounded-full bg-primary flex items-center justify-center hover:bg-primary-dark transition-colors active:scale-95"
-        >
-          {isPlaying ? (
-            <Pause size={20} className="text-bg-dark" />
-          ) : (
-            <Play size={20} className="text-bg-dark ml-0.5" />
-          )}
-        </button>
-        <button
-          onClick={onNext}
-          className="text-text-muted hover:text-text-main transition-colors"
-        >
-          <SkipForward size={20} />
-        </button>
-      </div>
+      <span className="text-[0.6875rem] text-text-muted tabular-nums shrink-0 w-8 text-right">
+        {formatTime(currentTime)}
+      </span>
+      <ProgressBar
+        progress={progress}
+        bufferProgress={bufferProgress}
+        duration={duration}
+        onSeek={onSeek}
+      />
+      <span className="text-[0.6875rem] text-text-muted tabular-nums shrink-0 w-8">
+        {formatTime(duration)}
+      </span>
 
-      {/* Speed + Loop + Sequential */}
-      <div className="flex items-center justify-between mt-3">
-        {/* Speed */}
-        <div className="flex items-center gap-1">
-          {SPEEDS.map((s) => (
-            <button
-              key={s}
-              onClick={() => setSpeed(s)}
-              className={`px-2 py-1 rounded-lg text-xs font-medium transition-all ${
-                settings.speed === s
-                  ? "bg-primary/20 text-primary"
-                  : "text-text-muted hover:text-text-secondary"
-              }`}
-            >
-              {s}x
-            </button>
-          ))}
-        </div>
-
-        {/* Loop & Sequential */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setLoopMode(!settings.loopMode)}
-            className={`p-1.5 rounded-lg transition-all ${
-              settings.loopMode
-                ? "bg-primary/20 text-primary"
-                : "text-text-muted hover:text-text-secondary"
-            }`}
-            title={t("loop")}
-          >
-            <Repeat size={16} />
-          </button>
-        </div>
-      </div>
+      <button
+        onClick={() => setLoopMode(!settings.loopMode)}
+        className={`p-1.5 rounded-lg transition-all shrink-0 ${
+          settings.loopMode
+            ? "bg-primary/20 text-primary"
+            : "text-text-muted hover:text-text-secondary"
+        }`}
+        title={t("loop")}
+        aria-label={t("loop")}
+      >
+        <Repeat size={16} />
+      </button>
     </div>
   );
 }

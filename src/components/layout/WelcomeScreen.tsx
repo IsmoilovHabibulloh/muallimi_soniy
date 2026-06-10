@@ -70,7 +70,7 @@ export function WelcomeScreen() {
       className={`fixed inset-0 z-[200] flex items-center justify-center p-4 bg-bg-dark transition-opacity duration-300 ${visible ? "opacity-100" : "opacity-0"}`}
     >
       <div
-        className={`max-w-[380px] w-full px-7 py-9 rounded-[28px] text-center glass transition-all duration-500 ${visible ? "scale-100 translate-y-0" : "scale-95 translate-y-4"}`}
+        className={`max-w-[23.75rem] w-full px-7 py-9 rounded-[28px] text-center glass transition-all duration-500 ${visible ? "scale-100 translate-y-0" : "scale-95 translate-y-4"}`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -79,28 +79,28 @@ export function WelcomeScreen() {
           className="w-28 h-28 mx-auto mb-7 object-contain"
         />
 
-        <h1 className="text-[28px] font-extrabold text-text-main mb-3 tracking-tight">
+        <h1 className="text-[1.75rem] font-extrabold text-text-main mb-3 tracking-tight">
           {texts.welcome}
         </h1>
 
-        <p className="text-[15px] text-text-muted leading-relaxed mb-7">
+        <p className="text-[0.9375rem] text-text-muted leading-relaxed mb-7">
           {texts.description}
         </p>
 
         <div className="glass-green rounded-2xl px-5 py-4 mb-5 flex items-start gap-3.5 text-left">
-          <span className="text-[26px] leading-none mt-0.5 shrink-0">🤲</span>
-          <p className="text-[13px] text-text-secondary leading-[1.6] flex-1">
+          <span className="text-[1.625rem] leading-none mt-0.5 shrink-0">🤲</span>
+          <p className="text-[0.8125rem] text-text-secondary leading-[1.6] flex-1">
             {texts.wuduReminder}
           </p>
         </div>
 
-        <p className="text-[12px] text-text-muted mb-7 leading-relaxed">
+        <p className="text-[0.75rem] text-text-muted mb-7 leading-relaxed">
           {texts.offlineNote}
         </p>
 
         <button
           onClick={handleContinue}
-          className="w-full py-4 rounded-2xl font-bold text-[16px] text-white transition-all active:scale-[0.97] hover:brightness-110"
+          className="w-full py-4 rounded-2xl font-bold text-[1rem] text-white transition-all active:scale-[0.97] hover:brightness-110"
           style={{
             background: "linear-gradient(135deg, var(--color-primary-dark), var(--color-primary))",
             boxShadow:

@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "black-translucent",
+    // Light default tema — status bar matni qora bo'lishi uchun "default"
+    statusBarStyle: "default",
     title: "Muallimi Soniy",
   },
 };
@@ -18,9 +19,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  themeColor: "#071a0e",
+  // Pinch-zoom ochiq (WCAG 1.4.4); double-tap zoom body'dagi
+  // touch-action: manipulation bilan o'chirilgan.
+  maximumScale: 5,
+  userScalable: true,
+  // Light default; dark tanlanganda SettingsProvider meta'ni yangilaydi
+  themeColor: "#f0f7f2",
 };
 
 export default function RootLayout({

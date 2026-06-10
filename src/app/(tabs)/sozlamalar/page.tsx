@@ -69,7 +69,7 @@ export default function SozlamalarPage() {
   const modalItem = openModal ? aboutData.items.find((i) => i.key === openModal) : null;
 
   return (
-    <div className="max-w-lg mx-auto px-5 pt-6 pb-6">
+    <div className="max-w-lg mx-auto px-5 pt-6 pb-2">
       <h1 className="text-2xl font-bold text-text-main mb-4">{t("settings")}</h1>
 
       <div className="space-y-4">
@@ -161,7 +161,7 @@ export default function SozlamalarPage() {
                 }`}
               >
                 <span style={{ fontSize: fs.size, fontWeight: 700 }}>{fs.label}</span>
-                <span className="text-[10px] opacity-70">{fs.sub}</span>
+                <span className="text-[0.625rem] opacity-70">{fs.sub}</span>
               </button>
             ))}
           </div>

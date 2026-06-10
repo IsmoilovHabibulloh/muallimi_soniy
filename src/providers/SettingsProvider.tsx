@@ -48,21 +48,37 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
     DEFAULT_SETTINGS
   );
 
-  // Apply theme to DOM
+  // Takrorlash soni sessiyalararo SAQLANMAYDI — har ochilishda 1 dan
+  // boshlanadi (foydalanuvchi qarori 2026-06-10). Sessiya davomida
+  // o'zgartirish odatdagidek ishlaydi.
+  useEffect(() => {
+    if (!isLoaded) return;
+    setSettings((prev) =>
+      prev.repeatCount === 1 ? prev : { ...prev, repeatCount: 1 }
+    );
+    // faqat storage birinchi yuklanganda
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoaded]);
+
+  // Apply theme to DOM. DEFAULT = LIGHT: noma'lum/buzilgan qiymat ham
+  // light'ga tushadi. Status-bar (meta theme-color) faol temaga ergashadi.
   useEffect(() => {
     const root = document.documentElement;
+    const apply = (theme: "light" | "dark") => {
+      root.setAttribute("data-theme", theme);
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute("content", theme === "dark" ? "#071a0e" : "#f0f7f2");
+    };
     if (settings.theme === "system") {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      root.setAttribute("data-theme", prefersDark ? "dark" : "light");
-      const listener = (e: MediaQueryListEvent) => {
-        root.setAttribute("data-theme", e.matches ? "dark" : "light");
-      };
       const mq = window.matchMedia("(prefers-color-scheme: dark)");
+      apply(mq.matches ? "dark" : "light");
+      const listener = (e: MediaQueryListEvent) =>
+        apply(e.matches ? "dark" : "light");
       mq.addEventListener("change", listener);
       return () => mq.removeEventListener("change", listener);
-    } else {
-      root.setAttribute("data-theme", settings.theme);
     }
+    apply(settings.theme === "dark" ? "dark" : "light");
   }, [settings.theme]);
 
   // Apply font size to DOM

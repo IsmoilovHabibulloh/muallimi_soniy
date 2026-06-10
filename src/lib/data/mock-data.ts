@@ -206,7 +206,7 @@ export const lessons: Record<string, Lesson[]> = {
       },
       order: 1,
       audioUrl: "/audio/32. madli 01.mp3",
-      pageCount: 5,
+      pageCount: 4,
     },
   ],
   ch_tashdid: [
@@ -236,7 +236,7 @@ export const lessons: Record<string, Lesson[]> = {
       },
       order: 1,
       audioUrl: "/audio/35. tanvin.mp3",
-      pageCount: 3,
+      pageCount: 2,
     },
   ],
   ch_alif: [

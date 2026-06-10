@@ -4,10 +4,13 @@
   "description": "Ahmad Xodiy Maqsudiy — Muallimi Soniy kitobini oʻqish va talaffuzni eshitish uchun moʻljallangan interaktiv platforma",
   "start_url": "/home",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#071a0e",
+  "orientation": "any",
+  "background_color": "#f0f7f2",
   "theme_color": "#22c55e",
-  "categories": ["education", "books"],
+  "categories": [
+    "education",
+    "books"
+  ],
   "lang": "uz",
   "icons": [
     {

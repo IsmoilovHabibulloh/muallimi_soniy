@@ -8,7 +8,7 @@ export default function TabsLayout({
   return (
     <div className="flex flex-col min-h-dvh">
       <main
-        className="flex-1 pb-28 overflow-y-auto"
+        className="flex-1 pb-20 overflow-y-auto"
         style={{
           maskImage:
             "linear-gradient(to bottom, black, black calc(100% - 100px), transparent)",

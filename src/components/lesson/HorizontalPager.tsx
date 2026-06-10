@@ -56,10 +56,18 @@ export function HorizontalPager({
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="overflow-hidden" ref={emblaRef}>
-      <div className="flex">
-        {pages.map((page) => (
-          <div key={page.id} className="flex-[0_0_100%] min-w-0 px-1">
+    <div className="overflow-hidden h-full" ref={emblaRef}>
+      <div className="flex h-full">
+        {/* Har slide O'ZI scroll bo'ladi — scroll balandligi faqat shu
+            sahifa kontenticha. (Aks holda tashqi scroller eng uzun sahifa
+            bo'yicha cho'zilib, qisqa sahifalarda ham katta bo'sh scroll
+            qolardi.) */}
+        {pages.map((page, idx) => (
+          <div
+            key={page.id}
+            data-page-slide={idx}
+            className="flex-[0_0_100%] min-w-0 px-1 h-full overflow-y-auto overscroll-contain"
+          >
             <PageView
               page={page}
               activeElementId={activeElementId}

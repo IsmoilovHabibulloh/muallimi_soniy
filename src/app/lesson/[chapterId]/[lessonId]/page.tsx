@@ -35,7 +35,7 @@ export default function LessonPage({ params }: Props) {
   const searchParams = useSearchParams();
   const startPageParam = parseInt(searchParams.get("page") || "0", 10) || 0;
   const { settings, t } = useSettings();
-  const { setLastViewed } = useProgress();
+  const { setLastViewed, markLessonComplete } = useProgress();
 
   const [bookPages, setBookPages] = useState<BookPage[]>([]);
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
@@ -54,8 +54,14 @@ export default function LessonPage({ params }: Props) {
 
   const audio = useAudio();
 
+  // Fade mask'lar JORIY slide'ning scroll holatiga qarab (har slide o'zi
+  // scroll bo'ladi — HorizontalPager'ga qarang).
   useEffect(() => {
-    const el = scrollRef.current;
+    const wrap = scrollRef.current;
+    if (!wrap) return;
+    const el = wrap.querySelector<HTMLElement>(
+      `[data-page-slide="${currentPageIndex}"]`
+    );
     if (!el) return;
     const update = () => {
       setScrolledFromTop(el.scrollTop > 4);
@@ -70,7 +76,7 @@ export default function LessonPage({ params }: Props) {
       el.removeEventListener("scroll", update);
       ro.disconnect();
     };
-  }, [currentPageIndex]);
+  }, [currentPageIndex, loading, bookPages.length]);
 
   const currentBookPage = bookPages[currentPageIndex];
   const currentLesson = currentBookPage?.lesson;
@@ -138,14 +144,16 @@ export default function LessonPage({ params }: Props) {
     }
   }, [loading, currentBookPage, currentChapter, currentLesson, chapterId, lessonId, router]);
 
-  // Sync settings → audio engine
+  // Sync settings → audio engine. Tezlik UI'si olib tashlangan — doim 1x
+  // (eski saqlangan 0.5x/1.5x qiymatlar ham qo'llanmaydi).
   useEffect(() => {
-    audio.setSpeed(settings.speed);
+    audio.setSpeed(1);
     audio.setRepeatCount(settings.repeatCount);
     audio.setLoopMode(settings.loopMode);
-  }, [settings.speed, settings.repeatCount, settings.loopMode, audio]);
+  }, [settings.repeatCount, settings.loopMode, audio]);
 
-  // Save progress (per-lesson page index)
+  // Save progress (per-lesson page index). Darsning OXIRGI sahifasiga
+  // yetilganda dars "tugagan" deb belgilanadi (TOC'dagi ✓ shu yerdan).
   useEffect(() => {
     if (!loading && currentBookPage) {
       setLastViewed(
@@ -153,8 +161,12 @@ export default function LessonPage({ params }: Props) {
         currentLesson!.id,
         currentBookPage.lessonPageIndex
       );
+      const next = bookPages[currentPageIndex + 1];
+      if (!next || next.lesson.id !== currentLesson!.id) {
+        markLessonComplete(currentLesson!.id);
+      }
     }
-  }, [loading, currentBookPage, currentChapter, currentLesson, setLastViewed]);
+  }, [loading, currentBookPage, currentChapter, currentLesson, setLastViewed, markLessonComplete, bookPages, currentPageIndex]);
 
   // MediaSession
   useEffect(() => {
@@ -294,63 +306,67 @@ export default function LessonPage({ params }: Props) {
   );
 
   return (
-    <div className="flex flex-col h-dvh overflow-hidden">
+    <div className="flex flex-col h-dvh overflow-hidden pb-[env(safe-area-inset-bottom)]">
       {/* Header */}
-      <header className="flex items-center gap-3 px-4 pt-6 pb-3 shrink-0 z-30 border-b border-white/10">
-        <button
-          onClick={() => router.push("/home")}
-          className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
-          aria-label="Back"
-        >
-          <ArrowLeft size={18} className="text-text-main" />
-        </button>
-        <div className="flex-1 min-w-0">
-          <h1 className="text-base font-semibold text-text-main truncate">
-            {currentLesson?.title[settings.locale] || ""}
-          </h1>
-          <p className="text-xs text-text-muted truncate">
-            {currentChapter?.title[settings.locale] || ""}
-          </p>
+      <header className="shrink-0 z-30 border-b border-white/10">
+        <div className="flex items-center gap-3 px-4 pt-[max(env(safe-area-inset-top),1.25rem)] pb-3 short:pt-1.5 short:pb-1.5 max-w-3xl mx-auto w-full">
+          <button
+            onClick={() => router.push("/home")}
+            className="w-10 h-10 short:w-8 short:h-8 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
+            aria-label="Back"
+          >
+            <ArrowLeft size={18} className="text-text-main" />
+          </button>
+          <div className="flex-1 min-w-0">
+            <h1 className="text-base short:text-sm font-semibold text-text-main truncate">
+              {currentLesson?.title[settings.locale] || ""}
+            </h1>
+            <p className="text-xs text-text-muted truncate short:hidden">
+              {currentChapter?.title[settings.locale] || ""}
+            </p>
+          </div>
+          <button
+            onClick={() => setTocOpen(true)}
+            className="w-10 h-10 short:w-8 short:h-8 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
+            aria-label={t("lessons")}
+          >
+            <ListOrdered size={20} className="text-text-main" />
+          </button>
         </div>
-        <button
-          onClick={() => setTocOpen(true)}
-          className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
-          aria-label={t("lessons")}
-        >
-          <ListOrdered size={20} className="text-text-main" />
-        </button>
       </header>
 
       <TocSheet
         open={tocOpen}
         onClose={() => setTocOpen(false)}
-        currentChapterId={currentChapter?.id}
         currentLessonId={currentLesson?.id}
-        currentLessonPageIndex={currentBookPage?.lessonPageIndex}
+        currentGlobalPage={currentPageIndex + 1}
       />
 
-      {/* Pager */}
+      {/* Pager — markazlashgan o'qish ustuni (desktopda cho'zilib ketmaydi).
+          Scroll har slide ichida — bu konteyner scroll EMAS. */}
       <div
         ref={scrollRef}
-        className="flex-1 px-3 pt-2 overflow-y-auto min-h-0"
+        className="flex-1 px-3 pt-2 short:pt-1 overflow-hidden min-h-0"
         style={{
           maskImage: buildMask(scrolledFromTop, hasMoreBelow),
           WebkitMaskImage: buildMask(scrolledFromTop, hasMoreBelow),
         }}
       >
-        <HorizontalPager
-          pages={pageElements}
-          currentIndex={currentPageIndex}
-          activeElementId={activeElement?.id ?? null}
-          onPageChange={handlePageChange}
-          onElementClick={handleElementClick}
-          onBackgroundClick={() => setActiveElement(null)}
-        />
+        <div className="max-w-xl mx-auto w-full h-full">
+          <HorizontalPager
+            pages={pageElements}
+            currentIndex={currentPageIndex}
+            activeElementId={activeElement?.id ?? null}
+            onPageChange={handlePageChange}
+            onElementClick={handleElementClick}
+            onBackgroundClick={() => setActiveElement(null)}
+          />
+        </div>
       </div>
 
       {/* Page indicator (whole-book) */}
       {bookPages.length > 1 && (
-        <div className="shrink-0">
+        <div className="shrink-0 max-w-xl mx-auto w-full">
           <PageIndicator
             total={bookPages.length}
             current={currentPageIndex}
@@ -361,7 +377,7 @@ export default function LessonPage({ params }: Props) {
 
       {/* Audio controls */}
       {hasAudio && (
-        <div className="shrink-0">
+        <div className="shrink-0 max-w-xl mx-auto w-full">
           <AudioControls
             isPlaying={audio.isPlaying}
             currentTime={audio.currentTime}

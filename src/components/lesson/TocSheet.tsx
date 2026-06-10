@@ -1,50 +1,30 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { X, BookOpen, CheckCircle, Volume2 } from "lucide-react";
+import { useEffect } from "react";
+import { X } from "lucide-react";
 import { useSettings } from "@/providers/SettingsProvider";
-import { useProgress } from "@/providers/ProgressProvider";
-import { getChapters, getLessons } from "@/lib/data/data-provider";
-import { Spinner } from "@/components/ui/Spinner";
-import type { Chapter, Lesson } from "@/lib/data/types";
+import { useBookToc } from "@/lib/hooks/useBookToc";
+import { BookToc } from "@/components/toc/BookToc";
 
 interface Props {
   open: boolean;
   onClose: () => void;
-  currentChapterId?: string;
   currentLessonId?: string;
-  currentLessonPageIndex?: number;
+  /** Reader'dagi joriy GLOBAL sahifa (1-asoslangan) — "X / 52" bilan aynan. */
+  currentGlobalPage?: number;
 }
 
+/* Mundarija drawer — o'ngdan slide-in. Ichki ro'yxat /darslar bilan
+   AYNAN bir xil (BookToc); farq: header'da joriy pozitsiya + progress
+   chizig'i, joriy dars ostida global raqamli sahifa chiplari. */
 export function TocSheet({
   open,
   onClose,
-  currentChapterId,
   currentLessonId,
-  currentLessonPageIndex,
+  currentGlobalPage,
 }: Props) {
-  const { t, settings } = useSettings();
-  const { isLessonComplete } = useProgress();
-  const [chapters, setChapters] = useState<Chapter[]>([]);
-  const [lessonsMap, setLessonsMap] = useState<Record<string, Lesson[]>>({});
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    if (!open || loaded) return;
-    getChapters().then((chs) => {
-      setChapters(chs);
-      Promise.all(
-        chs.map(async (ch) => {
-          const ls = await getLessons(ch.id);
-          return [ch.id, ls] as const;
-        })
-      ).then((entries) => {
-        setLessonsMap(Object.fromEntries(entries));
-        setLoaded(true);
-      });
-    });
-  }, [open, loaded]);
+  const { t } = useSettings();
+  const { outline } = useBookToc();
 
   useEffect(() => {
     if (!open) return;
@@ -58,6 +38,12 @@ export function TocSheet({
       document.body.style.overflow = "";
     };
   }, [open, onClose]);
+
+  const total = outline?.totalPages ?? 0;
+  const pct =
+    total && currentGlobalPage
+      ? Math.min(100, (currentGlobalPage / total) * 100)
+      : 0;
 
   return (
     <div
@@ -75,136 +61,43 @@ export function TocSheet({
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <header className="flex items-center justify-between gap-3 px-5 py-4 border-b border-white/5 shrink-0">
-          <h2 className="text-lg font-bold text-text-main">{t("lessons")}</h2>
-          <button
-            onClick={onClose}
-            className="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
-            aria-label="Close"
-          >
-            <X size={18} className="text-text-main" />
-          </button>
+        <header className="shrink-0 border-b border-white/5">
+          <div className="flex items-center justify-between gap-3 px-5 pt-4 pb-3">
+            <div className="min-w-0">
+              <h2 className="text-lg font-bold text-text-main">
+                {t("contents")}
+              </h2>
+              {Boolean(currentGlobalPage && total) && (
+                <p className="text-xs text-text-muted tabular-nums">
+                  {t("page")} {currentGlobalPage} / {total}
+                </p>
+              )}
+            </div>
+            <button
+              onClick={onClose}
+              className="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95 shrink-0"
+              aria-label="Close"
+            >
+              <X size={18} className="text-text-main" />
+            </button>
+          </div>
+          {/* Reader indikatorining vizual aksi — drawer ochilganda pozitsiya darhol his qilinadi */}
+          <div className="h-1 bg-white/10">
+            <div
+              className="h-full bg-primary transition-all duration-300"
+              style={{ width: `${pct}%` }}
+            />
+          </div>
         </header>
 
         <div className="flex-1 overflow-y-auto px-4 py-4">
-          {!loaded ? (
-            <Spinner />
-          ) : (
-            <div className="space-y-5">
-              {chapters.map((ch) => {
-                const chLessons = lessonsMap[ch.id] || [];
-                const isCurrentChapter = ch.id === currentChapterId;
-                return (
-                  <section key={ch.id}>
-                    <div
-                      className={`flex items-center gap-3 px-2 pb-2 ${
-                        isCurrentChapter ? "text-primary" : "text-text-main"
-                      }`}
-                    >
-                      <span className="text-xl">{ch.icon}</span>
-                      <h3 className="text-sm font-bold uppercase tracking-wide truncate">
-                        {ch.title[settings.locale]}
-                      </h3>
-                    </div>
-
-                    <div className="glass overflow-hidden">
-                      {chLessons.length === 0 && (
-                        <p className="text-xs text-text-muted px-4 py-3">
-                          {t("no_lessons")}
-                        </p>
-                      )}
-                      {chLessons.map((lesson, lIdx) => {
-                        const completed = isLessonComplete(lesson.id);
-                        const isCurrentLesson = lesson.id === currentLessonId;
-                        return (
-                          <div
-                            key={lesson.id}
-                            className={`px-4 py-3 ${
-                              lIdx > 0 ? "border-t border-white/5" : ""
-                            }`}
-                          >
-                            <Link
-                              href={`/lesson/${ch.id}/${lesson.id}`}
-                              onClick={onClose}
-                              className="flex items-center gap-3"
-                            >
-                              <div
-                                className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
-                                  completed
-                                    ? "bg-primary/20"
-                                    : isCurrentLesson
-                                      ? "bg-primary/15"
-                                      : "bg-white/5"
-                                }`}
-                              >
-                                {completed ? (
-                                  <CheckCircle size={16} className="text-primary" />
-                                ) : (
-                                  <BookOpen
-                                    size={16}
-                                    className={
-                                      isCurrentLesson
-                                        ? "text-primary"
-                                        : "text-text-muted"
-                                    }
-                                  />
-                                )}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p
-                                  className={`text-sm truncate ${
-                                    isCurrentLesson
-                                      ? "text-primary font-semibold"
-                                      : "text-text-main"
-                                  }`}
-                                >
-                                  {lesson.title[settings.locale]}
-                                </p>
-                                <p className="text-xs text-text-muted">
-                                  {lesson.pageCount} {t("pages")}
-                                </p>
-                              </div>
-                              {lesson.audioUrl && (
-                                <Volume2
-                                  size={14}
-                                  className="text-primary/60 shrink-0"
-                                />
-                              )}
-                            </Link>
-
-                            <div className="flex flex-wrap gap-1.5 mt-2.5 ml-11">
-                              {Array.from(
-                                { length: lesson.pageCount },
-                                (_, i) => {
-                                  const isCurrentPage =
-                                    isCurrentLesson &&
-                                    currentLessonPageIndex === i;
-                                  return (
-                                    <Link
-                                      key={i}
-                                      href={`/lesson/${ch.id}/${lesson.id}?page=${i}`}
-                                      onClick={onClose}
-                                      className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-medium tabular-nums transition-colors ${
-                                        isCurrentPage
-                                          ? "bg-primary text-white"
-                                          : "bg-white/5 text-text-muted hover:bg-primary/20 hover:text-text-main"
-                                      }`}
-                                      aria-label={`${t("page")} ${i + 1}`}
-                                    >
-                                      {i + 1}
-                                    </Link>
-                                  );
-                                }
-                              )}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </section>
-                );
-              })}
-            </div>
+          {open && (
+            <BookToc
+              variant="sheet"
+              currentLessonId={currentLessonId}
+              currentGlobalPage={currentGlobalPage}
+              onNavigate={onClose}
+            />
           )}
         </div>
       </aside>

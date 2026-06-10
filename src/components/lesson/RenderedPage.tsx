@@ -216,7 +216,7 @@ function PositionRow({
     <div className="flex flex-row-reverse justify-center gap-6">
       {els.map((el, i) => (
         <div key={el.id} className="flex flex-col items-center gap-1.5">
-          <p className="text-[11px] uppercase tracking-wide text-text-muted">
+          <p className="text-[0.6875rem] uppercase tracking-wide text-text-muted">
             {labels[i]}
           </p>
           <ArabicEl
@@ -889,7 +889,7 @@ function MadRule({
   const content = (
     <>
       <div className="flex items-center justify-between gap-2">
-        <p className="text-[11px] font-semibold text-text-main">
+        <p className="text-[0.6875rem] font-semibold text-text-main">
           Mad yozilishi qoidalari
           <span className="ml-1 text-text-muted font-normal">
             (kitob muqaddimasidan)
@@ -897,7 +897,7 @@ function MadRule({
         </p>
         {clickable && (
           <span
-            className="flex shrink-0 items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary"
+            className="flex shrink-0 items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[0.625rem] font-semibold text-primary"
             aria-hidden
           >
             <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor">
@@ -908,7 +908,7 @@ function MadRule({
         )}
       </div>
       {/* Audio narration (0-29s) verbatim — 6 gap. 4-5 asosiy qoidalar bold. */}
-      <div className="mt-1 space-y-1 text-[11px] leading-snug text-text-muted">
+      <div className="mt-1 space-y-1 text-[0.6875rem] leading-snug text-text-muted">
         <p>
           Bungacha yozilgan arabcha so&apos;zlar madsiz so&apos;zlar edi.
           Endi arabcha so&apos;zlarining madliylari ko&apos;rsatiladi.
@@ -985,13 +985,13 @@ function TashdidRule({
   const content = (
     <>
       <div className="flex items-center justify-between gap-2">
-        <p className="text-[11px] font-semibold text-text-main">
+        <p className="text-[0.6875rem] font-semibold text-text-main">
           Tashdid qoidasi
           <span className="ml-1 text-text-muted font-normal">(kitobdan)</span>
         </p>
         {clickable && (
           <span
-            className="flex shrink-0 items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary"
+            className="flex shrink-0 items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[0.625rem] font-semibold text-primary"
             aria-hidden
           >
             <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor">
@@ -1028,7 +1028,7 @@ function TashdidRule({
 
       {/* Audio narration (0-9.9s) verbatim — kitobdagi chig'atoy turkiy
           matnning zamonaviy o'zbek talqini. Hech narsa qo'shilmaydi. */}
-      <p className="text-[11px] leading-snug text-text-main">
+      <p className="text-[0.6875rem] leading-snug text-text-main">
         Tashdidli harflar ustiga ushbu tashdid alomatlari qo&apos;yilgan
         harflar ikkilantirib o&apos;qiladi.
       </p>
@@ -1099,7 +1099,7 @@ function TanvinRule({
           <h3 className="arabic-text text-base font-bold text-text-secondary" style={{ fontFamily: "var(--font-arabic)" }}>
             {rule.arabic}
           </h3>
-          <span className="flex shrink-0 items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary">
+          <span className="flex shrink-0 items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[0.625rem] font-semibold text-primary">
             <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor">
               <path d="M2 1.5v7l6-3.5z" />
             </svg>
@@ -1113,7 +1113,7 @@ function TanvinRule({
       )}
 
       {/* Chig'atoy izoh — audio narration verbatim. Static, faqat o'qish. */}
-      <p className="mt-1 text-[10px] leading-snug text-text-main/85 text-center px-1">
+      <p className="mt-1 text-[0.625rem] leading-snug text-text-main/85 text-center px-1">
         Ushbu uch tanvin alomatlarining biri qoʻyilgan harflardan soʻng
         <span className="mx-1 font-semibold">bir sukunli nun</span>
         ortirib oʻqiladi.
@@ -1150,7 +1150,7 @@ function TanvinRule({
                 </span>
               </button>
               {/* Uzbek label (kichik) */}
-              <span className="text-[9px] leading-tight text-text-muted whitespace-nowrap">
+              <span className="text-[0.5625rem] leading-tight text-text-muted whitespace-nowrap">
                 {sign.uzbek.replace(/\s*\([^)]+\)/, "")}
               </span>
               {/* Misol juftligi — A = (AN) format */}
@@ -1374,10 +1374,10 @@ function Page18({ elements, activeId, hasActive, onElementClick }: PP) {
             boxShadow: activeId === outro.id ? "0 6px 20px var(--color-primary-glow)" : "none",
           }}
         >
-          <p className="text-[11px] leading-snug text-text-muted">
+          <p className="text-[0.6875rem] leading-snug text-text-muted">
             {outro.uzbek}
           </p>
-          <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary">
+          <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[0.625rem] font-semibold text-primary">
             <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor">
               <path d="M2 1.5v7l6-3.5z" />
             </svg>
@@ -1385,7 +1385,7 @@ function Page18({ elements, activeId, hasActive, onElementClick }: PP) {
           </span>
         </button>
       ) : (
-        <p className="mt-2 text-[11px] leading-snug text-text-muted text-center px-3">
+        <p className="mt-2 text-[0.6875rem] leading-snug text-text-muted text-center px-3">
           Ushbu darsda yozilgan harflarning har qaysisini xatosiz mad
           qilmaguncha keyingi darslarni ko&apos;rsatma talabaga.
         </p>
@@ -1491,7 +1491,7 @@ function YaNuqtasizRule() {
           ى
         </span>
       </div>
-      <p className="mt-1 text-center text-[11px] leading-snug text-text-muted">
+      <p className="mt-1 text-center text-[0.6875rem] leading-snug text-text-muted">
         Nuqtasiz <span className="arabic-text">ى</span> ham xuddi
         oddiy <span className="arabic-text">ي</span> kabi o&apos;qiladi.
       </p>
@@ -1731,7 +1731,7 @@ function Page25({ elements, activeId, hasActive, onElementClick }: PP) {
         <span className="arabic-text font-bold text-[clamp(0.85rem,5cqi,1.1rem)]" style={{ fontFamily: "var(--font-arabic)" }}>
           {e.arabic}
         </span>
-        <span className="text-[10px] opacity-60">−</span>
+        <span className="text-[0.625rem] opacity-60">−</span>
         <span className="arabic-text text-[clamp(0.65rem,3.5cqi,0.85rem)] opacity-60" style={{ fontFamily: "var(--font-arabic)" }}>
           ({expand})
         </span>
@@ -1840,7 +1840,7 @@ function AlifHamzaIntro({
 
   const NumberedRow = ({ num, els: rowEls }: { num: string; els: Element[] }) => (
     <div dir="rtl" className="flex w-full items-center gap-1">
-      <span className="arabic-text text-[10px] text-text-muted shrink-0 w-[16px] text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+      <span className="arabic-text text-[0.625rem] text-text-muted shrink-0 w-[16px] text-center" style={{ fontFamily: "var(--font-arabic)" }}>
         {num})
       </span>
       <div dir="rtl" className="flex flex-1 justify-around items-center gap-0.5">
@@ -1887,18 +1887,18 @@ function AlifHamzaIntro({
             boxShadow: activeId === subtitle.id ? "0 4px 14px var(--color-primary-glow)" : "none",
           }}
         >
-          <span className="arabic-text text-[10px] text-center leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
+          <span className="arabic-text text-[0.625rem] text-center leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
             {subtitle.arabic}
           </span>
         </button>
       ) : (
-        <p className="arabic-text text-[10px] text-text-muted text-center leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
+        <p className="arabic-text text-[0.625rem] text-text-muted text-center leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
           الف و همزة توقّز (٩) كورينيشده يازيلادى
         </p>
       )}
       {/* 9 ta shakl bir qatorda, RTL — chap tomonda kichik raqam (١) */}
       <div dir="rtl" className="flex w-full justify-around items-center gap-0.5 mt-0.5">
-        <span className="arabic-text text-[10px] text-text-muted shrink-0 w-[16px] text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+        <span className="arabic-text text-[0.625rem] text-text-muted shrink-0 w-[16px] text-center" style={{ fontFamily: "var(--font-arabic)" }}>
           ١
         </span>
         {forms.map((f) => <FormCell key={f.id} el={f} />)}
@@ -1934,7 +1934,7 @@ function P26NumberedRow({
   const gapClass = FLUID_GAP[gap] ?? gap;
   return (
     <div dir="rtl" className="flex w-full items-center gap-1">
-      <span className="arabic-text text-[10px] text-text-muted shrink-0 w-[14px] text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+      <span className="arabic-text text-[0.625rem] text-text-muted shrink-0 w-[14px] text-center" style={{ fontFamily: "var(--font-arabic)" }}>
         {num ? `${num})` : ""}
       </span>
       <div dir="rtl" className={`flex flex-1 justify-around items-center ${gapClass}`}>
@@ -2001,7 +2001,7 @@ function Page27({ elements, activeId, hasActive, onElementClick }: PP) {
           boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
         }}
       >
-        <h3 className="arabic-text text-[13px] font-bold leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
+        <h3 className="arabic-text text-[0.8125rem] font-bold leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
           {titleEl.arabic}
         </h3>
       </button>
@@ -2017,10 +2017,10 @@ function Page27({ elements, activeId, hasActive, onElementClick }: PP) {
         return (
           <div key={i} className="flex flex-row-reverse items-center gap-[clamp(0.125rem,0.9cqi,0.25rem)]">
             <ArabicEl el={a} isActive={activeId === a.id} hasActive={hasActive} onClick={() => onElementClick(a)} size="sm" />
-            <span className="text-text-muted text-[12px] select-none" style={{ opacity: 0.7 }}>—</span>
+            <span className="text-text-muted text-[0.75rem] select-none" style={{ opacity: 0.7 }}>—</span>
             <ArabicEl el={b} isActive={activeId === b.id} hasActive={hasActive} onClick={() => onElementClick(b)} size="sm" />
             {i < pairs.length - 1 && (
-              <span className="text-text-muted text-[10px] mx-0.5 select-none" style={{ opacity: 0.6 }}>،</span>
+              <span className="text-text-muted text-[0.625rem] mx-0.5 select-none" style={{ opacity: 0.6 }}>،</span>
             )}
           </div>
         );
@@ -2090,7 +2090,7 @@ function Page28({ elements, activeId, hasActive, onElementClick }: PP) {
 
   // Statik chig'atoy izoh — click yo'q, kitobdagi subtitle ko'rsatadi
   const SubText = ({ children }: { children: React.ReactNode }) => (
-    <p className="arabic-text text-[9.5px] text-text-muted text-center leading-tight px-2" style={{ fontFamily: "var(--font-arabic)" }}>
+    <p className="arabic-text text-[0.59375rem] text-text-muted text-center leading-tight px-2" style={{ fontFamily: "var(--font-arabic)" }}>
       {children}
     </p>
   );
@@ -2109,7 +2109,7 @@ function Page28({ elements, activeId, hasActive, onElementClick }: PP) {
           boxShadow: isActive ? "0 4px 14px var(--color-primary-glow)" : "none",
         }}
       >
-        <span className="arabic-text text-[9.5px] text-center leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
+        <span className="arabic-text text-[0.59375rem] text-center leading-tight" style={{ fontFamily: "var(--font-arabic)" }}>
           {subEl.arabic}
         </span>
       </button>
@@ -2170,7 +2170,7 @@ function Page29({ elements, activeId, hasActive, onElementClick }: PP) {
   const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-0.5" />;
 
   // Chig'atoy rule narration — clickable title above each section's word grid.
-  // Compact: text-[10px] approx, no vertical padding so 11 rows + 3 titles fit in viewport.
+  // Compact: text-[0.625rem] approx, no vertical padding so 11 rows + 3 titles fit in viewport.
   const SectionTitle = ({ id }: { id: string }) => {
     const t = el(id);
     if (!t) return null;
@@ -2244,7 +2244,7 @@ function Page30({ elements, activeId, hasActive, onElementClick }: PP) {
             boxShadow: activeId === topHeader.id ? "0 6px 20px var(--color-primary-glow)" : "none",
           }}
         >
-          <p className="arabic-text text-[10.5px] leading-snug" style={{ fontFamily: "var(--font-arabic)" }}>
+          <p className="arabic-text text-[0.65625rem] leading-snug" style={{ fontFamily: "var(--font-arabic)" }}>
             {topHeader.arabic}
           </p>
         </button>
@@ -2278,7 +2278,7 @@ function Page30({ elements, activeId, hasActive, onElementClick }: PP) {
             <h3 className="arabic-text text-base font-bold" style={{ fontFamily: "var(--font-arabic)" }}>
               {vt.arabic}
             </h3>
-            <p className="text-[9px] uppercase tracking-wide opacity-70 mt-0.5">
+            <p className="text-[0.5625rem] uppercase tracking-wide opacity-70 mt-0.5">
               Vasl — qo&apos;shish
             </p>
           </button>
@@ -2300,7 +2300,7 @@ function Page30({ elements, activeId, hasActive, onElementClick }: PP) {
               boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
             }}
           >
-            <p className="arabic-text text-[10px] leading-snug text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+            <p className="arabic-text text-[0.625rem] leading-snug text-center" style={{ fontFamily: "var(--font-arabic)" }}>
               {vr.arabic}
             </p>
           </button>
@@ -2315,7 +2315,7 @@ function Page30({ elements, activeId, hasActive, onElementClick }: PP) {
 
       {/* Footnote — static text */}
       <div className="w-full mt-1">
-        <p className="arabic-text text-[10px] leading-snug text-text-muted text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+        <p className="arabic-text text-[0.625rem] leading-snug text-text-muted text-center" style={{ fontFamily: "var(--font-arabic)" }}>
           (٭) بُو سُوزْ بِئْسَ لِسْمُ دیب اوقیلادی
         </p>
       </div>
@@ -2341,7 +2341,7 @@ function Page31({ elements, activeId, hasActive, onElementClick }: PP) {
             boxShadow: activeId === def.id ? "0 4px 14px var(--color-primary-glow)" : "none",
           }}
         >
-          <p className="arabic-text text-[10.5px] leading-snug text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+          <p className="arabic-text text-[0.65625rem] leading-snug text-center" style={{ fontFamily: "var(--font-arabic)" }}>
             {def.arabic}
           </p>
         </button>
@@ -2387,7 +2387,7 @@ function Page32({ elements, activeId, hasActive, onElementClick }: PP) {
             ({e.arabic})
           </span>
         </button>
-        <span className="text-[10px] opacity-60">−</span>
+        <span className="text-[0.625rem] opacity-60">−</span>
         <span
           dir="rtl"
           className="arabic-text text-[clamp(0.62rem,3.0cqi,0.78rem)] opacity-65 leading-tight"
@@ -2540,7 +2540,7 @@ function Page33({ elements, activeId, hasActive, onElementClick }: PP) {
           }}
         >
           <span
-            className="arabic-text text-[10px] text-center leading-tight"
+            className="arabic-text text-[0.625rem] text-center leading-tight"
             style={{ fontFamily: "var(--font-arabic)" }}
           >
             {topTitle.arabic}
@@ -2587,7 +2587,7 @@ function Page33({ elements, activeId, hasActive, onElementClick }: PP) {
             boxShadow: activeId === sub.id ? "0 4px 14px var(--color-primary-glow)" : "none",
           }}
         >
-          <span className="arabic-text text-[9.5px] leading-tight text-center" style={{ fontFamily: "var(--font-arabic)" }}>
+          <span className="arabic-text text-[0.59375rem] leading-tight text-center" style={{ fontFamily: "var(--font-arabic)" }}>
             {sub.arabic}
           </span>
         </button>
@@ -2620,7 +2620,7 @@ function Page34({ elements, activeId, hasActive, onElementClick }: PP) {
   // Star/gul separator (statik, kitobdagi sariq gul belgisini taqlid qiladi)
   const Gul = () => (
     <span
-      className="select-none text-[10px] leading-none mx-0.5"
+      className="select-none text-[0.625rem] leading-none mx-0.5"
       style={{ color: "var(--color-primary)", opacity: 0.55 }}
     >
       ❀
@@ -2922,11 +2922,11 @@ function Page36({ elements, activeId, hasActive, onElementClick }: PP) {
   // Decorative surah section title (statik — kitobda ham markazda bezakli yoziladi)
   const SurahTitle = ({ text }: { text: string }) => (
     <div className="flex flex-row-reverse items-center justify-center gap-2 w-full my-0.5">
-      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
       <h3 className="arabic-text text-[clamp(0.85rem,4cqi,1.05rem)] font-bold text-text-secondary text-center">
         {text}
       </h3>
-      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
     </div>
   );
 
@@ -3062,7 +3062,7 @@ function Page39({ elements, activeId, hasActive, onElementClick }: PP) {
   const Head = ({ text, sub }: { text: string; sub: string }) => (
     <div className="text-center mt-0.5 mb-0">
       <h3 className="arabic-text text-base font-bold text-text-secondary leading-none">{text}</h3>
-      <p className="text-[10px] text-text-muted mt-0 leading-tight">{sub}</p>
+      <p className="text-[0.625rem] text-text-muted mt-0 leading-tight">{sub}</p>
     </div>
   );
   const Sep = () => <div className="w-full border-b border-dotted border-white/10 my-1" />;
@@ -3121,7 +3121,7 @@ function Page40({ elements, activeId, hasActive, onElementClick }: PP) {
           ۩
         </span>
       </div>
-      <p className="text-[9px] uppercase tracking-widest text-text-muted mt-0.5">
+      <p className="text-[0.5625rem] uppercase tracking-widest text-text-muted mt-0.5">
         Sajda oyati
       </p>
       <Divider />
@@ -3365,11 +3365,11 @@ function Page45({ elements, activeId, hasActive, onElementClick }: PP) {
 
   const SurahTitle = ({ text }: { text: string }) => (
     <div className="flex flex-row-reverse items-center justify-center gap-2 w-full my-0.5">
-      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
       <h3 className="arabic-text text-[clamp(0.78rem,3.6cqi,0.98rem)] font-bold text-text-secondary text-center">
         {text}
       </h3>
-      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
     </div>
   );
 
@@ -3490,11 +3490,11 @@ function Page46({ elements, activeId, hasActive, onElementClick }: PP) {
 
   const SurahTitle = ({ text }: { text: string }) => (
     <div className="flex flex-row-reverse items-center justify-center gap-2 w-full my-0.5">
-      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
       <h3 className="arabic-text text-[clamp(0.78rem,3.6cqi,0.98rem)] font-bold text-text-secondary text-center">
         {text}
       </h3>
-      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
     </div>
   );
 
@@ -3609,11 +3609,11 @@ function Page47({ elements, activeId, hasActive, onElementClick }: PP) {
 
   const SurahTitle = ({ text }: { text: string }) => (
     <div className="flex flex-row-reverse items-center justify-center gap-2 w-full my-0.5">
-      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
       <h3 className="arabic-text text-[clamp(0.78rem,3.6cqi,0.98rem)] font-bold text-text-secondary text-center">
         {text}
       </h3>
-      <span className="text-text-muted text-[10px] opacity-60">❀</span>
+      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
     </div>
   );
 

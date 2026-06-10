@@ -805,6 +805,33 @@ Yangi harf sahifasini qurayotganda:
 > komponent qo'shganda, **shu yerdagi qoidalarga amal qilinadi**. O'zgarish
 > kiritish kerak bo'lsa — avval bu yerda yozilgan qarorni yangilang.
 
+## Adaptiv masshtab tizimi (2026-06-10)
+
+Butun ilova **root font-size orqali avtomatik masshtablanadi** (`globals.css`):
+
+```
+font-size = 16px × --font-scale (sozlamadagi small/medium/large: 0.875/1/1.125)
+                 × --screen-scale (ekran kengligi: 768px→1.0625, 1024px→1.125,
+                   1440px→1.25, 1920px→1.375; har biri min-height sharti bilan)
+```
+
+Qoidalar:
+- **Hamma o'lcham rem'da yoziladi** — `text-[22px]` kabi qattiq px TAQIQLANGAN
+  (rem'ga aylantirilgan: 22px → `text-[1.375rem]`). Qattiq px root masshtabga
+  ergashmaydi va katta ekranda mayda qoladi.
+- Lesson kontenti `max-w-xl mx-auto` o'qish ustunida (rem'da bo'lgani uchun
+  desktop'da ~720-790px gacha kengayadi). PageIndicator va AudioControls ham
+  shu ustun kengligida. Header ichki qismi `max-w-3xl mx-auto`.
+- Sahifa kartasi ichidagi matnlar avvalgidek `cqi` clamp bilan — karta kengaysa
+  harflar ham o'sadi; clamp max'lari rem'da, shuning uchun katta ekranda
+  chegaralar ham ko'tariladi.
+- `@custom-variant short` = `(orientation: landscape) and (max-height: 480px)`
+  — telefon yonbosh rejimi. Lesson chrome shu variant bilan mini ko'rinishga
+  o'tadi (pastda).
+- Viewport zoom OCHIQ (`maximumScale: 5, userScalable: true` — WCAG 1.4.4);
+  double-tap zoom `body { touch-action: manipulation }` bilan o'chirilgan.
+- `manifest.json` `orientation: "any"` — PWA landshaftni bloklamaydi.
+
 ## Bosh sahifa (`/home`)
 
 Maqsad: **bitta yirik kitobga** kirish nuqtasi. Boblar grid'i yo'q (mundarija
@@ -1625,35 +1652,45 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
 
 ### Tuzilma (yuqoridan pastga)
 
-1. **Header** (`pt-6 pb-3`, **`border-b border-white/10`** — aniq pastki chiziq) —
+1. **Header** (**`border-b border-white/10`** — aniq pastki chiziq; ichki qism
+   `max-w-3xl mx-auto`, `pt-[max(env(safe-area-inset-top),1.25rem)] pb-3`) —
    joriy sahifaga qarab dinamik:
-   - Chap: orqaga tugma (`ArrowLeft`, 40×40)
+   - Chap: orqaga tugma (`ArrowLeft`, 40×40; `short:` 32×32)
    - O'rtada: **joriy** dars `lesson.title` + bob `chapter.title` (joriy
-     sahifaning lesson/chapter'idan olinadi)
-   - O'ngda: mundarija tugmasi (`ListOrdered`, 40×40)
+     sahifaning lesson/chapter'idan olinadi; bob nomi `short:hidden`)
+   - O'ngda: mundarija tugmasi (`ListOrdered`, 40×40; `short:` 32×32)
 2. **Sahifa ko'rinishi** (`HorizontalPager` + `PageView`):
    - Embla Carousel — barcha 54 sahifa bir ketma-ketlikda
-   - **Adaptiv edge fade** (`maskImage`) — **ikkala tomonda alohida** scroll
-     holatiga qarab ishlaydi:
+   - **Har slide O'ZI vertikal scroll** (`data-page-slide={idx}`,
+     `h-full overflow-y-auto overscroll-contain`) — scroll balandligi FAQAT
+     shu sahifa kontenticha. Tashqi pager konteyner `overflow-hidden`.
+     ⚠️ Scroll'ni tashqi konteynerga qaytarmang: embla qatori balandligi
+     eng uzun slide (muqaddima ~3250px) bo'yicha bo'lib, qisqa sahifalarda
+     ham pastga ulkan bo'sh scroll paydo bo'ladi (2026-06-10 da tuzatilgan bag).
+   - **Adaptiv edge fade** (`maskImage` tashqi konteynerda) — JORIY slide'ning
+     scroll holatiga qarab ikkala tomonda alohida:
      - **Tepa fade**: faqat `scrollTop > 4` bo'lganda (yuqorida content yashirin
        bo'lsa). Aks holda content header chizig'iga toza tegadi.
      - **Pastki fade**: faqat content sahifa tagiga sig'masa (`scrollTop +
        clientHeight < scrollHeight - 4`). Qisqa sahifalarda (masalan, Madlar)
        pastki fade yo'q — content kartasi to'liq, toza ko'rinadi.
-     - `ResizeObserver` orqali sahifa o'zgarganda yoki window resize bo'lganda
-       qayta hisoblanadi.
+     - Lesson page effekt joriy slide'ni `[data-page-slide="${idx}"]` orqali
+       topib scroll/ResizeObserver listener'larini biriktiradi.
    - Konfig: `align: "center"`, `duration: 28`, `containScroll: "trimSnaps"`
-3. **Sahifa indikatori** (`PageIndicator`) — butun kitob bo'yicha:
-   - Chap: `<` (chevron, disabled at 0)
-   - O'rtada: **progress bar** (yashil to'ldiriluvchi chiziq + drag handle)
-     — bosib yoki sudrab istalgan sahifaga o'tish mumkin
-   - O'ng: `>` (chevron, disabled at end)
-   - Pastida: "X / 54" (kichik, muted)
+3. **Sahifa indikatori** (`PageIndicator`) — butun kitob bo'yicha, **bitta
+   qator**: `‹` chevron + progress bar (bosib/sudrab sahifaga o'tish) +
+   "X / 54" (bar yonida inline) + `›` chevron. `short:` rejimda chevronlar
+   28×28 va paddinglar kichrayadi.
 4. **Audio nazorati** (`AudioControls`) — joriy sahifaning **lesson** ga
-   tegishli audiodan foydalanadi:
-   - Play/pause katta yumaloq tugma
-   - Tezlik: 0.5x / 1x / 1.5x
-   - Loop / sequential rejim toggle
+   tegishli audiodan foydalanadi. **BITTA qatorli bar** (hamma rejimda):
+   prev/play/next + joriy vaqt + progress + umumiy vaqt + loop (~54px).
+   `short:` (telefon yonbosh) rejimida o'lchamlar/paddinglar kichrayadi.
+   - **Tezlik tugmalari YO'Q** (foydalanuvchi qarori 2026-06-10: "umuman
+     kerak emas"). Engine doim 1x (`audio.setSpeed(1)` lesson page'da);
+     eski saqlangan 0.5x/1.5x qiymatlar ham qo'llanmaydi. Tezlik UI'sini
+     qaytarmang.
+   - Progress chiziq vizual ingichka (h-1), lekin bosish maydoni `py-2`
+     bilan kengaytirilgan.
 
 ### Sahifa o'tishi va URL sinxronizatsiyasi
 
@@ -1672,27 +1709,94 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
 
 Sahifa o'zgarganda: audio to'xtaydi, faol element tozalanadi, progress saqlanadi.
 
-## Mundarija drawer (`TocSheet`)
+## Mundarija — yagona `BookToc` komponenti (2026-06-10 redesign)
 
-- **Trigger**: lesson header'dagi o'ng tomondagi tugma.
-- **Pozitsiya**: o'ngdan slide-in (full height, max-w-md).
-- **Backdrop**: yarim shaffof qora + blur, bosilganda yopiladi.
-- **Yopish usullari**: backdrop, X tugma, `Esc` klavishi.
-- **Tuzilma — to'liq mundarija**: barcha boblar **doim ochiq**, accordion yo'q.
-  Har bob:
-  - Sarlavha: ikonka + nomi (uppercase, kichik). Joriy bob — `primary` rangda.
-  - Darslar ro'yxati: har dars boshida ikonka (`BookOpen` / `CheckCircle` —
-    tugatilgan bo'lsa), nomi, sahifa soni, audio bor bo'lsa `Volume2` belgi.
-  - Joriy dars `primary/15` fonda + `primary` rangda matn.
-  - Har dars ostida — **sahifa chiplari** (`1, 2, 3, ...`):
-    - 32×32 yumaloq kvadrat tugmalar
-    - Joriy sahifa — `bg-primary` to'liq, oq matn
-    - Boshqalar — `bg-white/5`, hover'da `primary/20`
-    - Bosilganda `?page=N` query param bilan navigatsiya qiladi.
-- **Lesson sahifasi** `?page=N` query param'ni o'qib, mos sahifadan boshlaydi.
+> `/darslar` sahifasi va lesson ichidagi `TocSheet` drawer **bitta**
+> `src/components/toc/BookToc.tsx` komponentidan quriladi (variant prop).
+> Eski `ChapterAccordion`/`LessonListItem` O'CHIRILGAN — qaytarmang.
+
+### Qat'iy qoidalar
+
+- **Sahifa raqamlari DOIM GLOBAL (1..52)** — reader'dagi "X / 52" bilan 1:1.
+  Yagona manba: `getBookOutline()` (data-provider) + `useBookToc()` hook.
+  `lesson.pageCount` TOC'da ISHLATILMAYDI (PAGE_MAP — yagona haqiqat).
+  URL kontrakti o'zgarmagan: `?page={lessonPageIndex}` (lesson-local),
+  faqat KO'RSATILADIGAN raqam global.
+- **Bir darsli boblar bitta birlashgan qator** (bob ikonka + bob nomi +
+  diapazon "21–23") — "Tashdid → Tashdid" takrori taqiqlangan.
+  Ko'p darsli boblar: uppercase bob sarlavhasi (ikonka 16px + diapazon,
+  hammasi tugagan bo'lsa CheckCircle2 12px) + ichki dars qatorlari (pl-11).
+- **Qator anatomiyasi**: nom (chap) + leader dots (nuqtali chiziq,
+  border-text-muted/30) + o'ng klaster: Volume2 12px (audio bo'lsa) +
+  Check 14px (tugagan) + global raqam. Joriy qator: chap 3px primary bar +
+  `bg-primary/20` fon + raqam o'rniga **pill** (bg-primary, oq, joriy
+  global sahifa).
+- **Bob ikonkalari faqat lucide** — `src/components/toc/chapter-icons.ts`
+  xaritasi (BookOpen/Type/AudioLines/Repeat2/Quote/PenLine/Link2/WholeWord/
+  ScrollText/HandHeart). mock-data emoji `icon` UI'da ishlatilmaydi (iOS
+  export uchun saqlangan).
+- **Tugagan dars** holati: `completedLessons` YOKI o'qib o'tib ketilgan
+  (`globalEnd < resumeGlobalPage`) — fallback derivatsiya `useBookToc`da.
+  Yozish nuqtasi: lesson sahifasida dars oxirgi sahifasiga yetilganda
+  `markLessonComplete` chaqiriladi.
+- Light remap'da mavjud alpha classlardangina foydalanish (bg-white/5,
+  bg-white/10, bg-primary/20, border-white/5) — yangi arbitrary alpha
+  qo'shilsa globals.css remap'iga ham qo'shing.
+
+### /darslar sahifasi
+
+H1 "Mundarija" (t("contents")) + subtitle "52 sahifa · 10 bob" (dinamik) +
+`ResumeCard` (glass-green: Play ikonka, DAVOM ETING/BOSHLASH micro-label,
+dars nomi, "Sahifa X / 52 · N%", h-1 progress bar, → resumeHref) +
+bitta glass kartada `<BookToc variant="page" />`.
+
+### TocSheet drawer
+
+- Trigger/pozitsiya/yopish: avvalgidek (o'ngdan slide-in, backdrop, Esc).
+- Header: "Mundarija" + "Sahifa X / 52" (reader bilan aynan) + header ostida
+  h-1 progress chizig'i.
+- Body: `<BookToc variant="sheet" currentLessonId currentGlobalPage
+  onNavigate={onClose} />`. Sheet farqlari: sahifa **chiplari faqat JORIY
+  dars ostida** (36×36, yorlig'i GLOBAL raqam, href `?page={i}`), ochilganda
+  joriy qator auto-scroll (320ms dan keyin, instant, block:center).
+- Props: `currentGlobalPage` = lesson sahifasidagi `currentPageIndex + 1`.
+  (`currentChapterId`/`currentLessonPageIndex` prop'lari olib tashlangan.)
+
+### BookHeroCard (/home)
+
+`useBookToc()` dan oladi (resumeHref/resumeGlobalPage/totalPages) — eski
+pageCount-yig'indi hisobi (52/54 nomuvofiqlik bergan) taqiqlangan.
+
+## Sozlamalar defaultlari (foydalanuvchi qarorlari)
+
+- **Tema: DOIM light default** (2026-06-10). DEFAULT_SETTINGS.theme="light",
+  layout.tsx SSR `data-theme="light"`, noma'lum/buzilgan qiymat ham light'ga
+  tushadi (SettingsProvider guard), meta theme-color/manifest/statusBar light.
+  Dark/system — faqat foydalanuvchi tanlovi bilan.
+- **Takrorlash soni: HAR OCHILISHDA 1** (2026-06-10). repeatCount
+  sessiyalararo saqlanmaydi — SettingsProvider isLoaded'da 1 ga reset
+  qiladi. Sessiya ichida o'zgartirish ishlaydi. Bu xatti-harakatni
+  o'zgartirmang (persist qilib qo'ymang).
+- **Tezlik: doim 1x** — tezlik UI'si olib tashlangan (AudioControls
+  bo'limiga qarang).
 
 ## Vizual tamoyillar
 
+- **DEFAULT TEMA = LIGHT, har doim** (foydalanuvchi qarori 2026-06-10):
+  - `globals.css` da baza qiymatlar (`@theme`, `.glass*`, scrollbar,
+    white-alpha utility remap'lari) — **light**. Dark faqat
+    `html[data-theme="dark"]` override orqali. `data-theme` atributi
+    yo'q/buzilgan bo'lsa ham ilova light ochiladi (utility remap'lar
+    `html:not([data-theme="dark"])` selektorida).
+  - `SettingsProvider` noma'lum theme qiymatini light'ga tushiradi va
+    `meta[name="theme-color"]` ni faol temaga moslab yangilaydi
+    (light `#f0f7f2` / dark `#071a0e`). `useLocalStorage` eski saqlangan
+    obyektni defaultlar bilan birlashtiradi (theme maydoni yo'q bo'lsa
+    "light" qoladi).
+  - `layout.tsx`: `data-theme="light"` SSR, `themeColor: "#f0f7f2"`,
+    `statusBarStyle: "default"`. `manifest.json`: `background_color:
+    "#f0f7f2"` (light splash). Dark/system tanlovlari sozlamalarda
+    saqlanadi — faqat foydalanuvchi ataylab tanlasa qo'llanadi.
 - **Glass effekti**: `glass` (neytral) va `glass-green` (vurg'u uchun) classlari.
 - **Asosiy rang**: `--color-primary` (yashil, dark/light theme uchun farqli).
 - **Ikonkalar**: faqat `lucide-react`.

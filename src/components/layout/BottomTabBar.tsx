@@ -30,7 +30,7 @@ export function BottomTabBar() {
               }`}
             >
               <Icon size={22} strokeWidth={isActive ? 2.5 : 1.5} />
-              <span className="text-[10px] font-medium">{t(tab.key)}</span>
+              <span className="text-[0.625rem] font-medium">{t(tab.key)}</span>
               {isActive && (
                 <div className="w-1 h-1 rounded-full bg-primary" />
               )}
