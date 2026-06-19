@@ -79,7 +79,7 @@ function Title({ text, sub }: { text: string; sub?: string }) {
   return (
     <div className="text-center my-2">
       <h3 className="arabic-text text-xl font-bold text-text-secondary">{text}</h3>
-      {sub && <p className="text-xs text-text-muted mt-0.5">{sub}</p>}
+      {sub && <p className="arabic-text text-xs text-text-muted mt-0.5" dir="rtl">{sub}</p>}
     </div>
   );
 }
@@ -301,7 +301,7 @@ function Page0({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center justify-center text-center gap-6 py-10 min-h-[60vh]">
       <div>
-        <p className="text-xs uppercase tracking-widest text-text-muted">Muallif</p>
+        <p className="arabic-text text-sm text-text-muted" dir="rtl">مؤلف</p>
         <p
           className="arabic-text text-xl mt-2"
           style={{ color: "var(--color-el-jumla)" }}
@@ -339,7 +339,7 @@ function Page0({ elements, activeId, hasActive, onElementClick }: PP) {
 
       <p className="text-sm text-text-muted mt-6 flex items-center gap-2">
         <span aria-hidden="true">🎧</span>
-        <span>O&apos;qidi: Jahongir qori Nematov</span>
+        <span className="arabic-text" dir="rtl">اوقیدی: جهانگیر قاری نعمتاو</span>
       </p>
     </div>
   );
@@ -503,7 +503,13 @@ function Page3({ elements, activeId, hasActive, onElementClick }: PP) {
             hasActive={hasActive}
             onClick={() => onElementClick(rule1)}
           >
-            {rule1.uzbek}
+            <span
+              className="arabic-text"
+              dir="rtl"
+              style={{ fontFamily: "var(--font-arabic)", fontSize: "1.1rem", lineHeight: 2 }}
+            >
+              {rule1.arabic}
+            </span>
           </RuleBlock>
         </div>
       )}
@@ -515,9 +521,12 @@ function Page3({ elements, activeId, hasActive, onElementClick }: PP) {
             hasActive={hasActive}
             onClick={() => onElementClick(misol)}
           >
-            <span>Misol uchun </span>
-            <span className="arabic-text" style={{ fontFamily: "var(--font-arabic)" }}>
-              اب. اج, اس
+            <span
+              className="arabic-text"
+              dir="rtl"
+              style={{ fontFamily: "var(--font-arabic)", fontSize: "1.1rem", lineHeight: 2 }}
+            >
+              {misol.arabic}
             </span>
           </RuleBlock>
         </div>
@@ -530,7 +539,13 @@ function Page3({ elements, activeId, hasActive, onElementClick }: PP) {
             hasActive={hasActive}
             onClick={() => onElementClick(rule2)}
           >
-            {rule2.uzbek}
+            <span
+              className="arabic-text"
+              dir="rtl"
+              style={{ fontFamily: "var(--font-arabic)", fontSize: "1.1rem", lineHeight: 2 }}
+            >
+              {rule2.arabic}
+            </span>
           </RuleBlock>
         </div>
       )}
@@ -539,7 +554,7 @@ function Page3({ elements, activeId, hasActive, onElementClick }: PP) {
       <Row els={els(["15","16","17","18","19","20","21"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-1" />
       <Row els={els(["22","23","24","25","26","27","28"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-1" />
       <Divider />
-      <Title text="حَرَكَاتْ" sub="Harakatlar" />
+      <Title text="حَرَكَاتْ" sub="حرکتلر" />
       <Row els={els(["29","30","31"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="3xl" gap="gap-6" />
       <Divider />
       <Row els={els(["32","33","34"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="3xl" gap="gap-6" />
@@ -580,14 +595,14 @@ function Page5({ elements, activeId, hasActive, onElementClick }: PP) {
       <Row els={els(["06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
       <Divider />
       {/* Nun — 20 element */}
-      <Title text="حرف نون" sub="Nun harfi" />
+      <Title text="حرف نون" sub="نون حرفی" />
       <Row els={els(["10","11","12"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["13","14","15","16","17","18"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
       <Row els={els(["19","20","21","22","23","24"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
       <Row els={els(["25","26","27","28","29"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
       <Divider />
       {/* Ya — 18 element */}
-      <Title text="حرف یاء" sub="Ya harfi" />
+      <Title text="حرف یاء" sub="یاء حرفی" />
       <Row els={els(["30","31","32"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["33","34","35","36","37","38"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
       <Row els={els(["39","40","41","42","43"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
@@ -601,14 +616,14 @@ function Page6({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* Ba — 18 element */}
-      <Title text="حرف باء" sub="Ba harfi" />
+      <Title text="حرف باء" sub="باء حرفی" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["04","05","06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
       <Row els={els(["10","11","12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
       <Row els={els(["15","16","17","18"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
       <Divider />
       {/* Kaf — 21 element */}
-      <Title text="حرف كاف" sub="Kaf harfi" />
+      <Title text="حرف كاف" sub="کاف حرفی" />
       <Row els={els(["19","20","21"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["22","23","24","25"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
       <Row els={els(["26","27","28","29","30"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
@@ -623,7 +638,7 @@ function Page7({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* Lam — 26 element */}
-      <Title text="حرف لام" sub="Lam harfi" />
+      <Title text="حرف لام" sub="لام حرفی" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["04","05","06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["10","11","12","13","14","15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -631,7 +646,7 @@ function Page7({ elements, activeId, hasActive, onElementClick }: PP) {
       <Row els={els(["22","23","24","25","26"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
       {/* Vav — 23 element */}
-      <Title text="حرف واو" sub="Vav harfi" />
+      <Title text="حرف واو" sub="واو حرفی" />
       <Row els={els(["27","28","29"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["30","31","32","33"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-2" />
       <Row els={els(["34","35","36","37","38","39"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -646,14 +661,14 @@ function Page8({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* Ha (ه) — 21 element */}
-      <Title text="حرف هاء" sub="Ha harfi" />
+      <Title text="حرف هاء" sub="هاء حرفی" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["04","05","06","07","08","09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["11","12","13","14","15","16"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["17","18","19","20","21"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
       {/* Fa (ف) — 25 element */}
-      <Title text="حرف فاء" sub="Fa harfi" />
+      <Title text="حرف فاء" sub="فاء حرفی" />
       <Row els={els(["22","23","24"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["25","26","27","28","29","30"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["31","32","33","34","35","36"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -668,7 +683,7 @@ function Page9({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* Qof (ق) — 26 element */}
-      <Title text="حرف قاف" sub="Qof harfi" />
+      <Title text="حرف قاف" sub="قاف حرفی" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["04","05","06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["10","11","12","13","14","15","16"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
@@ -677,7 +692,7 @@ function Page9({ elements, activeId, hasActive, onElementClick }: PP) {
       <Row els={els(["21","22","23","24","25","26"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
       {/* Shin (ش) — 24 element */}
-      <Title text="حرف شین" sub="Shin harfi" />
+      <Title text="حرف شین" sub="شین حرفی" />
       <Row els={els(["27","28","29"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["30","31","32","33","34","35"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["36","37","38","39","40","41"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -692,7 +707,7 @@ function Page10({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* Sin (س) — 23 element */}
-      <Title text="حرف سین" sub="Sin harfi" />
+      <Title text="حرف سین" sub="سین حرفی" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["04","05","06","07","08"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["09","10","11","12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -700,7 +715,7 @@ function Page10({ elements, activeId, hasActive, onElementClick }: PP) {
       <Row els={els(["20","21","22","23"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
       {/* Tsa (ث) — 30 element */}
-      <Title text="حرف ثاء" sub="Tho harfi" />
+      <Title text="حرف ثاء" sub="ثاء حرفی" />
       <Row els={els(["24","25","26"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["27","28","29","30","31","32"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["33","34","35","36","37","38"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -717,7 +732,7 @@ function Page11({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* Sod (ص) — 20 element */}
-      <Title text="حرف صاد" sub="Sod harfi" />
+      <Title text="حرف صاد" sub="صاد حرفی" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["04","05","06","07","08","09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
       <Row els={els(["11","12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -725,7 +740,7 @@ function Page11({ elements, activeId, hasActive, onElementClick }: PP) {
       <Row els={els(["15","16","17","18","19","20"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
       {/* Tho (ط) — 29 element */}
-      <Title text="حرف طاء" sub="To harfi" />
+      <Title text="حرف طاء" sub="طاء حرفی" />
       <Row els={els(["21","22","23"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["24","25","26","27","28","29"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["30","31","32","33","34","35"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -742,14 +757,14 @@ function Page12({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* Jim (ج) — 18 element */}
-      <Title text="حرف جیم" sub="Jim harfi" />
+      <Title text="حرف جیم" sub="جیم حرفی" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["04","05","06","07","08"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["09","10","11","12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["15","16","17","18"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
       {/* Xo (خ) — 23 element */}
-      <Title text="حرف خاء" sub="Xo harfi" />
+      <Title text="حرف خاء" sub="خاء حرفی" />
       <Row els={els(["19","20","21"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["22","23","24","25","26","27"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["28","29","30","31","32","33"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -764,7 +779,7 @@ function Page13({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* Ha (ح) — 28 element: 3 header + 6 + 5 + 4 + 4 + 6 taqqoslash */}
-      <Title text="حرف حاء" sub="Ha harfi" />
+      <Title text="حرف حاء" sub="حاء حرفی" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["04","05","06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["10","11","12","13","14"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -775,7 +790,7 @@ function Page13({ elements, activeId, hasActive, onElementClick }: PP) {
       <Row els={els(["23","24","25","26","27","28"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
       {/* G'ayn (غ) — 18 element: 3 header + 6 + 5 + 4 */}
-      <Title text="حرف غین" sub="G'ayn harfi" />
+      <Title text="حرف غین" sub="غین حرفی" />
       <Row els={els(["29","30","31"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["32","33","34","35","36","37"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["38","39","40","41","42"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -789,7 +804,7 @@ function Page14({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* Ayn (ع) — 27 element */}
-      <Title text="حرف عین" sub="Ayn harfi" />
+      <Title text="حرف عین" sub="عین حرفی" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["04","05","06","07","08","09","10"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
       <Row els={els(["11","12","13","14","15","16"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -798,7 +813,7 @@ function Page14({ elements, activeId, hasActive, onElementClick }: PP) {
       <Row els={els(["22","23","24","25","26","27"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Divider />
       {/* Dal (د) — 23 element */}
-      <Title text="حرف دال" sub="Dal harfi" />
+      <Title text="حرف دال" sub="دال حرفی" />
       <Row els={els(["28","29","30"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["31","32","33","34","35","36"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["37","38","39","40","41","42"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -813,7 +828,7 @@ function Page15({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* Dod (ض) — 25 element: 3 header + 6 + 6 + 4 + 6 taqqoslash */}
-      <Title text="حرف ضاد" sub="Dod harfi" />
+      <Title text="حرف ضاد" sub="ضاد حرفی" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["04","05","06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <Row els={els(["10","11","12","13","14","15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-0.5" />
@@ -823,7 +838,7 @@ function Page15({ elements, activeId, hasActive, onElementClick }: PP) {
       <Row els={els(["20","21","22","23","24","25"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <Divider />
       {/* Zal (ذ) — 29 element: 3 header + 8 + 6 + 6 + 6 taqqoslash */}
-      <Title text="حرف ذال" sub="Zal harfi" />
+      <Title text="حرف ذال" sub="ذال حرفی" />
       <Row els={els(["26","27","28"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["29","30","31","32","33","34","35","36"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-0.5" />
       <Row els={els(["37","38","39","40","41","42"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
@@ -840,7 +855,7 @@ function Page16({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* Zo (ظ) — 49 element */}
-      <Title text="حرف ظاء" sub="Zo harfi" />
+      <Title text="حرف ظاء" sub="ظاء حرفی" />
       <Row els={els(["01","02","03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="2xl" gap="gap-5" />
       <Row els={els(["04","05","06","07","08","09"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
       <Row els={els(["10","11","12","13","14","15"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-1.5" />
@@ -876,12 +891,12 @@ function MadRule({
 }) {
   const clickable = !!rule && !!onClick;
   const content = (
-    <>
+    <div dir="rtl" className="arabic-text text-right">
       <div className="flex items-center justify-between gap-2">
         <p className="text-[0.6875rem] font-semibold text-text-main">
-          Mad yozilishi qoidalari
-          <span className="ml-1 text-text-muted font-normal">
-            (kitob muqaddimasidan)
+          مد یازیلیشی قائده‌لری
+          <span className="mr-1 text-text-muted font-normal">
+            (کتاب مقدمه‌سیدن)
           </span>
         </p>
         {clickable && (
@@ -892,37 +907,35 @@ function MadRule({
             <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor">
               <path d="M2 1.5v7l6-3.5z" />
             </svg>
-            eshitish
+            اشیتیش
           </span>
         )}
       </div>
-      {/* Audio narration (0-29s) verbatim — 6 gap. 4-5 asosiy qoidalar bold. */}
-      <div className="mt-1 space-y-1 text-[0.6875rem] leading-snug text-text-muted">
+      {/* Audio narration (0-29s) verbatim — 6 gap (eski o'zbek yozuvi). 2 asosiy qoida bold. */}
+      <div className="mt-1 space-y-1 text-[0.6875rem] leading-relaxed text-text-muted">
         <p>
-          Bungacha yozilgan arabcha so&apos;zlar madsiz so&apos;zlar edi.
-          Endi arabcha so&apos;zlarining madliylari ko&apos;rsatiladi.
+          بونگاچه یازیلگان عربچه سوزلر مدسیز سوزلر ایدی. ایندی عربچه
+          سوزلرینینگ مدلیلری کورساتیلادی.
         </p>
         <p>
-          Arabcha so&apos;zlar madliy bo&apos;lganda fatha, kasra va zamma
-          alomatlari boshqacha yoziladi:
+          عربچه سوزلر مدلی بولگانده فتحه، کسره و ضمّه علامتلری باشقه‌چه
+          یازیلادی:
         </p>
-        <ul className="pl-3.5 list-disc space-y-0.5 marker:text-primary">
+        <ul className="ps-3.5 list-disc space-y-0.5 marker:text-primary">
           <li className="text-text-main">
             <span className="font-semibold">
-              Fatha va kasra alomatlari yonboshlatilmay, balki tikka
-              yoziladi.
+              فتحه و کسره علامتلری یانباشلاتیلمای، بلکه تیکّه یازیلادی.
             </span>
           </li>
           <li className="text-text-main">
             <span className="font-semibold">
-              Zamma alomati odatiy zammadan ko&apos;ra kattaroq,
-              yo&apos;g&apos;onroq yoziladi.
+              ضمّه علامتی عادتی ضمّه‌دن کوره کتته‌راق، یوغانراق یازیلادی.
             </span>
           </li>
         </ul>
-        <p>O&apos;quvchilar bu o&apos;zgarishlarga diqqat qilishlari kerak.</p>
+        <p>اوقووچیلر بو اوزگاریشلرگه دقّت قیلیشلری کرک.</p>
       </div>
-    </>
+    </div>
   );
 
   const baseClass =
@@ -972,11 +985,11 @@ function TashdidRule({
 }) {
   const clickable = !!rule && !!onClick;
   const content = (
-    <>
+    <div dir="rtl" className="arabic-text text-right">
       <div className="flex items-center justify-between gap-2">
         <p className="text-[0.6875rem] font-semibold text-text-main">
-          Tashdid qoidasi
-          <span className="ml-1 text-text-muted font-normal">(kitobdan)</span>
+          تشدید قائده‌سی
+          <span className="mr-1 text-text-muted font-normal">(کتابدن)</span>
         </p>
         {clickable && (
           <span
@@ -986,7 +999,7 @@ function TashdidRule({
             <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor">
               <path d="M2 1.5v7l6-3.5z" />
             </svg>
-            eshitish
+            اشیتیش
           </span>
         )}
       </div>
@@ -1017,11 +1030,11 @@ function TashdidRule({
 
       {/* Audio narration (0-9.9s) verbatim — kitobdagi chig'atoy turkiy
           matnning zamonaviy o'zbek talqini. Hech narsa qo'shilmaydi. */}
-      <p className="text-[0.6875rem] leading-snug text-text-main">
-        Tashdidli harflar ustiga ushbu tashdid alomatlari qo&apos;yilgan
-        harflar ikkilantirib o&apos;qiladi.
+      <p className="text-[0.6875rem] leading-relaxed text-text-main">
+        تشدیدلی حرفلر اوستیگه اوشبو تشدید علامتلری قوییلگان حرفلر
+        ایککیلنتیریب اوقیلادی.
       </p>
-    </>
+    </div>
   );
 
   const baseClass =
@@ -1092,7 +1105,7 @@ function TanvinRule({
             <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor">
               <path d="M2 1.5v7l6-3.5z" />
             </svg>
-            eshitish
+            اشیتیش
           </span>
         </button>
       ) : (
@@ -1102,10 +1115,10 @@ function TanvinRule({
       )}
 
       {/* Chig'atoy izoh — audio narration verbatim. Static, faqat o'qish. */}
-      <p className="mt-1 text-[0.625rem] leading-snug text-text-main/85 text-center px-1">
-        Ushbu uch tanvin alomatlarining biri qoʻyilgan harflardan soʻng
-        <span className="mx-1 font-semibold">bir sukunli nun</span>
-        ortirib oʻqiladi.
+      <p className="arabic-text mt-1 text-[0.625rem] leading-relaxed text-text-main/85 text-center px-1" dir="rtl">
+        اوشبو اوچ تنوین علامتلرینینگ بیری قوییلگان حرفلردن سونگ
+        <span className="mx-1 font-semibold">بیر سکونلی نون</span>
+        اورتیریب اوقیلادی.
       </p>
 
       {/* 3 ustun: har ustun — belgi (clickable) + label + misol juftligi.
@@ -1139,7 +1152,7 @@ function TanvinRule({
                 </span>
               </button>
               {/* Uzbek label (kichik) */}
-              <span className="text-[0.5625rem] leading-tight text-text-muted whitespace-nowrap">
+              <span className="arabic-text text-[0.5625rem] leading-tight text-text-muted whitespace-nowrap" dir="rtl">
                 {sign.uzbek.replace(/\s*\([^)]+\)/, "")}
               </span>
               {/* Misol juftligi — A = (AN) format */}
@@ -1256,10 +1269,10 @@ function Page17({ elements, activeId, hasActive, onElementClick }: PP) {
         <h3 className="mad-arabic-text text-xl text-text-secondary">
           {introTitle.arabic}
         </h3>
-        <p className="text-xs text-text-muted mt-0.5">{introTitle.uzbek}</p>
+        <p className="arabic-text text-xs text-text-muted mt-0.5" dir="rtl">مدلی حرفلر</p>
       </button>
     ) : (
-      <Title text="مدلي حرفلر" sub="Madli harflar" />
+      <Title text="مدلي حرفلر" sub="مدلی حرفلر" />
     )
   );
 
@@ -1363,20 +1376,19 @@ function Page18({ elements, activeId, hasActive, onElementClick }: PP) {
             boxShadow: activeId === outro.id ? "0 6px 20px var(--color-primary-glow)" : "none",
           }}
         >
-          <p className="text-[0.6875rem] leading-snug text-text-muted">
-            {outro.uzbek}
+          <p className="arabic-text text-[0.6875rem] leading-relaxed text-text-muted" dir="rtl">
+            {outro.arabic}
           </p>
           <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[0.625rem] font-semibold text-primary">
             <svg width="9" height="9" viewBox="0 0 10 10" fill="currentColor">
               <path d="M2 1.5v7l6-3.5z" />
             </svg>
-            eshitish
+            اشیتیش
           </span>
         </button>
       ) : (
-        <p className="mt-2 text-[0.6875rem] leading-snug text-text-muted text-center px-3">
-          Ushbu darsda yozilgan harflarning har qaysisini xatosiz mad
-          qilmaguncha keyingi darslarni ko&apos;rsatma talabaga.
+        <p className="arabic-text mt-2 text-[0.6875rem] leading-relaxed text-text-muted text-center px-3" dir="rtl">
+          اوشبو درسده يازيلگان حرفلرنينگ هر قايسيسي خطاسيز مد قيلينماگونچه كيينگي درسلر كورسه تلميذي
         </p>
       )}
     </div>
@@ -1409,7 +1421,7 @@ function Page19({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-0.5">
       {/* MadRule yo'q — 17-sahifada ko'rsatilgan, takror kerak emas. */}
-      <Title text="مدّی سوزلر" sub="Madli so'zlar" />
+      <Title text="مدّی سوزلر" sub="مدلی سوزلر" />
       {/* Yuqori bo'lim: 9 qator (R1-R9) */}
       <MadWordRow ids={["01","02","03","04","05","06"]} size="md" />
       <MadWordRow ids={["07","08","09","10","11","12"]} size="md" />
@@ -1438,7 +1450,7 @@ function Page20({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-1">
       {/* MadRule yo'q — 17-sahifada ko'rsatilgan, takror kerak emas. */}
-      <Title text="مدّی سوزلر (دوام)" sub="Madli so'zlar davomi" />
+      <Title text="مدّی سوزلر (دوام)" sub="مدلی سوزلر دوامی" />
       {/* ── Top: uzun fe'l shakllari (15 ta) ── */}
       <Row els={els(["01","02","03","04"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-2" mad />
       <Row els={els(["05","06","07","08"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="md" gap="gap-2" mad />
@@ -1480,9 +1492,8 @@ function YaNuqtasizRule() {
           ى
         </span>
       </div>
-      <p className="mt-1 text-center text-[0.6875rem] leading-snug text-text-muted">
-        Nuqtasiz <span className="arabic-text">ى</span> ham xuddi
-        oddiy <span className="arabic-text">ي</span> kabi o&apos;qiladi.
+      <p className="arabic-text mt-1 text-center text-[0.6875rem] leading-relaxed text-text-muted" dir="rtl">
+        نقطه‌سیز ى هم خودّی عادی ي کبی اوقیلادی.
       </p>
     </div>
   );
@@ -2267,8 +2278,8 @@ function Page30({ elements, activeId, hasActive, onElementClick }: PP) {
             <h3 className="arabic-text text-base font-bold" style={{ fontFamily: "var(--font-arabic)" }}>
               {vt.arabic}
             </h3>
-            <p className="text-[0.5625rem] uppercase tracking-wide opacity-70 mt-0.5">
-              Vasl — qo&apos;shish
+            <p className="arabic-text text-[0.5625rem] opacity-70 mt-0.5" dir="rtl">
+              وصل — قوشیش
             </p>
           </button>
         );
@@ -2317,7 +2328,7 @@ function Page31({ elements, activeId, hasActive, onElementClick }: PP) {
   const def = el("definition");
   return (
     <div className="flex flex-col items-center gap-2">
-      <Title text="وقف" sub="Vaqf (to'xtash)" />
+      <Title text="وقف" sub="وقف (توختاش)" />
       <Row els={els(["01"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="lg" gap="gap-3" />
       {/* Chig'atoy definition (clickable) */}
       {def && (
@@ -3051,7 +3062,7 @@ function Page39({ elements, activeId, hasActive, onElementClick }: PP) {
   const Head = ({ text, sub }: { text: string; sub: string }) => (
     <div className="text-center mt-0.5 mb-0">
       <h3 className="arabic-text text-base font-bold text-text-secondary leading-none">{text}</h3>
-      <p className="text-[0.625rem] text-text-muted mt-0 leading-tight">{sub}</p>
+      <p className="arabic-text text-[0.625rem] text-text-muted mt-0 leading-tight" dir="rtl">{sub}</p>
     </div>
   );
   const Sep = () => <div className="w-full border-b border-dotted border-white/10 my-1" />;
@@ -3062,7 +3073,7 @@ function Page39({ elements, activeId, hasActive, onElementClick }: PP) {
       <Sep />
 
       {/* Surah Ash-Sharh — bismillah + 8 ayat */}
-      <Head text="سورة الشرح" sub="Sharh surasi" />
+      <Head text="سورة الشرح" sub="شرح سوره‌سی" />
       <Row els={els(["sharh_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["sharh_v1", "sharh_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["sharh_v3", "sharh_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
@@ -3071,7 +3082,7 @@ function Page39({ elements, activeId, hasActive, onElementClick }: PP) {
       <Sep />
 
       {/* Surah At-Tin — bismillah + 8 ayat */}
-      <Head text="سورة التين" sub="Tin surasi" />
+      <Head text="سورة التين" sub="تین سوره‌سی" />
       <Row els={els(["tin_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["tin_v1", "tin_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["tin_v3", "tin_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
@@ -3081,7 +3092,7 @@ function Page39({ elements, activeId, hasActive, onElementClick }: PP) {
       <Sep />
 
       {/* Surah Al-Alaq — header only (body on p40) */}
-      <Head text="سورة العلق" sub="Alaq surasi" />
+      <Head text="سورة العلق" sub="علق سوره‌سی" />
       <Row els={els(["alaq_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
     </div>
   );
@@ -3104,19 +3115,19 @@ function Page40({ elements, activeId, hasActive, onElementClick }: PP) {
         <AyahRow els={els(["a19"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
         <span
           className="arabic-text text-[clamp(0.9rem,4.5cqi,1.2rem)] leading-none select-none"
-          title="Sajda oyati"
+          title="سجده آیتی"
           style={{ color: "var(--color-primary)", opacity: 0.85, fontFamily: "var(--font-arabic)" }}
         >
           ۩
         </span>
       </div>
-      <p className="text-[0.5625rem] uppercase tracking-widest text-text-muted mt-0.5">
-        Sajda oyati
+      <p className="arabic-text text-[0.5625rem] text-text-muted mt-0.5" dir="rtl">
+        سجده آیتی
       </p>
       <Divider />
 
       {/* Surah Al-Qadr (Bismillah + 5 ayat) */}
-      <Title text="سورة القدر" sub="Qadr surasi" />
+      <Title text="سورة القدر" sub="قدر سوره‌سی" />
       <Row els={els(["q_bism"])}     activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["q01"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["q02", "q03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
@@ -3131,7 +3142,7 @@ function Page41({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 41);
   return (
     <div className="flex flex-col items-center gap-0.5">
-      <Title text="سورة البينة" sub="Bayyina surasi" />
+      <Title text="سورة البينة" sub="بیّنه سوره‌سی" />
       <Row els={els(["bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["a1"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["a2"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
@@ -3151,7 +3162,7 @@ function Page42({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-0.5">
       {/* === Surah Az-Zalzalah === */}
-      <Title text="سورة الزلزلة" sub="Zalzala surasi" />
+      <Title text="سورة الزلزلة" sub="زلزله سوره‌سی" />
       <Row els={els(["zz_bism"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["zz_a1", "zz_a2"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
       <AyahRow els={els(["zz_a3", "zz_a4"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
@@ -3161,7 +3172,7 @@ function Page42({ elements, activeId, hasActive, onElementClick }: PP) {
       <Divider />
 
       {/* === Surah Al-'Adiyat === */}
-      <Title text="سورة العاديات" sub="Adiyat surasi" />
+      <Title text="سورة العاديات" sub="عادیات سوره‌سی" />
       <Row els={els(["ad_bism"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["ad_a1", "ad_a2", "ad_a3"])}  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["ad_a4", "ad_a5"])}           activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
@@ -3180,7 +3191,7 @@ function Page43({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-0.5">
       {/* === Surah Al-Qari'ah === */}
-      <Title text="سورة القارعة" sub="Qari'ah surasi" />
+      <Title text="سورة القارعة" sub="قارعه سوره‌سی" />
       <Row els={els(["qr_bism"])}                 activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["qr_a1", "qr_a2", "qr_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["qr_a4"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
@@ -3192,7 +3203,7 @@ function Page43({ elements, activeId, hasActive, onElementClick }: PP) {
       <Divider />
 
       {/* === Surah At-Takathur === */}
-      <Title text="سورة التكاثر" sub="Takasur surasi" />
+      <Title text="سورة التكاثر" sub="تکاثر سوره‌سی" />
       <Row els={els(["tk_bism"])}                 activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["tk_a1", "tk_a2", "tk_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["tk_a4", "tk_a5"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
@@ -3202,7 +3213,7 @@ function Page43({ elements, activeId, hasActive, onElementClick }: PP) {
       <Divider />
 
       {/* === Surah Al-'Asr — title + Bismillah only (full body on p44) === */}
-      <Title text="سورة العصر" sub="Asr surasi" />
+      <Title text="سورة العصر" sub="عصر سوره‌سی" />
       <Row els={els(["as_bism"])}                 activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
     </div>
   );

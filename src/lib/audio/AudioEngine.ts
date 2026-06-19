@@ -70,18 +70,47 @@ export class AudioEngine {
   loadAudio(url: string): Promise<void> {
     return new Promise((resolve, reject) => {
       const resolved = new URL(url, location.href).href;
-      if (this.audio.src === resolved) {
+      // Already this src AND fully buffered (HAVE_ENOUGH_DATA) — play now.
+      if (this.audio.src === resolved && this.audio.readyState >= 4) {
         resolve();
         return;
       }
       this.stop();
       this.audio.src = url;
-      this.audio.addEventListener("canplay", () => resolve(), { once: true });
-      this.audio.addEventListener(
-        "error",
-        () => reject(new Error("Audio load failed")),
-        { once: true }
-      );
+
+      // Muammo (FIX): avval `canplay` da hal qilinardi — lekin `canplay`
+      // faqat "ijroni boshlash mumkin" degani, fayl TO'LIQ buferlanmagan.
+      // Juda qisqa chunklarda (alif 0.41s, tha 0.47s) ijro buferdan o'zib
+      // ketadi, brauzer `ended` ni erta beradi va segment kesiladi — shu
+      // sababli "bir necha bor bosgandan keyin to'liq eshitiladi" muammosi
+      // bo'lardi. Yechim: `canplaythrough` (oxirigacha to'xtovsiz ijro
+      // qilish kafolati) ni kutamiz; agar u kechiksa, `canplay` + qisqa
+      // grace bilan zaxira yo'l.
+      let graceTimer: ReturnType<typeof setTimeout> | null = null;
+      const cleanup = () => {
+        if (graceTimer) clearTimeout(graceTimer);
+        this.audio.removeEventListener("canplaythrough", onReady);
+        this.audio.removeEventListener("canplay", onCanPlay);
+        this.audio.removeEventListener("error", onError);
+      };
+      const onReady = () => {
+        cleanup();
+        resolve();
+      };
+      const onCanPlay = () => {
+        // canplaythrough kelmasa ham, qisqa kutishdan so'ng davom etamiz
+        // (mahalliy/serverdagi kichik fayllar uchun yetarli buffer bo'ladi).
+        if (graceTimer) clearTimeout(graceTimer);
+        graceTimer = setTimeout(onReady, 200);
+      };
+      const onError = () => {
+        cleanup();
+        reject(new Error("Audio load failed"));
+      };
+
+      this.audio.addEventListener("canplaythrough", onReady);
+      this.audio.addEventListener("canplay", onCanPlay);
+      this.audio.addEventListener("error", onError);
       this.audio.load();
     });
   }
