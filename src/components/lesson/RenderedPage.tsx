@@ -381,12 +381,55 @@ function Page1({ elements, activeId, hasActive, onElementClick }: PP) {
         </button>
       )}
       <h2 className="text-lg font-bold text-text-secondary text-center mb-2">MUQADDIMA</h2>
-      {MUQADDIMA_PARAGRAPHS.map((text, i) => (
-        <p key={i} className="text-sm leading-relaxed text-text-main text-justify indent-6">
-          {text}
-        </p>
-      ))}
+      {MUQADDIMA_PARAGRAPHS.map((text, i) => {
+        // Paragraf audio element'i (p1_par1..p1_par9). Vaqtlar
+        // tools/align_muqaddima.py bilan audiodan o'lchangan.
+        const el = elements.find((e) => e.id === `p1_par${i + 1}`);
+        if (!el) {
+          // Vaqti hali aniqlanmagan paragraf — bosilmaydigan matn bo'lib qoladi.
+          return (
+            <p key={i} className="text-sm leading-relaxed text-text-main text-justify indent-6">
+              {text}
+            </p>
+          );
+        }
+        return <ProseBtn key={i} el={el} isActive={activeId === el.id} onClick={() => onElementClick(el)} text={text} />;
+      })}
     </div>
+  );
+}
+
+// Muqaddima paragrafi — bosilsa audioning o'sha qismi ijro etiladi.
+// Qoida: faol bo'lmagan paragraflar XIRALASHTIRILMAYDI (CLAUDE.md).
+function ProseBtn({
+  el,
+  isActive,
+  onClick,
+  text,
+}: {
+  el: Element;
+  isActive: boolean;
+  onClick: () => void;
+  text: string;
+}) {
+  void el;
+  return (
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
+      className="element-spring rounded-lg text-sm leading-relaxed text-justify indent-6 px-3 py-1.5 w-full"
+      style={{
+        color: isActive ? "#ffffff" : "var(--color-text-main)",
+        backgroundColor: isActive ? "var(--color-primary)" : "transparent",
+        boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
+        textShadow: isActive ? "0 1px 2px rgba(0,0,0,0.3)" : "none",
+        WebkitBoxDecorationBreak: "clone",
+      }}
+    >
+      {text}
+    </button>
   );
 }
 

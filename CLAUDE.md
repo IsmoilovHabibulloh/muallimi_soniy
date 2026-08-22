@@ -886,12 +886,38 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   va o'quvchi ismi (Jahongir qori Nematov) audio'da yo'q — static qoldirildi.
   Butun audio AudioControls orqali ijro etiladi.
 - **Muqaddima (Sahifa 2)** — read-along rejimida: tepada Bismillah
-  (`p1_000`, `A.muq` 0-5s) tugmasi + "MUQADDIMA" sarlavha + 9 paragrafli
-  o'zbekcha prose (plain `<p>`, click yo'q). To'liq 7:32 audio
-  AudioControls orqali ijro etiladi. Prose matnlar `RenderedPage.tsx`
-  dagi `MUQADDIMA_PARAGRAPHS` arrayida hardcoded — `elements.ts` da
-  faqat Bismillah element'i qolgan. (Avval 659 so'z alohida
-  button edi, lekin placeholder timings bilan — olib tashlandi.)
+  (`p1_000`, `A.muq` 0-5s) tugmasi + "MUQADDIMA" sarlavha + **9 ta
+  bosiladigan paragraf** (`p1_par1`..`p1_par9`, `ProseBtn` komponenti).
+  Paragraf bosilsa audioning o'sha qismi ijro etiladi; to'liq 7:32 audio
+  AudioControls orqali ham ishlaydi. Paragraf matnlari
+  `src/lib/data/muqaddima.ts` dagi `MUQADDIMA_PARAGRAPHS` da (yagona
+  manba — ham web, ham kontent eksporti shundan oladi); `elements.ts` da
+  faqat VAQTLAR turadi, matn takrorlanmaydi.
+
+  **Vaqtlar qanday olingan** (2026-08-22): yozuv ostida fon musiqasi bor,
+  shu sababli `silencedetect` (-25dB gacha sinaldi) bitta ham jimlik
+  topmaydi — chegaralarni jimlik bo'yicha kesib bo'lmaydi. Yechim —
+  forced alignment:
+  1. `py tools/transcribe_muqaddima.py small` → Whisper so'z vaqtlari
+     (`tools/_tmp/muqaddima_words.json`, 743 so'z).
+  2. `py tools/align_muqaddima.py` → kitob matni (659 so'z) Whisper
+     so'zlariga Needleman-Wunsch bilan tekislanadi; mos kelmagan
+     so'zlar interpolatsiya bilan baholanadi; har chegara paragrafning
+     BIRINCHI so'zi boshiga yopishtiriladi.
+  3. `py tools/verify_muqaddima.py` → har paragraf boshida audioda nima
+     eshitilishini kitob matni bilan solishtiradi.
+
+  ⚠️ Whisper o'zbekchani **fonetik** yozadi ("ushbu"→"uxbu",
+  "O'sha"→"Ose", "Garchi"→"Gerche"). Shuning uchun solishtirishda aynan
+  moslik EMAS, o'xshashlik darajasi ishlatiladi. Aynan moslik talab
+  qilinsa, to'g'ri chegara ham "xato" ko'rinadi.
+
+  ⚠️ **2026-04-22 gacha bu yerda 659 ta so'z elementi bo'lgan va ular
+  SOXTA vaqtlar bilan edi** (379 so'z aynan 0.69s, 263 tasi 0.68s, 17
+  tasi 0.00s — `umumiy_vaqt ÷ so'z_soni`; birinchi so'z ikkinchisidan
+  keyin turgan). Commit `82ec447` da to'g'ri o'chirilgan. So'z darajasiga
+  (karaoke) qaytmoqchi bo'lsangiz — vaqtlarni ALBATTA audiodan
+  o'lchang, hisoblab yozmang.
 - Muqaddima kitobda 2 sahifa bo'lgan, lekin uzluksiz matn — birlashtirilgan.
 - Sahifa 4 kitob sahifa 4 bilan aynan mos. Za (non-connector) / Mim (connector,
   pozitsion) / Ta (connector, pozitsion).

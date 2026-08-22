@@ -47,3 +47,7 @@ next-env.d.ts
 # Skript ishlatish uchun: brew install ffmpeg (Mac) yoki apt install ffmpeg (Linux)
 # va keyin: ln -s $(which ffmpeg) tools/ffmpeg
 tools/ffmpeg
+
+# Skript ishlab chiqargan vaqtinchalik fayllar (transkripsiya, audio kesish)
+tools/_tmp/
+tools/__pycache__/

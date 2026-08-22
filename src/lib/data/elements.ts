@@ -215,12 +215,33 @@ const p0: ED[] = [
 
 // ============================================================
 // PAGE 1 — Muqaddima (p1 + p2 merged)
-// Read-along sahifa: faqat Bismillah tugmasi qoladi; prose matnlar
-// hardcoded MUQADDIMA_PARAGRAPHS arrayida (RenderedPage.tsx).
-// To'liq audio AudioControls orqali ijro etiladi.
+// Read-along sahifa: Bismillah + 9 paragraf. Paragraf matnlari
+// MUQADDIMA_PARAGRAPHS da (muqaddima.ts) — bu yerda faqat vaqtlar,
+// takrorlanmasin. To'liq audio AudioControls orqali ham ijro etiladi.
+//
+// Vaqtlar 02. Muqaddima.mp3 dan O'LCHANGAN (tools/align_muqaddima.py):
+// yozuv ostida fon musiqasi borligi sababli silencedetect ishlamaydi
+// (-25dB gacha sinaldi, bitta ham jimlik yo'q), shuning uchun matn
+// Whisper transkripsiyasiga forced-alignment bilan moslashtirilgan.
+// Har paragraf boshi tools/verify_muqaddima.py bilan tasdiqlangan (9/9).
+//
+// ⚠️ 2026-04-22 gacha bu yerda 659 ta so'z elementi bo'lgan, lekin ular
+// PLACEHOLDER vaqtlar bilan edi (379 ta so'z aynan 0.69s, 263 tasi 0.68s,
+// 17 tasi 0.00s — umumiy_vaqt ÷ so'z_soni). Ular commit 82ec447 da
+// to'g'ri o'chirilgan. So'z darajasiga qaytmoqchi bo'lsangiz, vaqtlarni
+// ALBATTA audiodan o'lchang — hisoblab yozmang.
 // ============================================================
 const p1: ED[] = [
   ["000", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ", "Bismillahir rohmanir rohim", A.muq, 0, 5, 0, 0, 0, 0],
+  ["par1", "jumla", "", "1-paragraf", A.muq, 5.00, 80.75, 0, 0, 0, 0],
+  ["par2", "jumla", "", "2-paragraf", A.muq, 80.75, 131.40, 0, 0, 0, 0],
+  ["par3", "jumla", "", "3-paragraf", A.muq, 131.40, 205.56, 0, 0, 0, 0],
+  ["par4", "jumla", "", "4-paragraf", A.muq, 205.56, 269.04, 0, 0, 0, 0],
+  ["par5", "jumla", "", "5-paragraf", A.muq, 269.04, 286.02, 0, 0, 0, 0],
+  ["par6", "jumla", "", "6-paragraf", A.muq, 286.02, 359.28, 0, 0, 0, 0],
+  ["par7", "jumla", "", "7-paragraf", A.muq, 359.28, 416.62, 0, 0, 0, 0],
+  ["par8", "jumla", "", "8-paragraf", A.muq, 416.62, 428.92, 0, 0, 0, 0],
+  ["par9", "jumla", "", "9-paragraf", A.muq, 428.92, 448.50, 0, 0, 0, 0],
 ];
 
 // ============================================================
@@ -3300,8 +3321,8 @@ const p50: ED[] = [
 export const PAGE_ELEMENTS: Record<number, Element[]> = {
   // Muqova: 3 ta sarlavha tugmasi (to'liq audio — lesson.audioUrl).
   0: make(0, p0),
-  // Muqaddima: read-along sahifa — faqat Bismillah element, qolgan matn
-  // RenderedPage.tsx da hardcoded (MUQADDIMA_PARAGRAPHS).
+  // Muqaddima: read-along sahifa — Bismillah + 9 paragraf (matnlari
+  // muqaddima.ts dagi MUQADDIMA_PARAGRAPHS da, bu yerda faqat vaqtlar).
   1: make(1, p1),
   3: make(3, p3),
   4: make(4, p4),
