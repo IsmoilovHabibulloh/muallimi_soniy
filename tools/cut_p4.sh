@@ -4,8 +4,11 @@
 # Boundary policy: silence-detected + buffer for clean cuts.
 set -euo pipefail
 
-ROOT="/Users/habibulloh22icloud.com/Desktop/Antigravity/muallimi soniy"
-FF="$ROOT/tools/ffmpeg"
+# Yo'l skript joylashuvidan olinadi — loyiha ko'chirilsa ham ishlaydi
+# (avval macOS yo'li qotib yozilgan edi, boshqa mashinada ishlamasdi).
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+FF="${FFMPEG:-$ROOT/tools/ffmpeg}"
+command -v "$FF" >/dev/null 2>&1 || FF=ffmpeg
 
 cut() {
   local src="$1" out="$2" start="$3" end="$4"
@@ -30,7 +33,9 @@ cut "$ZA_SRC" "$ZA_OUT/z05_iz.mp3"      8.629   9.379
 cut "$ZA_SRC" "$ZA_OUT/z06_uz.mp3"     11.209  11.999
 cut "$ZA_SRC" "$ZA_OUT/z07_zar.mp3"    13.969  14.600
 cut "$ZA_SRC" "$ZA_OUT/z08_zir.mp3"    16.309  16.899
-cut "$ZA_SRC" "$ZA_OUT/z09_zur.mp3"    18.609  18.940
+# 2026-08-24: oxiri "r" tovushi o'rtasida kesilgan edi (0.33s).
+# O'lchov (tools/audio_span.py): nutq 18.37-19.09.
+cut "$ZA_SRC" "$ZA_OUT/z09_zur.mp3"    18.330  19.160
 cut "$ZA_SRC" "$ZA_OUT/z10_azru.mp3"   22.149  23.279
 cut "$ZA_SRC" "$ZA_OUT/z11_izru.mp3"   24.589  25.659
 cut "$ZA_SRC" "$ZA_OUT/z12_uzru.mp3"   27.249  28.399
@@ -52,7 +57,8 @@ cut "$MA_SRC" "$MA_OUT/m05_im.mp3"     10.450  11.139
 cut "$MA_SRC" "$MA_OUT/m06_um.mp3"     13.109  13.819
 cut "$MA_SRC" "$MA_OUT/m07_mur.mp3"    16.029  16.620
 cut "$MA_SRC" "$MA_OUT/m08_muz.mp3"    18.309  18.979
-cut "$MA_SRC" "$MA_OUT/m09_rum.mp3"    20.529  21.239
+# 2026-08-24: oxirgi "m" so'nishiga zaxira yo'q edi. Nutq 20.50-21.24.
+cut "$MA_SRC" "$MA_OUT/m09_rum.mp3"    20.470  21.320
 # Silence-detected for correct tail:
 cut "$MA_SRC" "$MA_OUT/m10_amara.mp3"  23.459  24.398
 cut "$MA_SRC" "$MA_OUT/m11_umara.mp3"  26.392  27.415

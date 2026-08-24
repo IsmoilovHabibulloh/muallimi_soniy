@@ -219,11 +219,15 @@ const p0: ED[] = [
 // MUQADDIMA_PARAGRAPHS da (muqaddima.ts) — bu yerda faqat vaqtlar,
 // takrorlanmasin. To'liq audio AudioControls orqali ham ijro etiladi.
 //
-// Vaqtlar 02. Muqaddima.mp3 dan O'LCHANGAN (tools/align_muqaddima.py):
-// yozuv ostida fon musiqasi borligi sababli silencedetect ishlamaydi
-// (-25dB gacha sinaldi, bitta ham jimlik yo'q), shuning uchun matn
-// Whisper transkripsiyasiga forced-alignment bilan moslashtirilgan.
-// Har paragraf boshi tools/verify_muqaddima.py bilan tasdiqlangan (9/9).
+// Vaqtlar 02. Muqaddima.mp3 dan O'LCHANGAN. Uch bosqich:
+//   1. tools/align_muqaddima.py    — matnni Whisper so'zlariga tekislaydi
+//      (silencedetect ishlamaydi: fon musiqasi bor, -25dB da ham jimlik yo'q)
+//   2. tools/refine_muqaddima.py   — chegarani AUDIO ENERGIYASI bo'yicha
+//      aniqlashtiradi. ⚠️ MAJBURIY: Whisper so'z boshini haqiqiydan ~0.3-1.5s
+//      ERTA ko'rsatadi, shu sababli faqat 1-bosqichga tayanilsa har paragraf
+//      OLDINGISINING oxirgi so'zlarini ham ijro etadi (2026-08-24 xatosi).
+//   3. tools/check_boundaries.py   — har chegarani audio bilan tasdiqlaydi:
+//      oldin jimlik, keyin nutq bo'lishi shart (9/9 o'tdi, nisbat 61-512x).
 //
 // ⚠️ 2026-04-22 gacha bu yerda 659 ta so'z elementi bo'lgan, lekin ular
 // PLACEHOLDER vaqtlar bilan edi (379 ta so'z aynan 0.69s, 263 tasi 0.68s,
@@ -241,15 +245,15 @@ const p1: ED[] = [
   // gacha chiqib ketib, "Qo" bo'g'inini ham ijro etardi (foydalanuvchi
   // 2026-08-24 da qayd etdi). 3.70 da 1.3s zaxira qoladi.
   ["000", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ", "Bismillahir rohmanir rohim", A.muq, 0, 3.70, 0, 0, 0, 0],
-  ["par1", "jumla", "", "1-paragraf", A.muq, 5.00, 80.75, 0, 0, 0, 0],
-  ["par2", "jumla", "", "2-paragraf", A.muq, 80.75, 131.40, 0, 0, 0, 0],
-  ["par3", "jumla", "", "3-paragraf", A.muq, 131.40, 205.56, 0, 0, 0, 0],
-  ["par4", "jumla", "", "4-paragraf", A.muq, 205.56, 269.04, 0, 0, 0, 0],
-  ["par5", "jumla", "", "5-paragraf", A.muq, 269.04, 286.02, 0, 0, 0, 0],
-  ["par6", "jumla", "", "6-paragraf", A.muq, 286.02, 359.28, 0, 0, 0, 0],
-  ["par7", "jumla", "", "7-paragraf", A.muq, 359.28, 416.62, 0, 0, 0, 0],
-  ["par8", "jumla", "", "8-paragraf", A.muq, 416.62, 428.92, 0, 0, 0, 0],
-  ["par9", "jumla", "", "9-paragraf", A.muq, 428.92, 448.50, 0, 0, 0, 0],
+  ["par1", "jumla", "", "1-paragraf", A.muq, 5.00, 80.77, 0, 0, 0, 0],
+  ["par2", "jumla", "", "2-paragraf", A.muq, 80.77, 132.28, 0, 0, 0, 0],
+  ["par3", "jumla", "", "3-paragraf", A.muq, 132.28, 206.47, 0, 0, 0, 0],
+  ["par4", "jumla", "", "4-paragraf", A.muq, 206.47, 269.64, 0, 0, 0, 0],
+  ["par5", "jumla", "", "5-paragraf", A.muq, 269.64, 286.06, 0, 0, 0, 0],
+  ["par6", "jumla", "", "6-paragraf", A.muq, 286.06, 359.54, 0, 0, 0, 0],
+  ["par7", "jumla", "", "7-paragraf", A.muq, 359.54, 417.44, 0, 0, 0, 0],
+  ["par8", "jumla", "", "8-paragraf", A.muq, 417.44, 430.41, 0, 0, 0, 0],
+  ["par9", "jumla", "", "9-paragraf", A.muq, 430.41, 448.50, 0, 0, 0, 0],
 ];
 
 // ============================================================
@@ -329,7 +333,7 @@ const p4: ED[] = [
   ["06", "bogin", "اُزْ", "Uz",  A.z("z06_uz"),  0, 0.79, 52, 18, 10, 6],
   ["07", "bogin", "زَرْ", "Zar", A.z("z07_zar"), 0, 0.63, 36, 18, 10, 6],
   ["08", "bogin", "زِرْ", "Zir", A.z("z08_zir"), 0, 0.59, 20, 18, 10, 6],
-  ["09", "bogin", "زُرْ", "Zur", A.z("z09_zur"), 0, 0.33,  4, 18, 10, 6],
+  ["09", "bogin", "زُرْ", "Zur", A.z("z09_zur"), 0, 0.83,  4, 18, 10, 6],
   ["10", "soz", "اَزْرُ", "Azru", A.z("z10_azru"), 0, 1.13, 84, 28, 12, 6],
   ["11", "soz", "اِزْرُ", "Izru", A.z("z11_izru"), 0, 1.07, 64, 28, 12, 6],
   ["12", "soz", "اُزْرُ", "Uzru", A.z("z12_uzru"), 0, 1.15, 44, 28, 12, 6],
@@ -344,9 +348,11 @@ const p4: ED[] = [
   ["19", "bogin", "اُمْ", "Um",  A.m("m06_um"),  0, 0.71, 52, 50, 10, 6],
   ["20", "bogin", "مُرْ", "Mur", A.m("m07_mur"), 0, 0.59, 36, 50, 10, 6],
   ["21", "bogin", "مُزْ", "Muz", A.m("m08_muz"), 0, 0.67, 20, 50, 10, 6],
-  ["22", "bogin", "رُمْ", "Rum", A.m("m09_rum"), 0, 0.71,  4, 50, 10, 6],
+  ["22", "bogin", "رُمْ", "Rum", A.m("m09_rum"), 0, 0.85,  4, 50, 10, 6],
   ["23", "soz",   "اَمَرَ", "Amara", A.m("m10_amara"), 0, 0.94, 85, 60, 12, 6],
-  ["24", "soz",   "اُمَرَ", "Umara", A.m("m11_umara"), 0, 1.02, 70, 60, 12, 6],
+  // Passiv shakl (23 "amara" ning jufti): mim KASRA bilan — audio "umira"
+  // deydi. 2026-08-24 gacha fatha bilan (اُمَرَ "umara") yozilgan edi — xato.
+  ["24", "soz",   "اُمِرَ", "Umira", A.m("m11_umara"), 0, 1.02, 70, 60, 12, 6],
   ["25", "soz",   "اَمْرُ", "Amru",  A.m("m12_amru"),  0, 1.15, 55, 60, 12, 6],
   ["26", "soz",   "اِمْرُ", "Imru",  A.m("m13_imru"),  0, 1.12, 40, 60, 12, 6],
   ["27", "soz",   "رَمْزُ", "Ramzu", A.m("m14_ramzu"), 0, 1.31, 25, 60, 12, 6],
@@ -426,7 +432,10 @@ const p5: ED[] = [
   ["35", "soz", "زَيْتُ", "Zaytu", A.y("y06_zaytu"), 0, 1.42, 52, 80, 12, 5],
   ["36", "soz", "مَيْتُ", "Maytu", A.y("y07_maytu"), 0, 1.33, 36, 80, 12, 5],
   ["37", "soz", "رَأْيُ", "Ra'yu", A.y("y08_rayu"),  0, 1.37, 20, 80, 12, 5],
-  ["38", "soz", "رَمَى",  "Rama",  A.y("y09_rama"),  0, 1.30,  4, 80, 12, 5],
+  // Kitob (5.jpg) da: ra+FATHA, mim+SUKUN, ya+DAMMA -> "ramyu".
+  // Qo'shnisi رَأْيُ (ra'yu) bilan bir xil naqsh. 2026-08-24 gacha
+  // رَمَى ("rama") deb yozilgan edi — mim'da fatha, ya nuqtasiz, damma yo'q.
+  ["38", "soz", "رَمْيُ",  "Ramyu",  A.y("y09_rama"),  0, 1.30,  4, 80, 12, 5],
   // Row 2 (5 so'z)
   ["39", "soz", "يَمَنْ",   "Yaman",  A.y("y10_yaman"),  0, 1.07, 82, 88, 14, 5],
   ["40", "soz", "مَرْيَمْ", "Maryam", A.y("y11_maryam"), 0, 1.33, 62, 88, 16, 5],

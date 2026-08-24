@@ -42,7 +42,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 // --- Sozlama -----------------------------------------------------------------
-const CONTENT_VERSION = "2.1.1"; // kontent o'zgarganda oshiring
+const CONTENT_VERSION = "2.2.0"; // kontent o'zgarganda oshiring
 const SCHEMA_VERSION = 2; // paket TUZILISHI o'zgarganda oshiring
 
 const __dirname = dirname(fileURLToPath(import.meta.url));

@@ -507,6 +507,35 @@ ushlanadi.
 
 > **Bu CLAUDE.md darajasidagi qat'iy protokol — har bir sahifa uchun amal qiling.**
 
+### 🛑 Vaqt qo'yishdan oldin — AUDIO ENERGIYASINI o'lchang (2026-08-24)
+
+Foydalanuvchi bir sessiyada uchta bir xil ildizli xatoni topdi. Uchalasi ham
+vaqtlar **eshitilmasdan/o'lchanmasdan** qo'yilganidan kelib chiqqan:
+
+| Xato | Sabab |
+|---|---|
+| Muqaddima: har paragraf oldingisining oxirini ijro etardi | chegara Whisper so'z vaqtiga qo'yilgan |
+| Bismillah oxirida "Qo" eshitilardi | chegara keyingi so'z boshiga juda yaqin (30 ms) |
+| `زُرْ` oxiri uzilib qolgan | kesim tovush o'rtasida (0.33 s, qo'shnilari 0.60 s) |
+
+**QAT'IY QOIDA**: Whisper ham, PDF ham vaqtni **taxminan** beradi —
+Whisper so'z boshini haqiqiydan **0.3–1.5 s ERTA** ko'rsatadi (o'lchandi).
+Ularga tayanib chegara qo'yish — xato. Har doim energiyani o'lchang:
+
+```bash
+# Bitta talaffuzning haqiqiy boshi/oxiri
+py tools/audio_span.py "public/audio/06. za.mp3" 18.30 19.60
+
+# Kesilib qolgan chunklarni topish (butun loyiha yoki tanlangan papkalar)
+py tools/check_chunk_tails.py 06_za 07_ma
+```
+
+**Zaxira**: boshidan −0.05 s, oxiridan +0.08 s (fricative/nazal so'nishi uchun).
+
+**AudioEngine 40 ms polling bilan to'xtaydi** — segment oxiri keyingi
+tovushga 40 ms dan yaqin bo'lsa, o'sha tovush ham eshitiladi. Chegarani
+jimlikning o'rtasiga qo'ying, tovush chetiga emas.
+
 ### ⚠️ PDF'ga ko'r-ko'rona ishonmaslik
 
 `Materiallar/audio_qoidalar/<NN>_*.pdf` fayllari 80% aniqlikdagi qo'llanma.
