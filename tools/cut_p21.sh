@@ -27,7 +27,8 @@ mkdir -p "$OUT_M"
 # Row 1: تَعْلِيمْ تَدْرِيسْ تَبْرِيكْ تَحْسِينْ
 cut "$SRC_M" "$OUT_M/m21r1_w1_talim.mp3"    328.31  330.48  # تعليم
 cut "$SRC_M" "$OUT_M/m21r1_w2_tadris.mp3"   330.87  332.59  # تدريس
-cut "$SRC_M" "$OUT_M/m21r1_w3_tabrik.mp3"   333.13  334.50  # تبريك
+# 2026-08-24: oxirgi "k" PORTLASHI kesilgan edi (334.52-334.58).
+cut "$SRC_M" "$OUT_M/m21r1_w3_tabrik.mp3"   333.13  334.70  # تبريك
 cut "$SRC_M" "$OUT_M/m21r1_w4_tahsin.mp3"   335.51  337.30  # تحسين
 
 # Row 2: بِيعَة مِيلَة عِيشَة يَبِيعُ يَمِيلُ تَعِيشُ

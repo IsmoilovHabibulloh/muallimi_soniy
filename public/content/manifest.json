@@ -1,15 +1,15 @@
 {
   "schemaVersion": 2,
-  "contentVersion": "2.6.0",
-  "generatedAt": "2026-08-24T03:16:48.615Z",
-  "contentHash": "e5f2f55414010874cb06c123bc01fe10c34dbafd8b7b74de1143ff4c90ed03d3",
+  "contentVersion": "2.7.0",
+  "generatedAt": "2026-08-24T04:42:10.239Z",
+  "contentHash": "a5faab915a4d8179c67a3c7eaa300d85aded84bcf588f4988b47f53aa5f7cc52",
   "parts": {
     "sahifalar": {
       "files": [
         {
           "path": "content/sahifalar/book.json",
           "bytes": 391061,
-          "sha256": "3608e4b23ff71fd7a36dbc2e86bdce753b8f2d812f2d082589e059290538214b"
+          "sha256": "50f44860e6820be450e411a4ca6e7b2a0fc586346eeff3c7e0db10fad329c0f1"
         }
       ],
       "counts": {
@@ -26,13 +26,13 @@
         {
           "path": "content/audiolar/audio-manifest.json",
           "bytes": 261709,
-          "sha256": "5b3dd038f3aec19d7d690bc6394f4363ccb6b133f3168993ac6badf46ab7ce64"
+          "sha256": "edb20b3ceded5efc84d4904bccbf73729664b6fd4ce690c23e82ca7ded5687f2"
         }
       ],
       "totals": {
         "packs": 13,
         "uniqueFiles": 1757,
-        "uniqueBytes": 127242769
+        "uniqueBytes": 127247785
       }
     },
     "sozlamalar": {
