@@ -2052,13 +2052,16 @@ function Page27({ elements, activeId, hasActive, onElementClick }: PP) {
   };
 
   // R3 — 3 juftlik singular/plural, har juftlik orasida tire (statik visual)
+  // RTL natural reading order: pair 1 (marratun) o'ngda, pair 3 (hurratun) chapda.
+  // dir="rtl" o'zi yetarli — flex-row-reverse QO'SHMANG, aks holda RTL bekor bo'lib,
+  // tartib chapdan o'ngga aylanadi (2026-08-24 da shu xato topilgan va tuzatilgan).
   const PairRow = ({ pairs }: { pairs: Array<[Element | undefined, Element | undefined]> }) => (
-    <div dir="rtl" className="flex w-full flex-row-reverse flex-wrap justify-center items-center gap-[clamp(0.25rem,2cqi,0.5rem)]">
+    <div dir="rtl" className="flex w-full flex-wrap justify-center items-center gap-[clamp(0.25rem,2cqi,0.5rem)]">
       {pairs.map((pair, i) => {
         const [a, b] = pair;
         if (!a || !b) return null;
         return (
-          <div key={i} className="flex flex-row-reverse items-center gap-[clamp(0.125rem,0.9cqi,0.25rem)]">
+          <div key={i} className="flex items-center gap-[clamp(0.125rem,0.9cqi,0.25rem)]">
             <ArabicEl el={a} isActive={activeId === a.id} hasActive={hasActive} onClick={() => onElementClick(a)} size="sm" />
             <span className="text-text-muted text-[0.75rem] select-none" style={{ opacity: 0.7 }}>—</span>
             <ArabicEl el={b} isActive={activeId === b.id} hasActive={hasActive} onClick={() => onElementClick(b)} size="sm" />

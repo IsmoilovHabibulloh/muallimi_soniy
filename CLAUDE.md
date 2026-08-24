@@ -1307,6 +1307,12 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
     R2 5 so'z (`جَمِيلَةٌ حَلِيمَةٌ سَلِيمَةٌ شَرِيفَةٌ نَعِيمَةٌ`) +
     R3 6 so'z, 3 juftlik singular/plural (`مَرَّةٌ-مَرَّاتٌ، كَرَّةٌ-كَرَّاتٌ،
     حُرَّةٌ-حُرَّاتٌ`). Chunklar `38_t_marbuta/p27_*.mp3`.
+    ⚠️ 2026-08-24: `PairRow` komponenti `dir="rtl"` bilan birga
+    `flex-row-reverse` ham ishlatgan — ikkalasi bir-birini bekor qilib,
+    vizual tartibni chapdan o'ngga aylantirgan (hurratun juftligi o'ngda,
+    marratun chapda ko'rinardi — kitobga zid). `flex-row-reverse` olib
+    tashlandi (`dir="rtl"` o'zi yetarli — xuddi shu qoida `HarfRow`
+    komponentida ham 2538-qatorda izohlangan).
   - Pastki bo'lim (32 element, `39. yoz-o'qiladigan.mp3` 188s, ulushli 28-sahifa
     bilan): subtitle (`يازلماسه‌ده اوقيلاديگان حرفلر`) + 3 ta Muqaddara bo'limi:
     - **Alif Muqaddara** (14 element): intro narration + R1 4 so'z
