@@ -4,9 +4,12 @@
 
 set -e
 
-SRC="/Users/habibulloh22icloud.com/Desktop/Antigravity/muallimi soniy/muallimus-soniy/public/audio/33. madli 02.mp3"
-OUT="/Users/habibulloh22icloud.com/Desktop/Antigravity/muallimi soniy/Materiallar/madlar/edit_audios/33_madli_02"
-FF="/Users/habibulloh22icloud.com/Desktop/Antigravity/muallimi soniy/tools/ffmpeg"
+# Yo'l skript joylashuvidan olinadi (avval macOS yo'li qotib yozilgan edi).
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SRC="$ROOT/public/audio/33. madli 02.mp3"
+OUT="$ROOT/Materiallar/madlar/edit_audios/33_madli_02"
+FF="${FFMPEG:-$ROOT/tools/ffmpeg}"
+command -v "$FF" >/dev/null 2>&1 || FF=ffmpeg
 
 mkdir -p "$OUT"
 
@@ -57,7 +60,10 @@ cut p20_29_munfiquuna      273.95 276.40
 
 echo "=== Mid section: 4 feminine plural + passives ==="
 cut p20_30_muslimaat       278.30 280.25
-cut p20_31_mukhlisaat      281.45 283.40
+# 2026-08-24: oxirgi "t" PORTLASHI kesilib qolgan edi (283.42-283.51).
+# Jarangsiz portlovchi tovushda avval jimlik (yopilish), keyin portlash
+# keladi - jimlikda kesilsa harf butunlay yo'qoladi.
+cut p20_31_mukhlisaat      281.45 283.60
 cut p20_32_mansuuruuna     284.85 287.20
 cut p20_33_matluubuuna     288.35 290.55
 

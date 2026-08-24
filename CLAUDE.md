@@ -536,6 +536,39 @@ py tools/check_chunk_tails.py 06_za 07_ma
 tovushga 40 ms dan yaqin bo'lsa, o'sha tovush ham eshitiladi. Chegarani
 jimlikning o'rtasiga qo'ying, tovush chetiga emas.
 
+### 🛑 So'z oxiridagi PORTLOVCHI kesilib qolishi (ت ك ق ط ب د ج)
+
+2026-08-24 da foydalanuvchi topdi: 20-sahifada `مُخْلِصَاتْ` chunki
+"muxlisaa" bo'lib eshitilardi — oxirgi "t" yo'q edi.
+
+Sabab — jarangsiz portlovchi ikki fazadan iborat:
+
+| Faza | Nima bo'ladi | Energiya |
+|------|--------------|----------|
+| 1. Yopilish | ~100 ms **JIMLIK** | ~nol |
+| 2. Portlash | harfning o'zi | past, lekin bor |
+
+Kesim 1-fazada tugasa, harf **butunlay yo'qoladi**, lekin chunk "toza"
+ko'rinadi — chunki jimlikda tugagan. `check_chunk_tails.py` buni
+TOPA OLMAYDI.
+
+Misol (`33. madli 02.mp3`):
+```
+283.00-283.27  unli "aa"      (~5000)
+283.28-283.41  jimlik          (~25)   <- eski kesim shu yerda tugagan
+283.42-283.51  "t" portlashi   (~700)  <- yo'qolgan qism
+```
+
+**Qoida**: oxiri sukunli portlovchi bo'lgan so'zni kesayotganda,
+`audio_span.py` bilan jimlikdan KEYINGI portlash bor-yo'qligini
+tekshiring va uni kesim ichiga oling.
+
+⚠️ **Buni avtomatlashtirib bo'lmaydi**: arab tilida vaqf holatida oxirgi
+portlovchi ko'pincha **portlatilmay** o'qiladi — bu me'yor. Chunkning
+o'zidan qarab "qori portlatmagan" bilan "portlash kesilgan" ni ajratib
+bo'lmaydi (sinab ko'rildi: 95 ta so'zdan 77 tasi yolg'on bayroq oldi).
+Ajratish uchun MANBA audioning kesimdan keyingi qismini ko'rish kerak.
+
 ### 🔍 Audio chunk NOMI — matnni tekshirishning bepul usuli
 
 Chunk fayllari talaffuz bo'yicha nomlangan (`zh44_zahr_za.mp3`,

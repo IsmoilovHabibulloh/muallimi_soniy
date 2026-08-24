@@ -1593,7 +1593,8 @@ const p20: ED[] = [
   ["29", "soz", "مُنْفِقُونَ", "Sarflovchilar",                A.md2("p20_29_munfiquuna"),  0, 2.45, 0, 0, 0, 0],
   // ── Row 8 (4 ta — 2 ayol ko'plik + 2 passiv) ──
   ["30", "soz", "مُسْلِمَاتْ", "Musulma ayollar",              A.md2("p20_30_muslimaat"),   0, 1.95, 0, 0, 0, 0],
-  ["31", "soz", "مُخْلِصَاتْ", "Ixlosli ayollar",              A.md2("p20_31_mukhlisaat"),  0, 1.95, 0, 0, 0, 0],
+  // 2026-08-24: oxirgi "t" portlashi kesilgan edi (1.95 -> 2.15s).
+  ["31", "soz", "مُخْلِصَاتْ", "Ixlosli ayollar",              A.md2("p20_31_mukhlisaat"),  0, 2.15, 0, 0, 0, 0],
   ["32", "soz", "مَنْصُورُونَ", "Yordam berilganlar",          A.md2("p20_32_mansuuruuna"), 0, 2.35, 0, 0, 0, 0],
   ["33", "soz", "مَطْلُوبُونَ", "Talab qilinganlar",           A.md2("p20_33_matluubuuna"), 0, 2.20, 0, 0, 0, 0],
 
