@@ -232,7 +232,15 @@ const p0: ED[] = [
 // ALBATTA audiodan o'lchang — hisoblab yozmang.
 // ============================================================
 const p1: ED[] = [
-  ["000", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ", "Bismillahir rohmanir rohim", A.muq, 0, 5, 0, 0, 0, 0],
+  // Bismillah + "Muqaddima" sarlavhasi. Oxiri 3.70 — nima uchun aynan shu:
+  //   0.00-1.84  Bismillah
+  //   2.60-3.42  "Muqaddima" (3.46 da to'liq so'nadi)
+  //   3.46-5.02  jimlik
+  //   5.03       "Qo'lingizdagi" (1-paragraf) boshlanadi
+  // Avval 5 edi — AudioEngine 40ms polling bilan to'xtagani uchun 5.04
+  // gacha chiqib ketib, "Qo" bo'g'inini ham ijro etardi (foydalanuvchi
+  // 2026-08-24 da qayd etdi). 3.70 da 1.3s zaxira qoladi.
+  ["000", "jumla", "بِسْمِ اللَّهِ الرَّحْمٰنِ الرَّحِيمِ", "Bismillahir rohmanir rohim", A.muq, 0, 3.70, 0, 0, 0, 0],
   ["par1", "jumla", "", "1-paragraf", A.muq, 5.00, 80.75, 0, 0, 0, 0],
   ["par2", "jumla", "", "2-paragraf", A.muq, 80.75, 131.40, 0, 0, 0, 0],
   ["par3", "jumla", "", "3-paragraf", A.muq, 131.40, 205.56, 0, 0, 0, 0],
