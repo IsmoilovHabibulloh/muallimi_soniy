@@ -977,7 +977,9 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
 - **Sahifa 10 tugallangan**: Sin س (23 element, 19_sa/: 3 header + 5+6+5+4 so'z),
   Tsa ث (30 element, 20_tsa/: 3 header + 6+6+5+4 so'z + 6 taqqoslash). Jami 53 element.
   Ikkalasi connector — header'lar pozitsion: `سَ / ـسِـ / ـسُ`, `ثَ / ـثِـ / ـثُ`.
-  Tsa Row 5 — sin/tsa taqqoslash juftliklari damma bilan: سَمَرُ-ثَمَرُ، سَبْتُ-ثَبْتُ، سَلْسُ-ثَلْثُ.
+  Tsa Row 5 — sin/tsa taqqoslash: 1-juftlik SUKUN bilan (سَمَرْ-ثَمَرْ),
+  2- va 3-juftlik damma bilan (سَبْتُ-ثَبْتُ، سَلْسُ-ثَلْثُ). 2026-08-24 gacha
+  uchalasi ham damma deb yozilgan edi — kitobga zid.
 - **Sahifa 11 tugallangan**: Sod ص (20 element, 21_so/: 3 header + 7+4+6 so'z),
   Tho ط (29 element, 22_to/: 3 header + 6+6+4+4+6 so'z). Jami 49 element.
   Ikkalasi connector — header'lar pozitsion: `صَ / ـصِـ / ـصُ`, `طَ / ـطِـ / ـطُ`.

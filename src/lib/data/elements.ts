@@ -660,9 +660,12 @@ const p9: ED[] = [
   ["10", "soz", "قَلْبُ",   "Qalbu (yurak)",   A.q("q10_qalbu"),  0, 1.21, 88, 22, 12, 5],
   ["11", "soz", "قَبْلُ",   "Qablu (oldin)",   A.q("q11_qablu"),  0, 1.07, 74, 22, 12, 5],
   ["12", "soz", "فَوْقُ",   "Fawqu (yuqori)",  A.q("q12_fawqu"),  0, 1.32, 60, 22, 12, 5],
-  ["13", "soz", "قَلَمُ",   "Qalamu",          A.q("q13_qalamu"), 0, 0.95, 46, 22, 12, 5],
-  ["14", "soz", "قَمَرُ",   "Qamaru (oy)",     A.q("q14_qamaru"), 0, 0.87, 32, 22, 12, 5],
-  ["15", "soz", "لَقَبُ",   "Laqabu",          A.q("q15_laqabu"), 0, 1.05, 18, 22, 12, 5],
+  // Kitob (9.jpg) Row 2: birinchi 3 so'z damma bilan (قَلْبُ قَبْلُ فَوْقُ),
+  // keyingi 3 tasi SUKUN bilan (قَلَمْ قَمَرْ لَقَبْ). 2026-08-24 gacha
+  // uchalasi damma deb yozilgan edi — xato.
+  ["13", "soz", "قَلَمْ",   "Qalam",           A.q("q13_qalamu"), 0, 0.95, 46, 22, 12, 5],
+  ["14", "soz", "قَمَرْ",   "Qamar (oy)",      A.q("q14_qamaru"), 0, 0.87, 32, 22, 12, 5],
+  ["15", "soz", "لَقَبْ",   "Laqab",           A.q("q15_laqabu"), 0, 1.05, 18, 22, 12, 5],
   ["16", "soz", "قُمْقُمْ",  "Qumqum",          A.q("q16_qumqum"), 0, 1.40,  4, 22, 12, 5],
   // Row 3 (4 so'z): اِقْتَرَبَ، يَقْتَرِبُ، اِنْقَلَبَ، يَنْقَلِبُ
   ["17", "soz", "اِقْتَرَبَ", "Iqtaraba (yaqinlashdi)",     A.q("q17_iqtaraba"),  0, 1.51, 80, 31, 18, 5],
@@ -753,17 +756,20 @@ const p10: ED[] = [
   ["28", "soz", "ثِبْ",    "Thib",             A.th("th05_thib"),     0, 0.75, 74, 51, 8, 5],
   ["29", "soz", "ثَمْ",    "Tham",             A.th("th06_tham"),     0, 0.95, 60, 51, 8, 5],
   ["30", "soz", "ثِنْ",    "Thin",             A.th("th07_thin"),     0, 0.91, 46, 51, 8, 5],
-  ["31", "soz", "ثَمَرُ",  "Thamaru (meva)",    A.th("th08_thamaru"),  0, 0.97, 30, 51, 12, 5],
-  ["32", "soz", "ثَمَنٌ",  "Thamanun (narx)",   A.th("th09_thamanun"), 0, 1.10, 12, 51, 12, 5],
+  // Kitob (10.jpg) da bu 6 so'z SUKUN bilan tugaydi (2026-08-24 tuzatildi).
+  // ثَمَنْ va مَثَلْ da avval TANVIN (ٌ) yozilgan edi — tanvin 24-sahifada
+  // o'rgatiladi, bu yerda bo'lishi mumkin emas edi.
+  ["31", "soz", "ثَمَرْ",  "Thamar (meva)",     A.th("th08_thamaru"),  0, 0.97, 30, 51, 12, 5],
+  ["32", "soz", "ثَمَنْ",  "Thaman (narx)",     A.th("th09_thamanun"), 0, 1.10, 12, 51, 12, 5],
   // Row 2 (6 so'z): ثَوْرُ ثَوْبُ ثَيْبُ مِثْلُ مُثْلُ مَثَلٌ
   ["33", "soz", "ثَوْرُ",  "Thawru (ho'kiz)",   A.th("th10_thawru"),   0, 1.29, 88, 59, 11, 5],
   ["34", "soz", "ثَوْبُ",  "Thawbu (kiyim)",    A.th("th11_thawbu"),   0, 1.25, 72, 59, 11, 5],
   ["35", "soz", "ثَيْبُ",  "Thaybu",            A.th("th12_thaybu"),   0, 1.28, 56, 59, 11, 5],
   ["36", "soz", "مِثْلُ",  "Mithlu (misli)",    A.th("th13_mithlu"),   0, 1.26, 40, 59, 11, 5],
   ["37", "soz", "مُثْلُ",  "Muthlu",            A.th("th14_muthlu"),   0, 1.33, 24, 59, 11, 5],
-  ["38", "soz", "مَثَلٌ",  "Mathalun (misol)",  A.th("th15_mathalun"), 0, 1.07,  8, 59, 11, 5],
+  ["38", "soz", "مَثَلْ",  "Mathal (misol)",    A.th("th15_mathalun"), 0, 1.07,  8, 59, 11, 5],
   // Row 3 (5 so'z): كَوْثَرُ اَكْثَرَ يُكْثِرُ اَثْبَتَ يُثْبِتُ
-  ["39", "soz", "كَوْثَرُ", "Kawtharu (mo'l-ko'l)",    A.th("th16_kawtharu"), 0, 1.27, 84, 67, 14, 5],
+  ["39", "soz", "كَوْثَرْ", "Kawthar (mo'l-ko'l)",     A.th("th16_kawtharu"), 0, 1.27, 84, 67, 14, 5],
   ["40", "soz", "اَكْثَرَ", "Aksara (ko'paytirdi)",    A.th("th17_aksara"),   0, 1.30, 66, 67, 14, 5],
   ["41", "soz", "يُكْثِرُ", "Yuksiru (ko'paytiradi)",  A.th("th18_yuksiru"),  0, 1.39, 48, 67, 14, 5],
   ["42", "soz", "اَثْبَتَ", "Asbata (tasdiqladi)",     A.th("th19_asbata"),   0, 1.37, 30, 67, 14, 5],
@@ -774,8 +780,9 @@ const p10: ED[] = [
   ["46", "soz", "اِسْتَثْقَلَ",  "Istasqala (og'ir topdi)",     A.th("th23_istasqala"),  0, 2.06, 32, 75, 20, 5],
   ["47", "soz", "يَسْتَثْقِلُ",  "Yastasqilu (og'ir topadi)",   A.th("th24_yastasqilu"), 0, 2.11,  8, 75, 20, 5],
   // Row 5 (6 so'z, 3 juftlik — sin vs tsa taqqoslash): سَمَرُ-ثَمَرُ، سَبْتُ-ثَبْتُ، سَلْسُ-ثَلْثُ
-  ["48", "soz", "سَمَرُ", "Samaru (suhbat)",       A.th("th25_samar"),  0, 0.89, 86, 87, 12, 5],
-  ["49", "soz", "ثَمَرُ", "Thamaru (meva)",        A.th("th26_thamar"), 0, 0.91, 72, 87, 12, 5],
+  // Taqqoslash: 1-juftlik SUKUN bilan, 2- va 3-juftlik damma bilan (kitobga mos).
+  ["48", "soz", "سَمَرْ", "Samar (suhbat)",        A.th("th25_samar"),  0, 0.89, 86, 87, 12, 5],
+  ["49", "soz", "ثَمَرْ", "Thamar (meva)",         A.th("th26_thamar"), 0, 0.91, 72, 87, 12, 5],
   ["50", "soz", "سَبْتُ", "Sabtu (shanba)",        A.th("th27_sabt"),   0, 1.20, 58, 87, 12, 5],
   ["51", "soz", "ثَبْتُ", "Thabtu (ro'yxat)",      A.th("th28_thabt"),  0, 1.19, 44, 87, 12, 5],
   ["52", "soz", "سَلْسُ", "Salsu (yumshoq)",       A.th("th29_sals"),   0, 1.40, 30, 87, 12, 5],
