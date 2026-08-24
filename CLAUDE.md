@@ -536,6 +536,21 @@ py tools/check_chunk_tails.py 06_za 07_ma
 tovushga 40 ms dan yaqin bo'lsa, o'sha tovush ham eshitiladi. Chegarani
 jimlikning o'rtasiga qo'ying, tovush chetiga emas.
 
+### 🔍 Audio chunk NOMI — matnni tekshirishning bepul usuli
+
+Chunk fayllari talaffuz bo'yicha nomlangan (`zh44_zahr_za.mp3`,
+`th09_thamanun.mp3`). Matnni yozayotganda **chunk nomiga qarang** — agar
+matn boshqa so'zni ko'rsatsa, biri xato.
+
+2026-08-24 da shu bilan topildi: 16-sahifada matn `ذَهَبْ` (zahab) edi,
+chunk nomi esa `zh44_zahr_za` — kitobda `زَهَرْ` ekan (dhal→zay, ba→ra).
+Yonidagi `طَهَرْ` ham `ظَهَرْ` bo'lishi kerak edi (`zh45_zahr_zo2`).
+
+⚠️ Buni AVTOMATLASHTIRISHGA urinildi va bekor qilindi: nomlash
+konvensiyasi sahifalar bo'ylab har xil (`p27_alif_r1_w2_rahman` da
+`alif` — bo'lim nomi, so'zning qismi emas), shu sababli avtomatik
+solishtirish juda ko'p yolg'on ogohlantirish beradi. Qo'lda qarang.
+
 ### ⚠️ PDF'ga ko'r-ko'rona ishonmaslik
 
 `Materiallar/audio_qoidalar/<NN>_*.pdf` fayllari 80% aniqlikdagi qo'llanma.

@@ -1,15 +1,15 @@
 {
   "schemaVersion": 2,
-  "contentVersion": "2.4.0",
-  "generatedAt": "2026-08-24T02:15:09.995Z",
-  "contentHash": "c88bb83e63fb04dcef9a316581532a7e0d90b2daf0bdb9a5e43867dea721e24e",
+  "contentVersion": "2.5.0",
+  "generatedAt": "2026-08-24T02:21:55.849Z",
+  "contentHash": "b6b0b73df52ecef0a0f2dd844c41ca87ad7b7365283a11cd1c79cc875a87dce0",
   "parts": {
     "sahifalar": {
       "files": [
         {
           "path": "content/sahifalar/book.json",
-          "bytes": 391048,
-          "sha256": "55d8144feb2f11215dbe6a67f6b8faaccb9832aa9f6102534f767ffd4f0a7626"
+          "bytes": 391061,
+          "sha256": "382e555801964dd24d4fe896a83a4070795c35715a3177b628d9c6a197e9e335"
         }
       ],
       "counts": {

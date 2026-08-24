@@ -1184,8 +1184,12 @@ const p16: ED[] = [
   ["42", "soz", "ظَهْرُ",   "Zahru (orqa)",          A.zh("zh42_zahr_zo"),   0, 1.38, 30, 74, 12, 5],
   ["43", "soz", "ضَهْرُ",   "Dahru",                 A.zh("zh43_dahr_dod"),  0, 1.40, 14, 74, 12, 5],
   // ── Taqqoslash qatori 2 (6 so'z, 3 juftlik — ز/ظ) ──
-  ["44", "soz", "ذَهَبْ",    "Zahab (oltin)",         A.zh("zh44_zahr_za"),   0, 1.05, 86, 83, 12, 5],
-  ["45", "soz", "طَهَرْ",    "Tohar (tozalandi)",     A.zh("zh45_zahr_zo2"),  0, 1.15, 72, 83, 12, 5],
+  // L2 taqqoslash qatori: za/zo juftliklari (kitob 16.jpg oxirgi qator).
+  // 2026-08-24: 44 da "ذَهَبْ" (dhal + ba) yozilgan edi — kitobda زَهَرْ
+  // (zay + ra), 45 da "طَهَرْ" (tho) — kitobda ظَهَرْ (zo, nuqtali).
+  // Audio chunk nomlari ham buni tasdiqlaydi: zahr_za / zahr_zo2.
+  ["44", "soz", "زَهَرْ",    "Zahar (gulladi, ز)",    A.zh("zh44_zahr_za"),   0, 1.05, 86, 83, 12, 5],
+  ["45", "soz", "ظَهَرْ",    "Zahar (zohir bo'ldi, ظ)", A.zh("zh45_zahr_zo2"),  0, 1.15, 72, 83, 12, 5],
   ["46", "soz", "اَزْهَرْ",  "Azhar (gulladi)",       A.zh("zh46_azhar_za"),  0, 1.31, 58, 83, 14, 5],
   ["47", "soz", "اَظْهَرْ",  "Azhar (oshkor qildi)",  A.zh("zh47_azhar_zo"),  0, 1.33, 44, 83, 14, 5],
   ["48", "soz", "اَعْزَمْ",  "A'zam (qat'iy qildi)",  A.zh("zh48_azam_za"),   0, 1.42, 30, 83, 14, 5],
