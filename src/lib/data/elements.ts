@@ -626,9 +626,10 @@ const p8: ED[] = [
   ["34", "soz", "فِكْرُ",  "Fikru (fikr)",   A.f("f13_fikru"), 0, 1.11, 36, 74, 12, 5],
   ["35", "soz", "زِفْرُ",  "Zifru",          A.f("f14_zifru"), 0, 1.33, 20, 74, 12, 5],
   ["36", "soz", "كِفْلُ",  "Kiflu (nasib)",  A.f("f15_kiflu"), 0, 1.21,  4, 74, 12, 5],
-  // Row 3 (6 so'z): فُلْفُلْ، نَوْفَرُ، نَوْفَلْ، فَهِمَ، يَفْهَمُ، اِفْهَمْ
+  // Row 3 (6 so'z): فُلْفُلْ، نَوْفَرْ، نَوْفَلْ، فَهِمَ، يَفْهَمُ، اِفْهَمْ
   ["37", "soz", "فُلْفُلْ", "Fulful (murch)",      A.f("f16_fulful"),  0, 1.42, 84, 84, 14, 5],
-  ["38", "soz", "نَوْفَرُ", "Nawfaru",             A.f("f17_nawfaru"), 0, 1.49, 68, 84, 14, 5],
+  // Kitob (8.jpg): oxiri SUKUN (2026-08-24).
+  ["38", "soz", "نَوْفَرْ", "Nawfar",              A.f("f17_nawfaru"), 0, 1.49, 68, 84, 14, 5],
   ["39", "soz", "نَوْفَلْ", "Nawfal (ism)",        A.f("f18_nawfal"),  0, 1.57, 52, 84, 14, 5],
   ["40", "soz", "فَهِمَ",   "Fahima (tushundi)",   A.f("f19_fahima"),  0, 1.09, 36, 84, 14, 5],
   ["41", "soz", "يَفْهَمُ", "Yafhamu (tushunadi)", A.f("f20_yafhamu"), 0, 1.55, 20, 84, 14, 5],
@@ -902,8 +903,9 @@ const p12: ED[] = [
   ["29", "soz", "خَتْمُ",   "Xatmu (tamom, muhr)",       A.x("xo11_xatmu"),   0, 1.26, 73, 62, 11, 5],
   ["30", "soz", "خَمْرُ",   "Xamru (may)",               A.x("xo12_xamru"),   0, 1.25, 59, 62, 11, 5],
   ["31", "soz", "خَوْفُ",   "Xawfu (qo'rquv)",           A.x("xo13_xawfu"),   0, 1.45, 45, 62, 11, 5],
-  ["32", "soz", "مَخْرَجُ", "Maxraju (chiqish joyi)",    A.x("xo14_maxraju"), 0, 1.34, 27, 62, 15, 5],
-  ["33", "soz", "مُخْبِرُ", "Muxbiru (xabar beruvchi)",  A.x("xo15_muxbiru"), 0, 1.24,  8, 62, 15, 5],
+  // Kitob (12.jpg) da bu ikkisi SUKUN bilan tugaydi (2026-08-24).
+  ["32", "soz", "مَخْرَجْ", "Maxraj (chiqish joyi)",     A.x("xo14_maxraju"), 0, 1.34, 27, 62, 15, 5],
+  ["33", "soz", "مُخْبِرْ", "Muxbir (xabar beruvchi)",   A.x("xo15_muxbiru"), 0, 1.24,  8, 62, 15, 5],
   // Row 4 (4 so'z, past/present juftliklar — form IV أفعل): اَخْرَجَ يُخْرِجُ اَخْبَرَ يُخْبِرُ
   ["34", "soz", "اَخْرَجَ", "Axraja (chiqardi)",        A.x("xo16_axraja"),  0, 1.29, 82, 71, 15, 5],
   ["35", "soz", "يُخْرِجُ", "Yuxriju (chiqaradi)",      A.x("xo17_yuxriju"), 0, 1.39, 61, 71, 15, 5],
@@ -1060,13 +1062,14 @@ const p15: ED[] = [
   ["01", "harf", "ضَ",   "Dod (boshida)",    A.do_("do01_fatha"),     0, 0.72, 72, 4, 10, 6],
   ["02", "harf", "ـضِـ", "Dod (oʻrtasida)",  A.do_("do02_kasra"),     0, 0.82, 44, 4, 10, 6],
   ["03", "harf", "ـضُ",  "Dod (oxirida)",    A.do_("do03_damma"),     0, 0.78, 16, 4, 10, 6],
-  // Row 2 (6 ism — oxiri damma): ضَيْفُ عَضَلُ ضَهْبُ ضَبْطُ ضَعْفُ عَرَضُ
+  // Row 2 (6 ism — oxiri damma): ضَيْفُ عَضْلُ ضَهْبُ ضَبْطُ ضَعْفُ عَرْضُ
   ["04", "soz", "ضَيْفُ", "Mehmon",           A.do_("do04_dayf"),      0, 1.39, 84, 13, 12, 5],
   ["05", "soz", "عَضْلُ", "Mushak",           A.do_("do05_adal"),      0, 1.33, 70, 13, 12, 5],
   ["06", "soz", "ضَهْبُ", "Pishirish",        A.do_("do06_dahb"),      0, 1.48, 56, 13, 12, 5],
   ["07", "soz", "ضَبْطُ", "Nazorat",          A.do_("do07_dabt"),      0, 1.29, 42, 13, 12, 5],
   ["08", "soz", "ضَعْفُ", "Zaiflik",          A.do_("do08_daf"),       0, 1.39, 28, 13, 12, 5],
-  ["09", "soz", "عَرَضُ", "Ko'rsatish",       A.do_("do09_arad"),      0, 1.17, 14, 13, 12, 5],
+  // Kitob (15.jpg): ر ustida SUKUN (fatha emas) -> عَرْضُ (2026-08-24).
+  ["09", "soz", "عَرْضُ", "Ko'rsatish",       A.do_("do09_arad"),      0, 1.17, 14, 13, 12, 5],
   // Row 3 (ض-ر-ب: 2 ism + 1 imperativ + 3 present fe'l)
   ["10", "soz", "مَضْرِبْ", "Urish joyi",     A.do_("do10_madrib"),    0, 1.40, 84, 22, 12, 5],
   ["11", "soz", "مِضْرَبْ", "Urish asbobi / kaltak", A.do_("do11_mudrib"), 0, 1.50, 70, 22, 12, 5],
@@ -1119,8 +1122,9 @@ const p15: ED[] = [
   ["50", "soz", "زِفْرُ",   "Qichqiriq (ز)",    A.za_("za25_zifru"),       0, 1.21, 72, 88, 10, 5],
   ["51", "soz", "بَذْلُ",   "Sarflash (ذ)",     A.za_("za26_badhlu_zal"),  0, 1.24, 58, 88, 10, 5],
   ["52", "soz", "بَزْلُ",   "Ajratish (ز)",     A.za_("za27_bazlu_zain"),  0, 1.30, 46, 88, 10, 5],
-  ["53", "soz", "اَبْذَلُ",  "Sarflayman (ذ)",  A.za_("za28_abdhalu"),     0, 1.30, 32, 88, 10, 5],
-  ["54", "soz", "اَبْزَلُ",  "Ajrataman (ز)",   A.za_("za29_abzalu"),      0, 1.30, 20, 88, 10, 5],
+  // Kitob (15.jpg): oxirgi juftlik SUKUN bilan (2026-08-24).
+  ["53", "soz", "اَبْذَلْ",  "Sarflayman (ذ)",  A.za_("za28_abdhalu"),     0, 1.30, 32, 88, 10, 5],
+  ["54", "soz", "اَبْزَلْ",  "Ajrataman (ز)",   A.za_("za29_abzalu"),      0, 1.30, 20, 88, 10, 5],
 ];
 
 // ============================================================
