@@ -2523,9 +2523,13 @@ const p30: ED[] = [
 const p31: ED[] = [
   // 2026-05-19: title 42.vaqf 0-0.85s, definition 3-32s, words 1-9 from 36.5-60s.
   // Vaqf misollari: 9 oyat oxiri (Quran).
+  // ⚠️ 2026-08-27: `definition` matni audiodan qariyb yarmi (butun 2-jumla —
+  // qanday tovush bilan to'xtash kerakligi) tushib qolgan edi. Kitob rasmi
+  // (31.jpg) dan to'liq ko'chirildi va Whisper transkripsiyasi bilan
+  // so'z-so'z tasdiqlandi (audio 28.98s, chunk 29.00s — mos).
   ["01", "jumla", "وقف",            "Vaqf (to'xtash)", A.vaqf("p31_title"),       0, 0.85, 56,  8, 16, 5],
-  ["definition", "jumla", "وقف ـ تنفّش (توختاش). قرآنی اوقیغانده توختاش الامتلریده بر آز توختاب نفس آلیب داوام ایتیلادی",
-    "Vaqf — tinish (to'xtash). Qur'on o'qiganda to'xtash alomatlarida bir oz to'xtab, nafas olib davom etiladi",
+  ["definition", "jumla", "وقف – طینیش دیگانی، طینیش- توختش دیگانیدر. قرآن اوقیغانده توختش علامتلری آلدیده‌گی سوزلرنی اوقیب بولگاچ بر آز توختب نفس آلیش کیره ك بولادی. توختش علامتی آلدیده‌گی سوزلرنی اوقیب توکتگانده سوزیگه قاراب سکون طاوشی یا الف طاوشی یاکی سکونالی ها (ة - ٥) طاوشی بیلان توختش کیره ك بولادی",
+    "Vaqf — tinish degani, tinish — to'xtash degandir. Qur'on o'qiganda to'xtash alomatlari oldidagi so'zlarni o'qib bo'lgach bir oz to'xtab nafas olish kerak bo'ladi. To'xtash alomati oldidagi so'zlarni o'qib tugatganda so'ziga qarab sukun tovushi ya alif tovushi yoki sukunli ha (ة) tovushi bilan to'xtash kerak bo'ladi",
     A.vaqf("p31_definition"), 0, 29.00, 0, 0, 0, 0],
   // 9 ta vaqf misollar (har biri oyat oxiri)
   ["02", "soz", "نَسْتَعِينُ",  "Nasta'in (yordam so'raymiz)",       A.vaqf("p31_w1_nastain"),   0, 2.20, 0, 0, 0, 0],

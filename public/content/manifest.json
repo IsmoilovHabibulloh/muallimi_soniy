@@ -1,22 +1,22 @@
 {
   "schemaVersion": 2,
-  "contentVersion": "2.7.1",
-  "generatedAt": "2026-08-27T06:07:07.310Z",
-  "contentHash": "3e513fc6da794b33bfd6cf426b07139a8b5860751a7b80602485d3def352983a",
+  "contentVersion": "2.8.0",
+  "generatedAt": "2026-08-27T09:41:51.207Z",
+  "contentHash": "e55fc664e5298ef1f43c524f99ab9093c962b11a5f7f4bea708ecd7efa300a39",
   "parts": {
     "sahifalar": {
       "files": [
         {
           "path": "content/sahifalar/book.json",
-          "bytes": 391061,
-          "sha256": "b3ea40d90c487c303ed51889301cecc9fa996b3ed554efd748234d96244d03b8"
+          "bytes": 391610,
+          "sha256": "9be3862b34e6346cbe9e73bb98e7a04d3647e65041d7f994a0c696aeb8d4f709"
         }
       ],
       "counts": {
         "chapters": 10,
         "lessons": 13,
         "pageKeys": 50,
-        "bookPages": 52,
+        "bookPages": 50,
         "elements": 1894,
         "muqaddimaParagraphs": 9
       }
@@ -25,8 +25,8 @@
       "files": [
         {
           "path": "content/audiolar/audio-manifest.json",
-          "bytes": 261709,
-          "sha256": "edb20b3ceded5efc84d4904bccbf73729664b6fd4ce690c23e82ca7ded5687f2"
+          "bytes": 249538,
+          "sha256": "ce1ebffec0f4ddbfb456f77ed0f9fba5642602ce42df7c4a8df604fb2326993c"
         }
       ],
       "totals": {

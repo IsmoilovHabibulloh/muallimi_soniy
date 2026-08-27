@@ -326,8 +326,15 @@ export const PAGE_MAP: Record<string, number[]> = {
   ls_harflar_2: [11, 12, 13, 14, 15, 16],
   ls_madlar: [17, 18, 19, 20],
   ls_tashdid: [21, 22, 23],
-  ls_tanvin: [24, 25],
-  ls_alif: [25, 26, 27, 28, 29, 30],
+  // Sahifa 25 va 30 — o'tish sahifalari (bir yarmi oldingi mavzuni tugatadi,
+  // bir yarmi keyingisini boshlaydi). Bir xil sahifa avval IKKALA qo'shni
+  // darsda ham ro'yxatga olingan edi (25: tanvin+alif, 30: alif+vasl) — bu
+  // uni global o'quvchida IKKI MARTA ketma-ket ko'rsatardi (2026-08-27 da
+  // foydalanuvchi 31/32-sahifa "bir xil" ekanini topdi). Sahifa 21 andozasiga
+  // muvofiq (mad+tashdid o'tishi — faqat ls_tashdid'da, ls_madlar'da emas):
+  // o'tish sahifasi faqat YANGI mavzu darsiga tegishli.
+  ls_tanvin: [24],
+  ls_alif: [25, 26, 27, 28, 29],
   ls_vasl: [30, 31, 32, 33],
   ls_kalimalar: [34, 35],
   ls_suralar: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47],

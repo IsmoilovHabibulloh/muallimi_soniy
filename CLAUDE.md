@@ -1361,6 +1361,16 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   Vaqtlar silencedetect -28dB/d=0.35 + buffers asoslangan — foydalanuvchi
   audio'larni eshitib tasdiqlasa, mos kelmagan chunks `cut_p30.sh` orqali
   qayta kesilsin. Cut script: `tools/cut_p30.sh`.
+- **Sahifa 31 (Vaqf) `definition` matni to'ldirildi (2026-08-27)**: audio
+  29.00s edi, matn esa audioning yarmigagina yetardi (foydalanuvchi
+  "matn audioga qaraganda kam" deb topdi). Whisper transkripsiyasi
+  (uz) + kitob rasmi (31.jpg)dan to'liq matn tiklandi — audio ikki
+  jumladan iborat ekan: 1) vaqf/tinish/to'xtash ta'rifi + nafas olish
+  qoidasi (avval yozilgan qism, lekin so'zma-so'z emas — parafraz
+  qilingan edi), 2) **butunlay tushirib qoldirilgan** ikkinchi jumla —
+  to'xtash alomati oldidagi so'zni o'qib tugatganda QANDAY tovush
+  bilan to'xtash kerakligi (sukun/alif/sukunli-ha). Whisper matni
+  kitob rasmi bilan so'z-so'z tasdiqlandi (audio 28.98s ≈ chunk 29.00s).
 - **Sahifa 32 idg'om sektsiyasi qayta yozildi (2026-05-22)**: eski versiyada
   faqat 4 misol (`min ni'matin`, `min rabbika`, `qad tabayyana`, `yawma'idhin`)
   bor edi — Layl/Zalzaladan olingan, kitobdagi matn bilan **mos kelmas edi**.
@@ -1711,7 +1721,7 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
     `ns_*` ishlatadi) — `make()` page-prefiks (`p46_*` / `p47_*`) tufayli
     global element store'da kollyziya yo'q, lekin renderer kodida har sahifa
     o'zining usePageElements scope'iga bog'liq.
-- **Sahifa 50 tugallangan** (user-facing "52 / 52" — global indikatorda
+- **Sahifa 50 tugallangan** (user-facing "50 / 50" — global indikatorda
   kitobning eng oxirgi sahifasi): Du'a al-Qunut (دعاء القنوت). 8 element:
   1 ta clickable sarlavha (`p50_01` دُعَاءُ الْقُنُوتِ) + 7 ta tabiiy clause
   (`p50_02..p50_08`). Matn — kitob rasmidan 1:1 transkripsiya, hech bir
@@ -1736,7 +1746,7 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   - Card balandligi ~250px (mobile 375px viewport), bemalol sig'adi
     — paragrafga aylantirilganidan keyin avvalgi 7 qatordan ancha
     ixchamroq.
-- **Sahifa 49 tugallangan** (user-facing "51 / 52" — global indikatorda
+- **Sahifa 49 tugallangan** (user-facing "49 / 50" — global indikatorda
   oxirgidan oldingi sahifa; manba: `Materiallar/sano tashahhud duolar/49.jpg`):
   Salavotlar (اَلصَّلَوَاتُ) — Ibrahimiya
   salavotining 2 ta varianti (صَلِّ va بَارِكْ) + Du'a (اَلدُّعَاءُ) — namozdan
@@ -1761,9 +1771,38 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
 - Barcha sahifalar tugallangan: 11-21, 23, 24, 25, 26, 27, 28, 29, 30, 34, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
   (faqat 22, 31, 32, 33, 35, 36, 47 hali placeholder yoki yo'q).
 
+### 🛑 PAGE_MAP'da o'tish sahifasini IKKI DARSGA qo'shmang (2026-08-27)
+
+Sahifa 25 va 30 — o'tish sahifalari: bir yarmi oldingi mavzuni tugatadi
+(masalan Tanvinli tashdid), bir yarmi keyingisini boshlaydi (Alif-Hamza
+kirish). Avval IKKALASI ham qo'shni darslarning PAGE_MAP massivida edi:
+```
+ls_tanvin: [24, 25],   ls_alif: [25, 26, 27, 28, 29, 30],   ls_vasl: [30, 31, 32, 33],
+```
+Bu global o'quvchida bir xil sahifani IKKI MARTA ketma-ket ko'rsatardi
+(foydalanuvchi buni "31/32-sahifa bir xil" deb topdi — aslida ikkalasi
+ham ichki id=30). `data-page-slide` matnini solishtirib 100% tasdiqlandi.
+
+**Qoida**: o'tish sahifasi faqat YANGI mavzu darsiga tegishli (sahifa 21
+andozasi — mad+tashdid o'tishi faqat `ls_tashdid`da, `ls_madlar`da emas).
+Hozir: `ls_tanvin: [24]`, `ls_alif: [25..29]`, `ls_vasl: [30..33]`.
+
+Global sahifalar soni shu bilan **52 → 50** ga tushdi (kontent
+eksportida ham "50 kalit / 50 o'qish sahifasi" — avval 52 edi, chunki
+2 ta id ikki marta hisoblangan). Progress-tiklash xavfsiz: agar
+saqlangan `lessonPageIndex` endi mavjud bo'lmasa (masalan eski
+`ls_alif` 6-sahifasida to'xtagan foydalanuvchi), `page.tsx` fallback
+orqali darsning BOSHIGA qaytaradi — buzilmaydi, faqat pozitsiya bir
+oz orqaga suriladi.
+
+**Yangi PAGE_MAP tuzayotganda tekshiring**: har bobning bosh/oxir
+sahifasini qo'shni bobning oxir/bosh sahifasi bilan solishtiring —
+agar ID bir xil bo'lsa, faqat BITTASIDA (yangi mavzu darsida)
+qoldiring.
+
 ### Tarkibiy ma'lumot
 
-- `getAllBookPages()` — barcha 54 sahifani **global tartibda** qaytaradi:
+- `getAllBookPages()` — barcha 50 sahifani **global tartibda** qaytaradi:
   bobdan-bobga, darsdan-darsga, sahifa-sahifa.
 - Har bir sahifaga `chapter`, `lesson`, `globalIndex`, `lessonPageIndex`
   metadata biriktirilgan.
@@ -1837,7 +1876,7 @@ Sahifa o'zgarganda: audio to'xtaydi, faol element tozalanadi, progress saqlanadi
 
 ### Qat'iy qoidalar
 
-- **Sahifa raqamlari DOIM GLOBAL (1..52)** — reader'dagi "X / 52" bilan 1:1.
+- **Sahifa raqamlari DOIM GLOBAL (1..50)** — reader'dagi "X / 50" bilan 1:1.
   Yagona manba: `getBookOutline()` (data-provider) + `useBookToc()` hook.
   `lesson.pageCount` TOC'da ISHLATILMAYDI (PAGE_MAP — yagona haqiqat).
   URL kontrakti o'zgarmagan: `?page={lessonPageIndex}` (lesson-local),
@@ -1865,15 +1904,15 @@ Sahifa o'zgarganda: audio to'xtaydi, faol element tozalanadi, progress saqlanadi
 
 ### /darslar sahifasi
 
-H1 "Mundarija" (t("contents")) + subtitle "52 sahifa · 10 bob" (dinamik) +
+H1 "Mundarija" (t("contents")) + subtitle "50 sahifa · 10 bob" (dinamik) +
 `ResumeCard` (glass-green: Play ikonka, DAVOM ETING/BOSHLASH micro-label,
-dars nomi, "Sahifa X / 52 · N%", h-1 progress bar, → resumeHref) +
+dars nomi, "Sahifa X / 50 · N%", h-1 progress bar, → resumeHref) +
 bitta glass kartada `<BookToc variant="page" />`.
 
 ### TocSheet drawer
 
 - Trigger/pozitsiya/yopish: avvalgidek (o'ngdan slide-in, backdrop, Esc).
-- Header: "Mundarija" + "Sahifa X / 52" (reader bilan aynan) + header ostida
+- Header: "Mundarija" + "Sahifa X / 50" (reader bilan aynan) + header ostida
   h-1 progress chizig'i.
 - Body: `<BookToc variant="sheet" currentLessonId currentGlobalPage
   onNavigate={onClose} />`. Sheet farqlari: sahifa **chiplari faqat JORIY
