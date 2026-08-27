@@ -1233,7 +1233,11 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   - R8 (5): `بِئْسَ بِئْرُ سَئِلَ يَسْئَلْ مَسْئُولْ` (hamza on ya, middle sukun).
   - R9 (5): `شَاءَ سَاءَ جَاءَ يَشَاءُ مَسَاءُ` (hamza after long alif).
   - C1 (5, unnumbered): `شَىْءُ جَىْءُ يَجِىْءُ يُسِىْءُ مُسِىْءُ` (hamza ـَىْءُ).
-  - C2 (6, unnumbered): `شَيْءُ فَيْءُ مِلْءُ بَرْءُ جُزْءُ قِرَاءَةْ` (hamza at end).
+  - C2 (6, unnumbered): `شَيْءُ فَيْءُ مِلْءُ بُرْءُ جُزْءُ قِرَاءَةْ` (hamza at end).
+    Naqsh — har unli 2x: fatha (شيء,فيء), kasra (ملء,قراءة), damma
+    (بُرْءُ,جزء). 2026-08-25 gacha `بَرْءُ` (fatha) deb yozilgan edi —
+    kitob rasmi VA naqsh (damma 1x qolib ketardi) buni rad etardi;
+    tarjima "sog'ayish" ham بُرْء (bur') ma'nosiga mos, بَرْء emas.
   - C3 (5, unnumbered): `سُوءُ يَسُوءُ وَضُوءُ قُرُوءُ مُرُوءَةْ` (hamza after long waw).
   **Bottom section** (divider'dan keyin, 2 qator):
   - Rb1 (4): `اَلْمَرْءُ اِمْرَأً اِمْرِئٍ اِمْرُؤٌ` — al-mar' declension.

@@ -2166,7 +2166,11 @@ const p26: ED[] = [
   ["c2_w1", "soz", "شَيْءُ",     "Shayʔu (narsa)",     A.ah("p26_c2_w1_shay"),  0, 1.25, 0, 0, 0, 0],
   ["c2_w2", "soz", "فَيْءُ",     "Fayʔu (soya)",       A.ah("p26_c2_w2_fay"),   0, 1.20, 0, 0, 0, 0],
   ["c2_w3", "soz", "مِلْءُ",     "Milʔu (to'liqlik)",  A.ah("p26_c2_w3_mil"),   0, 1.30, 0, 0, 0, 0],
-  ["c2_w4", "soz", "بَرْءُ",     "Barʔu (sog'ayish)",  A.ah("p26_c2_w4_bar"),   0, 1.20, 0, 0, 0, 0],
+  // 2026-08-25: "ب" fatha bilan yozilgan edi — kitob rasmi (26.jpg, C2 qator)da
+  // damma. Qator naqshi ham buni tasdiqlaydi: fatha 2x (شيء,فيء), kasra 2x
+  // (ملء,قراءة), damma esa جزء bilan birga 2x bo'lishi kerak (bittasi edi).
+  // Tarjima "sog'ayish" ham بُرْء (bur') ma'nosiga mos, بَرْء (bar') emas.
+  ["c2_w4", "soz", "بُرْءُ",     "Burʔu (sog'ayish)",  A.ah("p26_c2_w4_bar"),   0, 1.20, 0, 0, 0, 0],
   ["c2_w5", "soz", "جُزْءُ",     "Juzʔu (qism)",       A.ah("p26_c2_w5_juz"),   0, 1.35, 0, 0, 0, 0],
   ["c2_w6", "soz", "قِرَاءَةٌ", "Qiraaʔatun (o'qish)", A.ah("p26_c2_w6_qiraa"), 0, 2.80, 0, 0, 0, 0],
 
