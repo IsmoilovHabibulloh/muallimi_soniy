@@ -50,9 +50,16 @@ cut "$SRC_MA" "$OUT_MA" p45_ma_bism  0.90   5.55
 cut "$SRC_MA" "$OUT_MA" p45_ma_a1    8.40  14.45
 cut "$SRC_MA" "$OUT_MA" p45_ma_a2   16.50  22.55
 cut "$SRC_MA" "$OUT_MA" p45_ma_a3   24.65  31.40
-cut "$SRC_MA" "$OUT_MA" p45_ma_a4   34.25  38.55
-cut "$SRC_MA" "$OUT_MA" p45_ma_a5   38.55  45.30
-cut "$SRC_MA" "$OUT_MA" p45_ma_a4_a5 34.25 45.30    # a4+a5 birlashtirilgan — reciter uzluksiz o'qigan
+# 2026-08-27: chegara 38.55 -> 38.46 (energiya profili: eng past nuqta
+# 38.44s edi, 38.55 esa a5 so'zining boshlanishini a4 ichiga qo'shib
+# qo'yardi). elements.ts endi HAR IKKALASINI shu alohida fayllarga
+# bog'laydi — avval ikkalasi ham p45_ma_a4_a5 (quyida) ga bog'langan edi,
+# bosilganda AYNI bir 11.05s audio ikki marta eshitilardi.
+cut "$SRC_MA" "$OUT_MA" p45_ma_a4   34.25  38.46
+cut "$SRC_MA" "$OUT_MA" p45_ma_a5   38.46  45.30
+# a4+a5 birlashtirilgan (reciter uzluksiz o'qigan) — hozir elements.ts da
+# ISHLATILMAYDI, faqat zaxira sifatida saqlanadi.
+cut "$SRC_MA" "$OUT_MA" p45_ma_a4_a5 34.25 45.30
 cut "$SRC_MA" "$OUT_MA" p45_ma_a6   48.40  54.30
 cut "$SRC_MA" "$OUT_MA" p45_ma_a7   56.30  61.55
 

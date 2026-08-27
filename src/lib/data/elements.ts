@@ -3152,11 +3152,15 @@ const p45: ED[] = [
   ["ma_a1",   "jumla", "اَرَءَيْتَ الَّذٖى يُكَذِّبُ بِالدّٖينِ",                         "Mo'un 1-oyat: Dinni yolg'on chiqaruvchini ko'rdingmi?",                A.mau("p45_ma_a1"),   0, 6.05, 0, 0, 0, 0],
   ["ma_a2",   "jumla", "فَذٰلِكَ الَّذٖى يَدُعُّ الْيَتٖيمَ",                            "Mo'un 2-oyat: U yetimni qattiq itarib quvuvchidir",                    A.mau("p45_ma_a2"),   0, 6.05, 0, 0, 0, 0],
   ["ma_a3",   "jumla", "وَلَا يَحُضُّ عَلٰى طَعَامِ الْمِسْكٖينِ",                      "Mo'un 3-oyat: Va miskinning taomiga (boshqalarni) qiziqtirmaydi",      A.mau("p45_ma_a3"),   0, 6.75, 0, 0, 0, 0],
-  // Mo'un 4 + 5 — reciter uzluksiz o'qigan (sukunat yo'q). Ikkala element bitta
-  // birlashgan chunkni ijro etadi (a4 + a5 = 11.05s). Vizual jihatdan ham bir
-  // qatorda joylashtirilgan (foydalanuvchi qarori 2026-05-22).
-  ["ma_a4",   "jumla", "فَوَيْلٌ لِّلْمُصَلّٖينَ",                                       "Mo'un 4-oyat: Bas, namoz o'qiguvchilarga voy bo'lsin",                 A.mau("p45_ma_a4_a5"), 0, 11.05, 0, 0, 0, 0],
-  ["ma_a5",   "jumla", "الَّذٖينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَ",                         "Mo'un 5-oyat: Ular o'z namozlaridan g'ofildirlar",                     A.mau("p45_ma_a4_a5"), 0, 11.05, 0, 0, 0, 0],
+  // 2026-08-27: avval a4/a5 ikkalasi ham birlashgan p45_ma_a4_a5 (11.05s)
+  // chunkka bog'langan edi — har ikkalasini bossa AYNI BIR audio ikki marta
+  // eshitilardi (foydalanuvchi topdi). cut_p45.sh da ALOHIDA fayllar ham
+  // (p45_ma_a4 4.30s, p45_ma_a5 6.75s — manba 34.25-38.55 / 38.55-45.30)
+  // allaqachon tayyor edi, shunchaki elements.ts ularga bog'lanmagan edi.
+  // Ixlos v3/v4 (p46) dagi o'xshash birlashtirish bunga o'xshamaydi — u yerda
+  // ALOHIDA fayl umuman yo'q (texnik zaruriyat), bu yerda esa bor edi.
+  ["ma_a4",   "jumla", "فَوَيْلٌ لِّلْمُصَلّٖينَ",                                       "Mo'un 4-oyat: Bas, namoz o'qiguvchilarga voy bo'lsin",                 A.mau("p45_ma_a4"), 0, 4.21, 0, 0, 0, 0],
+  ["ma_a5",   "jumla", "الَّذٖينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَ",                         "Mo'un 5-oyat: Ular o'z namozlaridan g'ofildirlar",                     A.mau("p45_ma_a5"), 0, 6.84, 0, 0, 0, 0],
   ["ma_a6",   "jumla", "الَّذٖينَ هُمْ يُرَاءُونَ",                                       "Mo'un 6-oyat: Ular riyokorlik qiluvchilardir",                          A.mau("p45_ma_a6"),   0, 5.90, 0, 0, 0, 0],
   ["ma_a7",   "jumla", "وَيَمْنَعُونَ الْمَاعُونَ",                                       "Mo'un 7-oyat: Va mo'un (zaruriy buyumlar)dan man qiluvchilardir",      A.mau("p45_ma_a7"),   0, 5.25, 0, 0, 0, 0],
 

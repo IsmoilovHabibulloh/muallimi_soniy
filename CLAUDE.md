@@ -1636,7 +1636,17 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   - **Ma'un** (8 chunk): `74. Mauvn.mp3` (62.20s). Chunklar
     `74_mauvn/p45_ma_*.mp3` (bismillah + a1..a7). Audio helper: `A.mau()`.
     Audio'da a4 va a5 reciter tomonidan bog'lab o'qilgan (sukunat yo'q) —
-    sun'iy 38.55s da bo'lindi.
+    sun'iy 38.46s da bo'lindi.
+    ⚠️ 2026-08-27: elements.ts da a4 va a5 IKKALASI ham birlashgan
+    `p45_ma_a4_a5` (11.05s) chunkka bog'langan edi — har birini bosganda
+    AYNI BIR audio (ikkala oyat) ijro etilardi, ya'ni foydalanuvchi uchun
+    "ikki marta takrorlangandek" eshitilardi. Alohida `p45_ma_a4` /
+    `p45_ma_a5` fayllari cut_p45.sh da ALLAQACHON bor edi — shunchaki
+    elements.ts ularga bog'lanmagan edi. Chegara ham energiya profiliga
+    ko'ra 38.55 -> 38.46 ga siljitildi (eng past nuqta 38.44s; 38.55 esa
+    a5 ning boshini a4 ichiga qo'shib qo'yardi).
+    Eslatma: p46 dagi Ixlos v3/v4 birlashtirilishi bunga O'XSHAMAYDI —
+    u yerda alohida fayl umuman yo'q (texnik zaruriyat, atayin qaror).
   - **Kawthar** (4 chunk): `75. Kavsar.mp3` (29.54s). Chunklar
     `75_kavsar/p45_ka_*.mp3` (bismillah + a1..a3). Audio helper: `A.kau()`.
   - **Kafirun bismillah** (1 chunk): `76. Kafirun.mp3` (65.36s) ning
@@ -1649,8 +1659,9 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
   container `size="sm"` Verse — barcha 18 element bitta viewportga (677px)
   sig'adi. Cut script: `tools/cut_p45.sh` (silencedetect -32dB/0.30s +
   ~0.2s buffers). Vaqtlar foydalanuvchi tinglovi orqali tasdiqlanmagan —
-  mos kelmagan chunks `cut_p45.sh` orqali qayta kesilsin (ayniqsa Ma'un
-  a4/a5 bo'linish 38.55s da to'g'rimi tekshirilsin).
+  mos kelmagan chunks `cut_p45.sh` orqali qayta kesilsin (Ma'un a4/a5
+  bo'linishi 2026-08-27 da energiya profili bilan tekshirilib 38.46s ga
+  tuzatildi).
 - **Sahifa 48 tugallangan**: Sano (الثَّنَاءُ) + Tashahhud (التَّشَهُّدُ).
   Jami 12 clickable element — 2 sarlavha (Sano + Tashahhud) + 3 Sano body
   segmenti + 7 Tashahhud body segmenti, kitobning vergul (،) bo'linishlariga
