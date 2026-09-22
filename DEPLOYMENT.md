@@ -1,135 +1,190 @@
 # Muallimi Soniy — Deployment
 
-## Server ma'lumotlari
+Loyihani o'z serveringizga o'rnatish bo'yicha umumiy qo'llanma.
 
-| Parametr | Qiymat |
-|----------|--------|
-| Server | Essential Intel NL-3 v.2 |
-| IP | `188.137.250.167` |
-| OS | Ubuntu 24.04.2 LTS |
-| Domen | `muallimisoniy.uz` |
-| Node.js | v20.20.2 |
-| npm | v11.16.0 (2026-06-10 da yangilangan — lockfile npm 11 bilan generatsiya qilinadi, eski npm 10 `npm ci` da yiqilardi) |
-| PM2 | v6.0.14 |
-| Nginx | v1.24.0 |
+> ℹ️ Bu ochiq kodli repozitoriy. Bu yerda **hech qanday server manzili, foydalanuvchi
+> nomi, port, parol yoki sertifikat saqlanmaydi**. Ishlab turgan o'rnatmaning aniq
+> qiymatlari repodan tashqarida, alohida joyda turadi.
 
-## Fayl joylashuvi
+## Talablar
+
+| Komponent | Versiya |
+|-----------|---------|
+| OS | Ubuntu 24.04 LTS (yoki shunga o'xshash) |
+| Node.js | v20 LTS |
+| PM2 | v6+ |
+| Nginx | v1.24+ |
+
+## Arxitektura
 
 ```
-/var/www/muallimi_soniy/     ← loyiha papkasi
-/etc/nginx/sites-available/muallimi-soniy  ← nginx config
+Internet → CDN/proxy (ixtiyoriy) → nginx (:443 / :80) → Next.js (127.0.0.1:<APP_PORT>)
+                                        ↓
+                            statik audio/rasm/shrift — diskdan
 ```
 
-## Deploy jarayoni (git push → pull → deploy)
+Next.js ilovasi faqat `127.0.0.1` da tinglaydi, tashqariga nginx chiqaradi.
+Katta audio fayllar (~250 MB) Next.js orqali emas, nginx tomonidan to'g'ridan-to'g'ri
+diskdan beriladi — shunda ilovaga yuk tushmaydi va Range (`206`) so'rovlari to'g'ri ishlaydi.
 
-### 1. Lokal: kod yozib, push qilish
+## 1. Kodni olish
 
 ```bash
-cd muallimus-soniy
-git add -A
-git commit -m "Yangi o'zgarishlar"
-git push origin main
+git clone https://github.com/<foydalanuvchi>/muallimi_soniy.git /var/www/muallimi_soniy
+cd /var/www/muallimi_soniy
 ```
 
-### 2. Serverda: pull va deploy
+Repo hajmi ~760 MB (audio va `Materiallar/` tufayli).
+
+## 2. Bog'liqliklar
 
 ```bash
-ssh root@188.137.250.167
+npx --yes npm@11 ci
+```
+
+> ⚠️ **`npm ci` oddiy npm 10 bilan ishlamaydi** — bu loyihaning `package-lock.json`
+> fayli npm 11 bilan generatsiya qilingan, npm 10 unda `npm error npm ci` bilan yiqiladi.
+>
+> Agar server umumiy bo'lsa (boshqa loyihalar ham ishlasa), **global npm'ni
+> yangilamang** — `npx --yes npm@11 ci` faqat shu loyiha uchun ishlaydi va
+> tizimdagi npm'ga tegmaydi.
+>
+> npm 11 ba'zi install-skriptlarni (`sharp`, `esbuild`, `@swc/core`) xavfsizlik
+> sababli o'tkazib yuboradi — bu build'ga xalaqit bermaydi.
+
+## 3. Build
+
+```bash
+npx next build
+```
+
+## 4. PM2 bilan ishga tushirish
+
+```bash
+pm2 start ./node_modules/.bin/next --name muallimi-soniy \
+  --cwd /var/www/muallimi_soniy -- start -H 127.0.0.1 -p <APP_PORT>
+pm2 save
+```
+
+`pm2 save` + `pm2 startup` — server qayta yuklanganda ilova o'zi ko'tariladi.
+
+Kundalik buyruqlar:
+
+```bash
+pm2 status
+pm2 logs muallimi-soniy
+pm2 restart muallimi-soniy
+```
+
+## 5. Nginx
+
+Ikkita fayl: umumiy `location` bloklari uchun snippet va uni `include` qiladigan
+server bloklari. Snippet'ning asosiy qismi:
+
+```nginx
+# Statik media — diskdan to'g'ridan-to'g'ri
+location /audio/  { alias /var/www/muallimi_soniy/public/audio/;  expires 30d; access_log off; }
+location /images/ { alias /var/www/muallimi_soniy/public/images/; expires 30d; }
+location /fonts/  { alias /var/www/muallimi_soniy/public/fonts/;  expires 365d; }
+
+# Next.js hash'langan build fayllari
+location /_next/static/ {
+    proxy_pass http://127.0.0.1:<APP_PORT>;
+    proxy_set_header Host $host;
+    expires 365d;
+    add_header Cache-Control "public, immutable";
+}
+
+# Qolgan hammasi Next.js'ga (/serwist/sw.js ham shu yerdan)
+location / {
+    proxy_pass http://127.0.0.1:<APP_PORT>;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_cache_bypass $http_upgrade;
+}
+```
+
+Qo'llashdan oldin **har doim**:
+
+```bash
+nginx -t && systemctl reload nginx
+```
+
+> ⚠️ Umumiy serverda `systemctl restart nginx` **ishlatmang** — boshqa saytlar uziladi.
+> `reload` yetarli va uzilishsiz.
+>
+> ⚠️ nginx 1.24 da `http2 on;` direktivasi **yo'q** (u 1.25+ da paydo bo'lgan).
+> 1.24 uchun eski shakl: `listen 443 ssl http2;`
+
+## 6. HTTPS
+
+Ikki yondashuvdan birini tanlang:
+
+**a) Let's Encrypt (domen to'g'ridan-to'g'ri serverga ishora qilsa)**
+
+```bash
+certbot --nginx -d <domen> -d www.<domen>
+```
+
+Avtomatik yangilanadi (`certbot.timer`). `:80` blokida ACME so'rovlari
+redirect'siz o'tishi kerak:
+
+```nginx
+location ^~ /.well-known/acme-challenge/ { root /var/www/muallimi_soniy/public; }
+```
+
+**b) CDN proxy orqasida (Cloudflare va h.k.)**
+
+Agar proxy "Full (strict)" rejimda bo'lsa, origin'da haqiqiy sertifikat kerak,
+aks holda `526` xatosi chiqadi. Eng qulayi — provayderning Origin CA sertifikati:
+u uzoq muddatli va proxy tomonidan tan olinadi. Sertifikat va maxfiy kalit
+serverda saqlanadi (kalit `chmod 600`), **repoga qo'yilmaydi**.
+
+Bunday sertifikat **avtomatik yangilanmaydi** — muddati tugashidan oldin qo'lda
+almashtirish kerak.
+
+Tekshirish:
+
+```bash
+# sertifikat va kalit juft keladimi
+diff <(openssl x509 -in <cert> -noout -pubkey) <(openssl pkey -in <key> -pubout) && echo JUFT
+
+# origin nima qaytaryapti
+echo | openssl s_client -connect 127.0.0.1:443 -servername <domen> 2>/dev/null \
+  | openssl x509 -noout -dates -ext subjectAltName
+```
+
+## 7. Yangilanishlarni chiqarish
+
+```bash
 cd /var/www/muallimi_soniy
 git pull origin main
-npm ci
+npx --yes npm@11 ci
 npx next build
 pm2 restart muallimi-soniy
 ```
 
-### Qisqa variant (bir buyruq):
+## Offline (PWA) eslatmalari
+
+- Service worker `/serwist/sw.js` manzilida, Next.js orqali beriladi — alohida
+  nginx sozlamasi kerak emas.
+- Har deploy'dan keyin foydalanuvchilarga "Yangi versiya tayyor" toasti chiqadi.
+- Audio kesh (`ms-media-v1`, ~122 MB) deploy'da o'chmaydi.
+- **nginx'da `proxy_cache` YOQILMASIN** va CDN'da ham `/serwist/sw.js` keshlanmasin —
+  aks holda service worker eskirib, foydalanuvchilar eski versiyada qolib ketadi.
+
+## Muammolarni tekshirish
 
 ```bash
-ssh root@188.137.250.167 "cd /var/www/muallimi_soniy && git pull && npm ci && npx next build && pm2 restart muallimi-soniy"
+pm2 logs muallimi-soniy --lines 50     # ilova loglari
+tail -50 /var/log/nginx/error.log      # nginx xatolari
+curl -I http://127.0.0.1:<APP_PORT>/   # ilova javob beryaptimi
 ```
 
-## PM2 buyruqlari
-
-```bash
-pm2 status              # holat
-pm2 logs muallimi-soniy # loglar
-pm2 restart muallimi-soniy  # qayta ishga tushirish
-pm2 stop muallimi-soniy     # to'xtatish
-pm2 delete muallimi-soniy   # o'chirish
-```
-
-## Nginx buyruqlari
-
-```bash
-nginx -t                  # konfiguratsiya tekshirish
-systemctl restart nginx   # qayta ishga tushirish
-systemctl status nginx    # holat
-```
-
-## SSL sertifikat (certbot)
-
-Domen DNS to'g'ri sozlangandan keyin:
-
-```bash
-certbot --nginx -d muallimisoniy.uz -d www.muallimisoniy.uz
-```
-
-Avtomatik yangilanadi (certbot.timer).
-
-## DNS sozlamasi
-
-Domen provayderingizda quyidagi yozuvlarni qo'shing:
-
-| Tur | Nomi | Qiymat |
-|-----|------|--------|
-| A | @ | `188.137.250.167` |
-| A | www | `188.137.250.167` |
-| AAAA | @ | `2a13:4ac0:20:16:f816:3eff:feda:a439` |
-
-## Nginx konfiguratsiya
-
-```nginx
-server {
-    listen 80;
-    server_name muallimisoniy.uz www.muallimisoniy.uz;
-
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_cache_bypass $http_upgrade;
-    }
-
-    location /_next/static/ {
-        proxy_pass http://127.0.0.1:3000;
-        expires 365d;
-        add_header Cache-Control "public, immutable";
-    }
-
-    location /images/ {
-        root /var/www/muallimi_soniy/public;
-        expires 30d;
-    }
-
-    location /audio/ {
-        root /var/www/muallimi_soniy/public;
-        expires 30d;
-    }
-}
-```
-
-## Offline (PWA) — deploy eslatmalari
-
-- Service worker endi `/serwist/sw.js` da (eski `public/sw.js` o'chirilgan,
-  alohida nginx sozlamasi kerak emas — Next orqali proxy bo'ladi).
-- Har deploy'dan keyin foydalanuvchilarga "Yangi versiya tayyor" toasti
-  chiqadi — "Yangilash" bosilgach yangi versiya qo'llanadi.
-- Audio kesh (`ms-media-v1`, ~122 MB) deploy'da o'chmaydi — foydalanuvchi
-  qayta yuklamaydi.
-- nginx'da `proxy_cache` YOQILMASIN (hozir yo'q) — aks holda `/serwist/sw.js`
-  eskirib, foydalanuvchilar eski versiyada qolib ketadi.
+CDN xatolari: **521** = origin yiqilgan (pm2/nginx tekshiring),
+**526** = origin sertifikati yaroqsiz (6-bo'limga qarang).
