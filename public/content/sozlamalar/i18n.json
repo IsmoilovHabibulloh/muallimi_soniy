@@ -67,7 +67,8 @@
     "offline_pause": "Toʻxtatish",
     "offline_resume": "Davom ettirish",
     "update_ready": "Yangi versiya tayyor",
-    "update_now": "Yangilash"
+    "update_now": "Yangilash",
+    "tarjima": "Tarjima"
   },
   "uz-cyrl": {
     "home": "Бош саҳифа",
@@ -137,7 +138,8 @@
     "offline_pause": "Тўхтатиш",
     "offline_resume": "Давом эттириш",
     "update_ready": "Янги версия тайёр",
-    "update_now": "Янгилаш"
+    "update_now": "Янгилаш",
+    "tarjima": "Таржима"
   },
   "ru": {
     "home": "Главная",
@@ -207,7 +209,8 @@
     "offline_pause": "Пауза",
     "offline_resume": "Продолжить",
     "update_ready": "Доступна новая версия",
-    "update_now": "Обновить"
+    "update_now": "Обновить",
+    "tarjima": "Перевод"
   },
   "en": {
     "home": "Home",
@@ -277,6 +280,7 @@
     "offline_pause": "Pause",
     "offline_resume": "Resume",
     "update_ready": "New version available",
-    "update_now": "Update"
+    "update_now": "Update",
+    "tarjima": "Translation"
   }
 }

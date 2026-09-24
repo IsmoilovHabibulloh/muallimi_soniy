@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ElementOverlay } from "./ElementOverlay";
 import { RenderedPage, hasRenderer } from "./RenderedPage";
+import { TarjimaView, hasTarjima } from "./TarjimaView";
 import type { Page, Element } from "@/lib/data/types";
 
 interface Props {
@@ -10,6 +11,8 @@ interface Props {
   activeElementId: string | null;
   onElementClick: (element: Element) => void;
   onBackgroundClick: () => void;
+  /** Tarjima rejimi — suralar bo'limida oyat+ma'no ro'yxati */
+  tarjimaMode?: boolean;
 }
 
 export function PageView({
@@ -17,11 +20,24 @@ export function PageView({
   activeElementId,
   onElementClick,
   onBackgroundClick,
+  tarjimaMode = false,
 }: Props) {
   const [loaded, setLoaded] = useState(false);
 
   // Extract page number from imageUrl (e.g., "/images/3.jpg" → 3)
   const pageNumber = parseInt(page.imageUrl.replace(/.*\/(\d+)\.jpg/, "$1"));
+
+  // Tarjima rejimi — faqat tarjimasi bor sahifalarda (suralar bo'limi)
+  if (tarjimaMode && hasTarjima(page.elements)) {
+    return (
+      <TarjimaView
+        elements={page.elements}
+        activeElementId={activeElementId}
+        onElementClick={onElementClick}
+        onBackgroundClick={onBackgroundClick}
+      />
+    );
+  }
 
   // Use rendered page if available
   if (hasRenderer(pageNumber)) {

@@ -12,6 +12,7 @@ interface Props {
   onPageChange: (index: number) => void;
   onElementClick: (element: Element) => void;
   onBackgroundClick: () => void;
+  tarjimaMode?: boolean;
 }
 
 export function HorizontalPager({
@@ -21,6 +22,7 @@ export function HorizontalPager({
   onPageChange,
   onElementClick,
   onBackgroundClick,
+  tarjimaMode = false,
 }: Props) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     startIndex: currentIndex,
@@ -73,6 +75,7 @@ export function HorizontalPager({
               activeElementId={activeElementId}
               onElementClick={onElementClick}
               onBackgroundClick={onBackgroundClick}
+              tarjimaMode={tarjimaMode}
             />
           </div>
         ))}

@@ -2,11 +2,12 @@
 
 import { useEffect, useRef, useState, useCallback, useMemo, use } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeft, ListOrdered } from "lucide-react";
+import { ArrowLeft, ListOrdered, Languages } from "lucide-react";
 import { HorizontalPager } from "@/components/lesson/HorizontalPager";
 import { PageIndicator } from "@/components/lesson/PageIndicator";
 import { AudioControls } from "@/components/lesson/AudioControls";
 import { TocSheet } from "@/components/lesson/TocSheet";
+import { hasTarjima } from "@/components/lesson/TarjimaView";
 import { Spinner } from "@/components/ui/Spinner";
 import { useSettings } from "@/providers/SettingsProvider";
 import { useProgress } from "@/providers/ProgressProvider";
@@ -48,6 +49,7 @@ export default function LessonPage({ params }: Props) {
   } | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [tocOpen, setTocOpen] = useState(false);
+  const [tarjimaMode, setTarjimaMode] = useState(false);
   const [scrolledFromTop, setScrolledFromTop] = useState(false);
   const [hasMoreBelow, setHasMoreBelow] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -101,6 +103,23 @@ export default function LessonPage({ params }: Props) {
       setLoading(false);
     });
   }, [lessonId, startPageParam]);
+
+  // Tarjima rejimi sessiyalararo eslab qolinadi (faqat shu qurilmada).
+  useEffect(() => {
+    try {
+      setTarjimaMode(localStorage.getItem("muallimi-tarjima") === "1");
+    } catch {}
+  }, []);
+
+  const toggleTarjima = useCallback(() => {
+    setTarjimaMode((v) => {
+      const next = !v;
+      try {
+        localStorage.setItem("muallimi-tarjima", next ? "1" : "0");
+      } catch {}
+      return next;
+    });
+  }, []);
 
   // Show hint for first-time users
   useEffect(() => {
@@ -300,6 +319,8 @@ export default function LessonPage({ params }: Props) {
 
   if (loading || !currentBookPage) return <Spinner />;
 
+  const pageHasTarjima = hasTarjima(currentBookPage.elements);
+
   const hasAudio = Boolean(
     currentLesson?.audioUrl ||
       currentBookPage.elements.some((e) => e.audioUrl)
@@ -325,6 +346,30 @@ export default function LessonPage({ params }: Props) {
               {currentChapter?.title[settings.locale] || ""}
             </p>
           </div>
+          {pageHasTarjima && (
+            <button
+              onClick={toggleTarjima}
+              aria-pressed={tarjimaMode}
+              className={`h-10 short:h-8 px-2.5 rounded-xl flex items-center gap-1.5 transition-colors active:scale-95 ${
+                tarjimaMode ? "bg-primary/20" : "bg-white/5 hover:bg-white/10"
+              }`}
+              style={
+                tarjimaMode ? { color: "var(--color-primary)" } : undefined
+              }
+            >
+              <Languages
+                size={18}
+                className={tarjimaMode ? "" : "text-text-main"}
+              />
+              <span
+                className={`hidden sm:inline text-xs font-medium ${
+                  tarjimaMode ? "" : "text-text-main"
+                }`}
+              >
+                {t("tarjima")}
+              </span>
+            </button>
+          )}
           <button
             onClick={() => setTocOpen(true)}
             className="w-10 h-10 short:w-8 short:h-8 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
@@ -360,6 +405,7 @@ export default function LessonPage({ params }: Props) {
             onPageChange={handlePageChange}
             onElementClick={handleElementClick}
             onBackgroundClick={() => setActiveElement(null)}
+            tarjimaMode={tarjimaMode}
           />
         </div>
       </div>

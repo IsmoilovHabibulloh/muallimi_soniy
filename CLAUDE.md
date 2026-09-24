@@ -1879,6 +1879,50 @@ qoldiring.
 
 Sahifa o'zgarganda: audio to'xtaydi, faol element tozalanadi, progress saqlanadi.
 
+## Tarjima rejimi — suralar bo'limi (2026-09-24)
+
+> Manba g'oya: "Tafsiri Hilol" (islom.uz) ilovasidagi **Qur'on / Tarjima**
+> ko'rinishlari. Foydalanuvchi talabi: harflarni endi o'rganayotgan odam
+> oyat ma'nosini darhol ko'rsin.
+
+**Nima qiladi**: lesson header'idagi `Tarjima` tugmasi (lucide `Languages`)
+suralar sahifalarini (36–47) **oyat-oyat ro'yxat** ko'rinishiga o'tkazadi —
+har oyat o'z qatorida, ostida o'zbekcha ma'nosi (yashil). Tugma FAQAT
+tarjimasi bor sahifada ko'rinadi (`hasTarjima(elements)`); boshqa
+sahifalarda kitob layouti hech o'zgarmaydi.
+
+| Fayl | Vazifa |
+|------|--------|
+| `src/lib/data/tarjima.ts` | AUTO-GENERATED — `AYAH_TARJIMA` (element id → {s, a, uz, cy}) + `SURAH_INFO` |
+| `tools/fetch_tarjima.py` | Generator: quran.uz API + kirill→lotin translit |
+| `src/components/lesson/TarjimaView.tsx` | Ko'rinishning o'zi + `hasTarjima()` |
+
+**Qat'iy qoidalar**:
+1. **Kitob layoutiga (Page36..Page47) TEGMANG.** Ular bir qatorga 2–3
+   oyatni sig'diradi (bosma sahifaga o'xshatish) — tarjimani ularning
+   ichiga qo'yish layoutni buzadi. Tarjima — ALOHIDA ko'rinish.
+2. **Audio o'zgarmaydi** — TarjimaView o'sha `element.audioUrl` chunkini
+   `onElementClick` orqali ijro etadi. Takrorlash soni sozlamalardan
+   (AudioEngine hal qiladi). Yangi audio mantiq YOZMANG.
+3. `tarjima.ts` ni **qo'lda tahrirlamang** — `py -X utf8
+   tools/fetch_tarjima.py` bilan qayta quring. Element id o'zgarsa
+   (masalan yangi oyat qo'shilsa) skriptdagi `MAP` ni yangilang.
+4. Rejim holati `localStorage["muallimi-tarjima"]` da saqlanadi.
+5. Hozircha faqat **uz-latn / uz-cyrl**. `ru` va `en` lokallar lotin
+   o'zbekchaga tushadi — ularga alohida tarjima manbasi kerak.
+6. Tarjima matni **kontent paketiga (book.json) hali qo'shilmagan** —
+   mobil ilovalar uni ko'rmaydi. Qo'shilsa `schemaVersion` oshiriladi va
+   `iso prmt/`, `android prmt/` reja hujjatlari yangilanadi.
+
+**Manba va ishonchlilik**: matn — Shayx Muhammad Sodiq Muhammad Yusufning
+"Qur'oni Karim ma'nolar tarjimasi" (Tafsiri Hilol qisqa nashri),
+quran.uz `api/v1/quran/manotarjima/<sura>` orqali. API faqat kirill
+beradi; lotin rasmiy imlo bo'yicha translit qilinadi (ʻ = U+02BB,
+ʼ = U+02BC) va natija islom.uz ilovasidagi lotin matni bilan
+solishtirib tasdiqlangan (Fotiha 7-oyat, so'zma-so'z mos).
+Bismillah tarjimasi — Fotiha 1-oyat matni; ta'avvuz Qur'on oyati emas,
+matni `fetch_tarjima.py` dagi `SPECIAL` da qo'lda yozilgan.
+
 ## Mundarija — yagona `BookToc` komponenti (2026-06-10 redesign)
 
 > `/darslar` sahifasi va lesson ichidagi `TocSheet` drawer **bitta**

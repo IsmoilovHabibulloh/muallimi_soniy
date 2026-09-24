@@ -66,5 +66,6 @@
   "offline_pause": "Pause",
   "offline_resume": "Resume",
   "update_ready": "New version available",
-  "update_now": "Update"
+  "update_now": "Update",
+  "tarjima": "Translation"
 }
