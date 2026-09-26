@@ -5,6 +5,7 @@
     "locale": "uz-latn",
     "theme": "light",
     "fontSize": "medium",
+    "readingBg": "yashil",
     "loopMode": false,
     "sequentialMode": false
   },

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "contentVersion": "2.9.0",
-  "generatedAt": "2026-09-24T07:17:34.328Z",
-  "contentHash": "391bf024e1791a92c600f4ffa445e1506a8c48347c56c6ed1aa161765985ed7a",
+  "contentVersion": "2.10.0",
+  "generatedAt": "2026-09-26T06:50:10.623Z",
+  "contentHash": "5a163c58ab96f7cabc907c7452c06673548963987f126b9d9c704f76b77558c3",
   "parts": {
     "sahifalar": {
       "files": [
@@ -39,8 +39,8 @@
       "files": [
         {
           "path": "content/sozlamalar/i18n.json",
-          "bytes": 12625,
-          "sha256": "9e98620e38f14d33810a11fb74985bc5b1c413b102f586e2a9ea69771b44e483"
+          "bytes": 13576,
+          "sha256": "f8a165fc261089bff520ef01f4820afea127c0a5b9cc09b4b29e68e2eedd71a8"
         },
         {
           "path": "content/sozlamalar/legal.json",
@@ -49,8 +49,8 @@
         },
         {
           "path": "content/sozlamalar/settings.json",
-          "bytes": 5114,
-          "sha256": "8bcff8d355e9ea4bb03b4ebc888701a06da86cf8ca951f1b307a38412b699538"
+          "bytes": 5141,
+          "sha256": "6b8194e48b12b942928d50f19ebfa659f4d9dcd237fa61b2126d7b25228a892d"
         }
       ],
       "fonts": [

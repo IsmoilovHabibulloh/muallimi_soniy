@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { Volume2 } from "lucide-react";
 import { useSettings } from "@/providers/SettingsProvider";
 import { AYAH_TARJIMA, SURAH_INFO } from "@/lib/data/tarjima";
+import { SurahBanner } from "./SurahBanner";
 import type { Element } from "@/lib/data/types";
 
 interface Props {
@@ -65,7 +66,7 @@ export function TarjimaView({
 
   return (
     <div
-      className="w-full bg-white/[0.05] rounded-2xl border border-white/10 p-3"
+      className="quran-scope w-full bg-white/[0.05] rounded-2xl border border-white/10 p-3"
       style={{ containerType: "inline-size" }}
       onClick={onBackgroundClick}
     >
@@ -76,26 +77,20 @@ export function TarjimaView({
           return (
             <div key={el.id} className="w-full">
               {showHead && info && (
-                <div className="flex flex-col items-center gap-0.5 pt-2 pb-2.5">
-                  <div className="flex flex-row-reverse items-center justify-center gap-2">
-                    <span className="text-text-muted text-[0.625rem] opacity-60">
-                      ❀
-                    </span>
-                    <h3 className="arabic-text text-[clamp(0.9rem,4.2cqi,1.1rem)] font-bold text-text-secondary">
-                      {info.ar}
-                    </h3>
-                    <span className="text-text-muted text-[0.625rem] opacity-60">
-                      ❀
-                    </span>
-                  </div>
-                  <p className="text-[0.6875rem] text-text-muted text-center">
-                    {cyrl ? info.cy : info.uz}
-                    {(cyrl ? info.meanCy : info.mean) &&
-                      ` — ${cyrl ? info.meanCy : info.mean}`}
-                    {` · ${cyrl ? info.placeCy : info.place} · ${info.ayahs} ${
-                      cyrl ? "оят" : "oyat"
-                    }`}
-                  </p>
+                <div className="pt-1.5 pb-1">
+                  <SurahBanner
+                    text={info.ar}
+                    surah={t.s}
+                    note={
+                      (cyrl ? info.cy : info.uz) +
+                      ((cyrl ? info.meanCy : info.mean)
+                        ? ` — ${cyrl ? info.meanCy : info.mean}`
+                        : "") +
+                      ` · ${cyrl ? info.placeCy : info.place} · ${info.ayahs} ${
+                        cyrl ? "оят" : "oyat"
+                      }`
+                    }
+                  />
                 </div>
               )}
 

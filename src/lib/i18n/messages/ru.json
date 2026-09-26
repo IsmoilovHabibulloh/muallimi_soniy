@@ -67,5 +67,12 @@
   "offline_resume": "Продолжить",
   "update_ready": "Доступна новая версия",
   "update_now": "Обновить",
-  "tarjima": "Перевод"
+  "tarjima": "Перевод",
+  "background": "Фон",
+  "background_desc": "Цвет фона экрана чтения",
+  "bg_oq": "Белый",
+  "bg_yashil": "Светло-зелёный",
+  "bg_sepiya": "Сепия",
+  "bg_kulrang": "Серый",
+  "bg_tungi": "Чёрный"
 }

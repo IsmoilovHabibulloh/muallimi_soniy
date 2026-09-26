@@ -6,6 +6,10 @@ export type Theme = "light" | "dark" | "system";
 
 export type FontSize = "small" | "medium" | "large";
 
+/** O'qish ekranining fon rangi (lesson sahifasi). Ilovaning qolgan
+ *  qismi `theme` bo'yicha qoladi. */
+export type ReadingBg = "oq" | "yashil" | "sepiya" | "kulrang" | "tungi";
+
 export type PlaybackSpeed = 0.5 | 1.0 | 1.5;
 
 export interface LocalizedString {
@@ -62,6 +66,7 @@ export interface UserSettings {
   fontSize: FontSize;
   loopMode: boolean;
   sequentialMode: boolean;
+  readingBg: ReadingBg;
 }
 
 export interface UserProgress {
@@ -77,6 +82,7 @@ export const DEFAULT_SETTINGS: UserSettings = {
   locale: "uz-latn",
   theme: "light",
   fontSize: "medium",
+  readingBg: "yashil",
   loopMode: false,
   sequentialMode: false,
 };

@@ -67,5 +67,12 @@
   "offline_resume": "Davom ettirish",
   "update_ready": "Yangi versiya tayyor",
   "update_now": "Yangilash",
-  "tarjima": "Tarjima"
+  "tarjima": "Tarjima",
+  "background": "Fon",
+  "background_desc": "O'qish ekranining fon rangi",
+  "bg_oq": "Oq",
+  "bg_yashil": "Och yashil",
+  "bg_sepiya": "Sepiya",
+  "bg_kulrang": "Kulrang",
+  "bg_tungi": "Qora"
 }

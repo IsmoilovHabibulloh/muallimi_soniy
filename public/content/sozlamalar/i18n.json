@@ -68,7 +68,14 @@
     "offline_resume": "Davom ettirish",
     "update_ready": "Yangi versiya tayyor",
     "update_now": "Yangilash",
-    "tarjima": "Tarjima"
+    "tarjima": "Tarjima",
+    "background": "Fon",
+    "background_desc": "O'qish ekranining fon rangi",
+    "bg_oq": "Oq",
+    "bg_yashil": "Och yashil",
+    "bg_sepiya": "Sepiya",
+    "bg_kulrang": "Kulrang",
+    "bg_tungi": "Qora"
   },
   "uz-cyrl": {
     "home": "Бош саҳифа",
@@ -139,7 +146,14 @@
     "offline_resume": "Давом эттириш",
     "update_ready": "Янги версия тайёр",
     "update_now": "Янгилаш",
-    "tarjima": "Таржима"
+    "tarjima": "Таржима",
+    "background": "Фон",
+    "background_desc": "Ўқиш экранининг фон ранги",
+    "bg_oq": "Оқ",
+    "bg_yashil": "Оч яшил",
+    "bg_sepiya": "Сепия",
+    "bg_kulrang": "Кулранг",
+    "bg_tungi": "Қора"
   },
   "ru": {
     "home": "Главная",
@@ -210,7 +224,14 @@
     "offline_resume": "Продолжить",
     "update_ready": "Доступна новая версия",
     "update_now": "Обновить",
-    "tarjima": "Перевод"
+    "tarjima": "Перевод",
+    "background": "Фон",
+    "background_desc": "Цвет фона экрана чтения",
+    "bg_oq": "Белый",
+    "bg_yashil": "Светло-зелёный",
+    "bg_sepiya": "Сепия",
+    "bg_kulrang": "Серый",
+    "bg_tungi": "Чёрный"
   },
   "en": {
     "home": "Home",
@@ -281,6 +302,13 @@
     "offline_resume": "Resume",
     "update_ready": "New version available",
     "update_now": "Update",
-    "tarjima": "Translation"
+    "tarjima": "Translation",
+    "background": "Background",
+    "background_desc": "Reading screen background colour",
+    "bg_oq": "White",
+    "bg_yashil": "Light green",
+    "bg_sepiya": "Sepia",
+    "bg_kulrang": "Grey",
+    "bg_tungi": "Black"
   }
 }

@@ -15,6 +15,7 @@ import {
   Repeat2,
   ShieldCheck,
   Sun,
+  Palette,
   SunMoon,
   Type,
   X,
@@ -24,7 +25,12 @@ import { useSettings } from "@/providers/SettingsProvider";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { OfflineCard } from "@/components/sozlamalar/OfflineCard";
 import { LEGAL_CONTENT } from "@/lib/data/legal-content";
-import type { Locale, FontSize, Theme } from "@/lib/data/types";
+import type {
+  Locale,
+  FontSize,
+  Theme,
+  ReadingBg,
+} from "@/lib/data/types";
 
 const APP_VERSION = "1.0.0";
 
@@ -39,6 +45,21 @@ const THEMES: { value: Theme; icon: LucideIcon; labelKey: string }[] = [
   { value: "light", icon: Sun, labelKey: "light" },
   { value: "dark", icon: Moon, labelKey: "dark" },
   { value: "system", icon: MonitorSmartphone, labelKey: "system" },
+];
+
+// O'qish ekranining fon ranglari — globals.css dagi [data-reading-bg]
+// palitralariga 1:1 mos (o'zgartirsangiz ikkalasini birga yangilang).
+const READING_BGS: {
+  value: ReadingBg;
+  labelKey: string;
+  bg: string;
+  fg: string;
+}[] = [
+  { value: "oq", labelKey: "bg_oq", bg: "#ffffff", fg: "#12211a" },
+  { value: "yashil", labelKey: "bg_yashil", bg: "#edf7f0", fg: "#0f1f17" },
+  { value: "sepiya", labelKey: "bg_sepiya", bg: "#f6efe0", fg: "#3a2f21" },
+  { value: "kulrang", labelKey: "bg_kulrang", bg: "#e9ecee", fg: "#1f272c" },
+  { value: "tungi", labelKey: "bg_tungi", bg: "#0d1117", fg: "#e8eee9" },
 ];
 
 const FONT_SIZES: { value: FontSize; rem: number; labelKey: string }[] = [
@@ -80,8 +101,15 @@ function SectionHeader({
 }
 
 export default function SozlamalarPage() {
-  const { t, settings, setRepeatCount, setLocale, setFontSize, setTheme } =
-    useSettings();
+  const {
+    t,
+    settings,
+    setRepeatCount,
+    setLocale,
+    setFontSize,
+    setTheme,
+    setReadingBg,
+  } = useSettings();
   const [openModal, setOpenModal] = useState<LegalKey | null>(null);
   const modalScrollRef = useRef<HTMLDivElement>(null);
 
@@ -220,6 +248,45 @@ export default function SozlamalarPage() {
                 >
                   <Icon size={20} />
                   {t(th.labelKey)}
+                </button>
+              );
+            })}
+          </div>
+        </GlassCard>
+
+        {/* ── Fon (o'qish ekrani) ── */}
+        <GlassCard>
+          <SectionHeader
+            icon={Palette}
+            title={t("background")}
+            desc={t("background_desc")}
+          />
+          <div className="grid grid-cols-5 gap-2 mt-4">
+            {READING_BGS.map((bg) => {
+              const selected = settings.readingBg === bg.value;
+              return (
+                <button
+                  key={bg.value}
+                  onClick={() => setReadingBg(bg.value)}
+                  className={`flex flex-col items-center gap-1.5 py-2.5 px-1 rounded-xl transition-all active:scale-95 ${
+                    selected
+                      ? "bg-primary/20 border border-primary/40"
+                      : "bg-white/5 border border-white/5 hover:bg-white/10"
+                  }`}
+                >
+                  <span
+                    className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold border border-black/10"
+                    style={{ background: bg.bg, color: bg.fg }}
+                  >
+                    A
+                  </span>
+                  <span
+                    className={`text-[0.625rem] leading-tight text-center ${
+                      selected ? "text-primary font-medium" : "text-text-muted"
+                    }`}
+                  >
+                    {t(bg.labelKey)}
+                  </span>
                 </button>
               );
             })}

@@ -8,6 +8,8 @@ import { PageIndicator } from "@/components/lesson/PageIndicator";
 import { AudioControls } from "@/components/lesson/AudioControls";
 import { TocSheet } from "@/components/lesson/TocSheet";
 import { hasTarjima } from "@/components/lesson/TarjimaView";
+import { SurahPlayContext } from "@/components/lesson/SurahBanner";
+import { AYAH_TARJIMA } from "@/lib/data/tarjima";
 import { Spinner } from "@/components/ui/Spinner";
 import { useSettings } from "@/providers/SettingsProvider";
 import { useProgress } from "@/providers/ProgressProvider";
@@ -22,6 +24,12 @@ import type { Element } from "@/lib/data/types";
 
 interface Props {
   params: Promise<{ chapterId: string; lessonId: string }>;
+}
+
+/** Ketma-ket ijro bandi — element va u turgan global sahifa indeksi */
+interface SeqItem {
+  el: Element;
+  pageIndex: number;
 }
 
 function buildMask(top: boolean, bottom: boolean): string {
@@ -42,14 +50,17 @@ export default function LessonPage({ params }: Props) {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [activeElement, setActiveElement] = useState<Element | null>(null);
   const [loading, setLoading] = useState(true);
+  // Ketma-ket ijro — sahifani ham biladi, chunki sura ikki sahifaga
+  // bo'linishi mumkin (masalan Layl 37→38, Kofirun 45→46).
   const sequentialRef = useRef<{
     active: boolean;
     index: number;
-    elements: Element[];
+    items: SeqItem[];
   } | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [tocOpen, setTocOpen] = useState(false);
   const [tarjimaMode, setTarjimaMode] = useState(false);
+  const [playingSurah, setPlayingSurah] = useState<number | null>(null);
   const [scrolledFromTop, setScrolledFromTop] = useState(false);
   const [hasMoreBelow, setHasMoreBelow] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -205,45 +216,99 @@ export default function LessonPage({ params }: Props) {
       sequentialRef.current = null;
     }
     audio.setOnSegmentComplete(null);
+    setPlayingSurah(null);
   }, [audio]);
 
+  // Umumiy ketma-ket ijro: bandlar ro'yxatini boshidan oxirigacha o'qiydi
+  // va kerak bo'lsa sahifani ham surib boradi.
+  const runSequence = useCallback(
+    (items: SeqItem[]) => {
+      if (items.length === 0) return;
+      const fallbackSrc = currentLesson?.audioUrl;
+      sequentialRef.current = { active: true, index: 0, items };
+
+      const playAtIndex = (idx: number) => {
+        const seq = sequentialRef.current;
+        if (!seq || !seq.active) return;
+        if (idx >= seq.items.length) {
+          seq.active = false;
+          sequentialRef.current = null;
+          audio.setOnSegmentComplete(null);
+          setActiveElement(null);
+          setPlayingSurah(null);
+          return;
+        }
+        seq.index = idx;
+        const { el, pageIndex } = seq.items[idx];
+        // Sura keyingi sahifada davom etsa — o'sha sahifaga o'tamiz.
+        // handlePageChange EMAS: u ijroni bekor qilib yuborardi.
+        setCurrentPageIndex(pageIndex);
+        setActiveElement(el);
+        const src = el.audioUrl || fallbackSrc;
+        if (src) {
+          audio.playSegment(src, el.start, el.end).catch(() => {});
+        }
+      };
+
+      audio.setOnSegmentComplete(() => {
+        const seq = sequentialRef.current;
+        if (!seq || !seq.active) return;
+        playAtIndex(seq.index + 1);
+      });
+
+      playAtIndex(0);
+    },
+    [audio, currentLesson]
+  );
+
+  // Sura raqami → uning barcha element'lari (kitob tartibida, sahifa
+  // chegarasidan o'tib). Manba — AYAH_TARJIMA (element → sura/oyat).
+  const surahItems = useMemo(() => {
+    const map = new Map<number, SeqItem[]>();
+    bookPages.forEach((page, pageIndex) => {
+      page.elements.forEach((el) => {
+        const t = AYAH_TARJIMA[el.id];
+        if (!t || !t.s || el.start === el.end) return;
+        const list = map.get(t.s);
+        if (list) list.push({ el, pageIndex });
+        else map.set(t.s, [{ el, pageIndex }]);
+      });
+    });
+    return map;
+  }, [bookPages]);
+
+  // Sura nomiga bosilganda — surani boshidan oxirigacha o'qish.
+  // Ijrodagi suraning nomi qayta bosilsa — to'xtatadi.
+  const handlePlaySurah = useCallback(
+    (surah: number, lead?: Element) => {
+      const wasPlaying = playingSurah === surah;
+      cancelSequential();
+      audio.stop();
+      setActiveElement(null);
+      if (wasPlaying) return;
+
+      const verses = surahItems.get(surah) ?? [];
+      if (verses.length === 0) return;
+      // Sura nomi audiosi bor sahifalarda (37, 38, 44) avval nom o'qiladi.
+      const leadItem: SeqItem[] =
+        lead && lead.audioUrl && lead.start !== lead.end
+          ? [{ el: lead, pageIndex: currentPageIndex }]
+          : [];
+      setPlayingSurah(surah);
+      runSequence([...leadItem, ...verses]);
+    },
+    [playingSurah, cancelSequential, audio, surahItems, currentPageIndex, runSequence]
+  );
+
+  // AudioControls'dagi play — joriy sahifani boshidan oxirigacha o'qiydi.
   const startSequentialPlay = useCallback(() => {
     if (!currentBookPage) return;
     const fallbackSrc = currentLesson?.audioUrl;
-    const elements = currentBookPage.elements.filter(
-      (e) => (e.audioUrl || fallbackSrc) && e.start !== e.end
-    );
-    if (elements.length === 0) return;
-
-    sequentialRef.current = { active: true, index: 0, elements };
-
-    const playAtIndex = (idx: number) => {
-      const seq = sequentialRef.current;
-      if (!seq || !seq.active) return;
-      if (idx >= seq.elements.length) {
-        seq.active = false;
-        sequentialRef.current = null;
-        audio.setOnSegmentComplete(null);
-        setActiveElement(null);
-        return;
-      }
-      seq.index = idx;
-      const el = seq.elements[idx];
-      setActiveElement(el);
-      const src = el.audioUrl || fallbackSrc;
-      if (src) {
-        audio.playSegment(src, el.start, el.end).catch(() => {});
-      }
-    };
-
-    audio.setOnSegmentComplete(() => {
-      const seq = sequentialRef.current;
-      if (!seq || !seq.active) return;
-      playAtIndex(seq.index + 1);
-    });
-
-    playAtIndex(0);
-  }, [currentBookPage, currentLesson, audio]);
+    const items = currentBookPage.elements
+      .filter((e) => (e.audioUrl || fallbackSrc) && e.start !== e.end)
+      .map((el) => ({ el, pageIndex: currentPageIndex }));
+    runSequence(items);
+  }, [currentBookPage, currentLesson, currentPageIndex, runSequence]);
 
   const handleElementClick = useCallback(
     async (el: Element) => {
@@ -317,6 +382,11 @@ export default function LessonPage({ params }: Props) {
     return () => window.removeEventListener("keydown", onKey);
   }, [loading, tocOpen, currentPageIndex, bookPages.length, handlePageChange]);
 
+  const surahPlay = useMemo(
+    () => ({ onPlaySurah: handlePlaySurah, playingSurah }),
+    [handlePlaySurah, playingSurah]
+  );
+
   if (loading || !currentBookPage) return <Spinner />;
 
   const pageHasTarjima = hasTarjima(currentBookPage.elements);
@@ -326,8 +396,13 @@ export default function LessonPage({ params }: Props) {
       currentBookPage.elements.some((e) => e.audioUrl)
   );
 
+  // O'qish foni (sozlamalardagi "Fon") faqat shu ekranga qo'llanadi.
   return (
-    <div className="flex flex-col h-dvh overflow-hidden pb-[env(safe-area-inset-bottom)]">
+    <div
+      data-reading-bg={settings.readingBg}
+      style={{ background: "var(--color-bg-dark)" }}
+      className="flex flex-col h-dvh overflow-hidden pb-[env(safe-area-inset-bottom)]"
+    >
       {/* Header */}
       <header className="shrink-0 z-30 border-b border-white/10">
         <div className="flex items-center gap-3 px-4 pt-[max(env(safe-area-inset-top),1.25rem)] pb-3 short:pt-1.5 short:pb-1.5 max-w-3xl mx-auto w-full">
@@ -398,15 +473,17 @@ export default function LessonPage({ params }: Props) {
         }}
       >
         <div className="max-w-xl mx-auto w-full h-full">
-          <HorizontalPager
-            pages={pageElements}
-            currentIndex={currentPageIndex}
-            activeElementId={activeElement?.id ?? null}
-            onPageChange={handlePageChange}
-            onElementClick={handleElementClick}
-            onBackgroundClick={() => setActiveElement(null)}
-            tarjimaMode={tarjimaMode}
-          />
+          <SurahPlayContext.Provider value={surahPlay}>
+            <HorizontalPager
+              pages={pageElements}
+              currentIndex={currentPageIndex}
+              activeElementId={activeElement?.id ?? null}
+              onPageChange={handlePageChange}
+              onElementClick={handleElementClick}
+              onBackgroundClick={() => setActiveElement(null)}
+              tarjimaMode={tarjimaMode}
+            />
+          </SurahPlayContext.Provider>
         </div>
       </div>
 

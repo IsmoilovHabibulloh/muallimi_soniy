@@ -8,6 +8,7 @@ import type {
   Theme,
   FontSize,
   PlaybackSpeed,
+  ReadingBg,
 } from "@/lib/data/types";
 import { DEFAULT_SETTINGS } from "@/lib/data/types";
 
@@ -30,6 +31,7 @@ interface SettingsContextType {
   setLocale: (l: Locale) => void;
   setTheme: (t: Theme) => void;
   setFontSize: (f: FontSize) => void;
+  setReadingBg: (b: ReadingBg) => void;
   setLoopMode: (b: boolean) => void;
   setSequentialMode: (b: boolean) => void;
   t: (key: string) => string;
@@ -101,6 +103,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
     setLocale: (locale) => update({ locale }),
     setTheme: (theme) => update({ theme }),
     setFontSize: (fontSize) => update({ fontSize }),
+    setReadingBg: (readingBg) => update({ readingBg }),
     setLoopMode: (loopMode) => update({ loopMode }),
     setSequentialMode: (sequentialMode) => update({ sequentialMode }),
     t,

@@ -267,11 +267,122 @@ html:not([data-theme="dark"]) .border-white\/10 { border-color: rgba(0, 0, 0, 0.
 html:not([data-theme="dark"]) .text-white\/60 { color: rgba(0, 0, 0, 0.5) !important; }
 html:not([data-theme="dark"]) .bg-primary\/20 { background: rgba(22, 163, 74, 0.12) !important; }
 
+/* ═══ O'qish foni (lesson ekrani) — 2026-09-26 ═══
+   Foydalanuvchi so'radi: "Tafsiri Hilol"dagidek fon rangini tanlash.
+   `data-reading-bg` lesson sahifasining ildiz div'iga qo'yiladi — shu
+   subtree ichida matn/fon token'lari qayta ta'riflanadi. Ilovaning
+   qolgan qismi (home, darslar, sozlamalar) `theme` bo'yicha qoladi. */
+[data-reading-bg="oq"] {
+  --color-bg-dark: #ffffff;
+  --color-text-main: #12211a;
+  --color-text-secondary: #0d6b30;
+  --color-text-muted: #5b6b62;
+}
+
+[data-reading-bg="yashil"] {
+  --color-bg-dark: #edf7f0;
+  --color-text-main: #0f1f17;
+  --color-text-secondary: #0d6b30;
+  --color-text-muted: #4a6355;
+}
+
+[data-reading-bg="sepiya"] {
+  --color-bg-dark: #f6efe0;
+  --color-text-main: #3a2f21;
+  --color-text-secondary: #7a5a22;
+  --color-text-muted: #6b5c46;
+}
+
+[data-reading-bg="kulrang"] {
+  --color-bg-dark: #e9ecee;
+  --color-text-main: #1f272c;
+  --color-text-secondary: #2f5d43;
+  --color-text-muted: #5a666d;
+}
+
+[data-reading-bg="tungi"] {
+  --color-bg-dark: #0d1117;
+  --color-bg-card: rgba(255, 255, 255, 0.07);
+  --color-border-card: rgba(255, 255, 255, 0.12);
+  --color-text-main: #e8eee9;
+  --color-text-secondary: #86efac;
+  --color-text-muted: #9fb0a6;
+  --color-primary: #22c55e;
+  --color-primary-light: #4ade80;
+  --color-primary-glow: rgba(34, 197, 94, 0.4);
+}
+
+/* Tungi fon light tema ustida ham ishlashi kerak: light remap'da
+   white-alpha utility'lar qora-alpha'ga aylanadi — qorong'i yuzada ular
+   ko'rinmay qoladi, shuning uchun bu subtree'da qaytarib beramiz. */
+[data-reading-bg="tungi"] .bg-white\/5,
+[data-reading-bg="tungi"] .bg-white\/\[0\.05\] { background: rgba(255, 255, 255, 0.07) !important; }
+[data-reading-bg="tungi"] .bg-white\/10 { background: rgba(255, 255, 255, 0.1) !important; }
+[data-reading-bg="tungi"] .hover\:bg-white\/10:hover { background: rgba(255, 255, 255, 0.14) !important; }
+[data-reading-bg="tungi"] .border-white\/5 { border-color: rgba(255, 255, 255, 0.06) !important; }
+[data-reading-bg="tungi"] .border-white\/10 { border-color: rgba(255, 255, 255, 0.12) !important; }
+[data-reading-bg="tungi"] .bg-primary\/20 { background: rgba(34, 197, 94, 0.22) !important; }
+
 /* ═══ Arabic text ═══ */
 .arabic-text {
   font-family: var(--font-arabic);
   direction: rtl;
   line-height: 1.8;
+}
+
+/* ═══ Suralar bo'limi (36-47 sahifalar) — MUSHAF shrifti ═══
+   Foydalanuvchi qarori 2026-09-26: Qur'on matnini "Tafsiri Hilol"
+   (islom.uz) ilovasidagidek ko'rsatish. U yerda KFGQPC Uthmanic Hafs
+   ishlatiladi — bizda `UthmanicHafs.otf` allaqachon bor.
+   DOIRA: faqat `.quran-scope` ichida (suralar sahifalari + TarjimaView).
+   Kitobning qolgan qismi o'zgarmaydi — u yerda custom Noto Naskh
+   Muallimi majburiy (yuqoridagi qoidaga qarang). */
+.quran-scope .arabic-text {
+  font-family: "UthmanicHafs", "Noto Naskh Arabic Muallimi",
+    "Noto Naskh Arabic", serif;
+  line-height: 2;
+}
+
+/* Banner ostidagi chig'atoy izoh — Qur'on matni EMAS, shuning uchun
+   kitobning o'z shriftida qoladi (UthmanicHafs ZWNJ'ni ko'rsatib yuboradi). */
+.quran-scope .surah-sub.arabic-text {
+  font-family: var(--font-arabic);
+  line-height: 1.5;
+}
+
+/* ═══ Sura nomi banneri (mushafdagi bezakli ramka) ═══
+   Ikki chiziqli ramka: tashqi border + ichki inset soya. */
+.surah-banner {
+  border: 1.5px solid rgba(22, 163, 74, 0.45);
+  box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.16);
+  background: rgba(22, 163, 74, 0.05);
+}
+
+html[data-theme="dark"] .surah-banner {
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(34, 197, 94, 0.2);
+  background: rgba(34, 197, 94, 0.08);
+}
+
+/* Sura to'liq o'qilayotgan payt — banner yonadi */
+.surah-banner-playing {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 6px 20px var(--color-primary-glow);
+}
+
+.surah-banner-playing .surah-banner-rosette {
+  color: #ffffff;
+  opacity: 0.85;
+}
+
+.surah-banner-rosette {
+  font-family: var(--font-arabic);
+  font-size: 0.8125rem;
+  line-height: 1;
+  color: var(--color-primary);
+  opacity: 0.55;
+  pointer-events: none;
 }
 
 /* ═══ Mad harflar (sahifa 17-21) ═══

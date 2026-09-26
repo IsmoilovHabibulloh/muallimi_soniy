@@ -209,6 +209,27 @@ shriftlar (Amiri, Scheherazade, Kitab, KFGQPC va h.k.) **vaqtinchalik
 yoki shartli ishlatilmaydi**. Bitta toza universal stack:
 `NotoNaskhArabic-MuallimiSoniy.ttf` (Custom Noto Naskh Muallimi).
 
+### ⚠️ YAGONA ISTISNO — suralar bo'limi (36-47) mushaf shriftida (2026-09-26)
+
+> **"Tafsiri hilol ilovasidagi ushbu arab tili shriftidan foydalanib
+> bizdagi suralarning shriftini ham huddi shunday qilishimiz kerak."**
+> — foydalanuvchi, 2026-09-26.
+
+36-47 sahifalar — **Qur'on matni**, darslikning o'z matni emas. Shu
+sababli ular `UthmanicHafs.otf` (KFGQPC Madina mushafi) bilan
+chiziladi. Texnik yo'l: `RenderedPage` karta'siga `quran-scope` class
+qo'shiladi (`QURAN_PAGES` to'plami) va globals.css da
+`.quran-scope .arabic-text` shriftni almashtiradi. `TarjimaView` ham
+shu class'ni ishlatadi.
+
+**Doira qat'iy**: 1-35 va 48-50 sahifalar avvalgidek custom Noto Naskh
+Muallimi'da qoladi; mad sahifalari (17-21) ham tegilmagan. Bu istisnoni
+boshqa sahifalarga kengaytirmang va suralardan olib tashlamang.
+
+⚠️ Banner ostidagi chig'atoy izoh (`sub`) **kitob shriftida** qoladi
+(`.surah-sub`) — UthmanicHafs ZWNJ (U+200C) ni ko'rinadigan qilib
+chizadi.
+
 ### Nima uchun
 
 - **1:1 reproduktivlik**: Custom shrift bizning loyihamizning aniq
@@ -1923,6 +1944,42 @@ solishtirib tasdiqlangan (Fotiha 7-oyat, so'zma-so'z mos).
 Bismillah tarjimasi — Fotiha 1-oyat matni; ta'avvuz Qur'on oyati emas,
 matni `fetch_tarjima.py` dagi `SPECIAL` da qo'lda yozilgan.
 
+## Sura nomi banneri va surani to'liq o'qish (2026-09-26)
+
+Foydalanuvchi mushaf ilovasidagi bezakli sura ramkasini ko'rsatib
+so'radi: "suralarni nomini alohida shunaqa qilib ajratib chiqishimiz
+kerak", keyin — "sura nomiga bosganda sura to'liq o'qiladigan bo'lsin,
+har bir oyatni bosganda alohida o'qish ham saqlanib qolsin".
+
+**`src/components/lesson/SurahBanner.tsx`** — suralar bo'limidagi
+BARCHA sura sarlavhalari shu komponentdan quriladi (36-47 sahifalar
+va `TarjimaView`). Boshqa sarlavha uslubi yozmang; eski
+`❀ nom ❀` va `<Title>`/`<Head>` variantlari shu yerda BEKOR qilingan.
+
+| Prop | Vazifa |
+|------|--------|
+| `text` | arabcha sura nomi (statik sahifalarda) |
+| `surah` | sura raqami — bosilganda shu sura to'liq o'qiladi |
+| `lead` | sura nomi audiosi bor element (37, 38, 44) — ketma-ketlik boshida |
+| `sub` | chig'atoy izoh (RTL, kitob shriftida) |
+| `note` | lotin/kirill izoh (TarjimaView'da sura ma'lumoti) |
+
+**Ijro mantig'i** (`lesson/[chapterId]/[lessonId]/page.tsx`):
+- `surahItems` — `AYAH_TARJIMA` asosida sura → element'lar xaritasi.
+  Kitob tartibida quriladi, shuning uchun **sahifaga bo'lingan suralar
+  ham to'liq** chiqadi (Layl 37→38, Duho 38→39, Alaq 39→40, Asr 43→44,
+  Kofirun 45→46).
+- `runSequence(items)` — umumiy ketma-ket ijro; har band `pageIndex`
+  bilan keladi va kerak bo'lsa `setCurrentPageIndex` bilan sahifa
+  suriladi. **`handlePageChange` ISHLATMANG** — u ijroni bekor qiladi.
+- `handlePlaySurah(surah, lead)` — banner bosilganda. O'sha sura
+  ijroda bo'lsa, qayta bosish **to'xtatadi** (toggle).
+- Oyatni bosish avvalgidek `handleElementClick` — faqat o'sha oyat.
+  Bu xulqni o'zgartirmang.
+- `SurahPlayContext` (SurahBanner.tsx) — lesson sahifasi `Provider`
+  bilan o'raydi; banner'lar shundan `onPlaySurah` va `playingSurah`
+  oladi. Prop'ni 12 ta renderer orqali uzatmang.
+
 ## Mundarija — yagona `BookToc` komponenti (2026-06-10 redesign)
 
 > `/darslar` sahifasi va lesson ichidagi `TocSheet` drawer **bitta**
@@ -2002,6 +2059,22 @@ sahifa ichidagi `ABOUT_LABELS` lokalizatsiya konstanti — bekor qilingan.
 - **Ko'rinish (tema)** — 3 segment tugma lucide ikonkalar bilan: `Sun`/
   `Moon`/`MonitorSmartphone`. Emoji TAQIQLANGAN. i18n: uz'da "theme" =
   **"Koʻrinish"** ("Mavzu" xato — "topic" ma'nosi).
+- **Fon (o'qish ekrani)** — 5 ta namuna tugmasi (rangli kvadratda "A"):
+  `Oq` / `Och yashil` / `Sepiya` / `Kulrang` / `Qora`. Foydalanuvchi
+  2026-09-26 da so'radi (Tafsiri Hilol ilovasidagi "Fon" qatori);
+  och yashil ham qo'shildi — default shu (`readingBg: "yashil"`).
+  - Faqat **lesson ekraniga** qo'llanadi: `data-reading-bg` atributi
+    lesson sahifasining ildiz div'ida, palitralar globals.css da
+    (`[data-reading-bg="..."]` token override). Ilovaning qolgan qismi
+    (home, darslar, sozlamalar) `theme` bo'yicha qoladi.
+  - `Qora` — light tema ustida ham ishlaydi: light remap white-alpha
+    utility'larni qora-alpha'ga aylantirgani uchun
+    `[data-reading-bg="tungi"]` blokida ular qaytarib beriladi.
+    Yangi white-alpha class ishlatsangiz shu blokka ham qo'shing.
+  - Yorliq **"Qora"**, "Tungi" EMAS — "Tungi" tema bo'limida band
+    (ikkitasi bir ekranda chalkashtiradi).
+  - `READING_BGS` (sozlamalar sahifasi) va globals.css palitralari
+    1:1 mos bo'lishi shart — birini o'zgartirsangiz ikkinchisini ham.
 - **Shrift o'lchami** — 3 tugma, "A" harfi rem o'lchamlarda (0.8125/1/1.25),
   pastki yorliqlar `t("small"/"medium"/"large")` orqali (qattiq o'zbekcha
   matn bug'i tuzatilgan).

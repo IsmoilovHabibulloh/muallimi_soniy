@@ -67,5 +67,12 @@
   "offline_resume": "Давом эттириш",
   "update_ready": "Янги версия тайёр",
   "update_now": "Янгилаш",
-  "tarjima": "Таржима"
+  "tarjima": "Таржима",
+  "background": "Фон",
+  "background_desc": "Ўқиш экранининг фон ранги",
+  "bg_oq": "Оқ",
+  "bg_yashil": "Оч яшил",
+  "bg_sepiya": "Сепия",
+  "bg_kulrang": "Кулранг",
+  "bg_tungi": "Қора"
 }

@@ -3,6 +3,7 @@
 import React, { type CSSProperties } from "react";
 import type { Element } from "@/lib/data/types";
 import { ELEMENT_COLORS } from "@/lib/data/types";
+import { SurahBanner } from "./SurahBanner";
 import { MUQADDIMA_PARAGRAPHS } from "@/lib/data/muqaddima";
 
 interface RenderedPageProps {
@@ -2966,21 +2967,15 @@ function Page36({ elements, activeId, hasActive, onElementClick }: PP) {
   };
 
   // Decorative surah section title (statik — kitobda ham markazda bezakli yoziladi)
-  const SurahTitle = ({ text }: { text: string }) => (
-    <div className="flex flex-row-reverse items-center justify-center gap-2 w-full my-0.5">
-      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
-      <h3 className="arabic-text text-[clamp(0.85rem,4cqi,1.05rem)] font-bold text-text-secondary text-center">
-        {text}
-      </h3>
-      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
-    </div>
+  const SurahTitle = ({ text, surah }: { text: string; surah: number }) => (
+    <SurahBanner text={text} surah={surah} />
   );
 
   return (
     <div className="flex flex-col items-center gap-0.5 w-full">
       <Verse id="taawwudh" size="md" />
 
-      <SurahTitle text="سُورَةُ الْفَاتِحَة" />
+      <SurahTitle text="سُورَةُ الْفَاتِحَة" surah={1} />
       <Verse id="fa_bismi" num="١" size="md" />
       <Verse id="fa_v2" num="٢" size="sm" />
       <Verse id="fa_v3" num="٣" size="sm" />
@@ -2991,7 +2986,7 @@ function Page36({ elements, activeId, hasActive, onElementClick }: PP) {
 
       <Divider />
 
-      <SurahTitle text="اَوَّلُ سُورَةِ الْبَقَرَة" />
+      <SurahTitle text="اَوَّلُ سُورَةِ الْبَقَرَة" surah={2} />
       <Verse id="bq_bismi" size="md" />
       <Verse id="bq_v1" num="١" size="md" />
       <Verse id="bq_v2" num="٢" size="sm" />
@@ -3006,36 +3001,10 @@ function Page36({ elements, activeId, hasActive, onElementClick }: PP) {
 function Page37({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 37);
   const shamsTitleHeader = (
-    <div className="flex flex-row-reverse items-center justify-center gap-3 w-full">
-      <span className="text-text-muted text-xs">❀</span>
-      {els(["sh_title"]).map((el) => (
-        <ArabicEl
-          key={el.id}
-          el={el}
-          isActive={activeId === el.id}
-          hasActive={hasActive}
-          onClick={() => onElementClick(el)}
-          size="md"
-        />
-      ))}
-      <span className="text-text-muted text-xs">❀</span>
-    </div>
+    <SurahBanner surah={91} lead={els(["sh_title"])[0]} />
   );
   const laylTitleHeader = (
-    <div className="flex flex-row-reverse items-center justify-center gap-3 w-full">
-      <span className="text-text-muted text-xs">❀</span>
-      {els(["ll_title"]).map((el) => (
-        <ArabicEl
-          key={el.id}
-          el={el}
-          isActive={activeId === el.id}
-          hasActive={hasActive}
-          onClick={() => onElementClick(el)}
-          size="md"
-        />
-      ))}
-      <span className="text-text-muted text-xs">❀</span>
-    </div>
+    <SurahBanner surah={92} lead={els(["ll_title"])[0]} />
   );
   return (
     <div className="flex flex-col items-center gap-0.5">
@@ -3063,20 +3032,7 @@ function Page37({ elements, activeId, hasActive, onElementClick }: PP) {
 function Page38({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 38);
   const duhoTitleHeader = (
-    <div className="flex flex-row-reverse items-center justify-center gap-3 w-full">
-      <span className="text-text-muted text-xs">❀</span>
-      {els(["du_title"]).map((el) => (
-        <ArabicEl
-          key={el.id}
-          el={el}
-          isActive={activeId === el.id}
-          hasActive={hasActive}
-          onClick={() => onElementClick(el)}
-          size="md"
-        />
-      ))}
-      <span className="text-text-muted text-xs">❀</span>
-    </div>
+    <SurahBanner surah={93} lead={els(["du_title"])[0]} />
   );
   return (
     <div className="flex flex-col items-center gap-0.5">
@@ -3105,12 +3061,6 @@ function Page39({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 39);
   // Compact title + sep — needed to fit Duho v.11 + Sharh (9) + Tin (9) + Alaq header
   // = 20 elements + 3 titles + 3 dividers within a single viewport (~620px).
-  const Head = ({ text, sub }: { text: string; sub: string }) => (
-    <div className="text-center mt-0.5 mb-0">
-      <h3 className="arabic-text text-base font-bold text-text-secondary leading-none">{text}</h3>
-      <p className="arabic-text text-[0.625rem] text-text-muted mt-0 leading-tight" dir="rtl">{sub}</p>
-    </div>
-  );
   const Sep = () => <div className="w-full border-b border-dotted border-white/10 my-1" />;
   return (
     <div className="flex flex-col items-center gap-0">
@@ -3119,7 +3069,7 @@ function Page39({ elements, activeId, hasActive, onElementClick }: PP) {
       <Sep />
 
       {/* Surah Ash-Sharh — bismillah + 8 ayat */}
-      <Head text="سورة الشرح" sub="شرح سوره‌سی" />
+      <SurahBanner text="سورة الشرح" sub="شرح سوره‌سی" surah={94} />
       <Row els={els(["sharh_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["sharh_v1", "sharh_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["sharh_v3", "sharh_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
@@ -3128,7 +3078,7 @@ function Page39({ elements, activeId, hasActive, onElementClick }: PP) {
       <Sep />
 
       {/* Surah At-Tin — bismillah + 8 ayat */}
-      <Head text="سورة التين" sub="تین سوره‌سی" />
+      <SurahBanner text="سورة التين" sub="تین سوره‌سی" surah={95} />
       <Row els={els(["tin_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["tin_v1", "tin_v2"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["tin_v3", "tin_v4"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
@@ -3138,7 +3088,7 @@ function Page39({ elements, activeId, hasActive, onElementClick }: PP) {
       <Sep />
 
       {/* Surah Al-Alaq — header only (body on p40) */}
-      <Head text="سورة العلق" sub="علق سوره‌سی" />
+      <SurahBanner text="سورة العلق" sub="علق سوره‌سی" surah={96} />
       <Row els={els(["alaq_bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
     </div>
   );
@@ -3173,7 +3123,7 @@ function Page40({ elements, activeId, hasActive, onElementClick }: PP) {
       <Divider />
 
       {/* Surah Al-Qadr (Bismillah + 5 ayat) */}
-      <Title text="سورة القدر" sub="قدر سوره‌سی" />
+      <SurahBanner text="سورة القدر" sub="قدر سوره‌سی" surah={97} />
       <Row els={els(["q_bism"])}     activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["q01"])}        activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["q02", "q03"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
@@ -3188,7 +3138,7 @@ function Page41({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 41);
   return (
     <div className="flex flex-col items-center gap-0.5">
-      <Title text="سورة البينة" sub="بیّنه سوره‌سی" />
+      <SurahBanner text="سورة البينة" sub="بیّنه سوره‌سی" surah={98} />
       <Row els={els(["bism"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["a1"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["a2"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
@@ -3208,7 +3158,7 @@ function Page42({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-0.5">
       {/* === Surah Az-Zalzalah === */}
-      <Title text="سورة الزلزلة" sub="زلزله سوره‌سی" />
+      <SurahBanner text="سورة الزلزلة" sub="زلزله سوره‌سی" surah={99} />
       <Row els={els(["zz_bism"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["zz_a1", "zz_a2"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
       <AyahRow els={els(["zz_a3", "zz_a4"])}   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
@@ -3218,7 +3168,7 @@ function Page42({ elements, activeId, hasActive, onElementClick }: PP) {
       <Divider />
 
       {/* === Surah Al-'Adiyat === */}
-      <Title text="سورة العاديات" sub="عادیات سوره‌سی" />
+      <SurahBanner text="سورة العاديات" sub="عادیات سوره‌سی" surah={100} />
       <Row els={els(["ad_bism"])}                  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["ad_a1", "ad_a2", "ad_a3"])}  activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["ad_a4", "ad_a5"])}           activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
@@ -3237,7 +3187,7 @@ function Page43({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-0.5">
       {/* === Surah Al-Qari'ah === */}
-      <Title text="سورة القارعة" sub="قارعه سوره‌سی" />
+      <SurahBanner text="سورة القارعة" sub="قارعه سوره‌سی" surah={101} />
       <Row els={els(["qr_bism"])}                 activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["qr_a1", "qr_a2", "qr_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["qr_a4"])}                   activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
@@ -3249,7 +3199,7 @@ function Page43({ elements, activeId, hasActive, onElementClick }: PP) {
       <Divider />
 
       {/* === Surah At-Takathur === */}
-      <Title text="سورة التكاثر" sub="تکاثر سوره‌سی" />
+      <SurahBanner text="سورة التكاثر" sub="تکاثر سوره‌سی" surah={102} />
       <Row els={els(["tk_bism"])}                 activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
       <AyahRow els={els(["tk_a1", "tk_a2", "tk_a3"])} activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1" />
       <AyahRow els={els(["tk_a4", "tk_a5"])}          activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-1.5" />
@@ -3259,7 +3209,7 @@ function Page43({ elements, activeId, hasActive, onElementClick }: PP) {
       <Divider />
 
       {/* === Surah Al-'Asr — title + Bismillah only (full body on p44) === */}
-      <Title text="سورة العصر" sub="عصر سوره‌سی" />
+      <SurahBanner text="سورة العصر" sub="عصر سوره‌سی" surah={103} />
       <Row els={els(["as_bism"])}                 activeId={activeId} hasActive={hasActive} onClick={onElementClick} size="sm" gap="gap-2" />
     </div>
   );
@@ -3270,36 +3220,10 @@ function Page43({ elements, activeId, hasActive, onElementClick }: PP) {
 function Page44({ elements, activeId, hasActive, onElementClick }: PP) {
   const { els } = usePageElements(elements, 44);
   const humazahTitleHeader = (
-    <div className="flex flex-row-reverse items-center justify-center gap-3 w-full">
-      <span className="text-text-muted text-xs">❀</span>
-      {els(["hu_title"]).map((el) => (
-        <ArabicEl
-          key={el.id}
-          el={el}
-          isActive={activeId === el.id}
-          hasActive={hasActive}
-          onClick={() => onElementClick(el)}
-          size="md"
-        />
-      ))}
-      <span className="text-text-muted text-xs">❀</span>
-    </div>
+    <SurahBanner surah={104} lead={els(["hu_title"])[0]} />
   );
   const filTitleHeader = (
-    <div className="flex flex-row-reverse items-center justify-center gap-3 w-full">
-      <span className="text-text-muted text-xs">❀</span>
-      {els(["fi_title"]).map((el) => (
-        <ArabicEl
-          key={el.id}
-          el={el}
-          isActive={activeId === el.id}
-          hasActive={hasActive}
-          onClick={() => onElementClick(el)}
-          size="md"
-        />
-      ))}
-      <span className="text-text-muted text-xs">❀</span>
-    </div>
+    <SurahBanner surah={105} lead={els(["fi_title"])[0]} />
   );
   return (
     <div className="flex flex-col items-center gap-0.5">
@@ -3409,19 +3333,13 @@ function Page45({ elements, activeId, hasActive, onElementClick }: PP) {
     );
   };
 
-  const SurahTitle = ({ text }: { text: string }) => (
-    <div className="flex flex-row-reverse items-center justify-center gap-2 w-full my-0.5">
-      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
-      <h3 className="arabic-text text-[clamp(0.78rem,3.6cqi,0.98rem)] font-bold text-text-secondary text-center">
-        {text}
-      </h3>
-      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
-    </div>
+  const SurahTitle = ({ text, surah }: { text: string; surah: number }) => (
+    <SurahBanner text={text} surah={surah} />
   );
 
   return (
     <div className="flex flex-col items-center gap-0 w-full">
-      <SurahTitle text="سُورَةُ قُرَيْشٍ" />
+      <SurahTitle text="سُورَةُ قُرَيْشٍ" surah={106} />
       <Verse id="qu_bism" size="sm" />
       <Verse id="qu_a1" num="١" size="sm" />
       <Verse id="qu_a2" num="٢" size="sm" />
@@ -3430,7 +3348,7 @@ function Page45({ elements, activeId, hasActive, onElementClick }: PP) {
 
       <Divider />
 
-      <SurahTitle text="سُورَةُ الْمَاعُونِ" />
+      <SurahTitle text="سُورَةُ الْمَاعُونِ" surah={107} />
       <Verse id="ma_bism" size="sm" />
       <Verse id="ma_a1" num="١" size="sm" />
       <Verse id="ma_a2" num="٢" size="sm" />
@@ -3446,7 +3364,7 @@ function Page45({ elements, activeId, hasActive, onElementClick }: PP) {
 
       <Divider />
 
-      <SurahTitle text="سُورَةُ الْكَوْثَرِ" />
+      <SurahTitle text="سُورَةُ الْكَوْثَرِ" surah={108} />
       <Verse id="ka_bism" size="sm" />
       <Verse id="ka_a1" num="١" size="sm" />
       <Verse id="ka_a2" num="٢" size="sm" />
@@ -3454,7 +3372,7 @@ function Page45({ elements, activeId, hasActive, onElementClick }: PP) {
 
       <Divider />
 
-      <SurahTitle text="سُورَةُ الْكَافِرُونَ" />
+      <SurahTitle text="سُورَةُ الْكَافِرُونَ" surah={109} />
       <Verse id="kf_bism" size="sm" />
     </div>
   );
@@ -3534,14 +3452,8 @@ function Page46({ elements, activeId, hasActive, onElementClick }: PP) {
     );
   };
 
-  const SurahTitle = ({ text }: { text: string }) => (
-    <div className="flex flex-row-reverse items-center justify-center gap-2 w-full my-0.5">
-      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
-      <h3 className="arabic-text text-[clamp(0.78rem,3.6cqi,0.98rem)] font-bold text-text-secondary text-center">
-        {text}
-      </h3>
-      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
-    </div>
+  const SurahTitle = ({ text, surah }: { text: string; surah: number }) => (
+    <SurahBanner text={text} surah={surah} />
   );
 
   return (
@@ -3556,7 +3468,7 @@ function Page46({ elements, activeId, hasActive, onElementClick }: PP) {
 
       <Divider />
 
-      <SurahTitle text="سُورَةُ النَّصْرِ" />
+      <SurahTitle text="سُورَةُ النَّصْرِ" surah={110} />
       <Verse id="ns_bism" size="sm" />
       <Verse id="ns_a1" num="١" size="sm" />
       <Verse id="ns_a2" num="٢" size="sm" />
@@ -3564,7 +3476,7 @@ function Page46({ elements, activeId, hasActive, onElementClick }: PP) {
 
       <Divider />
 
-      <SurahTitle text="سُورَةُ الْمَسَدِ" />
+      <SurahTitle text="سُورَةُ الْمَسَدِ" surah={111} />
       <Verse id="ms_bism" size="sm" />
       <Verse id="ms_a1" num="١" size="sm" />
       <Verse id="ms_a2" num="٢" size="sm" />
@@ -3574,7 +3486,7 @@ function Page46({ elements, activeId, hasActive, onElementClick }: PP) {
 
       <Divider />
 
-      <SurahTitle text="سُورَةُ الْإِخْلَاصِ" />
+      <SurahTitle text="سُورَةُ الْإِخْلَاصِ" surah={112} />
       <Verse id="ix_bism" size="sm" />
       <Verse id="ix_a1" num="١" size="sm" />
       <Verse id="ix_a2" num="٢" size="sm" />
@@ -3653,20 +3565,14 @@ function Page47({ elements, activeId, hasActive, onElementClick }: PP) {
     );
   };
 
-  const SurahTitle = ({ text }: { text: string }) => (
-    <div className="flex flex-row-reverse items-center justify-center gap-2 w-full my-0.5">
-      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
-      <h3 className="arabic-text text-[clamp(0.78rem,3.6cqi,0.98rem)] font-bold text-text-secondary text-center">
-        {text}
-      </h3>
-      <span className="text-text-muted text-[0.625rem] opacity-60">❀</span>
-    </div>
+  const SurahTitle = ({ text, surah }: { text: string; surah: number }) => (
+    <SurahBanner text={text} surah={surah} />
   );
 
   return (
     <div className="flex flex-col items-center gap-0 w-full">
       {/* === Surah Al-Falaq (p47 to'g'ridan-to'g'ri Falaq bilan boshlanadi — Al-Ikhlas to'liq p46 da) === */}
-      <SurahTitle text="سُورَةُ الْفَلَقِ" />
+      <SurahTitle text="سُورَةُ الْفَلَقِ" surah={113} />
       <Verse id="fq_bism" size="sm" />
       <Verse id="fq_a1" num="١" size="sm" />
       <Verse id="fq_a2" num="٢" size="sm" />
@@ -3677,7 +3583,7 @@ function Page47({ elements, activeId, hasActive, onElementClick }: PP) {
       <Divider />
 
       {/* === Surah An-Nas === */}
-      <SurahTitle text="سُورَةُ النَّاسِ" />
+      <SurahTitle text="سُورَةُ النَّاسِ" surah={114} />
       <Verse id="ns_bism" size="sm" />
       <Verse id="ns_a1" num="١" size="sm" />
       <Verse id="ns_a2" num="٢" size="sm" />
@@ -3858,6 +3764,9 @@ const PAGE_RENDERERS: Record<number, React.ComponentType<PP>> = {
   48: Page48, 49: Page49, 50: Page50,
 };
 
+// Suralar bo'limi — mushaf shrifti (.quran-scope) shu sahifalarda qo'llanadi.
+const QURAN_PAGES = new Set([36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]);
+
 export function hasRenderer(pageNumber: number): boolean {
   return pageNumber in PAGE_RENDERERS;
 }
@@ -3876,7 +3785,9 @@ export function RenderedPage({
 
   return (
     <div
-      className="w-full bg-white/[0.05] rounded-2xl border border-white/10 p-4"
+      className={`w-full bg-white/[0.05] rounded-2xl border border-white/10 p-4${
+        QURAN_PAGES.has(pageNumber) ? " quran-scope" : ""
+      }`}
       style={{ containerType: "inline-size" }}
       onClick={onBackgroundClick}
     >

@@ -67,5 +67,12 @@
   "offline_resume": "Resume",
   "update_ready": "New version available",
   "update_now": "Update",
-  "tarjima": "Translation"
+  "tarjima": "Translation",
+  "background": "Background",
+  "background_desc": "Reading screen background colour",
+  "bg_oq": "White",
+  "bg_yashil": "Light green",
+  "bg_sepiya": "Sepia",
+  "bg_kulrang": "Grey",
+  "bg_tungi": "Black"
 }
