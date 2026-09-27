@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "contentVersion": "2.10.0",
-  "generatedAt": "2026-09-26T06:50:10.623Z",
-  "contentHash": "5a163c58ab96f7cabc907c7452c06673548963987f126b9d9c704f76b77558c3",
+  "contentVersion": "2.11.0",
+  "generatedAt": "2026-09-27T07:20:19.280Z",
+  "contentHash": "2967244397dce77e8435a02b03a9b9d5f2b2051de9aab33d97cc31283e2b9950",
   "parts": {
     "sahifalar": {
       "files": [
@@ -39,8 +39,8 @@
       "files": [
         {
           "path": "content/sozlamalar/i18n.json",
-          "bytes": 13576,
-          "sha256": "f8a165fc261089bff520ef01f4820afea127c0a5b9cc09b4b29e68e2eedd71a8"
+          "bytes": 13785,
+          "sha256": "8e06af6dabbb305df9085321940e89b5bac066929cccd5b0df5477c72d779a2e"
         },
         {
           "path": "content/sozlamalar/legal.json",

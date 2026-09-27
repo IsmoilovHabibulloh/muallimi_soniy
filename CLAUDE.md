@@ -1849,7 +1849,13 @@ qoldiring.
    - Chap: orqaga tugma (`ArrowLeft`, 40×40; `short:` 32×32)
    - O'rtada: **joriy** dars `lesson.title` + bob `chapter.title` (joriy
      sahifaning lesson/chapter'idan olinadi; bob nomi `short:hidden`)
-   - O'ngda: mundarija tugmasi (`ListOrdered`, 40×40; `short:` 32×32)
+   - O'ngda 3 ta tugma (chapdan o'ngga):
+     1. **Tarjima** (`Languages`) — faqat tarjimasi bor sahifada
+        (`hasTarjima`); yorlig'i `sm:` dan yuqorida ko'rinadi, telefonda
+        faqat ikonka. Yoqilganda yashil.
+     2. **O'qish sozlamalari** (`SlidersHorizontal`, 40×40) — pastki
+        oynani ochadi (pastdagi bo'limga qarang).
+     3. **Mundarija** (`ListOrdered`, 40×40; `short:` 32×32)
 2. **Sahifa ko'rinishi** (`HorizontalPager` + `PageView`):
    - Embla Carousel — barcha 54 sahifa bir ketma-ketlikda
    - **Har slide O'ZI vertikal scroll** (`data-page-slide={idx}`,
@@ -1980,6 +1986,33 @@ va `TarjimaView`). Boshqa sarlavha uslubi yozmang; eski
   bilan o'raydi; banner'lar shundan `onPlaySurah` va `playingSurah`
   oladi. Prop'ni 12 ta renderer orqali uzatmang.
 
+## O'qish sozlamalari oynasi — dars ichida (2026-09-27)
+
+> **"Shu qismdagi sozlamalarni dars jarayonida ham ishlatadigan qilgin.
+> Sozlamalarga chiqib borib kelmasligi uchun."** — foydalanuvchi,
+> 2026-09-27 (Tafsiri Hilol ilovasidagi "O'qish sozlamalari" oynasi).
+
+**`src/components/lesson/ReadingSettingsSheet.tsx`** — dars ekranining
+pastki oynasi. Header'dagi `SlidersHorizontal` tugmasi ochadi.
+Ichida: **Matn o'lchami**, **Fon**, **Takrorlash soni** va (faqat
+suralar bo'limida) **Tarjima** tugmachasi.
+
+**Qoidalar**:
+1. **Yagona state** — hammasi `useSettings()` orqali ishlaydi. Bu yerdagi
+   o'zgarish /sozlamalar sahifasida ham ko'rinadi va saqlanadi. Dars
+   uchun alohida sozlama state'i YARATMANG.
+2. **Portal EMAS** — oyna lesson sahifasining ildiz div'i ichida
+   render qilinadi, shunda `data-reading-bg` palitrasini meros oladi va
+   tanlangan fon oynaning o'zida ham darhol ko'rinadi (fon = `var(--color-bg-dark)`
+   inline; `glass` ning shaffofligi matn ustiga tushib ko'rinmay qolardi).
+3. **Palitra yagona manbadan**: `src/lib/reading-bg.ts` (`READING_BGS`,
+   `FONT_SIZES`) — sozlamalar sahifasi ham, oyna ham shundan oladi.
+   `globals.css` dagi `[data-reading-bg]` bloklariga 1:1 mos bo'lishi shart.
+4. Tugmacha (toggle) yo'lagi rangini `bg-white/20` bilan YOZMANG — light
+   remap'da u oq qolib ko'rinmaydi. `var(--color-border-card)` ishlating.
+5. Oyna ochiq payt `←`/`→` klaviatura navigatsiyasi o'chadi (TocSheet
+   bilan bir xil).
+
 ## Mundarija — yagona `BookToc` komponenti (2026-06-10 redesign)
 
 > `/darslar` sahifasi va lesson ichidagi `TocSheet` drawer **bitta**
@@ -2073,8 +2106,10 @@ sahifa ichidagi `ABOUT_LABELS` lokalizatsiya konstanti — bekor qilingan.
     Yangi white-alpha class ishlatsangiz shu blokka ham qo'shing.
   - Yorliq **"Qora"**, "Tungi" EMAS — "Tungi" tema bo'limida band
     (ikkitasi bir ekranda chalkashtiradi).
-  - `READING_BGS` (sozlamalar sahifasi) va globals.css palitralari
-    1:1 mos bo'lishi shart — birini o'zgartirsangiz ikkinchisini ham.
+  - `READING_BGS` va `FONT_SIZES` — `src/lib/reading-bg.ts` da (sozlamalar
+    sahifasi va dars ichidagi oyna ikkalasi shundan oladi). globals.css
+    palitralariga 1:1 mos bo'lishi shart — birini o'zgartirsangiz
+    ikkinchisini ham. Sahifa ichida nusxa ro'yxat TUTMANG.
 - **Shrift o'lchami** — 3 tugma, "A" harfi rem o'lchamlarda (0.8125/1/1.25),
   pastki yorliqlar `t("small"/"medium"/"large")` orqali (qattiq o'zbekcha
   matn bug'i tuzatilgan).

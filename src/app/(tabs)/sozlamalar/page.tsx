@@ -25,12 +25,8 @@ import { useSettings } from "@/providers/SettingsProvider";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { OfflineCard } from "@/components/sozlamalar/OfflineCard";
 import { LEGAL_CONTENT } from "@/lib/data/legal-content";
-import type {
-  Locale,
-  FontSize,
-  Theme,
-  ReadingBg,
-} from "@/lib/data/types";
+import { READING_BGS, FONT_SIZES } from "@/lib/reading-bg";
+import type { Locale, Theme } from "@/lib/data/types";
 
 const APP_VERSION = "1.0.0";
 
@@ -45,27 +41,6 @@ const THEMES: { value: Theme; icon: LucideIcon; labelKey: string }[] = [
   { value: "light", icon: Sun, labelKey: "light" },
   { value: "dark", icon: Moon, labelKey: "dark" },
   { value: "system", icon: MonitorSmartphone, labelKey: "system" },
-];
-
-// O'qish ekranining fon ranglari — globals.css dagi [data-reading-bg]
-// palitralariga 1:1 mos (o'zgartirsangiz ikkalasini birga yangilang).
-const READING_BGS: {
-  value: ReadingBg;
-  labelKey: string;
-  bg: string;
-  fg: string;
-}[] = [
-  { value: "oq", labelKey: "bg_oq", bg: "#ffffff", fg: "#12211a" },
-  { value: "yashil", labelKey: "bg_yashil", bg: "#edf7f0", fg: "#0f1f17" },
-  { value: "sepiya", labelKey: "bg_sepiya", bg: "#f6efe0", fg: "#3a2f21" },
-  { value: "kulrang", labelKey: "bg_kulrang", bg: "#e9ecee", fg: "#1f272c" },
-  { value: "tungi", labelKey: "bg_tungi", bg: "#0d1117", fg: "#e8eee9" },
-];
-
-const FONT_SIZES: { value: FontSize; rem: number; labelKey: string }[] = [
-  { value: "small", rem: 0.8125, labelKey: "small" },
-  { value: "medium", rem: 1, labelKey: "medium" },
-  { value: "large", rem: 1.25, labelKey: "large" },
 ];
 
 type LegalKey = "privacyPolicy" | "termsOfUse" | "aboutApp";

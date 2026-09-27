@@ -75,7 +75,8 @@
     "bg_yashil": "Och yashil",
     "bg_sepiya": "Sepiya",
     "bg_kulrang": "Kulrang",
-    "bg_tungi": "Qora"
+    "bg_tungi": "Qora",
+    "reading_settings": "Oʻqish sozlamalari"
   },
   "uz-cyrl": {
     "home": "Бош саҳифа",
@@ -153,7 +154,8 @@
     "bg_yashil": "Оч яшил",
     "bg_sepiya": "Сепия",
     "bg_kulrang": "Кулранг",
-    "bg_tungi": "Қора"
+    "bg_tungi": "Қора",
+    "reading_settings": "Ўқиш созламалари"
   },
   "ru": {
     "home": "Главная",
@@ -231,7 +233,8 @@
     "bg_yashil": "Светло-зелёный",
     "bg_sepiya": "Сепия",
     "bg_kulrang": "Серый",
-    "bg_tungi": "Чёрный"
+    "bg_tungi": "Чёрный",
+    "reading_settings": "Настройки чтения"
   },
   "en": {
     "home": "Home",
@@ -309,6 +312,7 @@
     "bg_yashil": "Light green",
     "bg_sepiya": "Sepia",
     "bg_kulrang": "Grey",
-    "bg_tungi": "Black"
+    "bg_tungi": "Black",
+    "reading_settings": "Reading settings"
   }
 }

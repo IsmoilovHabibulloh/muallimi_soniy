@@ -2,13 +2,19 @@
 
 import { useEffect, useRef, useState, useCallback, useMemo, use } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeft, ListOrdered, Languages } from "lucide-react";
+import {
+  ArrowLeft,
+  ListOrdered,
+  Languages,
+  SlidersHorizontal,
+} from "lucide-react";
 import { HorizontalPager } from "@/components/lesson/HorizontalPager";
 import { PageIndicator } from "@/components/lesson/PageIndicator";
 import { AudioControls } from "@/components/lesson/AudioControls";
 import { TocSheet } from "@/components/lesson/TocSheet";
 import { hasTarjima } from "@/components/lesson/TarjimaView";
 import { SurahPlayContext } from "@/components/lesson/SurahBanner";
+import { ReadingSettingsSheet } from "@/components/lesson/ReadingSettingsSheet";
 import { AYAH_TARJIMA } from "@/lib/data/tarjima";
 import { Spinner } from "@/components/ui/Spinner";
 import { useSettings } from "@/providers/SettingsProvider";
@@ -59,6 +65,7 @@ export default function LessonPage({ params }: Props) {
   } | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [tocOpen, setTocOpen] = useState(false);
+  const [readingSettingsOpen, setReadingSettingsOpen] = useState(false);
   const [tarjimaMode, setTarjimaMode] = useState(false);
   const [playingSurah, setPlayingSurah] = useState<number | null>(null);
   const [scrolledFromTop, setScrolledFromTop] = useState(false);
@@ -369,7 +376,7 @@ export default function LessonPage({ params }: Props) {
 
   // Keyboard arrow navigation
   useEffect(() => {
-    if (loading || tocOpen) return;
+    if (loading || tocOpen || readingSettingsOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.key === "ArrowLeft" && currentPageIndex > 0) {
@@ -380,7 +387,7 @@ export default function LessonPage({ params }: Props) {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [loading, tocOpen, currentPageIndex, bookPages.length, handlePageChange]);
+  }, [loading, tocOpen, readingSettingsOpen, currentPageIndex, bookPages.length, handlePageChange]);
 
   const surahPlay = useMemo(
     () => ({ onPlaySurah: handlePlaySurah, playingSurah }),
@@ -446,6 +453,13 @@ export default function LessonPage({ params }: Props) {
             </button>
           )}
           <button
+            onClick={() => setReadingSettingsOpen(true)}
+            className="w-10 h-10 short:w-8 short:h-8 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
+            aria-label={t("reading_settings")}
+          >
+            <SlidersHorizontal size={18} className="text-text-main" />
+          </button>
+          <button
             onClick={() => setTocOpen(true)}
             className="w-10 h-10 short:w-8 short:h-8 rounded-xl bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors active:scale-95"
             aria-label={t("lessons")}
@@ -454,6 +468,14 @@ export default function LessonPage({ params }: Props) {
           </button>
         </div>
       </header>
+
+      <ReadingSettingsSheet
+        open={readingSettingsOpen}
+        onClose={() => setReadingSettingsOpen(false)}
+        tarjimaAvailable={pageHasTarjima}
+        tarjimaMode={tarjimaMode}
+        onToggleTarjima={toggleTarjima}
+      />
 
       <TocSheet
         open={tocOpen}
