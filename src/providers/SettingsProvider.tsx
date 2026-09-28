@@ -9,6 +9,7 @@ import type {
   FontSize,
   PlaybackSpeed,
   ReadingBg,
+  ArabicFont,
 } from "@/lib/data/types";
 import { DEFAULT_SETTINGS } from "@/lib/data/types";
 
@@ -32,6 +33,7 @@ interface SettingsContextType {
   setTheme: (t: Theme) => void;
   setFontSize: (f: FontSize) => void;
   setReadingBg: (b: ReadingBg) => void;
+  setArabicFont: (f: ArabicFont) => void;
   setLoopMode: (b: boolean) => void;
   setSequentialMode: (b: boolean) => void;
   t: (key: string) => string;
@@ -104,6 +106,7 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
     setTheme: (theme) => update({ theme }),
     setFontSize: (fontSize) => update({ fontSize }),
     setReadingBg: (readingBg) => update({ readingBg }),
+    setArabicFont: (arabicFont) => update({ arabicFont }),
     setLoopMode: (loopMode) => update({ loopMode }),
     setSequentialMode: (sequentialMode) => update({ sequentialMode }),
     t,

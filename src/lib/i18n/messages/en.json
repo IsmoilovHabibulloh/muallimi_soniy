@@ -75,5 +75,7 @@
   "bg_sepiya": "Sepia",
   "bg_kulrang": "Grey",
   "bg_tungi": "Black",
-  "reading_settings": "Reading settings"
+  "reading_settings": "Reading settings",
+  "arabic_font": "Arabic font",
+  "arabic_font_desc": "Which font the surahs are shown in"
 }

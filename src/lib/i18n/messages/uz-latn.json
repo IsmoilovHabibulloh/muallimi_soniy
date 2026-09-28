@@ -75,5 +75,7 @@
   "bg_sepiya": "Sepiya",
   "bg_kulrang": "Kulrang",
   "bg_tungi": "Qora",
-  "reading_settings": "Oʻqish sozlamalari"
+  "reading_settings": "Oʻqish sozlamalari",
+  "arabic_font": "Arab shrifti",
+  "arabic_font_desc": "Suralar qaysi shriftda ko'rsatilsin"
 }

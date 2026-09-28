@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "contentVersion": "2.11.0",
-  "generatedAt": "2026-09-27T07:20:19.280Z",
-  "contentHash": "2967244397dce77e8435a02b03a9b9d5f2b2051de9aab33d97cc31283e2b9950",
+  "contentVersion": "2.12.0",
+  "generatedAt": "2026-09-28T06:23:34.966Z",
+  "contentHash": "563c9825eca3b6232fb38470f774bda2894045f37de7a69df20bc7578b1760f8",
   "parts": {
     "sahifalar": {
       "files": [
@@ -39,8 +39,8 @@
       "files": [
         {
           "path": "content/sozlamalar/i18n.json",
-          "bytes": 13785,
-          "sha256": "8e06af6dabbb305df9085321940e89b5bac066929cccd5b0df5477c72d779a2e"
+          "bytes": 14247,
+          "sha256": "e20a44f02204bd3e4415b50a3f6427c4d65bfb2e2c80dc9d2fe637ec39c716bd"
         },
         {
           "path": "content/sozlamalar/legal.json",
@@ -49,8 +49,8 @@
         },
         {
           "path": "content/sozlamalar/settings.json",
-          "bytes": 5141,
-          "sha256": "6b8194e48b12b942928d50f19ebfa659f4d9dcd237fa61b2126d7b25228a892d"
+          "bytes": 5983,
+          "sha256": "f4ec7dfff8fd5543bf87d964cf6f9f943c17341199cee6d994234856a6df410a"
         }
       ],
       "fonts": [
@@ -78,6 +78,16 @@
           "path": "fonts/UthmanicHafs.otf",
           "bytes": 246428,
           "sha256": "59e20b2403687a67854fd199861abed3528068c035d2689898465d5faf39bb31"
+        },
+        {
+          "path": "fonts/ScheherazadeNew-Regular.ttf",
+          "bytes": 331504,
+          "sha256": "794bac8dc9e83d1d620bc471ea694f5f31d0965ce8006490a79dfc51a2d283b3"
+        },
+        {
+          "path": "fonts/ScheherazadeNew-Bold.ttf",
+          "bytes": 593472,
+          "sha256": "91363517a63dbc7448b5814226d33d845b26b32a461cd159ea0b3f23c7effd2d"
         }
       ]
     }

@@ -226,6 +226,35 @@ shu class'ni ishlatadi.
 Muallimi'da qoladi; mad sahifalari (17-21) ham tegilmagan. Bu istisnoni
 boshqa sahifalarga kengaytirmang va suralardan olib tashlamang.
 
+#### Suralar uchun shrift TANLOVI (2026-09-28)
+
+> **"Bu iOs qismidagi ko'rinishimiz. Web qismiga ham shu arab shriftini
+> qo'shishimiz kerak. Suralarni shu shriftda o'qish qulayroq bo'lishi
+> uchun. Shuningdek iOsdagidek belgilaydigan ham qilgin."**
+> — foydalanuvchi, 2026-09-28.
+
+Sozlamalarda **"Arab shrifti"** tanlovi (iOS ilovadagidek, 2 ta namuna
+tugmasi). Faqat `.quran-scope` ga ta'sir qiladi:
+
+| Qiymat | Shrift | Holat |
+|---|---|---|
+| `naskh` | `UthmanicHafs.otf` (KFGQPC mushaf) | **standart** |
+| `scheherazade` | `ScheherazadeNew-Regular/Bold.ttf` (SIL, OFL) | yirikroq, ochiqroq — yangi o'rganuvchiga qulay |
+
+Texnik yo'l: lesson ildizida `data-arabic-font={settings.arabicFont}`,
+globals.css da `[data-arabic-font="scheherazade"] .quran-scope
+.arabic-text` shriftni almashtiradi (`line-height: 2.15` — Scheherazade
+harflari baland).
+
+⚠️ `--font-arabic` zanjiridan **"Scheherazade New" ATAYLAB olib
+tashlandi**: endi u bundle qilingan, zanjirda qolsa kitobning boshqa
+sahifalarida (masalan glyph yetishmaganda) kutilmaganda ishlatilib
+ketardi. Qaytarib qo'ymang.
+
+⚠️ Shrift ro'yxati `src/lib/reading-bg.ts` dagi `ARABIC_FONTS` da
+(namuna matn + CSS stack) — sozlamalar sahifasi ham, dars ichidagi oyna
+ham shundan oladi.
+
 ⚠️ Banner ostidagi chig'atoy izoh (`sub`) **kitob shriftida** qoladi
 (`.surah-sub`) — UthmanicHafs ZWNJ (U+200C) ni ko'rinadigan qilib
 chizadi.
@@ -2034,8 +2063,8 @@ ishlating, `BannerFrame` markup'ini nusxalamang.
 
 **`src/components/lesson/ReadingSettingsSheet.tsx`** — dars ekranining
 pastki oynasi. Header'dagi `SlidersHorizontal` tugmasi ochadi.
-Ichida: **Matn o'lchami**, **Fon**, **Takrorlash soni** va (faqat
-suralar bo'limida) **Tarjima** tugmachasi.
+Ichida: **Matn o'lchami**, **Arab shrifti**, **Fon**, **Takrorlash
+soni** va (faqat suralar bo'limida) **Tarjima** tugmachasi.
 
 **Qoidalar**:
 1. **Yagona state** — hammasi `useSettings()` orqali ishlaydi. Bu yerdagi
@@ -2045,9 +2074,10 @@ suralar bo'limida) **Tarjima** tugmachasi.
    render qilinadi, shunda `data-reading-bg` palitrasini meros oladi va
    tanlangan fon oynaning o'zida ham darhol ko'rinadi (fon = `var(--color-bg-dark)`
    inline; `glass` ning shaffofligi matn ustiga tushib ko'rinmay qolardi).
-3. **Palitra yagona manbadan**: `src/lib/reading-bg.ts` (`READING_BGS`,
-   `FONT_SIZES`) — sozlamalar sahifasi ham, oyna ham shundan oladi.
-   `globals.css` dagi `[data-reading-bg]` bloklariga 1:1 mos bo'lishi shart.
+3. **Palitra/shrift ro'yxati yagona manbadan**: `src/lib/reading-bg.ts`
+   (`READING_BGS`, `FONT_SIZES`, `ARABIC_FONTS`) — sozlamalar sahifasi
+   ham, oyna ham shundan oladi. `globals.css` dagi `[data-reading-bg]` va
+   `[data-arabic-font]` bloklariga 1:1 mos bo'lishi shart.
 4. Tugmacha (toggle) yo'lagi rangini `bg-white/20` bilan YOZMANG — light
    remap'da u oq qolib ko'rinmaydi. `var(--color-border-card)` ishlating.
 5. Oyna ochiq payt `←`/`→` klaviatura navigatsiyasi o'chadi (TocSheet
@@ -2150,6 +2180,10 @@ sahifa ichidagi `ABOUT_LABELS` lokalizatsiya konstanti — bekor qilingan.
     sahifasi va dars ichidagi oyna ikkalasi shundan oladi). globals.css
     palitralariga 1:1 mos bo'lishi shart — birini o'zgartirsangiz
     ikkinchisini ham. Sahifa ichida nusxa ro'yxat TUTMANG.
+- **Arab shrifti** — 2 ta namuna tugmasi (`بَ بِ بُ رَبِّ كِتَابٌ` har
+  shriftda chizilgan): `Naskh` (standart, UthmanicHafs) / `Scheherazade`.
+  FAQAT suralar bo'limiga ta'sir qiladi — tavsif shuni aytadi
+  (`arabic_font_desc`). Ro'yxat: `ARABIC_FONTS` (`src/lib/reading-bg.ts`).
 - **Shrift o'lchami** — 3 tugma, "A" harfi rem o'lchamlarda (0.8125/1/1.25),
   pastki yorliqlar `t("small"/"medium"/"large")` orqali (qattiq o'zbekcha
   matn bug'i tuzatilgan).

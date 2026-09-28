@@ -25,7 +25,7 @@ import { useSettings } from "@/providers/SettingsProvider";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { OfflineCard } from "@/components/sozlamalar/OfflineCard";
 import { LEGAL_CONTENT } from "@/lib/data/legal-content";
-import { READING_BGS, FONT_SIZES } from "@/lib/reading-bg";
+import { READING_BGS, FONT_SIZES, ARABIC_FONTS } from "@/lib/reading-bg";
 import type { Locale, Theme } from "@/lib/data/types";
 
 const APP_VERSION = "1.0.0";
@@ -84,6 +84,7 @@ export default function SozlamalarPage() {
     setFontSize,
     setTheme,
     setReadingBg,
+    setArabicFont,
   } = useSettings();
   const [openModal, setOpenModal] = useState<LegalKey | null>(null);
   const modalScrollRef = useRef<HTMLDivElement>(null);
@@ -261,6 +262,49 @@ export default function SozlamalarPage() {
                     }`}
                   >
                     {t(bg.labelKey)}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </GlassCard>
+
+        {/* ── Arab shrifti (suralar) ── */}
+        <GlassCard>
+          <SectionHeader
+            icon={Languages}
+            title={t("arabic_font")}
+            desc={t("arabic_font_desc")}
+          />
+          <div className="grid grid-cols-2 gap-2 mt-4">
+            {ARABIC_FONTS.map((f) => {
+              const selected = settings.arabicFont === f.value;
+              return (
+                <button
+                  key={f.value}
+                  onClick={() => setArabicFont(f.value)}
+                  className={`flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl transition-all active:scale-95 ${
+                    selected
+                      ? "bg-primary/20 border border-primary/40"
+                      : "bg-white/5 border border-white/5 hover:bg-white/10"
+                  }`}
+                >
+                  <span
+                    dir="rtl"
+                    className="text-[1.15rem] leading-[2] text-center"
+                    style={{
+                      fontFamily: f.stack,
+                      color: "var(--color-text-main)",
+                    }}
+                  >
+                    {f.sample}
+                  </span>
+                  <span
+                    className={`text-[0.6875rem] ${
+                      selected ? "text-primary font-medium" : "text-text-muted"
+                    }`}
+                  >
+                    {f.label}
                   </span>
                 </button>
               );

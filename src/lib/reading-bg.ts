@@ -1,4 +1,4 @@
-import type { ReadingBg } from "@/lib/data/types";
+import type { ReadingBg, ArabicFont } from "@/lib/data/types";
 
 /**
  * O'qish ekranining fon palitralari.
@@ -33,4 +33,33 @@ export const FONT_SIZES: {
   { value: "small", rem: 0.8125, labelKey: "small" },
   { value: "medium", rem: 1, labelKey: "medium" },
   { value: "large", rem: 1.25, labelKey: "large" },
+];
+
+/**
+ * Suralar bo'limidagi arab shrifti tanlovi (iOS ilovadagi "Arab shrifti").
+ * `sample` — tugmadagi namuna matn (iOS bilan bir xil).
+ *
+ * ⚠️ `globals.css` dagi `[data-arabic-font="..."]` qoidalariga mos bo'lishi
+ * shart. `naskh` — standart (UthmanicHafs, mushaf), alohida CSS qoidasi
+ * yo'q; `scheherazade` faqat `.quran-scope` ichida almashadi.
+ */
+export const ARABIC_FONTS: {
+  value: ArabicFont;
+  label: string;
+  sample: string;
+  /** Namunani ko'rsatish uchun CSS font stack */
+  stack: string;
+}[] = [
+  {
+    value: "naskh",
+    label: "Naskh",
+    sample: "بَ بِ بُ رَبِّ كِتَابٌ",
+    stack: '"UthmanicHafs", "Noto Naskh Arabic Muallimi", serif',
+  },
+  {
+    value: "scheherazade",
+    label: "Scheherazade",
+    sample: "بَ بِ بُ رَبِّ كِتَابٌ",
+    stack: '"Scheherazade New", "UthmanicHafs", serif',
+  },
 ];

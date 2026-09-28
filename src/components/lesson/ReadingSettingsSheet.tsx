@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { Languages, Minus, Plus, X } from "lucide-react";
 import { useSettings } from "@/providers/SettingsProvider";
-import { READING_BGS, FONT_SIZES } from "@/lib/reading-bg";
+import { READING_BGS, FONT_SIZES, ARABIC_FONTS } from "@/lib/reading-bg";
 
 interface Props {
   open: boolean;
@@ -36,8 +36,14 @@ export function ReadingSettingsSheet({
   tarjimaMode,
   onToggleTarjima,
 }: Props) {
-  const { t, settings, setFontSize, setReadingBg, setRepeatCount } =
-    useSettings();
+  const {
+    t,
+    settings,
+    setFontSize,
+    setReadingBg,
+    setRepeatCount,
+    setArabicFont,
+  } = useSettings();
 
   useEffect(() => {
     if (!open) return;
@@ -115,6 +121,50 @@ export function ReadingSettingsSheet({
                 );
               })}
             </div>
+          </section>
+
+          {/* ── Arab shrifti (suralar) ── */}
+          <section>
+            <h3 className="text-xs font-medium text-text-muted mb-2">
+              {t("arabic_font")}
+            </h3>
+            <div className="grid grid-cols-2 gap-2">
+              {ARABIC_FONTS.map((f) => {
+                const selected = settings.arabicFont === f.value;
+                return (
+                  <button
+                    key={f.value}
+                    onClick={() => setArabicFont(f.value)}
+                    className={`flex flex-col items-center gap-1 py-2.5 px-2 rounded-xl transition-all active:scale-95 ${
+                      selected
+                        ? "bg-primary/20 border border-primary/40"
+                        : "bg-white/5 border border-white/5 hover:bg-white/10"
+                    }`}
+                  >
+                    <span
+                      dir="rtl"
+                      className="text-[1.05rem] leading-[1.9] text-center"
+                      style={{
+                        fontFamily: f.stack,
+                        color: "var(--color-text-main)",
+                      }}
+                    >
+                      {f.sample}
+                    </span>
+                    <span
+                      className={`text-[0.625rem] leading-tight ${
+                        selected ? "text-primary font-medium" : "text-text-muted"
+                      }`}
+                    >
+                      {f.label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            <p className="text-[0.625rem] text-text-muted mt-1.5">
+              {t("arabic_font_desc")}
+            </p>
           </section>
 
           {/* ── Fon ── */}

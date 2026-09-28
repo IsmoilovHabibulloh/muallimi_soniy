@@ -75,5 +75,7 @@
   "bg_sepiya": "Сепия",
   "bg_kulrang": "Серый",
   "bg_tungi": "Чёрный",
-  "reading_settings": "Настройки чтения"
+  "reading_settings": "Настройки чтения",
+  "arabic_font": "Арабский шрифт",
+  "arabic_font_desc": "Каким шрифтом показывать суры"
 }

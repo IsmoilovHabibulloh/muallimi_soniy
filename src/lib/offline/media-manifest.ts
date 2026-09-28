@@ -17,6 +17,8 @@ const FONT_URLS = [
   "/fonts/Amiri-Regular.ttf",
   "/fonts/UthmanicHafs.otf",
   "/fonts/AmiriQuran.ttf",
+  "/fonts/ScheherazadeNew-Regular.ttf",
+  "/fonts/ScheherazadeNew-Bold.ttf",
 ];
 
 // Eslatma: /images/N.jpg fayllar manifestga KIRITILMAGAN — barcha sahifalar

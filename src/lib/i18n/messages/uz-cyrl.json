@@ -75,5 +75,7 @@
   "bg_sepiya": "Сепия",
   "bg_kulrang": "Кулранг",
   "bg_tungi": "Қора",
-  "reading_settings": "Ўқиш созламалари"
+  "reading_settings": "Ўқиш созламалари",
+  "arabic_font": "Араб шрифти",
+  "arabic_font_desc": "Суралар қайси шрифтда кўрсатилсин"
 }

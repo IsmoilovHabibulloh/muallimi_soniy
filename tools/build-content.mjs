@@ -42,7 +42,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 // --- Sozlama -----------------------------------------------------------------
-const CONTENT_VERSION = "2.11.0"; // kontent o'zgarganda oshiring
+const CONTENT_VERSION = "2.12.0"; // kontent o'zgarganda oshiring
 const SCHEMA_VERSION = 2; // paket TUZILISHI o'zgarganda oshiring
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -275,7 +275,7 @@ if (darkTokens["primary"] === lightTokens["primary"]) {
   throw new Error("Tema parse xatosi: dark tokenlar light bilan bir xil chiqdi");
 }
 
-// --- Shriftlar (5 ta; rollari CLAUDE.md "shrift" bo'limlaridan) ---------------
+// --- Shriftlar (7 ta; rollari CLAUDE.md "shrift" bo'limlaridan) ---------------
 const FONTS = [
   {
     path: "fonts/NotoNaskhArabic-MuallimiSoniy.ttf",
@@ -305,8 +305,20 @@ const FONTS = [
   {
     path: "fonts/UthmanicHafs.otf",
     family: "UthmanicHafs",
-    role: "mad-stack-fallback",
-    note: "Mad shrift stack zaxirasi (KFGQPC).",
+    role: "surah-default",
+    note: "Suralar bo'limi (36-47) STANDART shrifti — KFGQPC Madina mushafi (2026-09-26). Mad shrift stack'ida zaxira sifatida ham turadi.",
+  },
+  {
+    path: "fonts/ScheherazadeNew-Regular.ttf",
+    family: "Scheherazade New",
+    role: "surah-alt",
+    note: "Suralar uchun IKKINCHI variant (sozlamalarda \"Arab shrifti\" tanlovi, 2026-09-28). SIL, OFL litsenziyasi.",
+  },
+  {
+    path: "fonts/ScheherazadeNew-Bold.ttf",
+    family: "Scheherazade New",
+    role: "surah-alt-bold",
+    note: "Scheherazade New qalin (700) — oyat matni bold chiziladi, sintetik bold bo'lmasin.",
   },
 ];
 

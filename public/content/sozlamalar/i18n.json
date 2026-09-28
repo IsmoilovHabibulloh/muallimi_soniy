@@ -76,7 +76,9 @@
     "bg_sepiya": "Sepiya",
     "bg_kulrang": "Kulrang",
     "bg_tungi": "Qora",
-    "reading_settings": "Oʻqish sozlamalari"
+    "reading_settings": "Oʻqish sozlamalari",
+    "arabic_font": "Arab shrifti",
+    "arabic_font_desc": "Suralar qaysi shriftda ko'rsatilsin"
   },
   "uz-cyrl": {
     "home": "Бош саҳифа",
@@ -155,7 +157,9 @@
     "bg_sepiya": "Сепия",
     "bg_kulrang": "Кулранг",
     "bg_tungi": "Қора",
-    "reading_settings": "Ўқиш созламалари"
+    "reading_settings": "Ўқиш созламалари",
+    "arabic_font": "Араб шрифти",
+    "arabic_font_desc": "Суралар қайси шрифтда кўрсатилсин"
   },
   "ru": {
     "home": "Главная",
@@ -234,7 +238,9 @@
     "bg_sepiya": "Сепия",
     "bg_kulrang": "Серый",
     "bg_tungi": "Чёрный",
-    "reading_settings": "Настройки чтения"
+    "reading_settings": "Настройки чтения",
+    "arabic_font": "Арабский шрифт",
+    "arabic_font_desc": "Каким шрифтом показывать суры"
   },
   "en": {
     "home": "Home",
@@ -313,6 +319,8 @@
     "bg_sepiya": "Sepia",
     "bg_kulrang": "Grey",
     "bg_tungi": "Black",
-    "reading_settings": "Reading settings"
+    "reading_settings": "Reading settings",
+    "arabic_font": "Arabic font",
+    "arabic_font_desc": "Which font the surahs are shown in"
   }
 }

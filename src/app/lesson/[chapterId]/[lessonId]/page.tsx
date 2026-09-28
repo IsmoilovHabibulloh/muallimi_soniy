@@ -447,6 +447,7 @@ export default function LessonPage({ params }: Props) {
   return (
     <div
       data-reading-bg={settings.readingBg}
+      data-arabic-font={settings.arabicFont}
       style={{ background: "var(--color-bg-dark)" }}
       className="flex flex-col h-dvh overflow-hidden pb-[env(safe-area-inset-bottom)]"
     >

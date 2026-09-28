@@ -26,7 +26,9 @@
   --color-el-soz: #34d399;
   --color-el-jumla: #fbbf24;
 
-  --font-arabic: "Noto Naskh Arabic Muallimi", "Noto Naskh Arabic", "Scheherazade New", "Traditional Arabic", serif;
+  /* Scheherazade New ATAYLAB yo'q: u endi bundle qilingan va faqat
+     suralar tanlovida ishlatiladi — kitobning qolgan qismiga tushmasin. */
+  --font-arabic: "Noto Naskh Arabic Muallimi", "Noto Naskh Arabic", "Traditional Arabic", serif;
 }
 
 /* Custom Noto Naskh — GSUB ligature uni0651+uni0650 → uni06510650 va
@@ -75,6 +77,24 @@
   font-family: "Amiri Quran";
   src: url("/fonts/AmiriQuran.ttf") format("truetype");
   font-weight: 400;
+  font-display: swap;
+}
+
+/* Scheherazade New (SIL, OFL) — suralar uchun IKKINCHI variant.
+   Foydalanuvchi 2026-09-28 da so'radi: iOS ilovadagi "Arab shrifti"
+   tanlovini web'ga ham qo'shish. Harflari yirikroq va ochiqroq —
+   yangi o'rganuvchiga o'qish qulayroq. */
+@font-face {
+  font-family: "Scheherazade New";
+  src: url("/fonts/ScheherazadeNew-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Scheherazade New";
+  src: url("/fonts/ScheherazadeNew-Bold.ttf") format("truetype");
+  font-weight: 700;
   font-display: swap;
 }
 
@@ -348,6 +368,16 @@ html:not([data-theme="dark"]) .bg-primary\/20 { background: rgba(22, 163, 74, 0.
 .quran-scope .surah-sub.arabic-text {
   font-family: var(--font-arabic);
   line-height: 1.5;
+}
+
+/* Suralar uchun shrift tanlovi (sozlamalardagi "Arab shrifti") — 2026-09-28.
+   Standart — yuqoridagi mushaf (UthmanicHafs). `scheherazade` tanlansa
+   faqat `.quran-scope` ichidagi matn almashadi; kitobning qolgan qismi
+   custom Noto Naskh Muallimi'da qoladi. */
+[data-arabic-font="scheherazade"] .quran-scope .arabic-text {
+  font-family: "Scheherazade New", "UthmanicHafs", "Noto Naskh Arabic Muallimi",
+    serif;
+  line-height: 2.15;
 }
 
 /* ═══ Sura nomi banneri (mushafdagi bezakli ramka) ═══
