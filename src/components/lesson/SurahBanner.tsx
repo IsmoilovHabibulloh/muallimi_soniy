@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext } from "react";
+import type { ReactNode } from "react";
 import type { Element } from "@/lib/data/types";
 
 interface SurahPlay {
@@ -11,6 +12,74 @@ interface SurahPlay {
 }
 
 export const SurahPlayContext = createContext<SurahPlay | null>(null);
+
+/**
+ * Bezakli ramka — ikki chiziqli chegara + ikki chetida `۞` rozetka.
+ * Sura nomlari ham, kalima nomlari ham shundan quriladi (yagona uslub).
+ */
+function BannerFrame({
+  highlighted,
+  children,
+}: {
+  highlighted: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      className={`surah-banner${
+        highlighted ? " surah-banner-playing" : ""
+      } relative flex items-center justify-center rounded-lg`}
+    >
+      <span className="surah-banner-rosette absolute left-1.5">۞</span>
+      <span className="surah-banner-rosette absolute right-1.5">۞</span>
+      {children}
+    </div>
+  );
+}
+
+/**
+ * Bitta element uchun ramkali sarlavha — kalimalar bo'limi (34, 35-sahifalar).
+ *
+ * Foydalanuvchi 2026-09-28 da so'radi: "Kalimalarning nomlarini ham shunday
+ * alohida ramkaga olishimiz kerakday ko'rindi" (sura nomlaridagi ramka).
+ *
+ * `SurahBanner` dan farqi: bosilganda FAQAT o'sha elementning audiosi ijro
+ * etiladi (sura kabi ketma-ket o'qish YO'Q) — kalimalar uchun avvalgi
+ * xatti-harakat saqlanadi.
+ */
+export function TitleBanner({
+  element,
+  isActive,
+  onClick,
+}: {
+  element: Element;
+  isActive: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <div className="w-full my-0.5">
+      <BannerFrame highlighted={isActive}>
+        <button
+          type="button"
+          onClick={(ev) => {
+            ev.stopPropagation();
+            onClick();
+          }}
+          className="element-spring w-full px-7 py-[0.125rem] rounded-lg"
+        >
+          <h4
+            className="arabic-text font-bold text-center leading-snug text-[clamp(0.78rem,3.8cqi,0.98rem)]"
+            style={{
+              color: isActive ? "#ffffff" : "var(--color-text-secondary)",
+            }}
+          >
+            {element.arabic}
+          </h4>
+        </button>
+      </BannerFrame>
+    </div>
+  );
+}
 
 interface Props {
   /** Arabcha sura nomi. `lead` berilsa, o'sha elementning matni olinadi. */
@@ -59,13 +128,7 @@ export function SurahBanner({ text, surah, lead, sub, note }: Props) {
 
   return (
     <div className="w-full my-1">
-      <div
-        className={`surah-banner${
-          isPlaying ? " surah-banner-playing" : ""
-        } relative flex items-center justify-center rounded-lg`}
-      >
-        <span className="surah-banner-rosette absolute left-1.5">۞</span>
-        <span className="surah-banner-rosette absolute right-1.5">۞</span>
+      <BannerFrame highlighted={isPlaying}>
         {playable ? (
           <button
             type="button"
@@ -81,7 +144,7 @@ export function SurahBanner({ text, surah, lead, sub, note }: Props) {
         ) : (
           <div className="w-full px-7 py-[0.125rem]">{name}</div>
         )}
-      </div>
+      </BannerFrame>
       {sub && (
         <p
           className="surah-sub arabic-text text-center text-[0.625rem] text-text-muted mt-0.5 leading-tight"

@@ -1457,8 +1457,11 @@ foydalanuvchi swipe / scroll qilib davom etishi mumkin.
       `وَاَتُوبُ اِلَيْهِ مِنَ الذَّنْبِ الَّذِى اَعْلَمُ وَمِنَ الذَّنْبِ الَّذِى لَا اَعْلَمُ`.
     - `k5_p4_ghuyub` [39.627-44.416]: `اِنَّكَ اَنْتَ عَلَّامُ الْغُيُوبِ`
       (xuddi K4 oxiridagi ibora — istighfar du'osi ham shu bilan yakunlanadi).
-  - **Layout**: custom `<KalimaHead>` (kichik bold button) va `<KalimaBody>`
-    (RTL row, parts orasi `❀` gul ajratgich); title — yuqorida katta bold.
+  - **Layout**: `<KalimaHead>` — kalima nomi **bezakli ramkada**
+    (`TitleBanner`, sura nomlari bilan bir xil uslub; 2026-09-28) va
+    `<KalimaBody>` (RTL row, parts orasi `❀` gul ajratgich); sahifa
+    sarlavhasi (`كَلِمَاتُ إِيمَانٍ`) ramkasiz, yuqorida katta bold —
+    u kalima nomi emas, sahifa nomi.
     `gap-0` outer container, body parts `text-[clamp(0.72rem,3.4cqi,0.92rem)]`
     — barcha 20 element bitta viewportga (677px) sig'adi. Body parts'da
     chig'atoy/o'zbek izoh element'larda saqlangan (uzbek field), UIda
@@ -1985,6 +1988,27 @@ va `TarjimaView`). Boshqa sarlavha uslubi yozmang; eski
 - `SurahPlayContext` (SurahBanner.tsx) — lesson sahifasi `Provider`
   bilan o'raydi; banner'lar shundan `onPlaySurah` va `playingSurah`
   oladi. Prop'ni 12 ta renderer orqali uzatmang.
+
+### Kalimalar ham shu ramkada — `TitleBanner` (2026-09-28)
+
+> **"Kalimalarning nomlarini ham shunday alohida ramkaga olishimiz
+> kerakday ko'rindi."** — foydalanuvchi, 2026-09-28.
+
+Ramka markup'i `BannerFrame` ga ajratildi (SurahBanner.tsx ichida,
+eksport qilinmagan). Undan ikkita komponent quriladi:
+
+| Komponent | Qayerda | Bosilganda |
+|---|---|---|
+| `SurahBanner` | suralar (36-47) + `TarjimaView` | sura TO'LIQ o'qiladi |
+| `TitleBanner` | kalimalar (34, 35) | FAQAT o'sha nomning audiosi |
+
+`TitleBanner({ element, isActive, onClick })` — sura ijrosi mantig'i
+YO'Q, kalimalarning avvalgi xatti-harakati saqlangan. Ramka bir xil
+ko'rinadi (ikki chiziq + `۞` rozetka), faqat `my-0.5` bilan ixchamroq
+(34-sahifada 5 ta sarlavha bor).
+
+⚠️ Yangi ramkali sarlavha kerak bo'lsa — shu ikkisidan birini
+ishlating, `BannerFrame` markup'ini nusxalamang.
 
 ## O'qish sozlamalari oynasi — dars ichida (2026-09-27)
 

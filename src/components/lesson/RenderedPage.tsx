@@ -3,7 +3,7 @@
 import React, { type CSSProperties } from "react";
 import type { Element } from "@/lib/data/types";
 import { ELEMENT_COLORS } from "@/lib/data/types";
-import { SurahBanner } from "./SurahBanner";
+import { SurahBanner, TitleBanner } from "./SurahBanner";
 import { MUQADDIMA_PARAGRAPHS } from "@/lib/data/muqaddima";
 
 interface RenderedPageProps {
@@ -2674,25 +2674,17 @@ function Page34({ elements, activeId, hasActive, onElementClick }: PP) {
     </span>
   );
 
-  // Kalima heading — markazda, kichik bold clickable button
+  // Kalima nomi — sura nomlaridagi bezakli ramkada (foydalanuvchi 2026-09-28).
+  // Bosilganda faqat o'sha nomning audiosi ijro etiladi.
   const KalimaHead = ({ id }: { id: string }) => {
     const h = el(id);
     if (!h) return null;
-    const isActive = activeId === h.id;
     return (
-      <button
-        onClick={(e) => { e.stopPropagation(); onElementClick(h); }}
-        className="element-spring rounded-md px-2.5 py-0.5 mt-0.5"
-        style={{
-          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
-          color: isActive ? "#ffffff" : "var(--color-text-secondary)",
-          boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
-        }}
-      >
-        <h4 className="arabic-text text-[clamp(0.78rem,3.6cqi,0.95rem)] font-bold leading-tight">
-          {h.arabic}
-        </h4>
-      </button>
+      <TitleBanner
+        element={h}
+        isActive={activeId === h.id}
+        onClick={() => onElementClick(h)}
+      />
     );
   };
 
@@ -2794,24 +2786,16 @@ function Page35({ elements, activeId, hasActive, onElementClick }: PP) {
   const { el } = usePageElements(elements, 35);
   const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-1" />;
 
+  // Kalima nomi — 34-sahifa bilan bir xil ramkali sarlavha
   const Head = ({ id }: { id: string }) => {
     const h = el(id);
     if (!h) return null;
-    const isActive = activeId === h.id;
     return (
-      <button
-        onClick={(e) => { e.stopPropagation(); onElementClick(h); }}
-        className="element-spring rounded-md px-2.5 py-0.5"
-        style={{
-          backgroundColor: isActive ? "var(--color-primary)" : "transparent",
-          color: isActive ? "#ffffff" : "var(--color-text-secondary)",
-          boxShadow: isActive ? "0 6px 20px var(--color-primary-glow)" : "none",
-        }}
-      >
-        <h4 className="arabic-text text-[clamp(0.78rem,3.6cqi,0.95rem)] font-bold leading-tight">
-          {h.arabic}
-        </h4>
-      </button>
+      <TitleBanner
+        element={h}
+        isActive={activeId === h.id}
+        onClick={() => onElementClick(h)}
+      />
     );
   };
 
