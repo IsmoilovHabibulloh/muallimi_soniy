@@ -9,6 +9,13 @@ interface SurahPlay {
   onPlaySurah: (surah: number, lead?: Element) => void;
   /** Hozir ketma-ket o'qilayotgan sura (banner shu bo'yicha yonadi) */
   playingSurah: number | null;
+  /**
+   * Ixtiyoriy element ketma-ketligini o'qish — kalimalar uchun.
+   * `key` odatda sarlavha elementining id'si (toggle uchun ishlatiladi).
+   */
+  onPlayGroup: (key: string, elements: Element[]) => void;
+  /** Hozir o'qilayotgan guruh kaliti */
+  playingGroup: string | null;
 }
 
 export const SurahPlayContext = createContext<SurahPlay | null>(null);
@@ -43,34 +50,52 @@ function BannerFrame({
  * Foydalanuvchi 2026-09-28 da so'radi: "Kalimalarning nomlarini ham shunday
  * alohida ramkaga olishimiz kerakday ko'rindi" (sura nomlaridagi ramka).
  *
- * `SurahBanner` dan farqi: bosilganda FAQAT o'sha elementning audiosi ijro
- * etiladi (sura kabi ketma-ket o'qish YO'Q) — kalimalar uchun avvalgi
- * xatti-harakat saqlanadi.
+ * `parts` berilsa — nom bosilganda nom + barcha bo'laklar KETMA-KET
+ * o'qiladi (suralardagidek; foydalanuvchi 2026-09-28 da so'radi), qayta
+ * bosilsa to'xtaydi. Bo'lakni alohida bosish avvalgidek faqat o'sha
+ * bo'lakni o'qiydi.
+ *
+ * `SurahBanner` dan farqi — guruh `AYAH_TARJIMA` dan emas, renderer bergan
+ * element ro'yxatidan tuziladi (kalimalarda sura raqami yo'q).
  */
 export function TitleBanner({
   element,
+  parts = [],
   isActive,
   onClick,
 }: {
   element: Element;
+  /**
+   * Sarlavhadan keyingi qismlar. Berilsa, nom bosilganda nom + qismlar
+   * KETMA-KET o'qiladi (suralardagidek). Qismlarni alohida bosish
+   * avvalgidek faqat o'sha qismni o'qiydi.
+   */
+  parts?: Element[];
+  /** Kontekst bo'lmaganda ishlatiladigan zaxira holat/klik */
   isActive: boolean;
   onClick: () => void;
 }) {
+  const ctx = useContext(SurahPlayContext);
+  const groupPlayable = Boolean(ctx && parts.length);
+  const highlighted = isActive || ctx?.playingGroup === element.id;
+
   return (
     <div className="w-full my-0.5">
-      <BannerFrame highlighted={isActive}>
+      <BannerFrame highlighted={highlighted}>
         <button
           type="button"
           onClick={(ev) => {
             ev.stopPropagation();
-            onClick();
+            if (groupPlayable) ctx!.onPlayGroup(element.id, [element, ...parts]);
+            else onClick();
           }}
+          title={groupPlayable ? "Kalimani to'liq tinglash" : undefined}
           className="element-spring w-full px-7 py-[0.125rem] rounded-lg"
         >
           <h4
             className="arabic-text font-bold text-center leading-snug text-[clamp(0.78rem,3.8cqi,0.98rem)]"
             style={{
-              color: isActive ? "#ffffff" : "var(--color-text-secondary)",
+              color: highlighted ? "#ffffff" : "var(--color-text-secondary)",
             }}
           >
             {element.arabic}

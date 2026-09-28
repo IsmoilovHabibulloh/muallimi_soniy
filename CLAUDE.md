@@ -1997,15 +1997,31 @@ va `TarjimaView`). Boshqa sarlavha uslubi yozmang; eski
 Ramka markup'i `BannerFrame` ga ajratildi (SurahBanner.tsx ichida,
 eksport qilinmagan). Undan ikkita komponent quriladi:
 
-| Komponent | Qayerda | Bosilganda |
+| Komponent | Qayerda | Nom bosilganda |
 |---|---|---|
 | `SurahBanner` | suralar (36-47) + `TarjimaView` | sura TO'LIQ o'qiladi |
-| `TitleBanner` | kalimalar (34, 35) | FAQAT o'sha nomning audiosi |
+| `TitleBanner` | kalimalar (34, 35) | kalima TO'LIQ o'qiladi |
 
-`TitleBanner({ element, isActive, onClick })` — sura ijrosi mantig'i
-YO'Q, kalimalarning avvalgi xatti-harakati saqlangan. Ramka bir xil
-ko'rinadi (ikki chiziq + `۞` rozetka), faqat `my-0.5` bilan ixchamroq
-(34-sahifada 5 ta sarlavha bor).
+`TitleBanner({ element, parts, isActive, onClick })` — `parts` renderer
+bergan element ro'yxati (sarlavhadan keyingi bo'laklar). Bosilganda
+`onPlayGroup(element.id, [element, ...parts])` chaqiriladi; ijrodagi
+nomni qayta bosish to'xtatadi. **Bo'lakni alohida bosish o'zgarmagan** —
+faqat o'sha bo'lak o'qiladi (foydalanuvchi ikkalasini ham talab qildi).
+
+Ramka bir xil ko'rinadi (ikki chiziq + `۞` rozetka), faqat `my-0.5`
+bilan ixchamroq (34-sahifada 5 ta sarlavha bor).
+
+**Guruhlar qayerda yozilgan**: `Page34` da `<KalimaHead id parts={[...]} />`,
+`Page35` da `<Head id parts={[...]} />` — ya'ni renderer'ning o'zida,
+chunki kalimalarda sura raqamiga o'xshash kalit yo'q. Yangi kalima
+qo'shsangiz `parts` ro'yxatini ham to'ldiring, aks holda nom bosilganda
+faqat nomning o'zi o'qiladi.
+
+**Lesson sahifasida**: `handlePlayGroup(key, els)` + `playingGroup` —
+`handlePlaySurah` bilan bir xil `runSequence` dan foydalanadi;
+`elementPage` (element id → global sahifa) xaritasi sahifani topadi.
+35-sahifada `mashallah` Tamjid guruhiga KIRMAYDI (u alohida ibora,
+kalimaning bo'lagi emas).
 
 ⚠️ Yangi ramkali sarlavha kerak bo'lsa — shu ikkisidan birini
 ishlating, `BannerFrame` markup'ini nusxalamang.

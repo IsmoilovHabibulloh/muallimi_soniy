@@ -2674,14 +2674,16 @@ function Page34({ elements, activeId, hasActive, onElementClick }: PP) {
     </span>
   );
 
-  // Kalima nomi — sura nomlaridagi bezakli ramkada (foydalanuvchi 2026-09-28).
-  // Bosilganda faqat o'sha nomning audiosi ijro etiladi.
-  const KalimaHead = ({ id }: { id: string }) => {
+  // Kalima nomi — sura nomlaridagi bezakli ramkada (2026-09-28).
+  // `parts` — kalimaning barcha bo'laklari; nom bosilganda nom + bo'laklar
+  // ketma-ket o'qiladi. Bo'lakni alohida bosish avvalgidek ishlaydi.
+  const KalimaHead = ({ id, parts = [] }: { id: string; parts?: string[] }) => {
     const h = el(id);
     if (!h) return null;
     return (
       <TitleBanner
         element={h}
+        parts={parts.map((pid) => el(pid)).filter(Boolean) as Element[]}
         isActive={activeId === h.id}
         onClick={() => onElementClick(h)}
       />
@@ -2752,26 +2754,29 @@ function Page34({ elements, activeId, hasActive, onElementClick }: PP) {
       )}
 
       {/* Kalima 1 — Tayyiba */}
-      <KalimaHead id="k1_head" />
+      <KalimaHead id="k1_head" parts={["k1_body"]} />
       <KalimaBody ids={["k1_body"]} />
 
       {/* Kalima 2 — Shahada (yagona button, gul yo'q — to'liq audio uzluksiz) */}
-      <KalimaHead id="k2_head" />
+      <KalimaHead id="k2_head" parts={["k2_body"]} />
       <KalimaBody ids={["k2_body"]} />
 
       {/* Kalima 3 — Tawhid */}
-      <KalimaHead id="k3_head" />
+      <KalimaHead id="k3_head" parts={["k3_p1", "k3_p2", "k3_p3", "k3_p4"]} />
       <KalimaBody ids={["k3_p1", "k3_p2", "k3_p3", "k3_p4"]} />
 
       {/* Kalima 4 — Radd-i Kufr */}
-      <KalimaHead id="k4_head" />
+      <KalimaHead id="k4_head" parts={["k4_p1", "k4_p2", "k4_p3"]} />
       <KalimaBody ids={["k4_p1", "k4_p2", "k4_p3"]} />
 
       {/* Kalima 5 — Istighfar:
           R1: 2 ta Astaghfirullah (har biri alohida audio)
           R2: 3-Astaghfirullah + ta'ala min kulli... (BIRLASHGAN — uzluksiz audio)
           R3-R5: audio kengaytmasi (sirran/tawba/ghuyub) */}
-      <KalimaHead id="k5_head" />
+      <KalimaHead
+        id="k5_head"
+        parts={["k5_ast1", "k5_ast2", "k5_ast3_ext", "k5_p2_alaniya", "k5_p3_tawba", "k5_p4_ghuyub"]}
+      />
       <KalimaBody ids={["k5_ast1", "k5_ast2"]} />
       <KalimaBody ids={["k5_ast3_ext"]} />
       <KalimaBody ids={["k5_p2_alaniya"]} />
@@ -2787,12 +2792,13 @@ function Page35({ elements, activeId, hasActive, onElementClick }: PP) {
   const Sep = () => <div className="w-full border-b-2 border-dotted border-white/10 my-1" />;
 
   // Kalima nomi — 34-sahifa bilan bir xil ramkali sarlavha
-  const Head = ({ id }: { id: string }) => {
+  const Head = ({ id, parts = [] }: { id: string; parts?: string[] }) => {
     const h = el(id);
     if (!h) return null;
     return (
       <TitleBanner
         element={h}
+        parts={parts.map((pid) => el(pid)).filter(Boolean) as Element[]}
         isActive={activeId === h.id}
         onClick={() => onElementClick(h)}
       />
@@ -2826,7 +2832,7 @@ function Page35({ elements, activeId, hasActive, onElementClick }: PP) {
   return (
     <div className="flex flex-col items-center gap-0.5 w-full">
       {/* TAMJID — title + 4 qism + bonus */}
-      <Head id="tamjid_head" />
+      <Head id="tamjid_head" parts={["tamjid_p1", "tamjid_p2", "tamjid_p3", "tamjid_p4"]} />
       <Body id="tamjid_p1" />
       <Body id="tamjid_p2" />
       <Body id="tamjid_p3" />
@@ -2842,13 +2848,13 @@ function Page35({ elements, activeId, hasActive, onElementClick }: PP) {
       <Sep />
 
       {/* IMAN MUJMAL */}
-      <Head id="mujmal_head" />
+      <Head id="mujmal_head" parts={["mujmal_body"]} />
       <Body id="mujmal_body" />
 
       <Sep />
 
       {/* IMAN MUFASSAL */}
-      <Head id="mufassal_head" />
+      <Head id="mufassal_head" parts={["mufassal_body"]} />
       <Body id="mufassal_body" size="sm" />
     </div>
   );

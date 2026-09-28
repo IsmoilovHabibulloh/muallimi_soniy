@@ -68,6 +68,7 @@ export default function LessonPage({ params }: Props) {
   const [readingSettingsOpen, setReadingSettingsOpen] = useState(false);
   const [tarjimaMode, setTarjimaMode] = useState(false);
   const [playingSurah, setPlayingSurah] = useState<number | null>(null);
+  const [playingGroup, setPlayingGroup] = useState<string | null>(null);
   const [scrolledFromTop, setScrolledFromTop] = useState(false);
   const [hasMoreBelow, setHasMoreBelow] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -224,6 +225,7 @@ export default function LessonPage({ params }: Props) {
     }
     audio.setOnSegmentComplete(null);
     setPlayingSurah(null);
+    setPlayingGroup(null);
   }, [audio]);
 
   // Umumiy ketma-ket ijro: bandlar ro'yxatini boshidan oxirigacha o'qiydi
@@ -243,6 +245,7 @@ export default function LessonPage({ params }: Props) {
           audio.setOnSegmentComplete(null);
           setActiveElement(null);
           setPlayingSurah(null);
+          setPlayingGroup(null);
           return;
         }
         seq.index = idx;
@@ -283,6 +286,38 @@ export default function LessonPage({ params }: Props) {
     });
     return map;
   }, [bookPages]);
+
+  // Element -> global sahifa indeksi (guruh ijrosi sahifani bilishi uchun).
+  const elementPage = useMemo(() => {
+    const m = new Map<string, number>();
+    bookPages.forEach((page, i) =>
+      page.elements.forEach((el) => m.set(el.id, i))
+    );
+    return m;
+  }, [bookPages]);
+
+  // Kalima nomiga bosilganda — nom + barcha bo'laklari ketma-ket o'qiladi.
+  // Bo'lakni alohida bosish o'zgarmagan (handleElementClick).
+  const handlePlayGroup = useCallback(
+    (key: string, els: Element[]) => {
+      const wasPlaying = playingGroup === key;
+      cancelSequential();
+      audio.stop();
+      setActiveElement(null);
+      if (wasPlaying) return;
+
+      const items = els
+        .filter((e) => e.audioUrl && e.start !== e.end)
+        .map((e) => ({
+          el: e,
+          pageIndex: elementPage.get(e.id) ?? currentPageIndex,
+        }));
+      if (items.length === 0) return;
+      setPlayingGroup(key);
+      runSequence(items);
+    },
+    [playingGroup, cancelSequential, audio, elementPage, currentPageIndex, runSequence]
+  );
 
   // Sura nomiga bosilganda — surani boshidan oxirigacha o'qish.
   // Ijrodagi suraning nomi qayta bosilsa — to'xtatadi.
@@ -390,8 +425,13 @@ export default function LessonPage({ params }: Props) {
   }, [loading, tocOpen, readingSettingsOpen, currentPageIndex, bookPages.length, handlePageChange]);
 
   const surahPlay = useMemo(
-    () => ({ onPlaySurah: handlePlaySurah, playingSurah }),
-    [handlePlaySurah, playingSurah]
+    () => ({
+      onPlaySurah: handlePlaySurah,
+      playingSurah,
+      onPlayGroup: handlePlayGroup,
+      playingGroup,
+    }),
+    [handlePlaySurah, playingSurah, handlePlayGroup, playingGroup]
   );
 
   if (loading || !currentBookPage) return <Spinner />;
