@@ -69,6 +69,8 @@ export default function LessonPage({ params }: Props) {
   const [tarjimaMode, setTarjimaMode] = useState(false);
   const [playingSurah, setPlayingSurah] = useState<number | null>(null);
   const [playingGroup, setPlayingGroup] = useState<string | null>(null);
+  // Bir martalik eslatma: "sura nomiga bossangiz, sura to'liq o'qiladi"
+  const [surahHint, setSurahHint] = useState(false);
   const [scrolledFromTop, setScrolledFromTop] = useState(false);
   const [hasMoreBelow, setHasMoreBelow] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -138,6 +140,15 @@ export default function LessonPage({ params }: Props) {
       } catch {}
       return next;
     });
+  }, []);
+
+  useEffect(() => {
+    setSurahHint(localStorage.getItem("muallimi-surah-hint-seen") !== "1");
+  }, []);
+
+  const dismissSurahHint = useCallback(() => {
+    setSurahHint(false);
+    localStorage.setItem("muallimi-surah-hint-seen", "1");
   }, []);
 
   // Show hint for first-time users
@@ -323,6 +334,7 @@ export default function LessonPage({ params }: Props) {
   // Ijrodagi suraning nomi qayta bosilsa — to'xtatadi.
   const handlePlaySurah = useCallback(
     (surah: number, lead?: Element) => {
+      dismissSurahHint();
       const wasPlaying = playingSurah === surah;
       cancelSequential();
       audio.stop();
@@ -339,7 +351,7 @@ export default function LessonPage({ params }: Props) {
       setPlayingSurah(surah);
       runSequence([...leadItem, ...verses]);
     },
-    [playingSurah, cancelSequential, audio, surahItems, currentPageIndex, runSequence]
+    [playingSurah, cancelSequential, audio, surahItems, currentPageIndex, runSequence, dismissSurahHint]
   );
 
   // AudioControls'dagi play — joriy sahifani boshidan oxirigacha o'qiydi.
@@ -430,8 +442,10 @@ export default function LessonPage({ params }: Props) {
       playingSurah,
       onPlayGroup: handlePlayGroup,
       playingGroup,
+      surahHint,
+      dismissSurahHint,
     }),
-    [handlePlaySurah, playingSurah, handlePlayGroup, playingGroup]
+    [handlePlaySurah, playingSurah, handlePlayGroup, playingGroup, surahHint, dismissSurahHint]
   );
 
   if (loading || !currentBookPage) return <Spinner />;

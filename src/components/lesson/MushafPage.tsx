@@ -162,6 +162,7 @@ export function MushafPage({ elements, activeId, onElementClick }: Props) {
     el.id === activeId || (active !== undefined && sameAudio(el, active));
 
   const blocks = buildBlocks(elements);
+  const firstBanner = blocks.findIndex((b) => b.kind === "banner");
 
   return (
     <div className="flex flex-col items-center w-full gap-1">
@@ -175,6 +176,7 @@ export function MushafPage({ elements, activeId, onElementClick }: Props) {
               lead={b.lead}
               text={cfg?.text}
               sub={cfg?.sub}
+              hint={i === firstBanner}
             />
           );
         }

@@ -2,6 +2,8 @@
 
 import { createContext, useContext } from "react";
 import type { ReactNode } from "react";
+import { Headphones, X } from "lucide-react";
+import { useSettings } from "@/providers/SettingsProvider";
 import type { Element } from "@/lib/data/types";
 
 interface SurahPlay {
@@ -16,6 +18,10 @@ interface SurahPlay {
   onPlayGroup: (key: string, elements: Element[]) => void;
   /** Hozir o'qilayotgan guruh kaliti */
   playingGroup: string | null;
+  /** Bir martalik eslatma ("sura nomini bosing") hali ko'rsatilishi kerakmi */
+  surahHint: boolean;
+  /** Eslatmani yopish — qayta chiqmaydi (localStorage) */
+  dismissSurahHint: () => void;
 }
 
 export const SurahPlayContext = createContext<SurahPlay | null>(null);
@@ -120,6 +126,57 @@ interface Props {
   sub?: string;
   /** Banner ostidagi lotin/kirill izoh — "Fotiha — Ochuvchi · Makkiy · 7 oyat" */
   note?: string;
+  /**
+   * Sahifadagi BIRINCHI banner — bir martalik eslatma shu banner ostida
+   * chiqadi (MushafPage/TarjimaView beradi).
+   */
+  hint?: boolean;
+}
+
+/**
+ * Bir martalik eslatma — "sura nomiga bossangiz, sura to'liq o'qiladi".
+ *
+ * Foydalanuvchi 2026-10-20 da so'radi: banner bosilganda sura to'liq
+ * o'qilishi (2026-09-26) foydalanuvchiga ko'rinmas edi. Pufakcha banner
+ * ostida, strelkasi bannerga qaragan. "Tushunarli" (yoki X) bosilganda,
+ * yoki foydalanuvchi banner'ni o'zi bosganda yopiladi va qayta chiqmaydi
+ * (`localStorage["muallimi-surah-hint-seen"]`, lesson sahifasida).
+ */
+function SurahHint({ onClose }: { onClose: () => void }) {
+  const { t } = useSettings();
+  return (
+    <div className="relative mt-2 mx-auto w-fit max-w-full animate-fade-in" role="status">
+      <span
+        aria-hidden
+        className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 rotate-45 bg-primary"
+      />
+      <div className="relative flex items-center gap-2 rounded-xl bg-primary pl-3 pr-1.5 py-1.5 text-white shadow-lg">
+        <Headphones size={16} className="shrink-0" />
+        <p className="text-[0.8125rem] leading-snug font-medium">{t("surah_hint")}</p>
+        <button
+          type="button"
+          onClick={(ev) => {
+            ev.stopPropagation();
+            onClose();
+          }}
+          className="shrink-0 rounded-lg bg-white/20 px-2 py-1 text-[0.75rem] font-semibold active:scale-95 transition-transform"
+        >
+          {t("surah_hint_ok")}
+        </button>
+        <button
+          type="button"
+          aria-label={t("surah_hint_ok")}
+          onClick={(ev) => {
+            ev.stopPropagation();
+            onClose();
+          }}
+          className="shrink-0 w-6 h-6 flex items-center justify-center rounded-md opacity-80 active:scale-95"
+        >
+          <X size={14} />
+        </button>
+      </div>
+    </div>
+  );
 }
 
 /**
@@ -136,7 +193,7 @@ interface Props {
  * (`.surah-banner`, globals.css). Rozetka — `۞` (U+06DE), arab
  * shriftidagi Qur'on gul belgisi.
  */
-export function SurahBanner({ text, surah, lead, sub, note }: Props) {
+export function SurahBanner({ text, surah, lead, sub, note, hint }: Props) {
   const ctx = useContext(SurahPlayContext);
   const label = lead?.arabic ?? text ?? "";
   const playable = Boolean(surah && ctx);
@@ -182,6 +239,9 @@ export function SurahBanner({ text, surah, lead, sub, note }: Props) {
         <p className="text-center text-[0.6875rem] text-text-muted mt-0.5 leading-tight">
           {note}
         </p>
+      )}
+      {hint && playable && ctx!.surahHint && (
+        <SurahHint onClose={ctx!.dismissSurahHint} />
       )}
     </div>
   );

@@ -68,6 +68,8 @@
   "update_ready": "Yangi versiya tayyor",
   "update_now": "Yangilash",
   "tarjima": "Tarjima",
+  "surah_hint": "Sura nomiga bossangiz, sura toʻliq oʻqib beriladi",
+  "surah_hint_ok": "Tushunarli",
   "background": "Fon",
   "background_desc": "O'qish ekranining fon rangi",
   "bg_oq": "Oq",

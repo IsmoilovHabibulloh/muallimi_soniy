@@ -2006,6 +2006,22 @@ va `TarjimaView`). Boshqa sarlavha uslubi yozmang; eski
   bilan o'raydi; banner'lar shundan `onPlaySurah` va `playingSurah`
   oladi. Prop'ni renderer orqali uzatmang.
 
+### Bir martalik eslatma — "sura nomiga bossangiz..." (2026-10-20)
+
+Foydalanuvchi so'radi: sura nomi bosilsa sura to'liq o'qilishi
+ko'rinmas edi — bir martalik eslatma chiqsin.
+
+- `SurahBanner` ning `hint` prop'i — sahifadagi BIRINCHI banner'ga
+  beriladi (`MushafPage` va `TarjimaView` o'zi hisoblaydi). Banner ostida
+  yashil pufakcha (strelkasi bannerga qaragan, `Headphones` ikonka,
+  "Tushunarli" + X).
+- Holat `SurahPlayContext` da: `surahHint` / `dismissSurahHint`.
+  Yopiladi: "Tushunarli"/X bosilsa YOKI banner bosilsa
+  (`handlePlaySurah`). Saqlanadi: `localStorage["muallimi-surah-hint-seen"]="1"`
+  — qayta chiqmaydi.
+- Matn i18n'da: `surah_hint`, `surah_hint_ok` (4 til).
+- Kalimalar (`TitleBanner`) uchun eslatma YO'Q — faqat suralar.
+
 ### Kalimalar ham shu ramkada — `TitleBanner` (2026-09-28)
 
 > **"Kalimalarning nomlarini ham shunday alohida ramkaga olishimiz

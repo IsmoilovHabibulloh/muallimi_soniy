@@ -68,6 +68,8 @@
   "update_ready": "New version available",
   "update_now": "Update",
   "tarjima": "Translation",
+  "surah_hint": "Tap the surah name to hear the whole surah",
+  "surah_hint_ok": "Got it",
   "background": "Background",
   "background_desc": "Reading screen background colour",
   "bg_oq": "White",

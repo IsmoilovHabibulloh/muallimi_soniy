@@ -57,11 +57,14 @@ export function TarjimaView({
     const items = elements
       .map((el) => ({ el, t: AYAH_TARJIMA[el.id] }))
       .filter((r) => Boolean(r.t));
-    return items.map((r, i) => ({
+    const rows = items.map((r, i) => ({
       ...r,
       info: r.t.s ? SURAH_INFO[r.t.s] : undefined,
       showHead: Boolean(r.t.s) && (i === 0 || items[i - 1].t.s !== r.t.s),
     }));
+    // bir martalik eslatma faqat birinchi sura sarlavhasi ostida
+    const first = rows.findIndex((r) => r.showHead && r.info);
+    return rows.map((r, i) => ({ ...r, hint: i === first }));
   }, [elements]);
 
   return (
@@ -71,7 +74,7 @@ export function TarjimaView({
       onClick={onBackgroundClick}
     >
       <div className="flex flex-col gap-1.5">
-        {rows.map(({ el, t, info, showHead }) => {
+        {rows.map(({ el, t, info, showHead, hint }) => {
           const isActive = activeElementId === el.id;
 
           return (
@@ -81,6 +84,7 @@ export function TarjimaView({
                   <SurahBanner
                     text={info.ar}
                     surah={t.s}
+                    hint={hint}
                     note={
                       (cyrl ? info.cy : info.uz) +
                       ((cyrl ? info.meanCy : info.mean)
